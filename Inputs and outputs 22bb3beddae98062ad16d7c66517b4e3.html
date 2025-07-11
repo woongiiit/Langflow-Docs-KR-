@@ -1,0 +1,757 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Inputs and outputs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8062-ad16-d7c66517b4e3" class="page sans"><header><h1 class="page-title">Inputs and outputs</h1><p class="page-description"></p></header><div class="page-body"><h3 id="22cb3bed-dae9-80b7-aa33-e4ed8773f0d7" class="">: Components &gt; IO</h3><p id="22cb3bed-dae9-807a-9045-fc9374370bab" class="">
+</p><p id="22cb3bed-dae9-80d8-bf94-faf168eaf085" class="">Langflow의 <strong>입력/출력(IO) 컴포넌트</strong>는 플로우(flow)의 시작과 끝에서 <strong>데이터를 주고받는 역할</strong>을 합니다. 사용자의 입력을 받아 플로우를 시작하거나, 플로우의 최종 결과를 사용자에게 보여줄 때 사용됩니다.</p><p id="22cb3bed-dae9-80ff-9980-d129d1709916" class="">
+</p><hr id="22cb3bed-dae9-8060-9503-f9d0353cbf11"/><p id="22cb3bed-dae9-8016-b7c2-ecb094fdc8b4" class="">
+</p><h2 id="22cb3bed-dae9-8090-91fc-d90e96340f2c" class="">Chat Input 컴포넌트</h2><p id="22cb3bed-dae9-80de-bfb9-eb8fb0af4d96" class="">
+</p><p id="22cb3bed-dae9-80e3-947c-cd1f19e65488" class=""><code>Chat Input</code> 컴포넌트는 텍스트, 파일, 메타데이터 등 다양한 입력 유형을 받아 <code>Message</code> 객체를 생성하며, 입력된 텍스트와 발신자 정보, 세션 ID, 파일 첨부 정보를 포함한 <code>Message</code> 객체를 반환합니다. Playground에서 대화형 채팅 인터페이스를 제공합니다. 필요 시 <code>Message Store</code>에 저장할 수도 있습니다.</p><p id="22cb3bed-dae9-8064-b866-c793cec08d48" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-8033-99ce-cca5cff04fdd" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80f8-aa93-f316c8a837c4"><th id="jFZO" class="simple-table-header-color simple-table-header">이름</th><th id="xkML" class="simple-table-header-color simple-table-header">표시명</th><th id="zSZg" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8012-937a-d8a2ff2bf856"><td id="jFZO" class="">input_value</td><td id="xkML" class="">Text</td><td id="zSZg" class="">전달할 메시지 텍스트</td></tr><tr id="22cb3bed-dae9-802d-b2ee-de1d9e0316d2"><td id="jFZO" class="">should_store_message</td><td id="xkML" class="">Store Messages</td><td id="zSZg" class="">메시지를 기록에 저장할지 여부</td></tr><tr id="22cb3bed-dae9-80ec-8222-e6669e0d4f85"><td id="jFZO" class="">sender</td><td id="xkML" class="">Sender Type</td><td id="zSZg" class="">발신자 유형</td></tr><tr id="22cb3bed-dae9-8060-a3e5-ee48a8819008"><td id="jFZO" class="">sender_name</td><td id="xkML" class="">Sender Name</td><td id="zSZg" class="">발신자 이름</td></tr><tr id="22cb3bed-dae9-8069-8d41-e667946a867a"><td id="jFZO" class="">session_id</td><td id="xkML" class="">Session ID</td><td id="zSZg" class="">채팅 세션 고유 ID (비워둘 경우 현재 세션 사용)</td></tr><tr id="22cb3bed-dae9-806b-a3dd-c1d43da31704"><td id="jFZO" class="">files</td><td id="xkML" class="">Files</td><td id="zSZg" class="">메시지와 함께 전송할 파일들</td></tr><tr id="22cb3bed-dae9-8028-b285-d840762542ef"><td id="jFZO" class="">background_color</td><td id="xkML" class="">Background Color</td><td id="zSZg" class="">아이콘 배경색</td></tr><tr id="22cb3bed-dae9-80f2-8d97-e17de76a5217"><td id="jFZO" class="">chat_icon</td><td id="xkML" class="">Icon</td><td id="zSZg" class="">메시지 아이콘</td></tr><tr id="22cb3bed-dae9-809c-ade1-cc862d585564"><td id="jFZO" class="">text_color</td><td id="xkML" class="">Text Color</td><td id="zSZg" class="">발신자 이름 텍스트 색</td></tr></tbody></table><p id="22cb3bed-dae9-8041-80b1-cc713a2ccdd6" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-8077-83f4-c391fa366a3c" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8051-87ea-e530829ab154"><th id="Q~}^" class="simple-table-header-color simple-table-header">이름</th><th id="X;oD" class="simple-table-header-color simple-table-header">타입</th><th id="BSz?" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e7-aed7-fa80c262c901"><td id="Q~}^" class="">message</td><td id="X;oD" class="">Message</td><td id="BSz?" class="">지정된 속성을 포함한 생성된 <code>Message</code> 객체</td></tr></tbody></table><h3 id="22cb3bed-dae9-8001-9e34-f45b7a747cb5" class="">Message 생성 방식</h3><p id="22cb3bed-dae9-8031-9816-d26710a85a5b" class="">ChatInput 클래스는 입력값에 따른 Message 타입의 객체를  생성하고 저장할 수 있는 비동기 메서드를 제공합니다. Message 객체는 Message.create() 팩토리 메서드를 통해 ChatInput 클래스의 message_response 메서드 안에 생성됩니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80d3-81eb-e3415b0a9c49" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">message = await Message.create(
+    text=self.input_value,
+    sender=self.sender,
+    sender_name=self.sender_name,
+    session_id=self.session_id,
+    files=self.files,
+    properties={
+        &quot;background_color&quot;: background_color,
+        &quot;text_color&quot;: text_color,
+        &quot;icon&quot;: icon,
+    },
+)
+</code></pre><hr id="22cb3bed-dae9-806d-8d2c-f1c8f98eac33"/><p id="22cb3bed-dae9-80df-9ec5-ef8b541475e3" class="">
+</p><h2 id="22cb3bed-dae9-80c9-ac19-e3f28cdcc545" class="">Text Input 컴포넌트</h2><p id="22cb3bed-dae9-807a-a96a-e6e4e3d3973b" class="">
+</p><p id="22cb3bed-dae9-8038-83f0-f47fffd435fe" class=""><code>Text Input</code> 컴포넌트는 텍스트 문자열 입력을 받아 <code>Message</code> 객체를 생성하고, 입력된 텍스트만을 포함한 <code>Message</code> 객체를 반환합니다. 출력은 Playground에 표시되지 않습니다.</p><p id="22cb3bed-dae9-8075-9b5e-c850375cdcc6" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-80c7-b162-ff4a0469a1e2" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8060-8e94-e53626a201cb"><th id="kVil" class="simple-table-header-color simple-table-header">이름</th><th id="lIhM" class="simple-table-header-color simple-table-header">타입</th><th id="bmIW" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8064-9988-e6e1fd3b4bbf"><td id="kVil" class="">input_value</td><td id="lIhM" class="">Text</td><td id="bmIW" class="">출력으로 전달할 텍스트/내용</td></tr></tbody></table><p id="22cb3bed-dae9-805b-8d37-c59b6f6227aa" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-80e4-8f1a-fc4bd1427f10" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80c6-aa40-f15c2c324f27"><th id="HL&gt;}" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;{zM" class="simple-table-header-color simple-table-header">타입</th><th id="cVa}" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ca-b4a3-f232d45db638"><td id="HL&gt;}" class="">text</td><td id="&gt;{zM" class="">Text</td><td id="cVa}" class="">생성된 텍스트 메시지</td></tr></tbody></table><hr id="22cb3bed-dae9-801d-bbe3-ce4df2b7f1ac"/><p id="22cb3bed-dae9-80a0-955d-ea06c9e528e9" class="">
+</p><h2 id="22cb3bed-dae9-8059-b363-c2e3e92b2058" class="">Chat Output 컴포넌트</h2><p id="22cb3bed-dae9-8019-b85a-c6c9352eb836" class="">
+</p><p id="22cb3bed-dae9-8044-a0ec-e181d6869c6e" class=""><code>Chat Output</code> 컴포넌트는 입력된 텍스트, 발신자 정보, 세션 ID, 스타일 속성을 포함한 <code>Message</code> 객체를 생성합니다. 입력으로 <code>Data</code>, <code>DataFrame</code>, <code>Message</code>를 받을 수 있습니다.</p><p id="22cb3bed-dae9-8071-9314-ede3231dec52" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-8098-be5d-d781ee6cce88" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8038-87a8-ec6b6d1d2ebd"><th id="cTnX" class="simple-table-header-color simple-table-header">이름</th><th id="Uo@@" class="simple-table-header-color simple-table-header">표시명</th><th id="VdYH" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8018-b875-dc27ab93ab8c"><td id="cTnX" class="">input_value</td><td id="Uo@@" class="">Text</td><td id="VdYH" class="">출력할 메시지 텍스트</td></tr><tr id="22cb3bed-dae9-8092-81c0-c71d644e9a91"><td id="cTnX" class="">should_store_message</td><td id="Uo@@" class="">Store Messages</td><td id="VdYH" class="">메시지를 기록에 저장할지 여부</td></tr><tr id="22cb3bed-dae9-80d5-b01c-d1b4a3b7e31e"><td id="cTnX" class="">sender</td><td id="Uo@@" class="">Sender Type</td><td id="VdYH" class="">발신자 유형</td></tr><tr id="22cb3bed-dae9-80d7-bdfb-da1d2233f712"><td id="cTnX" class="">sender_name</td><td id="Uo@@" class="">Sender Name</td><td id="VdYH" class="">발신자 이름</td></tr><tr id="22cb3bed-dae9-8032-8a01-c4a01d196662"><td id="cTnX" class="">session_id</td><td id="Uo@@" class="">Session ID</td><td id="VdYH" class="">채팅 세션 고유 ID (비워둘 경우 현재 세션 사용)</td></tr><tr id="22cb3bed-dae9-80a8-becc-fe4c7e1a45ca"><td id="cTnX" class="">data_template</td><td id="Uo@@" class="">Data Template</td><td id="VdYH" class=""><code>Data</code>를 <code>Text</code>로 변환할 템플릿. 비워두면 <code>Data</code> 내부 <code>text</code> 키 사용</td></tr><tr id="22cb3bed-dae9-8021-8798-f70f90cb4d84"><td id="cTnX" class="">background_color</td><td id="Uo@@" class="">Background Color</td><td id="VdYH" class="">아이콘 배경색</td></tr><tr id="22cb3bed-dae9-803f-bbfc-c6df13043530"><td id="cTnX" class="">chat_icon</td><td id="Uo@@" class="">Icon</td><td id="VdYH" class="">메시지 아이콘</td></tr><tr id="22cb3bed-dae9-802b-ac5b-c2b1c32a675d"><td id="cTnX" class="">text_color</td><td id="Uo@@" class="">Text Color</td><td id="VdYH" class="">발신자 이름 텍스트 색</td></tr><tr id="22cb3bed-dae9-808b-af78-e7852fae92eb"><td id="cTnX" class="">clean_data</td><td id="Uo@@" class="">Basic Clean Data</td><td id="VdYH" class=""><code>DataFrame</code> 입력을 <code>Text</code>로 변환 시 빈 행, 빈 셀 줄, 다중 개행 제거 여부</td></tr></tbody></table><p id="22cb3bed-dae9-8086-bd51-db1a96f8f146" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-8092-b221-eb26971b4fb3" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a8-af7c-c5f429c07871"><th id="adL;" class="simple-table-header-color simple-table-header">이름</th><th id="?gUJ" class="simple-table-header-color simple-table-header">타입</th><th id=":o&lt;~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8074-87b2-e5bb4989acce"><td id="adL;" class="">message</td><td id="?gUJ" class="">Message</td><td id=":o&lt;~" class="">지정된 속성을 포함한 생성된 <code>Message</code> 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-80ef-8287-fbe2a3ee6df1"/><p id="22cb3bed-dae9-8029-9abb-d1a16e726976" class="">
+</p><h2 id="22cb3bed-dae9-8097-ad1f-dd1125ccdfbb" class="">Text Output 컴포넌트</h2><p id="22cb3bed-dae9-8037-bfcc-daad33607a42" class="">
+</p><p id="22cb3bed-dae9-807e-88cc-d599d5e88e84" class=""><code>Text Output</code> 컴포넌트는 하나의 텍스트 입력을 받아 <code>Message</code> 객체를 생성하고 해당 텍스트를 포함한 <code>Message</code> 객체를 반환합니다. 출력은 Playground에 표시되지 않습니다.</p><p id="22cb3bed-dae9-800d-9b58-cd3eb210d339" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-80ff-adad-d208a9f1c5e6" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80c0-a792-e22bd23f948d"><th id="cEHW" class="simple-table-header-color simple-table-header">이름</th><th id="QdME" class="simple-table-header-color simple-table-header">표시명</th><th id="Zg_@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-800c-8d12-f292c414c6de"><td id="cEHW" class="">input_value</td><td id="QdME" class="">Text</td><td id="Zg_@" class="">출력할 텍스트</td></tr></tbody></table><p id="22cb3bed-dae9-80dc-bfc8-ee69fd585e3a" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-80c5-afe2-d2ac89c75ff6" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80f5-a870-dc88525d42d6"><th id="C]Q|" class="simple-table-header-color simple-table-header">이름</th><th id="mAQs" class="simple-table-header-color simple-table-header">타입</th><th id="JRLK" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80bb-a084-fc2e7e07218f"><td id="C]Q|" class="">text</td><td id="mAQs" class="">Text</td><td id="JRLK" class="">생성된 텍스트 메시지</td></tr></tbody></table><hr id="22cb3bed-dae9-8092-80db-e807f475ed62"/><p id="22cb3bed-dae9-80fa-ad09-e20d43cc2a1d" class="">
+</p><h2 id="22cb3bed-dae9-807f-a685-d93f4bbae6d8" class="">예제 플로우</h2><p id="22cb3bed-dae9-8037-ae52-e14cfdb8e2b0" class="">
+</p><p id="22cb3bed-dae9-8099-8f23-e3c89df58c59" class=""><code>Chat Input</code> 컴포넌트를 OpenAI 모델 컴포넌트의 입력 포트에 연결하고, OpenAI 모델 컴포넌트의 Message 출력을 <code>Chat Output</code> 컴포넌트에 연결합니다. 그리고 OpenAI 모델 컴포넌트의 API Key 필드에 OpenAI API 키를 입력하면 완성입니다.</p><figure id="22cb3bed-dae9-800d-90d6-c33f1f45116c" class="image"><a href="image%2020.png"><img style="width:4000px" src="image%2020.png"/></a></figure><p id="22cb3bed-dae9-80e6-af35-d3faa6b0c4ed" class="">Playground에서 메시지를 입력하면 <code>Chat Input</code>이 모델에 전달하고, 모델의 응답이 <code>Chat Output</code>으로 표시됩니다.</p><p id="22cb3bed-dae9-803c-98d5-c2fd46d9743f" class="">
+</p><h3 id="22cb3bed-dae9-80b1-8db2-cd0145601993" class="">Chat 컴포넌트 예제 플로우 단계별 안내</h3><ol type="1" id="22cb3bed-dae9-80cc-91ab-c1c451f0b5ad" class="numbered-list" start="1"><li><strong>컴포넌트 연결</strong>: <code>Chat Input</code>과 <code>Chat Output</code> 컴포넌트를 Message 타입을 처리할 수 있는 컴포넌트들에 연결합니다. 본 예제에서는 <code>Chat Input</code>을 OpenAI 모델의 Input 포트에, OpenAI 모델의 Message 포트를 <code>Chat Output</code>에 연결합니다.</li></ol><ol type="1" id="22cb3bed-dae9-802b-b2a2-ea9c667fc5ee" class="numbered-list" start="2"><li><strong>API 키 설정</strong>: OpenAI 모델 컴포넌트의 OpenAI API Key 필드에 본인의 API 키를 입력합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8047-a3e0-e01ed6e89c2e" class="numbered-list" start="3"><li><strong>Playground에서 메시지 전송</strong>: Playground를 열고 메시지를 입력하면, OpenAI 모델 컴포넌트가 응답합니다. 필요하다면 System Message를 설정하여 응답 방식을 제어할 수 있습니다.</li></ol><ol type="1" id="22cb3bed-dae9-8092-a3c1-fda0ed4f5c50" class="numbered-list" start="4"><li><strong>로그 확인</strong>: Langflow UI에서 플로우 이름을 클릭한 후 <code>Logs</code> 버튼을 클릭하면 로그 창이 열립니다.  </li></ol><figure id="22cb3bed-dae9-802c-adf9-c1c92902fbd9" class="image"><a href="image%2021.png"><img style="width:3200px" src="image%2021.png"/></a></figure><ol type="1" id="22cb3bed-dae9-80b8-b040-cd3e3c920466" class="numbered-list" start="5"><li><strong>첫 번째 메시지 조회</strong>: <code>Chat Input</code>에서 전송된 메시지를 확인하려면 Outputs를 클릭합니다:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-800d-bcda-f2ed2acba6d6" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">&quot;messages&quot;: [
+  {
+    &quot;message&quot;: &quot;What&#x27;s the recommended way to install Docker on Mac M1?&quot;,
+    &quot;sender&quot;: &quot;User&quot;,
+    &quot;sender_name&quot;: &quot;User&quot;,
+    &quot;session_id&quot;: &quot;Session Apr 21, 17:37:04&quot;,
+    &quot;stream_url&quot;: null,
+    &quot;component_id&quot;: &quot;ChatInput-4WKag&quot;,
+    &quot;files&quot;: [],
+    &quot;type&quot;: &quot;text&quot;
+  }
+]
+</code></pre><ol type="1" id="22cb3bed-dae9-800d-a462-c170d45bd303" class="numbered-list" start="6"><li><strong>두 번째 메시지 조회</strong>: OpenAI 모델의 응답이 <code>Chat Output</code>으로 전송된 결과를 확인하려면 Outputs를 클릭합니다:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-805c-a61d-c065b3b97913" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">&quot;outputs&quot;: {
+  &quot;text_output&quot;: {
+    &quot;message&quot;: &quot;To install Docker on a Mac with an M1 chip, you should use Docker Desktop for Mac, which is optimized for Apple Silicon. Here&#x27;s a step-by-step guide to installing Docker on your M1 Mac:\n\n1. ...&quot;,
+    &quot;type&quot;: &quot;text&quot;
+  }
+}
+</code></pre><blockquote id="22cb3bed-dae9-809c-bf91-faa9f11dcd4e" class="">팁: 각 컴포넌트의 출력을 개별적으로 확인하려면 Inspect output을 클릭하세요.</blockquote><p id="22cb3bed-dae9-80e6-92d5-f8ee1a6f9b6b" class="">
+</p><hr id="22cb3bed-dae9-8088-a8ac-e441ac918b6c"/><p id="22cb3bed-dae9-80b0-ba65-d0fdd39d2d90" class="">
+</p><h2 id="22cb3bed-dae9-80b3-a0fc-e247b7d9d182" class="">API를 통한 채팅 메시지 전송</h2><p id="22cb3bed-dae9-80e1-96e7-f4a5a8e745de" class="">
+</p><p id="22cb3bed-dae9-80b2-a97d-dac7cf1fc1ef" class=""><strong>Chat Input</strong> 컴포넌트는 Langflow API에 메시지를 전달하는 진입점 역할을 합니다. 동일한 예시 메시지를 프로그래밍 방식으로 Langflow 서버에 전송하려면 다음 단계를 따라주세요.</p><ol type="1" id="22cb3bed-dae9-802c-bcbd-cf067fc2ddbb" class="numbered-list" start="1"><li><strong>엔드포인트 확인</strong><p id="22cb3bed-dae9-800d-9d7d-eaf7f4578c64" class="">Langflow 대시보드에서 <strong>Publish</strong>를 클릭한 뒤, <strong>API access</strong>를 클릭하여 엔드포인트 URL을 확인합니다.</p></li></ol><ol type="1" id="22cb3bed-dae9-8017-8aa5-ee03a68d4754" class="numbered-list" start="2"><li><strong>cURL 명령 복사</strong><p id="22cb3bed-dae9-809a-9506-c64c42daa75a" class=""><strong>cURL</strong> 탭에서 명령어를 복사한 뒤 터미널에 붙여넣습니다. 예시는 다음과 같습니다:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-8077-be0f-ce7c2073d55c" class="code"><code class="language-Bash" style="white-space:pre-wrap;word-break:break-all">curl --request POST \
+  --url &#x27;http://localhost:7860/api/v1/run/51eed711-4530-4fdc-9bce-5db4351cc73a?stream=false&#x27; \
+  --header &#x27;Content-Type: application/json&#x27; \
+  --data &#x27;{
+    &quot;input_value&quot;: &quot;What&#x27;\&#x27;&#x27;s the recommended way to install Docker on Mac M1?&quot;,
+    &quot;output_type&quot;: &quot;chat&quot;,
+    &quot;input_type&quot;: &quot;chat&quot;
+  }&#x27;</code></pre></li></ol><ol type="1" id="22cb3bed-dae9-80aa-b5a2-d91ddc6ecc41" class="numbered-list" start="3"><li><code><strong>input_value</strong></code><strong> 수정하기</strong><p id="22cb3bed-dae9-8058-b1e4-fc00fde6916c" class=""><code>&quot;input_value&quot;</code> 필드에 실제 질문을 입력합니다. 예:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-8035-b73f-ff08102426e3" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">&quot;input_value&quot;: &quot;What&#x27;s the recommended way to install Docker on Mac M1?&quot;</code></pre><ul id="22cb3bed-dae9-8022-a8f7-f2abef1db629" class="bulleted-list"><li style="list-style-type:disc"><code>output_type</code>과 <code>input_type</code> 파라미터를 함께 전달합니다.</li></ul><ul id="22cb3bed-dae9-80d8-b253-e8a35e583aee" class="bulleted-list"><li style="list-style-type:disc"><code>chat</code> 타입은 Playground에 메시지를 표시하고 추가 설정 옵션을 제공합니다.</li></ul><ul id="22cb3bed-dae9-80f1-bf22-ceb2f5d2006e" class="bulleted-list"><li style="list-style-type:disc"><code>text</code> 타입은 단순 문자열 응답을 반환하며 Playground에는 표시되지 않습니다.</li></ul></li></ol><ol type="1" id="22cb3bed-dae9-802f-823f-c04d99ea5633" class="numbered-list" start="4"><li><strong>커스텀 </strong><code><strong>session_id</strong></code><strong> 추가</strong><p id="22cb3bed-dae9-8039-8d14-f7ef4b393539" class="">메시지의 데이터 객체에 <code>&quot;session_id&quot;</code>를 추가하면, 클라이언트와 Langflow 서버 간에 새로운 채팅 세션이 시작됩니다. 예:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80a6-b22b-d9ce152c31f2" class="code"><code class="language-Bash" style="white-space:pre-wrap;word-break:break-all">curl --request POST \
+  --url &#x27;http://localhost:7860/api/v1/run/51eed711-4530-4fdc-9bce-5db4351cc73a?stream=false&#x27; \
+  --header &#x27;Content-Type: application/json&#x27; \
+  --data &#x27;{
+    &quot;input_value&quot;: &quot;What&#x27;s the recommended way to install Docker on Mac M1?&quot;,
+    &quot;session_id&quot;: &quot;docker-question-on-m1&quot;,
+    &quot;output_type&quot;: &quot;chat&quot;,
+    &quot;input_type&quot;: &quot;chat&quot;
+  </code></pre></li></ol><ol type="1" id="22cb3bed-dae9-8071-a596-cb0ba7c69f2e" class="numbered-list" start="5"><li><strong>POST 요청 전송</strong><p id="22cb3bed-dae9-8014-a3d7-f2a65ace9d13" class="">터미널에서 명령을 실행하면, Langflow 서버가 응답을 반환합니다.</p></li></ol><ol type="1" id="22cb3bed-dae9-806e-a1d4-d80f907054d4" class="numbered-list" start="6"><li><strong>Playground 확인</strong><p id="22cb3bed-dae9-804b-9a5f-dd2da8c8add5" class="">Playground에 접속하면 <code>docker-question-on-m1</code>이라는 이름의 새로운 채팅 세션이 나타납니다.</p></li></ol><ol type="1" id="22cb3bed-dae9-80c7-836d-c0727735b3b1" class="numbered-list" start="7"><li><strong>Tweaks로 추가 파라미터 수정</strong><p id="22cb3bed-dae9-80fd-b7e9-fd31deb1190b" class="">Chat Input/Chat Output 컴포넌트의 Tweaks를 통해 더 많은 파라미터를 조정할 수 있습니다.</p><ul id="22cb3bed-dae9-80c2-8144-edc354d03ffb" class="bulleted-list"><li style="list-style-type:disc"><strong>Publish</strong> → <strong>API access</strong> → <strong>Tweaks</strong>를 클릭하세요.</li></ul></li></ol><ol type="1" id="22cb3bed-dae9-80e4-9815-db22f93f10ab" class="numbered-list" start="8"><li><strong>예: 메시지 저장 비활성화</strong><p id="22cb3bed-dae9-808a-9387-f225754683d6" class="">Chat Input 컴포넌트에서 메시지 저장(<code>should_store_message</code>)을 비활성화하려면 다음과 같이 <code>tweaks</code> 필드를 추가합니다:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-8055-aab9-cab601d912ab" class="code"><code class="language-Bash" style="white-space:pre-wrap;word-break:break-all">curl --request POST \
+  --url &#x27;http://localhost:7860/api/v1/run/51eed711-4530-4fdc-9bce-5db4351cc73a?stream=false&#x27; \
+  --header &#x27;Content-Type: application/json&#x27; \
+  --data &#x27;{
+    &quot;input_value&quot;: &quot;Text to input to the flow&quot;,
+    &quot;output_type&quot;: &quot;chat&quot;,
+    &quot;input_type&quot;: &quot;chat&quot;,
+    &quot;tweaks&quot;: {
+      &quot;ChatInput-4WKag&quot;: {
+        &quot;should_store_message&quot;: false
+      }
+    }
+  }&#x27;</code></pre><p id="22cb3bed-dae9-800f-82a0-cbc4d597da6b" class="">이후 <strong>Logs</strong> 패널에서 요청을 확인하면 <code>should_store_message: false</code>가 적용된 것을 볼 수 있습니다.</p></li></ol><p id="22cb3bed-dae9-80bf-8075-c8f9ae150d49" class="">
+</p><hr id="22cb3bed-dae9-801f-b515-f7002fed2b76"/><p id="22cb3bed-dae9-80bd-a9ce-cf5c47cde06e" class="">
+</p><p id="22cb3bed-dae9-8054-a02e-d3502d77382a" class="">
+</p><p id="22cb3bed-dae9-80da-af5d-f9b7c243ea53" class="">*이 문서는 <a href="https://docs.langflow.org/components-io">https://docs.langflow.org/components-io</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22cb3bed-dae9-80ad-82bb-fad4c9e46f8a" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

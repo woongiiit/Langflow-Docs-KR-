@@ -1,0 +1,699 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Memories</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80f9-868a-c84893e5e647" class="page sans"><header><h1 class="page-title">Memories</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22cb3bed-dae9-8078-8063-e026cb4c4702" class="">메모리 (Memory) 컴포넌트</h1><h3 id="22cb3bed-dae9-80b9-b367-c4eef71fa87e" class="">: Components &gt; Memories</h3><p id="22cb3bed-dae9-80e1-92da-fecf341268c2" class="">
+</p><p id="22cb3bed-dae9-80a1-878f-ca9c4744a861" class="">Langflow의 <strong>메모리 (Memory) 컴포넌트</strong>는 <code>session_id</code>를 기준으로 채팅 메시지를 저장하고 불러옵니다.</p><p id="22cb3bed-dae9-8024-b203-f625ee5276dd" class="">이 컴포넌트는 벡터 스토어 컴포넌트와는 달리, 외부 데이터베이스에 채팅 메시지를 저장하고 검색하기 위해 설계되었습니다.</p><p id="22cb3bed-dae9-807d-b1be-d6c9cc92cf97" class="">메모리 컴포넌트는 외부 데이터베이스를 기억장치 (memory)로 사용할 수 있게 함으로써 LLM과 에이전트에게 연속성과 맥락 보존을 가능하게 합니다.</p><p id="22cb3bed-dae9-8085-9988-d6c01bf21011" class="">
+</p><hr id="22cb3bed-dae9-80fe-8351-e1867cfafa43"/><p id="22cb3bed-dae9-8012-8eba-dd8f0747affb" class="">
+</p><h2 id="22cb3bed-dae9-8026-9d7c-c4f594a41b28" class="">플로우에서 메모리 컴포넌트 사용하기</h2><p id="22cb3bed-dae9-8036-9307-d8e2f09c2415" class="">
+</p><p id="22cb3bed-dae9-805b-94c4-d90509f1bd0c" class="">아래 예시 플로우에서는 <code>Store Message</code> 헬퍼 컴포넌트와 <code>Message History</code> 헬퍼 컴포넌트를 사용하여 Astra DB Chat Memory 컴포넌트로 채팅 기록을 저장하고 불러옵니다.</p><p id="22cb3bed-dae9-8023-9e53-d90d816b4251" class="">
+</p><p id="22cb3bed-dae9-8032-ab27-faf920314c7a" class=""><code>Store Message</code> 컴포넌트가 채팅 메모리를 Data 객체로 저장하고, <code>Message History</code> 컴포넌트가 저장된 내용을 <code>Data</code>나 <code>string</code> 객체로 불러옵니다.</p><figure id="22cb3bed-dae9-80f1-a65d-ec23c8f3617b" class="image"><a href="image%2026.png"><img style="width:3178px" src="image%2026.png"/></a></figure><hr id="22cb3bed-dae9-807c-bdaf-f5cf4aa1e997"/><p id="22cb3bed-dae9-8066-849f-ded9b0f3d282" class="">
+</p><h2 id="22cb3bed-dae9-80a2-9bd0-fe60d0436589" class="">AstraDBChatMemory 컴포넌트</h2><p id="22cb3bed-dae9-8060-a0c1-f38ec04c8619" class="">
+</p><p id="22cb3bed-dae9-8029-9db4-d499d140cf38" class="">이 컴포넌트는 <code>AstraDBChatMessageHistory</code> 인스턴스를 생성하여 Astra DB(클라우드 네이티브 데이터베이스 서비스)를 통해 채팅 메시지를 저장하고 검색합니다.</p><p id="22cb3bed-dae9-8066-b1f6-e37eae5833af" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-80d3-846b-cc5c8bd5b28b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8083-98bb-c18672b49706"><th id="=bAr" class="simple-table-header-color simple-table-header">이름</th><th id="dk}&lt;" class="simple-table-header-color simple-table-header">타입</th><th id="HWIa" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ad-8a6e-c410e4950947"><td id="=bAr" class="">collection_name</td><td id="dk}&lt;" class="">String</td><td id="HWIa" class="">메시지를 저장할 Astra DB 컬렉션 이름 (필수)</td></tr><tr id="22cb3bed-dae9-8089-b776-c00d6fd28910"><td id="=bAr" class="">token</td><td id="dk}&lt;" class="">SecretString</td><td id="HWIa" class="">Astra DB 접근을 위한 인증 토큰 (필수)</td></tr><tr id="22cb3bed-dae9-80b0-8954-e199a3f49de3"><td id="=bAr" class="">api_endpoint</td><td id="dk}&lt;" class="">SecretString</td><td id="HWIa" class="">Astra DB 서비스 엔드포인트 URL (필수)</td></tr><tr id="22cb3bed-dae9-809f-84e0-f5054bc9ac1c"><td id="=bAr" class="">namespace</td><td id="dk}&lt;" class="">String</td><td id="HWIa" class="">컬렉션이 속한 Astra DB 네임스페이스 (선택)</td></tr><tr id="22cb3bed-dae9-80b1-a118-d98ba24d4f63"><td id="=bAr" class="">session_id</td><td id="dk}&lt;" class="">MessageText</td><td id="HWIa" class="">채팅 세션의 고유 식별자. 미입력 시 현재 세션 ID 사용</td></tr></tbody></table><p id="22cb3bed-dae9-8063-b9c0-f8fdc90fc67c" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-80ae-a22c-f6058d70038e" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8045-b8a7-c41ec20ab41c"><th id="fUTo" class="simple-table-header-color simple-table-header">이름</th><th id="Ex=]" class="simple-table-header-color simple-table-header">타입</th><th id="^om~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8053-9ee0-c56b475b7562"><td id="fUTo" class="">message_history</td><td id="Ex=]" class="">BaseChatMessageHistory</td><td id="^om~" class="">해당 세션의 <code>AstraDBChatMessageHistory</code> 인스턴스</td></tr></tbody></table><hr id="22cb3bed-dae9-80fe-9796-fd1ec83c3c26"/><p id="22cb3bed-dae9-80a2-8910-ec9c7eec34b4" class="">
+</p><h2 id="22cb3bed-dae9-8005-b77a-f1581279fe9c" class="">CassandraChatMemory 컴포넌트</h2><p id="22cb3bed-dae9-8049-b148-cad1a4e33789" class="">
+</p><p id="22cb3bed-dae9-80d8-bed3-c5c637482eab" class="">이 컴포넌트는 <code>CassandraChatMessageHistory</code> 인스턴스를 생성하여 Apache Cassandra 또는 DataStax Astra DB를 통해 채팅 메시지를 저장하고 검색합니다.</p><p id="22cb3bed-dae9-80cc-9e6e-ef00014dfcd1" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-8027-8571-e5c79dcbdf2b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8035-8490-e14f66b18226"><th id="E;zt" class="simple-table-header-color simple-table-header">이름</th><th id="&lt;wVD" class="simple-table-header-color simple-table-header">타입</th><th id="&gt;pAR" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8065-bc4a-ddee3d2939c7"><td id="E;zt" class="">database_ref</td><td id="&lt;wVD" class="">MessageText</td><td id="&gt;pAR" class="">Cassandra contact points 또는 Astra DB 데이터베이스 ID (필수)</td></tr><tr id="22cb3bed-dae9-800a-a1f5-f7cc74f0825a"><td id="E;zt" class="">username</td><td id="&lt;wVD" class="">MessageText</td><td id="&gt;pAR" class="">Cassandra 접속 사용자명. Astra DB 사용 시 비워두기</td></tr><tr id="22cb3bed-dae9-80b6-9caf-deb5e8279751"><td id="E;zt" class="">token</td><td id="&lt;wVD" class="">SecretString</td><td id="&gt;pAR" class="">Cassandra 패스워드 또는 Astra DB 토큰 (필수)</td></tr><tr id="22cb3bed-dae9-80a6-a5ae-c8681d8daa4a"><td id="E;zt" class="">keyspace</td><td id="&lt;wVD" class="">MessageText</td><td id="&gt;pAR" class="">Cassandra keyspace 또는 Astra DB 네임스페이스 (필수)</td></tr><tr id="22cb3bed-dae9-8084-bc5c-f3e7232bed15"><td id="E;zt" class="">table_name</td><td id="&lt;wVD" class="">MessageText</td><td id="&gt;pAR" class="">저장할 테이블 또는 컬렉션 이름 (필수)</td></tr><tr id="22cb3bed-dae9-80d3-969d-f5032a6366b0"><td id="E;zt" class="">session_id</td><td id="&lt;wVD" class="">MessageText</td><td id="&gt;pAR" class="">채팅 세션의 고유 식별자 (선택)</td></tr><tr id="22cb3bed-dae9-801e-8032-e0de43734e53"><td id="E;zt" class="">cluster_kwargs</td><td id="&lt;wVD" class="">Dictionary</td><td id="&gt;pAR" class="">Cassandra 클러스터 추가 설정을 위한 키워드 인수 (선택)</td></tr></tbody></table><p id="22cb3bed-dae9-8005-b642-f570dafb2ae6" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-806d-a364-c2b7e3d05a87" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80db-aa23-f2615800ad45"><th id="=c_n" class="simple-table-header-color simple-table-header">이름</th><th id="rcc|" class="simple-table-header-color simple-table-header">타입</th><th id="kuIF" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8045-bb8b-c17edff85b8f"><td id="=c_n" class="">message_history</td><td id="rcc|" class="">BaseChatMessageHistory</td><td id="kuIF" class="">해당 세션의 <code>CassandraChatMessageHistory</code> 인스턴스</td></tr></tbody></table><hr id="22cb3bed-dae9-803c-8a40-d09bf4af9227"/><p id="22cb3bed-dae9-8028-a68f-c7e9bc6a379b" class="">
+</p><h2 id="22cb3bed-dae9-80bb-acfa-f200b1a72108" class="">Mem0 Chat Memory 컴포넌트</h2><p id="22cb3bed-dae9-80aa-a227-e49eed4b8f40" class="">
+</p><p id="22cb3bed-dae9-8078-9619-f1b172faac4e" class=""><code>Mem0 Chat Memory</code> 컴포넌트는 Mem0 메모리 스토리지를 사용하여 채팅 메시지를 저장하고 검색합니다.</p><p id="22cb3bed-dae9-8025-9794-ffdcae2478a4" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-80e2-8298-ea80ad63e830" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8002-9bcd-f00b5f71c802"><th id="`~k~" class="simple-table-header-color simple-table-header">이름</th><th id="vl@;" class="simple-table-header-color simple-table-header">표시 이름</th><th id="lSY;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c2-98c4-ead60231ef3f"><td id="`~k~" class="">mem0_config</td><td id="vl@;" class="">Mem0 Configuration</td><td id="lSY;" class="">Mem0 메모리 인스턴스 초기화에 사용할 설정 사전</td></tr><tr id="22cb3bed-dae9-805e-a881-c916db41a60b"><td id="`~k~" class="">ingest_message</td><td id="vl@;" class="">Message to Ingest</td><td id="lSY;" class="">메모리에 인제스트할 메시지 내용</td></tr><tr id="22cb3bed-dae9-8095-ad17-f09212cc3884"><td id="`~k~" class="">existing_memory</td><td id="vl@;" class="">Existing Memory Instance</td><td id="lSY;" class="">기존 Mem0 메모리 인스턴스 (선택)</td></tr><tr id="22cb3bed-dae9-8097-9489-f14a6c7cf4e4"><td id="`~k~" class="">user_id</td><td id="vl@;" class="">User ID</td><td id="lSY;" class="">메시지와 연관된 사용자 식별자</td></tr><tr id="22cb3bed-dae9-805f-896c-f6549771a1fd"><td id="`~k~" class="">search_query</td><td id="vl@;" class="">Search Query</td><td id="lSY;" class="">관련 메모리를 검색하기 위한 입력 텍스트</td></tr><tr id="22cb3bed-dae9-80df-b44c-f73eef2c412b"><td id="`~k~" class="">mem0_api_key</td><td id="vl@;" class="">Mem0 API Key</td><td id="lSY;" class="">Mem0 플랫폼 API 키. 로컬 버전 사용 시 비워두기</td></tr><tr id="22cb3bed-dae9-8013-a361-df9aef56c2f0"><td id="`~k~" class="">metadata</td><td id="vl@;" class="">Metadata</td><td id="lSY;" class="">인제스트되는 메시지에 추가할 메타데이터</td></tr><tr id="22cb3bed-dae9-80cf-afc5-d6c490d5e371"><td id="`~k~" class="">openai_api_key</td><td id="vl@;" class="">OpenAI API Key</td><td id="lSY;" class="">OpenAI 임베딩 사용 시 필요한 API 키 (컴포넌트 설정에 없으면 필수)</td></tr></tbody></table><p id="22cb3bed-dae9-803b-8bd2-f65a672b4c5f" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-8070-9e14-e3410f7a0389" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8094-82db-f95d3b68970b"><th id="]eOC" class="simple-table-header-color simple-table-header">이름</th><th id="F:Kh" class="simple-table-header-color simple-table-header">표시 이름</th><th id="~]^W" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8058-b4b9-fc7b14e2a370"><td id="]eOC" class="">memory</td><td id="F:Kh" class="">Mem0 Memory</td><td id="~]^W" class="">인제스트 후 생성된 Mem0 메모리 객체</td></tr><tr id="22cb3bed-dae9-80e6-bfcd-d6e2560c6e22"><td id="]eOC" class="">search_results</td><td id="F:Kh" class="">Search Results</td><td id="~]^W" class="">메모리 검색 결과</td></tr></tbody></table><hr id="22cb3bed-dae9-80ef-bc53-fe1d0c84d998"/><p id="22cb3bed-dae9-80bf-871d-eca8bcb04d3c" class="">
+</p><h2 id="22cb3bed-dae9-8007-bb81-c7d2ba52d4a0" class="">Redis Chat Memory 컴포넌트</h2><p id="22cb3bed-dae9-80ea-80ff-c065d122ded1" class="">
+</p><p id="22cb3bed-dae9-8007-b51a-dedd2b907067" class="">이 컴포넌트는 Redis를 통해 채팅 메시지를 저장하고 검색합니다.</p><p id="22cb3bed-dae9-8046-94a9-cd642d136fce" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-8070-ada6-ddb3e543361f" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8091-956d-c45e7ebb9459"><th id="kmku" class="simple-table-header-color simple-table-header">이름</th><th id="kPEi" class="simple-table-header-color simple-table-header">표시 이름</th><th id="q?]_" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-808b-8b49-e78991baa1ce"><td id="kmku" class="">host</td><td id="kPEi" class="">hostname</td><td id="q?]_" class="">Redis 호스트 이름 또는 IP</td></tr><tr id="22cb3bed-dae9-8040-944f-debc65b5abe7"><td id="kmku" class="">port</td><td id="kPEi" class="">port</td><td id="q?]_" class="">Redis 포트 번호</td></tr><tr id="22cb3bed-dae9-80c5-b553-e5e652746d1f"><td id="kmku" class="">database</td><td id="kPEi" class="">database</td><td id="q?]_" class="">Redis 데이터베이스 번호</td></tr><tr id="22cb3bed-dae9-80e5-a343-f3c58f96ffb6"><td id="kmku" class="">username</td><td id="kPEi" class="">Username</td><td id="q?]_" class="">Redis 사용자명</td></tr><tr id="22cb3bed-dae9-806e-a30a-f0963f5795ff"><td id="kmku" class="">password</td><td id="kPEi" class="">Password</td><td id="q?]_" class="">사용자 암호</td></tr><tr id="22cb3bed-dae9-80db-a796-e1819d82eb5b"><td id="kmku" class="">key_prefix</td><td id="kPEi" class="">Key prefix</td><td id="q?]_" class="">키 프리픽스</td></tr><tr id="22cb3bed-dae9-80cb-bc34-cc748133ad7a"><td id="kmku" class="">session_id</td><td id="kPEi" class="">Session ID</td><td id="q?]_" class="">메시지 세션 ID</td></tr></tbody></table><p id="22cb3bed-dae9-8035-bd87-f6c921eb05c1" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-80b6-a390-eaceff56de42" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8025-afda-c812408712c6"><th id="&lt;OF;" class="simple-table-header-color simple-table-header">이름</th><th id="iRnJ" class="simple-table-header-color simple-table-header">표시 이름</th><th id=";@`N" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80eb-a732-f02194e8f276"><td id="&lt;OF;" class="">memory</td><td id="iRnJ" class="">Memory</td><td id=";@`N" class="">Redis 기반 채팅 메시지 히스토리 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-80e8-aa3f-d207738c6960"/><p id="22cb3bed-dae9-8068-9c8f-c3680acdaf26" class="">
+</p><h2 id="22cb3bed-dae9-80fa-a5af-f67fbe43a077" class="">Legacy 컴포넌트</h2><p id="22cb3bed-dae9-802d-b0e5-f127ad6fc4ca" class="">
+</p><p id="22cb3bed-dae9-80f1-8924-ee90f173d204" class="">더 이상 공식 지원되지는 않지만 사용 가능한 이전 버전 컴포넌트입니다.</p><h3 id="22cb3bed-dae9-80bd-a61b-ec9309d1a15d" class="">ZepChatMemory 컴포넌트</h3><p id="22cb3bed-dae9-8061-aa36-e3871e0c9071" class="">
+</p><p id="22cb3bed-dae9-80c4-974e-f37a3437b847" class="">이 컴포넌트는 <code>ZepChatMessageHistory</code> 인스턴스를 생성하며, Zep 메모리 서버를 통해 채팅 메시지를 저장하고 검색합니다.</p><p id="22cb3bed-dae9-80c0-9840-e182dc0d7e6a" class=""><strong>입력값 (Inputs)</strong></p><table id="22cb3bed-dae9-801a-aec0-da4b5f0ffc15" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8050-bccb-c6fc2cad2496"><th id="OwRk" class="simple-table-header-color simple-table-header">이름</th><th id="t~n{" class="simple-table-header-color simple-table-header">타입</th><th id="uTOh" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b0-a6e3-de1b73012d8e"><td id="OwRk" class="">url</td><td id="t~n{" class="">MessageText</td><td id="uTOh" class="">Zep 인스턴스 URL (필수)</td></tr><tr id="22cb3bed-dae9-8003-8638-d59fb3f368f1"><td id="OwRk" class="">api_key</td><td id="t~n{" class="">SecretString</td><td id="uTOh" class="">인증을 위한 API 키 (필수)</td></tr><tr id="22cb3bed-dae9-8087-883a-f2fe2b4c607c"><td id="OwRk" class="">api_base_path</td><td id="t~n{" class="">Dropdown</td><td id="uTOh" class="">사용할 API 버전 (예: api/v1, api/v2)</td></tr><tr id="22cb3bed-dae9-8048-96bd-c13d4503ecb5"><td id="OwRk" class="">session_id</td><td id="t~n{" class="">MessageText</td><td id="uTOh" class="">채팅 세션의 고유 식별자 (선택)</td></tr></tbody></table><p id="22cb3bed-dae9-805a-ad38-d4532d3413fa" class=""><strong>출력값 (Outputs)</strong></p><table id="22cb3bed-dae9-802a-ae8c-e8ee05a2ff30" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80cf-943b-dcd1d2c74197"><th id=":jXO" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;jrJ" class="simple-table-header-color simple-table-header">타입</th><th id="&gt;}G&gt;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a5-a95f-c5a1ab331e1d"><td id=":jXO" class="">message_history</td><td id="&gt;jrJ" class="">BaseChatMessageHistory</td><td id="&gt;}G&gt;" class="">해당 세션의 <code>ZepChatMessageHistory</code> 인스턴스</td></tr></tbody></table><hr id="22cb3bed-dae9-80ff-9f53-daf327426f9f"/><p id="22cb3bed-dae9-8015-ac05-c5194a929831" class="">
+</p><p id="22cb3bed-dae9-80ed-a9e2-f51abd627bd5" class="">
+</p><p id="22cb3bed-dae9-8069-86ad-d3807779293d" class="">*이 문서는 <a href="https://docs.langflow.org/components-memories">https://docs.langflow.org/components-memories</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22cb3bed-dae9-801a-88c6-ce06b3e35ad2" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

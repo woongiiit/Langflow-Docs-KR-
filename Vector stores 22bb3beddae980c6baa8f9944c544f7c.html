@@ -1,0 +1,726 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Vector stores</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80c6-baa8-f9944c544f7c" class="page sans"><header><h1 class="page-title">Vector stores</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22db3bed-dae9-8024-85f6-d276c0a1e538" class="">벡터 스토어 (Vector Store) 컴포넌트</h1><h3 id="22db3bed-dae9-8012-a6eb-cf4d514780f7" class="">: Components &gt; Vector Stores</h3><p id="22db3bed-dae9-807c-8077-e8571d58220a" class="">
+</p><p id="22db3bed-dae9-8065-8bd4-ec522215fb88" class="">Langflow의 <strong>Vector Store 컴포넌트</strong>는 벡터 데이터를 저장하고 검색하는 기능을 통해 <strong>챗봇이나 RAG(Retrieval-Augmented Generation)</strong> 같은 AI 작업을 지원합니다.</p><p id="22db3bed-dae9-809e-bffc-ea3c44ef1f50" class="">Vector Store 컴포넌트는 기존의 벡터 데이터베이스와 연결하거나, Langflow 내에서 임시로 벡터 저장소를 생성할 수 있습니다. 이렇게 저장된 벡터 데이터는 나중에 검색과 유사도 비교 작업에 사용됩니다.</p><p id="22db3bed-dae9-80bd-a88f-e6da988ba068" class=""><strong>메모리 컴포넌트</strong>와는 다릅니다. 메모리 컴포넌트는 주로 채팅 메시지를 저장하고 불러오기 위한 용도로 설계되어 있으며, 내부 메모리 또는 외부 DB와 연결됩니다. 자세한 내용은 메모리 관리 옵션을 참고하세요.</p><p id="22db3bed-dae9-8042-b433-de7635753be0" class="">
+</p><hr id="22db3bed-dae9-8004-895a-d403b63edb47"/><p id="22db3bed-dae9-808a-8e0d-e4f1a521d0ad" class="">
+</p><h2 id="22db3bed-dae9-80c6-ad76-ca40b4216096" class="">플로우에서 Vector Store 컴포넌트 사용하기</h2><p id="22db3bed-dae9-806d-ae59-e1a04148ec7d" class="">
+</p><p id="22db3bed-dae9-8089-a141-dc85385988db" class="">다음 예시는 <strong>Chroma DB</strong> 컴포넌트를 사용하는 경우입니다. 사용 중인 Vector Store 컴포넌트에 따라 매개변수나 인증 방식은 달라질 수 있으나, 전체 문서 업로드 및 임베딩(embedding) 처리 방식은 유사합니다.</p><ol type="1" id="22db3bed-dae9-8029-bef8-fcf6a9182c17" class="numbered-list" start="1"><li>로컬 파일에서 문서를 불러온 후, 텍스트를 청크로 나눕니다.</li></ol><ol type="1" id="22db3bed-dae9-8028-9d3b-f9de53570846" class="numbered-list" start="2"><li>연결된 <strong>임베딩 모델(model)</strong> 컴포넌트가 텍스트를 벡터로 변환합니다.</li></ol><ol type="1" id="22db3bed-dae9-80af-8a60-ffcdbc2e558b" class="numbered-list" start="3"><li>변환된 벡터는 Vector Store에 저장됩니다.</li></ol><p id="22db3bed-dae9-8085-b87f-dee34b5728ad" class="">이렇게 저장된 벡터 데이터는 RAG와 같은 워크로드에서 검색에 사용될 수 있습니다.</p><figure id="22cb3bed-dae9-8072-93bb-f8f27372641e" class="image"><a href="image%2043.png"><img style="width:2734px" src="image%2043.png"/></a></figure><p id="22db3bed-dae9-8077-970d-da84a7abd5ff" class="">사용자의 입력값 역시 임베딩되어, 사전에 저장된 벡터들과 유사도를 비교합니다.</p><ol type="1" id="22db3bed-dae9-80d5-9bab-ddd93878fcfc" class="numbered-list" start="1"><li>Vector Store 컴포넌트는 유사도 검색 결과를 <a href="https://www.notion.so/concepts-objects">Data 객체</a>로 출력합니다.</li></ol><ol type="1" id="22db3bed-dae9-8099-90ac-d2e1ad9237ce" class="numbered-list" start="2"><li>이 Data 객체는 텍스트로 변환된 뒤, Prompt 컴포넌트의 <code>{context}</code> 변수에 삽입됩니다.</li></ol><ol type="1" id="22db3bed-dae9-80a0-b2fa-d905bee8942e" class="numbered-list" start="3"><li>해당 context는 OpenAI 모델 컴포넌트가 응답을 생성할 때 참고하게 됩니다.</li></ol><figure id="22cb3bed-dae9-80e8-8a72-d2a25ca84791" class="image"><a href="image%2044.png"><img style="width:2414px" src="image%2044.png"/></a></figure><hr id="22cb3bed-dae9-800b-943d-f298b6f441d3"/><p id="22db3bed-dae9-8025-b9d3-c2eff734e0f6" class="">
+</p><h2 id="22db3bed-dae9-8065-a3e1-d327e5a3fdb3" class="">Astra DB Vector Store</h2><p id="22db3bed-dae9-802d-abe4-e486bacddfcd" class="">
+</p><p id="22db3bed-dae9-804f-b903-ec0c1e3b2146" class=""><strong>Astra DB Vector Store</strong> 컴포넌트는 <strong>Astra DB</strong>를 기반으로 벡터 저장 및 검색 기능을 제공합니다. 고급 검색 기능을 지원하며, Astra의 내장 임베딩 기능을 사용할 수도 있습니다.</p><p id="22db3bed-dae9-80de-816f-df192124a1ee" class="">자세한 내용은 <a href="https://docs.datastax.com/en/astra-db-serverless/databases/create-database.html">DataStax 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8024-8ecf-e106755c0bdc" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8086-a644-ca4769fb58f1" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-801e-9513-e9cacc0a0361"><th id="BQyg" class="simple-table-header-color simple-table-header">이름</th><th id="YDPB" class="simple-table-header-color simple-table-header">표시 이름</th><th id="jY@a" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80a7-a7a5-df452b431e90"><td id="BQyg" class="">token</td><td id="YDPB" class="">Astra DB Application Token</td><td id="jY@a" class="">Astra DB 접근을 위한 인증 토큰입니다.</td></tr><tr id="22db3bed-dae9-801f-9cee-ed41214f1c62"><td id="BQyg" class="">environment</td><td id="YDPB" class="">Environment</td><td id="jY@a" class="">Astra DB API 엔드포인트의 환경 설정 값 (예: <code>dev</code>, <code>prod</code>)</td></tr><tr id="22db3bed-dae9-8028-9e18-e97cd4f20113"><td id="BQyg" class="">database_name</td><td id="YDPB" class="">Database</td><td id="jY@a" class="">Astra DB 인스턴스의 데이터베이스 이름입니다.</td></tr><tr id="22db3bed-dae9-8072-bdb3-e99679fff306"><td id="BQyg" class="">api_endpoint</td><td id="YDPB" class="">Astra DB API Endpoint</td><td id="jY@a" class="">데이터베이스 선택보다 우선되는 API 엔드포인트 주소입니다.</td></tr><tr id="22db3bed-dae9-8020-a171-f85cc7a67ee3"><td id="BQyg" class="">collection_name</td><td id="YDPB" class="">Collection</td><td id="jY@a" class="">벡터가 저장될 Astra DB 내의 컬렉션 이름입니다.</td></tr><tr id="22db3bed-dae9-80f8-80ab-f32a8721c1b2"><td id="BQyg" class="">keyspace</td><td id="YDPB" class="">Keyspace</td><td id="jY@a" class="">(선택 사항) 사용할 Astra DB의 키스페이스입니다.</td></tr><tr id="22db3bed-dae9-8003-a2d8-e93cb792e2e8"><td id="BQyg" class="">embedding_choice</td><td id="YDPB" class="">Embedding Model or Astra Vectorize</td><td id="jY@a" class="">임베딩 모델을 선택하거나 Astra의 벡터화 기능을 사용할 수 있습니다.</td></tr><tr id="22db3bed-dae9-8000-b5ca-fd0e142b9d25"><td id="BQyg" class="">embedding_model</td><td id="YDPB" class="">Embedding Model</td><td id="jY@a" class="">사용할 임베딩 모델을 지정합니다. Astra Vectorize를 사용하는 경우 생략 가능.</td></tr><tr id="22db3bed-dae9-8034-9035-cd6716ae4e95"><td id="BQyg" class="">number_of_results</td><td id="YDPB" class="">Number of Search Results</td><td id="jY@a" class="">검색 결과로 반환할 벡터 개수입니다. 기본값: <code>4</code></td></tr><tr id="22db3bed-dae9-80a4-b3d6-ce906c162dad"><td id="BQyg" class="">search_type</td><td id="YDPB" class="">Search Type</td><td id="jY@a" class="">검색 방식: <code>Similarity</code>, <code>Similarity with score threshold</code>, <code>MMR (Max Marginal Relevance)</code> 중 선택</td></tr><tr id="22db3bed-dae9-8004-bd61-ce5d77bb065a"><td id="BQyg" class="">search_score_threshold</td><td id="YDPB" class="">Search Score Threshold</td><td id="jY@a" class=""><code>Similarity with score threshold</code> 사용 시 결과 필터링에 사용되는 최소 유사도 점수입니다.</td></tr><tr id="22db3bed-dae9-80f2-80ee-e2c0110fa87a"><td id="BQyg" class="">advanced_search_filter</td><td id="YDPB" class="">Search Metadata Filter</td><td id="jY@a" class="">(선택 사항) 검색 쿼리에 적용할 메타데이터 필터 사전(dictionary)입니다.</td></tr><tr id="22db3bed-dae9-8046-9541-cb87b4b7ffaa"><td id="BQyg" class="">autodetect_collection</td><td id="YDPB" class="">Autodetect Collection</td><td id="jY@a" class="">컬렉션을 자동 감지할지 여부를 지정하는 불리언 값입니다.</td></tr><tr id="22db3bed-dae9-8048-98b4-fbca6bd83f18"><td id="BQyg" class="">content_field</td><td id="YDPB" class="">Content Field</td><td id="jY@a" class="">벡터 저장소에서 텍스트로 사용할 필드입니다.</td></tr><tr id="22db3bed-dae9-8018-acbc-fd38ac9c927d"><td id="BQyg" class="">deletion_field</td><td id="YDPB" class="">Deletion Based On Field</td><td id="jY@a" class="">입력 데이터의 메타데이터와 일치하는 기존 문서를 삭제할 때 사용할 필드입니다.</td></tr><tr id="22db3bed-dae9-803e-bda4-d1d775b45e54"><td id="BQyg" class="">ignore_invalid_documents</td><td id="YDPB" class="">Ignore Invalid Documents</td><td id="jY@a" class="">유효하지 않은 문서를 무시할지 여부입니다.</td></tr><tr id="22db3bed-dae9-8087-afa2-ea14b541a961"><td id="BQyg" class="">astradb_vectorstore_kwargs</td><td id="YDPB" class="">AstraDBVectorStore Parameters</td><td id="jY@a" class="">AstraDBVectorStore에 전달할 추가 파라미터 사전입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8030-9485-e2662d2d2fd6" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8055-b74d-c4bf566f5ca1" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80bf-8aa3-d12c4029dcb1"><th id="hJou" class="simple-table-header-color simple-table-header">이름</th><th id="\nY|" class="simple-table-header-color simple-table-header">표시 이름</th><th id="M]E[" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-800b-83c2-d9ba798e1c24"><td id="hJou" class="">vector_store</td><td id="\nY|" class="">Vector Store</td><td id="M]E[" class="">설정된 Astra DB Vector Store 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80aa-bd3e-f367b0884f96"><td id="hJou" class="">search_results</td><td id="\nY|" class="">Search Results</td><td id="M]E[" class="">유사도 검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22db3bed-dae9-8008-9557-e40f89022133"/><h3 id="22db3bed-dae9-806a-b7f1-f82765e2e8b3" class="">임베딩 생성 방식</h3><p id="22db3bed-dae9-807f-b1b8-d36bdb79609e" class="">
+</p><p id="22db3bed-dae9-800a-a26a-cee3e4e6f0b1" class="">Astra DB Vector Store는 두 가지 방식으로 임베딩을 생성할 수 있습니다.</p><ol type="1" id="22db3bed-dae9-801c-8ac6-fbb1cd7dca72" class="numbered-list" start="1"><li><strong>임베딩 모델 연결</strong><p id="22db3bed-dae9-800b-9b12-d0c7aa122b2a" class="">Langflow의 <a href="https://www.notion.so/components-embedding-models">Embedding 컴포넌트</a>를 연결해 직접 임베딩을 생성합니다.</p></li></ol><ol type="1" id="22db3bed-dae9-802f-8a7b-c88e77987925" class="numbered-list" start="2"><li><strong>Astra Vectorize 사용</strong><p id="22db3bed-dae9-80a7-bda6-e62066301e69" class="">Astra DB 자체의 벡터화 서비스(Astra Vectorize)를 사용할 수도 있습니다. 컬렉션을 생성할 때, NVIDIA의 <code>NV-Embed-QA</code>와 같은 모델을 선택할 수 있습니다.</p></li></ol><p id="22db3bed-dae9-805b-886c-c772162721cd" class="">임베딩 모델은 <strong>컬렉션 생성 시</strong> 지정되며, 생성 이후에는 변경할 수 없습니다.</p><p id="22db3bed-dae9-8094-acfa-e08e0b3a06c4" class="">관련 예시는 <a href="https://www.notion.so/vector-store-rag">Vector Store RAG 스타터 프로젝트</a>를 참고하세요.</p><p id="22db3bed-dae9-802f-a7cc-c1efe168c15e" class="">자세한 정보는 <a href="https://docs.datastax.com/en/astra-db-serverless/databases/embedding-generation.html">Astra DB 임베딩 생성 문서</a>를 참고하세요.</p><hr id="22db3bed-dae9-8072-ad84-dd4d266a35d1"/><h3 id="22db3bed-dae9-8040-a809-eff32acc6ce2" class="">Hybrid Search (혼합 검색)</h3><p id="22db3bed-dae9-809d-a547-f125fca7b1b2" class="">Astra DB는 기본적으로 <strong>Hybrid Search</strong>를 지원합니다.</p><p id="22db3bed-dae9-80f6-9d66-d44c8d453518" class="">Hybrid Search는 다음 세 가지 항목으로 구성됩니다:</p><ul id="22db3bed-dae9-800a-b9e2-fc622cb16d33" class="bulleted-list"><li style="list-style-type:disc"><strong>Search Query</strong>: 벡터 기반 유사도 검색을 위한 질의어</li></ul><ul id="22db3bed-dae9-80b9-add5-e85ce86a6521" class="bulleted-list"><li style="list-style-type:disc"><strong>Lexical Terms</strong>: 쉼표로 구분된 키워드 목록 (예: <code>features, data, attributes, characteristics</code>)</li></ul><ul id="22db3bed-dae9-8034-8d23-e582c10eeb0b" class="bulleted-list"><li style="list-style-type:disc"><strong>Reranker</strong>: 벡터 결과와 키워드 결과를 재정렬하는 모델 (<code>nvidia/llama-3.2-nv.reranker</code>)</li></ul><p id="22db3bed-dae9-8067-af93-c829853755b7" class="">Hybrid Search는 벡터 유사도 검색과 키워드 기반 검색을 모두 수행하고, 그 결과를 비교한 뒤 최적의 결과를 반환합니다.</p><p id="22db3bed-dae9-803b-b412-ea8477a81791" class="">Hybrid Search를 사용하려면 컬렉션을 생성할 때 다음 기능이 <strong>활성화되어 있어야 합니다</strong>: 벡터, 텍스트 검색(lexical), 재정렬(rerank).</p><p id="22db3bed-dae9-8080-ba60-edc77e5f8301" class="">AWS <code>us-east-2</code> 리전에서 데이터베이스를 만들면 기본적으로 활성화됩니다.</p><p id="22db3bed-dae9-80b9-9bfd-ebc95daf6bc5" class="">자세한 설정 방법은 <a href="https://docs.datastax.com/en/astra-db-serverless/api-reference/collection-methods/create-collection.html#example-hybrid">DataStax 문서</a>를 참고하세요.</p><hr id="22db3bed-dae9-80c0-b89c-fc6695987504"/><h3 id="22db3bed-dae9-80e4-a331-c5e209e333c6" class="">Hybrid Search 사용 방법</h3><ol type="1" id="22db3bed-dae9-80b4-a13d-c4499af603a2" class="numbered-list" start="1"><li><strong>New Flow</strong> &gt; <strong>RAG</strong> &gt; <strong>Hybrid Search RAG</strong>를 선택하세요.</li></ol><ol type="1" id="22db3bed-dae9-806f-a7bf-ea051d746beb" class="numbered-list" start="2"><li><strong>OpenAI</strong> 모델 컴포넌트에 OpenAI API 키를 입력합니다.</li></ol><ol type="1" id="22db3bed-dae9-806d-83b7-d8dbf02d9289" class="numbered-list" start="3"><li><strong>Astra DB Vector Store</strong> 컴포넌트에 Astra DB Application Token을 입력합니다.</li></ol><ol type="1" id="22db3bed-dae9-80fa-bfab-da6252584b20" class="numbered-list" start="4"><li><strong>Database</strong> 필드에서 사용할 데이터베이스를 선택합니다.</li></ol><ol type="1" id="22db3bed-dae9-80e2-bc8d-ddc8e922972d" class="numbered-list" start="5"><li><strong>Collection</strong> 필드에서 Hybrid 기능이 활성화된 컬렉션을 선택하거나 새로 생성합니다.</li></ol><ol type="1" id="22db3bed-dae9-8036-9739-f087e62a0769" class="numbered-list" start="6"><li>Playground에서 다음과 같이 질문을 입력합니다:<p id="22db3bed-dae9-8051-ab6c-fb21c4c0e175" class=""><code>What are the features of my data?</code></p></li></ol><p id="22db3bed-dae9-801d-ab79-da7d20ed386c" class="">이때 사용자의 입력은 두 컴포넌트로 전송됩니다:</p><ul id="22db3bed-dae9-801c-90e9-eb60a2cb4544" class="bulleted-list"><li style="list-style-type:disc"><strong>OpenAI 모델</strong>: 사용자의 질문을 기반으로 키워드와 임베딩용 질문을 생성합니다.</li></ul><ul id="22db3bed-dae9-8064-a8b4-f33c0bf350d6" class="bulleted-list"><li style="list-style-type:disc"><strong>Astra DB</strong>: 벡터 기반 및 키워드 기반 검색을 수행합니다.</li></ul><p id="22db3bed-dae9-8068-bfbd-c770412435cf" class="">예시 프롬프트:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22db3bed-dae9-80d7-9944-eda0e5fa07e0" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">
+당신은 사용자의 요청을 받아, 질의어를 주제에 맞는 검색으로 변환하는 데이터베이스 쿼리 플래너입니다.
+
+다음을 생성하세요:
+1. Lucene 인덱스에서 사용할 단일 단어 키워드 최대 4개
+2. QA 임베딩 엔진에 사용할 질문
+
+단, 주제와 관련된 일반 키워드는 피하세요.
+
+</code></pre><ol type="1" id="22db3bed-dae9-8042-a79b-c4b0a296f0fd" class="numbered-list" start="1"><li><strong>OpenAI</strong> 컴포넌트에서 &lt;Icon name=&quot;TextSearch&quot; aria-hidden=&quot;true&quot;/&gt; <strong>Inspect output</strong>을 클릭하면 다음과 같은 결과를 볼 수 있습니다:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22db3bed-dae9-8017-af0d-f07dab7e9aee" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">kotlin
+복사편집
+1. 키워드: features, data, attributes, characteristics
+2. 질문: What characteristics can be identified in my data?
+
+</code></pre><ol type="1" id="22db3bed-dae9-80ad-b3bf-c3bf5f732219" class="numbered-list" start="1"><li>Structured Output 컴포넌트의 결과는 <strong>Parser</strong>로 전달되어 키워드 문자열로 변환됩니다.</li></ol><p id="22db3bed-dae9-80b0-a015-f92eb2ff118c" class="">이 문자열은 <strong>Astra DB</strong>의 <strong>Lexical Terms</strong> 포트로 전달되며, <strong>Search Query</strong> 포트에는 사용자의 질문이 벡터화되어 연결됩니다.</p><p id="22db3bed-dae9-8098-a82e-da1662f5fed4" class="">이 두 쿼리는 <code>find_and_rerank</code> 엔드포인트로 전달되며, <strong>reranker 모델</strong>이 두 결과를 비교해 가장 관련성 높은 결과를 반환합니다.</p><hr id="22db3bed-dae9-80c6-949e-f480798c19a1"/><h2 id="22db3bed-dae9-800e-97f8-da38bf6a7fbb" class="">Astra DB Vector Store</h2><p id="22db3bed-dae9-80a3-aa41-e4e66171aaad" class="">
+</p><p id="22db3bed-dae9-80d3-985e-f11a50a6c6b5" class=""><strong>Astra DB Vector Store</strong> 컴포넌트는 <strong>Astra DB</strong>를 기반으로 벡터 저장 및 검색 기능을 제공합니다. 고급 검색 기능을 지원하며, Astra의 내장 임베딩 기능을 사용할 수도 있습니다.</p><p id="22db3bed-dae9-8096-9d78-ca3eea6a648c" class="">자세한 내용은 <a href="https://docs.datastax.com/en/astra-db-serverless/databases/create-database.html">DataStax 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-80eb-8b09-f07483739506" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-801d-b9a6-dd127f689ff4" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-801c-8504-c7b4e866d32f"><th id="bmrt" class="simple-table-header-color simple-table-header">이름</th><th id="lD&lt;[" class="simple-table-header-color simple-table-header">표시 이름</th><th id="DsIn" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8037-8d9c-f3f1a396b025"><td id="bmrt" class="">token</td><td id="lD&lt;[" class="">Astra DB Application Token</td><td id="DsIn" class="">Astra DB 접근을 위한 인증 토큰입니다.</td></tr><tr id="22db3bed-dae9-8061-a250-e7c3aa123c44"><td id="bmrt" class="">environment</td><td id="lD&lt;[" class="">Environment</td><td id="DsIn" class="">Astra DB API 엔드포인트의 환경 설정 값 (예: <code>dev</code>, <code>prod</code>)</td></tr><tr id="22db3bed-dae9-8014-a1a1-e1cd4c03fa39"><td id="bmrt" class="">database_name</td><td id="lD&lt;[" class="">Database</td><td id="DsIn" class="">Astra DB 인스턴스의 데이터베이스 이름입니다.</td></tr><tr id="22db3bed-dae9-800a-b3de-ce81c57df421"><td id="bmrt" class="">api_endpoint</td><td id="lD&lt;[" class="">Astra DB API Endpoint</td><td id="DsIn" class="">데이터베이스 선택보다 우선되는 API 엔드포인트 주소입니다.</td></tr><tr id="22db3bed-dae9-8061-b973-f147fa24e9a1"><td id="bmrt" class="">collection_name</td><td id="lD&lt;[" class="">Collection</td><td id="DsIn" class="">벡터가 저장될 Astra DB 내의 컬렉션 이름입니다.</td></tr><tr id="22db3bed-dae9-80ae-8c8d-d06342a9ca1f"><td id="bmrt" class="">keyspace</td><td id="lD&lt;[" class="">Keyspace</td><td id="DsIn" class="">(선택 사항) 사용할 Astra DB의 키스페이스입니다.</td></tr><tr id="22db3bed-dae9-8046-b3ad-d2255e03c2a3"><td id="bmrt" class="">embedding_choice</td><td id="lD&lt;[" class="">Embedding Model or Astra Vectorize</td><td id="DsIn" class="">임베딩 모델을 선택하거나 Astra의 벡터화 기능을 사용할 수 있습니다.</td></tr><tr id="22db3bed-dae9-8023-806f-e561bb5e1396"><td id="bmrt" class="">embedding_model</td><td id="lD&lt;[" class="">Embedding Model</td><td id="DsIn" class="">사용할 임베딩 모델을 지정합니다. Astra Vectorize를 사용하는 경우 생략 가능.</td></tr><tr id="22db3bed-dae9-804e-8898-c7c2b6b1818e"><td id="bmrt" class="">number_of_results</td><td id="lD&lt;[" class="">Number of Search Results</td><td id="DsIn" class="">검색 결과로 반환할 벡터 개수입니다. 기본값: <code>4</code></td></tr><tr id="22db3bed-dae9-80ef-ab88-d6d790c47a67"><td id="bmrt" class="">search_type</td><td id="lD&lt;[" class="">Search Type</td><td id="DsIn" class="">검색 방식: <code>Similarity</code>, <code>Similarity with score threshold</code>, <code>MMR (Max Marginal Relevance)</code> 중 선택</td></tr><tr id="22db3bed-dae9-8070-b9fd-ed65494504c6"><td id="bmrt" class="">search_score_threshold</td><td id="lD&lt;[" class="">Search Score Threshold</td><td id="DsIn" class=""><code>Similarity with score threshold</code> 사용 시 결과 필터링에 사용되는 최소 유사도 점수입니다.</td></tr><tr id="22db3bed-dae9-8057-91bd-ff9778c4562b"><td id="bmrt" class="">advanced_search_filter</td><td id="lD&lt;[" class="">Search Metadata Filter</td><td id="DsIn" class="">(선택 사항) 검색 쿼리에 적용할 메타데이터 필터 사전(dictionary)입니다.</td></tr><tr id="22db3bed-dae9-8075-bb60-ef3d5b7a8ffe"><td id="bmrt" class="">autodetect_collection</td><td id="lD&lt;[" class="">Autodetect Collection</td><td id="DsIn" class="">컬렉션을 자동 감지할지 여부를 지정하는 불리언 값입니다.</td></tr><tr id="22db3bed-dae9-80e2-a38c-c0bad575dc95"><td id="bmrt" class="">content_field</td><td id="lD&lt;[" class="">Content Field</td><td id="DsIn" class="">벡터 저장소에서 텍스트로 사용할 필드입니다.</td></tr><tr id="22db3bed-dae9-807b-aebd-d2b48d212e26"><td id="bmrt" class="">deletion_field</td><td id="lD&lt;[" class="">Deletion Based On Field</td><td id="DsIn" class="">입력 데이터의 메타데이터와 일치하는 기존 문서를 삭제할 때 사용할 필드입니다.</td></tr><tr id="22db3bed-dae9-8029-ae59-dd2ef4e2090e"><td id="bmrt" class="">ignore_invalid_documents</td><td id="lD&lt;[" class="">Ignore Invalid Documents</td><td id="DsIn" class="">유효하지 않은 문서를 무시할지 여부입니다.</td></tr><tr id="22db3bed-dae9-80ed-8616-e8e45c194c4f"><td id="bmrt" class="">astradb_vectorstore_kwargs</td><td id="lD&lt;[" class="">AstraDBVectorStore Parameters</td><td id="DsIn" class="">AstraDBVectorStore에 전달할 추가 파라미터 사전입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80ca-9107-e8553a516d21" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-804a-9e63-df7268749bf3" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8080-bd53-f89b5dffb7cc"><th id="DpxR" class="simple-table-header-color simple-table-header">이름</th><th id="n[FM" class="simple-table-header-color simple-table-header">표시 이름</th><th id="a_^;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8053-af9b-f9ec0a58d360"><td id="DpxR" class="">vector_store</td><td id="n[FM" class="">Vector Store</td><td id="a_^;" class="">설정된 Astra DB Vector Store 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80b2-a53b-c96120313031"><td id="DpxR" class="">search_results</td><td id="n[FM" class="">Search Results</td><td id="a_^;" class="">유사도 검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22db3bed-dae9-8065-af50-d0cbafdf9699"/><h2 id="22db3bed-dae9-80eb-ae51-fec2f9f668f4" class="">Cassandra</h2><p id="22db3bed-dae9-80ee-84af-fe695db48a85" class="">
+</p><p id="22db3bed-dae9-802c-bce3-e3bf0b55d598" class="">이 컴포넌트는 <strong>Cassandra 기반의 Vector Store</strong>를 생성하며, 검색 기능을 포함합니다.</p><p id="22db3bed-dae9-80b7-addc-c7907ca66bf3" class="">Astra DB 환경뿐만 아니라 로컬 Cassandra 클러스터에서도 사용할 수 있습니다.</p><p id="22db3bed-dae9-8009-94fd-e75166b44efc" class="">자세한 내용은 <a href="https://cassandra.apache.org/doc/latest/cassandra/vector-search/overview.html">Cassandra 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-80be-96fd-f5fe68b2c361" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-80d5-99c4-da7820dd750d" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-809a-9dbb-de801316a704"><th id="^:g|" class="simple-table-header-color simple-table-header">이름</th><th id="vyAU" class="simple-table-header-color simple-table-header">타입</th><th id="zkVq" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8054-8247-c486007fada6"><td id="^:g|" class="">database_ref</td><td id="vyAU" class="">String</td><td id="zkVq" class="">Cassandra 클러스터 접속 주소 또는 AstraDB 데이터베이스 ID입니다.</td></tr><tr id="22db3bed-dae9-80e5-af8c-c6ebabab1e54"><td id="^:g|" class="">username</td><td id="vyAU" class="">String</td><td id="zkVq" class="">데이터베이스 사용자 이름입니다. AstraDB에서는 비워두세요.</td></tr><tr id="22db3bed-dae9-8052-852e-d549e38a54a5"><td id="^:g|" class="">token</td><td id="vyAU" class="">SecretString</td><td id="zkVq" class="">사용자 비밀번호 또는 AstraDB 인증 토큰입니다.</td></tr><tr id="22db3bed-dae9-80f7-a318-c0444cd61467"><td id="^:g|" class="">keyspace</td><td id="vyAU" class="">String</td><td id="zkVq" class="">사용할 테이블의 키스페이스 또는 AstraDB 네임스페이스입니다.</td></tr><tr id="22db3bed-dae9-8018-9b47-f01f70ac22e4"><td id="^:g|" class="">table_name</td><td id="vyAU" class="">String</td><td id="zkVq" class="">벡터를 저장할 테이블 또는 AstraDB 컬렉션의 이름입니다.</td></tr><tr id="22db3bed-dae9-8045-97b6-ef6d752c97f7"><td id="^:g|" class="">ttl_seconds</td><td id="vyAU" class="">Integer</td><td id="zkVq" class="">추가된 텍스트의 TTL(Time-To-Live)입니다.</td></tr><tr id="22db3bed-dae9-8062-a7e7-e3b68ab4e551"><td id="^:g|" class="">batch_size</td><td id="vyAU" class="">Integer</td><td id="zkVq" class="">한 번에 처리할 데이터 수입니다.</td></tr><tr id="22db3bed-dae9-8062-986e-eafbb81f7686"><td id="^:g|" class="">setup_mode</td><td id="vyAU" class="">String</td><td id="zkVq" class="">Cassandra 테이블 설정 방식입니다. 예: <code>&quot;Sync&quot;</code>, <code>&quot;Off&quot;</code></td></tr><tr id="22db3bed-dae9-8019-875a-dbca4bcd4a79"><td id="^:g|" class="">cluster_kwargs</td><td id="vyAU" class="">Dict</td><td id="zkVq" class="">Cassandra 클러스터 설정을 위한 추가 파라미터입니다.</td></tr><tr id="22db3bed-dae9-80ce-a52d-dcc35c383386"><td id="^:g|" class="">search_query</td><td id="vyAU" class="">String</td><td id="zkVq" class="">유사도 검색을 위한 질의어입니다.</td></tr><tr id="22db3bed-dae9-80c9-8fb3-d31c0ceea927"><td id="^:g|" class="">ingest_data</td><td id="vyAU" class="">Data</td><td id="zkVq" class="">Vector Store에 저장할 데이터입니다.</td></tr><tr id="22db3bed-dae9-80ce-a516-fdae1f7aba3e"><td id="^:g|" class="">embedding</td><td id="vyAU" class="">Embeddings</td><td id="zkVq" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-80b6-ac34-f5e8fe671500"><td id="^:g|" class="">number_of_results</td><td id="vyAU" class="">Integer</td><td id="zkVq" class="">검색 결과로 반환할 개수입니다.</td></tr><tr id="22db3bed-dae9-8037-be61-f440a93a48d7"><td id="^:g|" class="">search_type</td><td id="vyAU" class="">String</td><td id="zkVq" class="">검색 방식입니다. 예: <code>&quot;Similarity&quot;</code>, <code>&quot;MMR&quot;</code> 등</td></tr><tr id="22db3bed-dae9-802c-8c22-e0c45f7405a5"><td id="^:g|" class="">search_score_threshold</td><td id="vyAU" class="">Float</td><td id="zkVq" class="">검색 결과를 필터링할 최소 유사도 점수입니다.</td></tr><tr id="22db3bed-dae9-8065-8530-fb934f79141b"><td id="^:g|" class="">search_filter</td><td id="vyAU" class="">Dict</td><td id="zkVq" class="">메타데이터 기반 필터 조건입니다.</td></tr><tr id="22db3bed-dae9-8077-8fe5-ca6091801b71"><td id="^:g|" class="">body_search</td><td id="vyAU" class="">String</td><td id="zkVq" class="">텍스트 기반 키워드 검색에 사용할 문자열입니다.</td></tr><tr id="22db3bed-dae9-8062-9746-f3b4a6832a3f"><td id="^:g|" class="">enable_body_search</td><td id="vyAU" class="">Boolean</td><td id="zkVq" class="">텍스트 키워드 검색(body search)을 활성화할지 여부입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80d6-ab86-c874eac13b68" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8025-b57f-d6be43c339c4" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80f6-86c5-d365d06a4db9"><th id="mp[T" class="simple-table-header-color simple-table-header">이름</th><th id="IkMt" class="simple-table-header-color simple-table-header">타입</th><th id="Z=t_" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80ae-a177-ef844f51b49e"><td id="mp[T" class="">vector_store</td><td id="IkMt" class="">Cassandra</td><td id="Z=t_" class="">설정된 Cassandra 벡터 저장소 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8050-80db-fb22e5e0fd8a"><td id="mp[T" class="">search_results</td><td id="IkMt" class="">List[Data]</td><td id="Z=t_" class="">유사도 검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80c1-9fdb-f924604c8331"/><h2 id="22db3bed-dae9-801d-b35f-c9a24e5e2dd7" class="">Cassandra Graph Vector Store</h2><p id="22db3bed-dae9-80f5-b3cf-d83a3f94b3dd" class="">
+</p><p id="22db3bed-dae9-8080-9a31-fdf31ef06d65" class="">이 컴포넌트는 <strong>그래프 기능을 포함한 Cassandra 기반의 Vector Store</strong>를 생성하며,</p><p id="22db3bed-dae9-801c-8b6d-fb1f6649f54a" class=""><strong>Traversal(탐색)</strong> 방식의 검색과 <strong>MMR(Max Marginal Relevance)</strong> 등 다양한 검색 옵션을 지원합니다.</p><p id="22db3bed-dae9-80a4-befb-fa9a277a1e7d" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8016-b1a7-fab490373fef" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-802d-bd5e-fb1e67142865"><th id="{M:b" class="simple-table-header-color simple-table-header">이름</th><th id="IA;t" class="simple-table-header-color simple-table-header">표시 이름</th><th id="iC|~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8074-9999-e9f1b0c7e2cb"><td id="{M:b" class="">database_ref</td><td id="IA;t" class="">Contact Points / Astra Database ID</td><td id="iC|~" class="">Cassandra 클러스터의 접속 주소 또는 AstraDB 데이터베이스 ID입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-80aa-9ea6-e9add914283c"><td id="{M:b" class="">username</td><td id="IA;t" class="">Username</td><td id="iC|~" class="">데이터베이스 사용자 이름입니다. AstraDB를 사용하는 경우 비워두세요.</td></tr><tr id="22db3bed-dae9-80cf-bbe8-f256587be469"><td id="{M:b" class="">token</td><td id="IA;t" class="">Password / AstraDB Token</td><td id="iC|~" class="">사용자 비밀번호 또는 AstraDB 인증 토큰입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8087-8273-f868a701af4c"><td id="{M:b" class="">keyspace</td><td id="IA;t" class="">Keyspace</td><td id="iC|~" class="">사용할 테이블의 키스페이스 또는 AstraDB 네임스페이스입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8035-a761-c198447f120d"><td id="{M:b" class="">table_name</td><td id="IA;t" class="">Table Name</td><td id="iC|~" class="">벡터를 저장할 테이블 또는 AstraDB 컬렉션 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-80d5-b0bf-e2b6a2d56332"><td id="{M:b" class="">setup_mode</td><td id="IA;t" class="">Setup Mode</td><td id="iC|~" class="">Cassandra 테이블 설정 방식입니다. <code>&quot;Sync&quot;</code> 또는 <code>&quot;Off&quot;</code> 선택 가능. 기본값: <code>&quot;Sync&quot;</code></td></tr><tr id="22db3bed-dae9-807b-ba6e-e3d92529b0c0"><td id="{M:b" class="">cluster_kwargs</td><td id="IA;t" class="">Cluster arguments</td><td id="iC|~" class="">Cassandra 클러스터 설정을 위한 추가 파라미터입니다. 선택 사항입니다.</td></tr><tr id="22db3bed-dae9-80a3-bf99-ccbb1168430f"><td id="{M:b" class="">search_query</td><td id="IA;t" class="">Search Query</td><td id="iC|~" class="">유사도 검색에 사용할 질의어입니다.</td></tr><tr id="22db3bed-dae9-803c-ad14-fbdea6b4333a"><td id="{M:b" class="">ingest_data</td><td id="IA;t" class="">Ingest Data</td><td id="iC|~" class="">Vector Store에 저장할 데이터입니다.</td></tr><tr id="22db3bed-dae9-8097-82ee-d6b82b393531"><td id="{M:b" class="">embedding</td><td id="IA;t" class="">Embedding</td><td id="iC|~" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22db3bed-dae9-80c3-bb91-d22c9c616eb8"><td id="{M:b" class="">number_of_results</td><td id="IA;t" class="">Number of Results</td><td id="iC|~" class="">검색 결과로 반환할 개수입니다. 기본값: <code>4</code></td></tr><tr id="22db3bed-dae9-80d9-be6d-cef9d14948e7"><td id="{M:b" class="">search_type</td><td id="IA;t" class="">Search Type</td><td id="iC|~" class="">검색 방식입니다. <code>&quot;Traversal&quot;</code>, <code>&quot;MMR traversal&quot;</code>, <code>&quot;Similarity&quot;</code>, <code>&quot;Similarity with score threshold&quot;</code>, <code>&quot;MMR&quot;</code> 중 선택. 기본값: <code>&quot;Traversal&quot;</code></td></tr><tr id="22db3bed-dae9-808d-aefd-e1a935d7d6d4"><td id="{M:b" class="">depth</td><td id="IA;t" class="">Depth of traversal</td><td id="iC|~" class="">그래프 탐색의 최대 깊이입니다. <code>&quot;Traversal&quot;</code> 또는 <code>&quot;MMR traversal&quot;</code>을 사용할 때 적용됩니다. 기본값: <code>1</code></td></tr><tr id="22db3bed-dae9-8086-816d-eb5dbf5de188"><td id="{M:b" class="">search_score_threshold</td><td id="IA;t" class="">Search Score Threshold</td><td id="iC|~" class=""><code>&quot;Similarity with score threshold&quot;</code> 검색 방식에서 사용하는 최소 유사도 점수입니다.</td></tr><tr id="22db3bed-dae9-80c4-8a95-d571bb72a399"><td id="{M:b" class="">search_filter</td><td id="IA;t" class="">Search Metadata Filter</td><td id="iC|~" class="">검색에 적용할 메타데이터 기반 필터 조건입니다. 선택 사항입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8075-a202-e619825fcbec" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-80e3-8878-c8a8a2487c06" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-801f-be71-ff53dcb99125"><th id="g~=U" class="simple-table-header-color simple-table-header">이름</th><th id="nka_" class="simple-table-header-color simple-table-header">표시 이름</th><th id="kCUS" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8084-b998-c4433e357ace"><td id="g~=U" class="">vector_store</td><td id="nka_" class="">Vector Store</td><td id="kCUS" class="">설정된 Cassandra Graph 벡터 저장소 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-801a-baca-cd371245133e"><td id="g~=U" class="">search_results</td><td id="nka_" class="">Search Results</td><td id="kCUS" class="">검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80f0-8a51-f3c0b3e425aa"/><h2 id="22db3bed-dae9-80eb-9b13-fda8ff9953cb" class="">Chroma DB</h2><p id="22db3bed-dae9-80e3-9e78-d3a4e2333d6d" class="">
+</p><p id="22db3bed-dae9-8025-93bd-c26c89505ff0" class=""><strong>Chroma DB</strong> 컴포넌트는 간단한 실험과 벡터 저장을 위한 **임시 벡터 데이터베이스(ephemeral vector database)**를 생성합니다.</p><p id="22db3bed-dae9-80d0-8b6c-cbbeaa0391b2" class="">Langflow 내에서 빠르게 벡터 기반 검색을 테스트하고 임베딩 데이터를 저장할 수 있는 가장 기본적인 Vector Store입니다.</p><p id="22db3bed-dae9-80b3-97b6-cacd6d5a8af8" class="">플로우에서 사용하려면, <strong>Data</strong> 또는 <strong>DataFrame</strong>을 출력하는 컴포넌트에 연결하면 됩니다.</p><p id="22db3bed-dae9-808f-b52d-e297048df45c" class="">아래는 예시 흐름입니다:</p><ol type="1" id="22db3bed-dae9-80ce-93bf-ec3b4f228b47" class="numbered-list" start="1"><li><a href="https://www.notion.so/components-data#url">URL 컴포넌트</a>에서 텍스트 데이터를 불러온 후, 텍스트를 분할합니다.</li></ol><ol type="1" id="22db3bed-dae9-80cc-8e19-ffeb68e5647c" class="numbered-list" start="2"><li><strong>OpenAI Embeddings</strong> 컴포넌트를 통해 텍스트를 임베딩합니다.<p id="22db3bed-dae9-8011-b4a7-e21f48164c27" class="">(Chroma DB는 자체 임베딩도 가능하지만, 외부 모델 연결을 추천합니다.)</p></li></ol><figure id="22db3bed-dae9-800c-a7ad-e228b7aed7aa" class="image"><a href="image%2045.png"><img style="width:4000px" src="image%2045.png"/></a></figure><ol type="1" id="22db3bed-dae9-800e-b874-f667988d2d7b" class="numbered-list" start="3"><li><strong>Chroma DB</strong> 컴포넌트의 <strong>Collection</strong> 필드에 컬렉션 이름을 입력합니다.</li></ol><ol type="1" id="22db3bed-dae9-80a4-b963-de2cd733a15a" class="numbered-list" start="4"><li>영구 저장을 원할 경우, <strong>Persist</strong> 필드에 디렉토리 경로를 입력합니다.<p id="22db3bed-dae9-8084-b1d9-eddbd38516ca" class="">예: <code>./chroma-db</code> → Langflow 실행 디렉토리 기준으로 <code>chroma.sqlite3</code> 파일이 생성됩니다.</p></li></ol><ol type="1" id="22db3bed-dae9-801e-ab71-f8dfaaf24c70" class="numbered-list" start="5"><li>데이터를 저장하려면 컴포넌트에서 &lt;Icon name=&quot;Play&quot; aria-hidden=&quot;true&quot;/&gt; <strong>Run component</strong>를 클릭합니다.</li></ol><p id="22db3bed-dae9-80a2-827b-e5c0fa63bb6b" class="">중복된 문서를 여러 번 저장하려면 <strong>Allow Duplicates</strong> 옵션을 활성화하세요.</p><p id="22db3bed-dae9-800a-81d5-c017888124aa" class="">비활성화하면 동일한 콘텐츠는 자동으로 중복 제거됩니다.</p><ol type="1" id="22db3bed-dae9-80a8-8369-f1ed4f24fcdb" class="numbered-list" start="6"><li><strong>Split Text</strong> 컴포넌트에서 &lt;Icon name=&quot;TextSearch&quot; aria-hidden=&quot;true&quot;/&gt; <strong>Inspect output</strong>을 클릭하면, 분할된 텍스트를 확인할 수 있습니다.</li></ol><ol type="1" id="22db3bed-dae9-80d2-895f-d78f22c56e30" class="numbered-list" start="7"><li>Playground에서 쿼리를 입력하면, Chroma DB가 저장된 벡터와 입력값을 비교하여 유사도 검색을 수행합니다.</li></ol><p id="22db3bed-dae9-80c2-809e-fb88ccbf18e1" class="">자세한 내용은 <a href="https://docs.trychroma.com/">Chroma 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-80df-9114-fe05eedd966e" class="">
+</p><p id="22db3bed-dae9-806b-b4e7-da41bd4050c4" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8048-9a1f-f8d0a88a95d0" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80ad-8780-c34a34e3a1a8"><th id="oWSf" class="simple-table-header-color simple-table-header">이름</th><th id="Tljq" class="simple-table-header-color simple-table-header">타입</th><th id="^rt`" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-805b-81a0-c2f1f6d327e8"><td id="oWSf" class="">collection_name</td><td id="Tljq" class="">String</td><td id="^rt`" class="">Chroma 컬렉션 이름입니다. 기본값: <code>&quot;langflow&quot;</code></td></tr><tr id="22db3bed-dae9-8077-8a79-f254d8c6bdae"><td id="oWSf" class="">persist_directory</td><td id="Tljq" class="">String</td><td id="^rt`" class="">Chroma DB를 저장할 디렉토리 경로입니다.</td></tr><tr id="22db3bed-dae9-8039-bcb9-ff17329fc6ea"><td id="oWSf" class="">search_query</td><td id="Tljq" class="">String</td><td id="^rt`" class="">유사도 검색에 사용할 질의어입니다.</td></tr><tr id="22db3bed-dae9-8036-9da8-dfe79ed7422b"><td id="oWSf" class="">ingest_data</td><td id="Tljq" class="">Data</td><td id="^rt`" class="">저장할 데이터 목록입니다. (<code>Data</code> 객체 리스트)</td></tr><tr id="22db3bed-dae9-8067-be49-f334b98e2be9"><td id="oWSf" class="">embedding</td><td id="Tljq" class="">Embeddings</td><td id="^rt`" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-8077-8d20-e54b0041ad9d"><td id="oWSf" class="">chroma_server_cors_allow_origins</td><td id="Tljq" class="">String</td><td id="^rt`" class="">Chroma 서버에서 허용할 CORS Origin입니다.</td></tr><tr id="22db3bed-dae9-80c3-a026-d80f061cc5f6"><td id="oWSf" class="">chroma_server_host</td><td id="Tljq" class="">String</td><td id="^rt`" class="">Chroma 서버 호스트 주소입니다.</td></tr><tr id="22db3bed-dae9-8044-a9a5-f3e768ed672c"><td id="oWSf" class="">chroma_server_http_port</td><td id="Tljq" class="">Integer</td><td id="^rt`" class="">HTTP 요청을 위한 포트 번호입니다.</td></tr><tr id="22db3bed-dae9-80f8-bfc4-c1fa48f4d861"><td id="oWSf" class="">chroma_server_grpc_port</td><td id="Tljq" class="">Integer</td><td id="^rt`" class="">gRPC 요청을 위한 포트 번호입니다.</td></tr><tr id="22db3bed-dae9-80d5-b918-cc01ccda918d"><td id="oWSf" class="">chroma_server_ssl_enabled</td><td id="Tljq" class="">Boolean</td><td id="^rt`" class="">SSL을 사용할지 여부입니다.</td></tr><tr id="22db3bed-dae9-8086-b0d4-c06d803cc564"><td id="oWSf" class="">allow_duplicates</td><td id="Tljq" class="">Boolean</td><td id="^rt`" class="">동일한 문서를 중복 저장할지 여부입니다.</td></tr><tr id="22db3bed-dae9-80ce-ac93-d3708359de8b"><td id="oWSf" class="">search_type</td><td id="Tljq" class="">String</td><td id="^rt`" class="">검색 방식입니다. <code>&quot;Similarity&quot;</code> 또는 <code>&quot;MMR&quot;</code> 중 선택.</td></tr><tr id="22db3bed-dae9-80e8-9153-f7ba73adad68"><td id="oWSf" class="">number_of_results</td><td id="Tljq" class="">Integer</td><td id="^rt`" class="">검색 결과로 반환할 항목 수입니다. 기본값: <code>10</code></td></tr><tr id="22db3bed-dae9-8048-9836-dcef8610d45a"><td id="oWSf" class="">limit</td><td id="Tljq" class="">Integer</td><td id="^rt`" class=""><code>Allow Duplicates</code>가 비활성화된 경우 비교할 최대 문서 수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80e0-a29c-f49485742459" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8018-a13f-db45e723e8c8" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80b2-8fe6-e4e4137a316c"><th id="Yt{l" class="simple-table-header-color simple-table-header">이름</th><th id="AkAX" class="simple-table-header-color simple-table-header">타입</th><th id="_@aY" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80cb-accd-e2be7489d268"><td id="Yt{l" class="">vector_store</td><td id="AkAX" class="">Chroma</td><td id="_@aY" class="">설정된 Chroma Vector Store 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80c1-af72-c945dffb25a4"><td id="Yt{l" class="">search_results</td><td id="AkAX" class="">List[Data]</td><td id="_@aY" class="">검색 결과로 반환된 <a href="https://www.notion.so/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80ac-8850-f9290b12270d" class="">
+</p><hr id="22cb3bed-dae9-80ca-88ed-d62c14d6fbcc"/><h2 id="22db3bed-dae9-80c1-ba05-e4e759be100f" class="">Clickhouse</h2><p id="22db3bed-dae9-80d7-a291-fbd614e65eb5" class="">이 컴포넌트는 <strong>Clickhouse</strong> 데이터베이스를 활용한 <strong>Vector Store</strong>를 생성하며,</p><p id="22db3bed-dae9-809a-a367-c0199cc7a094" class="">벡터 유사도 기반 검색 기능을 제공합니다.</p><p id="22db3bed-dae9-805e-83ce-c0f10580f1cc" class="">자세한 내용은 <a href="https://clickhouse.com/docs/en/intro">Clickhouse 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8030-b40f-fbaa380cedc5" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8031-b806-d7658ad2b94f" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-800c-8d18-c4695b7074de"><th id="l;ez" class="simple-table-header-color simple-table-header">이름</th><th id="Oz_:" class="simple-table-header-color simple-table-header">표시 이름</th><th id="YgBo" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-801c-8e2f-ebcc95a13edf"><td id="l;ez" class="">host</td><td id="Oz_:" class="">hostname</td><td id="YgBo" class="">Clickhouse 서버의 호스트 이름입니다. 기본값: <code>&quot;localhost&quot;</code></td></tr><tr id="22db3bed-dae9-8022-9653-fe229cd2a7c0"><td id="l;ez" class="">port</td><td id="Oz_:" class="">port</td><td id="YgBo" class="">Clickhouse 서버의 포트 번호입니다. 기본값: <code>8123</code></td></tr><tr id="22db3bed-dae9-80b3-b102-dfc7c3d42aff"><td id="l;ez" class="">database</td><td id="Oz_:" class="">database</td><td id="YgBo" class="">사용할 Clickhouse 데이터베이스 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-800d-9330-d377daa52083"><td id="l;ez" class="">table</td><td id="Oz_:" class="">Table name</td><td id="YgBo" class="">벡터를 저장할 Clickhouse 테이블 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8026-ba6b-e58d0bc1ac37"><td id="l;ez" class="">username</td><td id="Oz_:" class="">Username</td><td id="YgBo" class="">Clickhouse 인증에 사용할 사용자 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-808d-9ec6-e790d99136c7"><td id="l;ez" class="">password</td><td id="Oz_:" class="">Password</td><td id="YgBo" class="">사용자 인증을 위한 비밀번호입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8049-bc45-d367a9f6f220"><td id="l;ez" class="">index_type</td><td id="Oz_:" class="">index_type</td><td id="YgBo" class="">인덱스 방식입니다. <code>&quot;annoy&quot;</code> 또는 <code>&quot;vector_similarity&quot;</code> 중 선택. 기본값: <code>&quot;annoy&quot;</code></td></tr><tr id="22db3bed-dae9-800a-b2f2-eff109b34aa7"><td id="l;ez" class="">metric</td><td id="Oz_:" class="">metric</td><td id="YgBo" class="">거리 계산 방식입니다. <code>&quot;angular&quot;</code>, <code>&quot;euclidean&quot;</code>, <code>&quot;manhattan&quot;</code>, <code>&quot;hamming&quot;</code>, <code>&quot;dot&quot;</code> 중 선택. 기본값: <code>&quot;angular&quot;</code></td></tr><tr id="22db3bed-dae9-80d5-a5bb-f35fbe7ab654"><td id="l;ez" class="">secure</td><td id="Oz_:" class="">Use https/TLS</td><td id="YgBo" class="">보안 연결(HTTPS/TLS) 사용 여부입니다. 기본값: <code>false</code></td></tr><tr id="22db3bed-dae9-80c4-b134-e874086af860"><td id="l;ez" class="">index_param</td><td id="Oz_:" class="">Param of the index</td><td id="YgBo" class="">인덱스 파라미터입니다. 예: <code>&quot;&#x27;L2Distance&#x27;,100&quot;</code></td></tr><tr id="22db3bed-dae9-805c-9f24-c7ab58a6d276"><td id="l;ez" class="">index_query_params</td><td id="Oz_:" class="">index query params</td><td id="YgBo" class="">인덱스 질의에 사용할 추가 파라미터입니다.</td></tr><tr id="22db3bed-dae9-80dd-9fb0-eaf104a8a148"><td id="l;ez" class="">search_query</td><td id="Oz_:" class="">Search Query</td><td id="YgBo" class="">유사도 검색에 사용할 질의어입니다.</td></tr><tr id="22db3bed-dae9-808c-9c22-e0043b4c6ee9"><td id="l;ez" class="">ingest_data</td><td id="Oz_:" class="">Ingest Data</td><td id="YgBo" class="">Vector Store에 저장할 데이터입니다.</td></tr><tr id="22db3bed-dae9-80ac-8876-d5ccb0acc17f"><td id="l;ez" class="">embedding</td><td id="Oz_:" class="">Embedding</td><td id="YgBo" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22db3bed-dae9-807e-a265-d59a59415477"><td id="l;ez" class="">number_of_results</td><td id="Oz_:" class="">Number of Results</td><td id="YgBo" class="">검색 결과로 반환할 개수입니다. 기본값: <code>4</code></td></tr><tr id="22db3bed-dae9-8009-95d0-dcfaf2fd58f5"><td id="l;ez" class="">score_threshold</td><td id="Oz_:" class="">Score threshold</td><td id="YgBo" class="">유사도 점수 필터링에 사용할 임계값입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80e4-bf5f-da6ef3f3ff09" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8050-a803-fb7b981ad778" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-803d-aa56-ea273661fff4"><th id="TRc[" class="simple-table-header-color simple-table-header">이름</th><th id="U@zq" class="simple-table-header-color simple-table-header">표시 이름</th><th id="D~Ir" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80ef-8e32-edcc2516da89"><td id="TRc[" class="">vector_store</td><td id="U@zq" class="">Vector Store</td><td id="D~Ir" class="">설정된 Clickhouse Vector Store 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8030-984f-c08e9d7e893c"><td id="TRc[" class="">search_results</td><td id="U@zq" class="">Search Results</td><td id="D~Ir" class="">유사도 검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-808c-a622-e75b029e274a"/><h2 id="22db3bed-dae9-803e-86f1-f906dcfc2145" class="">Couchbase</h2><p id="22db3bed-dae9-80df-a463-c29ed9384324" class="">
+</p><p id="22db3bed-dae9-8083-8547-c64b51426167" class="">이 컴포넌트는 <strong>Couchbase</strong> 데이터베이스를 기반으로 한 <strong>Vector Store</strong>를 생성하며,</p><p id="22db3bed-dae9-80a9-b525-d7d6c590db45" class="">벡터 유사도 검색과 문서 저장 기능을 제공합니다.</p><p id="22db3bed-dae9-80ef-bc09-c19d864e1926" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8006-9199-fa04b1fddc81" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-803d-905e-f5b4e1f0f5f6"><th id="AT}\" class="simple-table-header-color simple-table-header">이름</th><th id="qcpA" class="simple-table-header-color simple-table-header">표시 이름</th><th id="|:gc" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80a7-9072-c47688c66917"><td id="AT}\" class="">connection_string</td><td id="qcpA" class="">Connection String</td><td id="|:gc" class="">Couchbase 서버의 접속 주소입니다. 예: <code>&quot;couchbase://localhost&quot;</code></td></tr><tr id="22db3bed-dae9-807c-81ef-fc036771b8f5"><td id="AT}\" class="">bucket_name</td><td id="qcpA" class="">Bucket Name</td><td id="|:gc" class="">사용할 Couchbase 버킷(bucket)의 이름입니다.</td></tr><tr id="22db3bed-dae9-8069-b853-fa8a52e714d1"><td id="AT}\" class="">scope_name</td><td id="qcpA" class="">Scope Name</td><td id="|:gc" class="">사용할 스코프(scope) 이름입니다. Couchbase는 버킷 내에 스코프를 지원합니다.</td></tr><tr id="22db3bed-dae9-8031-a884-fe6825f4e410"><td id="AT}\" class="">collection_name</td><td id="qcpA" class="">Collection Name</td><td id="|:gc" class="">사용할 컬렉션 이름입니다.</td></tr><tr id="22db3bed-dae9-80cd-9b1e-c5b683d95542"><td id="AT}\" class="">username</td><td id="qcpA" class="">Username</td><td id="|:gc" class="">Couchbase 인증을 위한 사용자 이름입니다.</td></tr><tr id="22db3bed-dae9-80b6-a0d4-f61d2fc60d7d"><td id="AT}\" class="">password</td><td id="qcpA" class="">Password</td><td id="|:gc" class="">사용자 비밀번호입니다.</td></tr><tr id="22db3bed-dae9-8035-bc4e-c4cff05bdbe3"><td id="AT}\" class="">embedding</td><td id="qcpA" class="">Embedding</td><td id="|:gc" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22db3bed-dae9-8083-8cfe-c48005a4bc14"><td id="AT}\" class="">search_query</td><td id="qcpA" class="">Search Query</td><td id="|:gc" class="">유사도 검색에 사용할 질의어입니다.</td></tr><tr id="22db3bed-dae9-803d-a616-ce4904c95551"><td id="AT}\" class="">ingest_data</td><td id="qcpA" class="">Ingest Data</td><td id="|:gc" class="">저장할 데이터입니다.</td></tr><tr id="22db3bed-dae9-8093-a4b4-e074a4a2bb91"><td id="AT}\" class="">number_of_results</td><td id="qcpA" class="">Number of Results</td><td id="|:gc" class="">검색 결과로 반환할 개수입니다. 기본값: <code>4</code></td></tr><tr id="22db3bed-dae9-8024-b310-f74fa62242e4"><td id="AT}\" class="">search_filter</td><td id="qcpA" class="">Search Filter</td><td id="|:gc" class="">검색 시 적용할 메타데이터 필터입니다. 선택 사항입니다.</td></tr></tbody></table><p id="22db3bed-dae9-808d-96da-e097f7f9dd30" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8083-af68-e1c74e48b9b9" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8086-84c0-c0e760ceb1c9"><th id="Y_j\" class="simple-table-header-color simple-table-header">이름</th><th id="vd;S" class="simple-table-header-color simple-table-header">표시 이름</th><th id="fGhn" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80f2-97fc-d5f0130ce0ea"><td id="Y_j\" class="">vector_store</td><td id="vd;S" class="">Vector Store</td><td id="fGhn" class="">설정된 Couchbase Vector Store 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8029-b30e-d29dff844a4c"><td id="Y_j\" class="">search_results</td><td id="vd;S" class="">Search Results</td><td id="fGhn" class="">검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80d6-8be7-c05eff4f20c0"/><h2 id="22db3bed-dae9-80b6-ba98-e1c99c33170c" class="">Local DB</h2><p id="22db3bed-dae9-800d-b199-df80ce656a50" class="">
+</p><p id="22db3bed-dae9-80ef-9340-d648c4685f85" class=""><strong>Local DB</strong> 컴포넌트는 Langflow에서 <strong>Chroma DB를 확장한 로컬 벡터 데이터베이스</strong>입니다.</p><p id="22db3bed-dae9-80be-95ef-c9dd827a4f71" class="">사용자 친화적인 인터페이스를 제공하며, 다음 두 가지 모드를 지원합니다:</p><ul id="22db3bed-dae9-80b3-9fd7-cc8222be1455" class="bulleted-list"><li style="list-style-type:disc"><strong>Ingest 모드</strong>: 데이터를 벡터로 임베딩하고 저장</li></ul><ul id="22db3bed-dae9-80e8-b584-c8ac68ea1d17" class="bulleted-list"><li style="list-style-type:disc"><strong>Retrieve 모드</strong>: 저장된 벡터 데이터를 검색</li></ul><p id="22db3bed-dae9-8043-ac71-d5875a11ae8b" class="">이 컴포넌트는 자동 컬렉션 관리 기능과 Langflow의 캐시 디렉터리에 저장되는 <strong>영속적 저장(persistence)</strong> 기능을 내장하고 있어,</p><p id="22db3bed-dae9-8006-8a67-f869a5b3c742" class="">일반적인 ChromaDB 사용보다 편리하게 데이터를 다룰 수 있습니다.</p><blockquote id="22db3bed-dae9-802d-aa4e-f7154e140be2" class="">Ingest 모드는 일반 ChromaDB처럼 작동하며, 데이터는 Langflow 캐시 디렉토리에 영구 저장됩니다.<p id="22db3bed-dae9-80cc-a8b8-ed3c1e875aae" class="">해당 디렉터리는 환경 변수 <code>LANGFLOW_CONFIG_DIR</code>을 통해 지정할 수 있습니다.</p></blockquote><blockquote id="22db3bed-dae9-801b-9ce8-f0ada1f46961" class="">Retrieve 모드는 기존 Chroma 컬렉션을 질의할 수 있는 검색 기능을 제공합니다.</blockquote><blockquote id="22db3bed-dae9-801c-b501-d065f0248626" class="">자세한 정보는 Chroma 공식 문서를 참고하세요.</blockquote><p id="22db3bed-dae9-80d5-87ff-ec998f75624f" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8055-af4b-e5ec849b568c" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8068-ac84-c9cb1516a8eb"><th id="tpU;" class="simple-table-header-color simple-table-header">이름</th><th id="i\~N" class="simple-table-header-color simple-table-header">타입</th><th id="VeH|" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8060-a588-df3719a755b4"><td id="tpU;" class="">collection_name</td><td id="i\~N" class="">String</td><td id="VeH|" class="">사용할 Chroma 컬렉션 이름입니다. 기본값: <code>&quot;langflow&quot;</code></td></tr><tr id="22db3bed-dae9-80d6-ab8a-f1e459dab80f"><td id="tpU;" class="">persist_directory</td><td id="i\~N" class="">String</td><td id="VeH|" class="">벡터 저장소를 저장할 사용자 지정 디렉터리입니다. 벡터는 <code>$DIRECTORY/vector_stores/$COLLECTION_NAME</code> 경로에 저장됩니다. 지정하지 않으면 시스템 캐시 폴더가 사용됩니다.</td></tr><tr id="22db3bed-dae9-8005-865d-cd46a4aef8e0"><td id="tpU;" class="">existing_collections</td><td id="i\~N" class="">String</td><td id="VeH|" class="">기존에 생성된 컬렉션 중 하나를 선택하여 검색할 수 있습니다.</td></tr><tr id="22db3bed-dae9-8020-9f39-e518a8dcf8da"><td id="tpU;" class="">embedding</td><td id="i\~N" class="">Embeddings</td><td id="VeH|" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-80a8-b619-da277749248f"><td id="tpU;" class="">allow_duplicates</td><td id="i\~N" class="">Boolean</td><td id="VeH|" class=""><code>false</code>로 설정하면 중복된 문서는 저장되지 않습니다.</td></tr><tr id="22db3bed-dae9-804a-8b6f-deec28c00d1f"><td id="tpU;" class="">search_type</td><td id="i\~N" class="">String</td><td id="VeH|" class="">검색 방식입니다. <code>&quot;Similarity&quot;</code> 또는 <code>&quot;MMR&quot;</code> 중 선택합니다.</td></tr><tr id="22db3bed-dae9-809f-be2c-f728ee5a13ab"><td id="tpU;" class="">ingest_data</td><td id="i\~N" class="">Data / DataFrame</td><td id="VeH|" class="">저장할 데이터입니다. 입력된 데이터는 임베딩되어 검색이 가능하도록 인덱싱됩니다.</td></tr><tr id="22db3bed-dae9-8057-99fc-f1729e61d37d"><td id="tpU;" class="">search_query</td><td id="i\~N" class="">String</td><td id="VeH|" class="">지정한 컬렉션에서 유사한 콘텐츠를 검색할 질의어입니다.</td></tr><tr id="22db3bed-dae9-8004-b010-efd988c8ed1c"><td id="tpU;" class="">number_of_results</td><td id="i\~N" class="">Integer</td><td id="VeH|" class="">반환할 검색 결과 수입니다. 기본값: <code>10</code></td></tr><tr id="22db3bed-dae9-80a5-9570-fd5daadd8816"><td id="tpU;" class="">limit</td><td id="i\~N" class="">Integer</td><td id="VeH|" class=""><code>allow_duplicates=false</code>일 때 비교할 최대 문서 수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80d3-a8b0-ce07efc8ac77" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8001-b476-db8597749d55" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80e3-96a4-d829e94f5903"><th id="vR\{" class="simple-table-header-color simple-table-header">이름</th><th id="rQ]e" class="simple-table-header-color simple-table-header">타입</th><th id="pN^|" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8060-b3b5-ef879ba22e41"><td id="vR\{" class="">vector_store</td><td id="rQ]e" class="">Chroma</td><td id="pN^|" class="">지정한 설정으로 구성된 로컬 Chroma 벡터 저장소 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8013-b890-e221c21f7c5b"><td id="vR\{" class="">search_results</td><td id="rQ]e" class="">List[Data]</td><td id="pN^|" class="">유사도 검색 결과로 반환된 <a href="https://chatgpt.com/concepts-objects#data-object">Data 객체</a> 리스트입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8005-92a1-e7aa0c0030e9"/><h2 id="22db3bed-dae9-807a-a784-d7102d39e020" class="">Elasticsearch</h2><p id="22db3bed-dae9-807d-b1e0-d0e2809192bf" class="">
+</p><p id="22db3bed-dae9-80db-b73a-d567dca91e5b" class="">이 컴포넌트는 <strong>검색 기능을 포함한 Elasticsearch Vector Store</strong>를 생성합니다.</p><p id="22db3bed-dae9-8037-89b8-e773c3818293" class="">자세한 내용은 <a href="https://www.elastic.co/guide/index.html">Elasticsearch 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-80da-a973-c2bdf566b619" class=""><strong>입력 (Inputs)</strong></p><table id="22db3bed-dae9-8082-af0a-e2fb9aaa3720" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8090-9fc7-d7ef4d9e2494"><th id="~x;@" class="simple-table-header-color simple-table-header">이름</th><th id="rcsZ" class="simple-table-header-color simple-table-header">타입</th><th id="stt^" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80cd-a29e-d4a226124da7"><td id="~x;@" class="">es_url</td><td id="rcsZ" class="">String</td><td id="stt^" class="">Elasticsearch 서버의 URL입니다.</td></tr><tr id="22db3bed-dae9-8026-a37a-e90cf81a86fb"><td id="~x;@" class="">index_name</td><td id="rcsZ" class="">String</td><td id="stt^" class="">사용할 인덱스의 이름입니다.</td></tr><tr id="22db3bed-dae9-80e6-a0be-eb3e7d50a874"><td id="~x;@" class="">es_user</td><td id="rcsZ" class="">String</td><td id="stt^" class="">Elasticsearch 사용자 이름입니다.</td></tr><tr id="22db3bed-dae9-804e-b723-f4d1fe107ed9"><td id="~x;@" class="">es_password</td><td id="rcsZ" class="">String</td><td id="stt^" class="">Elasticsearch 비밀번호입니다.</td></tr><tr id="22db3bed-dae9-80a9-8ae4-e9e43c951c93"><td id="~x;@" class="">embedding</td><td id="rcsZ" class="">Embeddings</td><td id="stt^" class="">벡터 저장소에 사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-802f-801b-f84f4151df16"><td id="~x;@" class="">ingest_data</td><td id="rcsZ" class="">Data</td><td id="stt^" class="">저장할 데이터입니다.</td></tr><tr id="22db3bed-dae9-8018-9340-e1b30eae3db1"><td id="~x;@" class="">search_query</td><td id="rcsZ" class="">String</td><td id="stt^" class="">검색할 텍스트입니다.</td></tr><tr id="22db3bed-dae9-80db-8f14-fb49017f95ad"><td id="~x;@" class="">number_of_results</td><td id="rcsZ" class="">Integer</td><td id="stt^" class="">반환할 검색 결과 수입니다. 기본값: 4</td></tr><tr id="22db3bed-dae9-801c-9e19-eedf89b359d5"><td id="~x;@" class="">search_filter</td><td id="rcsZ" class="">Dict</td><td id="stt^" class="">메타데이터 기반 필터입니다. 선택 항목입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80bc-a37b-cedef25456ca" class=""><strong>출력 (Outputs)</strong></p><table id="22db3bed-dae9-8016-ba2b-f3bf1cbf035c" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-809e-8418-c38cbece8a4d"><th id="M&gt;JT" class="simple-table-header-color simple-table-header">이름</th><th id="c;Jt" class="simple-table-header-color simple-table-header">타입</th><th id="LQMN" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8077-80ae-ec0ae836821c"><td id="M&gt;JT" class="">vector_store</td><td id="c;Jt" class="">Elasticsearch</td><td id="LQMN" class="">설정된 Elasticsearch Vector Store 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80c2-9845-fd2c7c98ebd2"><td id="M&gt;JT" class="">search_results</td><td id="c;Jt" class="">List[Data]</td><td id="LQMN" class="">유사도 검색 결과를 담은 Data 객체 리스트입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80db-812a-f2340b089657"/><h2 id="22db3bed-dae9-8043-a19c-c9355f35038e" class="">FAISS</h2><p id="22db3bed-dae9-8052-85ee-d47e39f374c4" class="">
+</p><p id="22db3bed-dae9-807c-9857-c5a4dae224ae" class="">이 컴포넌트는 **검색 기능이 포함된 FAISS 벡터 스토어(Vector Store)**를 생성합니다.</p><p id="22db3bed-dae9-8071-8ce3-caebc214d38c" class="">자세한 내용은 <a href="https://faiss.ai/index.html">FAISS 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-806f-905e-e4107323f969" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-807c-bfe7-eabd42af74a5" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8007-9c9c-f051d81b2be7"><th id="|`t:" class="simple-table-header-color simple-table-header">이름</th><th id="K{XL" class="simple-table-header-color simple-table-header">타입</th><th id=";xbH" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-806e-96b9-f351599c7b09"><td id="|`t:" class="">index_name</td><td id="K{XL" class="">문자열</td><td id=";xbH" class="">FAISS 인덱스의 이름입니다. 기본값: <code>&quot;langflow_index&quot;</code></td></tr><tr id="22db3bed-dae9-80ae-8923-dc62c8ac73e8"><td id="|`t:" class="">persist_directory</td><td id="K{XL" class="">문자열</td><td id=";xbH" class="">FAISS 인덱스를 저장할 경로입니다. Langflow가 실행 중인 위치 기준의 상대 경로로 지정합니다.</td></tr><tr id="22db3bed-dae9-80b0-a1ed-e48021d2f2a7"><td id="|`t:" class="">search_query</td><td id="K{XL" class="">문자열</td><td id=";xbH" class="">벡터 스토어에서 검색할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-8005-900a-ee9e70db2a45"><td id="|`t:" class="">ingest_data</td><td id="K{XL" class="">데이터</td><td id=";xbH" class="">벡터 스토어에 삽입할 데이터 목록입니다.</td></tr><tr id="22db3bed-dae9-802e-a4a5-e430d0177cc1"><td id="|`t:" class="">allow_dangerous_deserialization</td><td id="K{XL" class="">불리언</td><td id=";xbH" class="">신뢰할 수 없는 소스로부터의 pickle 파일 로딩을 허용할지 여부입니다. 기본값: <code>True</code></td></tr><tr id="22db3bed-dae9-8045-b01d-c170101aca85"><td id="|`t:" class="">embedding</td><td id="K{XL" class="">임베딩</td><td id=";xbH" class="">벡터 스토어에 사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-8028-b969-fb3876ae9bdb"><td id="|`t:" class="">number_of_results</td><td id="K{XL" class="">정수</td><td id=";xbH" class="">검색 결과로 반환할 항목 수입니다. 기본값: <code>4</code></td></tr></tbody></table><p id="22db3bed-dae9-8067-848f-e3da46abbf13" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-80f2-9b58-ea598dd88a33" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8040-bf3a-e65061e16903"><th id="J=B\" class="simple-table-header-color simple-table-header">이름</th><th id="okyS" class="simple-table-header-color simple-table-header">표시 이름</th><th id="j:r\" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-803d-9619-cbeaa1a929d4"><td id="J=B\" class="">vector_store</td><td id="okyS" class="">Vector Store</td><td id="j:r\" class="">위에서 지정한 설정으로 구성된 FAISS 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8097-ae47-ffdc68914c76"><td id="J=B\" class="">search_results</td><td id="okyS" class="">Search Results</td><td id="j:r\" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체의 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-800e-be49-f42f507e0f69"/><h2 id="22db3bed-dae9-80f8-9a6f-cbc0213ebb96" class="">Graph RAG</h2><p id="22db3bed-dae9-80fa-8431-c416631f6b52" class="">
+</p><p id="22db3bed-dae9-801f-8bda-f8b466714f63" class="">이 컴포넌트는 <strong>그래프 기반 RAG(Retrieval Augmented Generation)</strong> 방식으로 벡터 스토어를 탐색하여 문서를 검색합니다.</p><p id="22db3bed-dae9-8021-a90a-ec11df544d8d" class="">자세한 내용은 <a href="https://datastax.github.io/graph-rag/">Graph RAG 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-802e-97ba-f483de334ed1" class="">예시 플로우는 <strong>Graph RAG 템플릿</strong>을 확인해 보세요.</p><p id="22db3bed-dae9-8072-accf-fa4adb9dc3ef" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-80bc-9043-fc475e61d399" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8080-9abd-e102882e53dd"><th id="Au?k" class="simple-table-header-color simple-table-header">이름</th><th id="dnh_" class="simple-table-header-color simple-table-header">표시 이름</th><th id="Oz;O" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80e6-9a18-d95a69afcd61"><td id="Au?k" class="">embedding_model</td><td id="dnh_" class="">Embedding Model</td><td id="Oz;O" class="">사용할 임베딩 모델을 지정합니다. 단, <a href="https://docs.datastax.com/en/astra-db-serverless/databases/embedding-generation.html">Astra vectorize</a>로 임베딩된 컬렉션이라면 필수는 아닙니다.</td></tr><tr id="22db3bed-dae9-80d3-a7ed-e878e1f3bc5a"><td id="Au?k" class="">vector_store</td><td id="dnh_" class="">Vector Store Connection</td><td id="Oz;O" class="">연결할 벡터 스토어입니다.</td></tr><tr id="22db3bed-dae9-80a4-abc6-c5a83d1e0fb8"><td id="Au?k" class="">edge_definition</td><td id="dnh_" class="">Edge Definition</td><td id="Oz;O" class="">그래프 탐색을 위한 엣지 정의입니다. 자세한 내용은 <a href="https://datastax.github.io/graph-rag/reference/graph_retriever/edges/">GraphRAG 엣지 문서</a>를 참고하세요.</td></tr><tr id="22db3bed-dae9-801e-baad-d56d0167ed3f"><td id="Au?k" class="">strategy</td><td id="dnh_" class="">Traversal Strategies</td><td id="Oz;O" class="">그래프 탐색에 사용할 전략입니다. 사용 가능한 전략 목록은 동적으로 불러옵니다.</td></tr><tr id="22db3bed-dae9-804f-b5d1-d626c0d25edd"><td id="Au?k" class="">search_query</td><td id="dnh_" class="">Search Query</td><td id="Oz;O" class="">벡터 스토어에서 검색할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-804a-9db3-d3959aa3e7dd"><td id="Au?k" class="">graphrag_strategy_kwargs</td><td id="dnh_" class="">Strategy Parameters</td><td id="Oz;O" class="">탐색 전략에 전달할 추가 파라미터입니다. 선택사항이며 자세한 내용은 <a href="https://datastax.github.io/graph-rag/reference/graph_retriever/strategies/">전략 문서</a>를 참고하세요.</td></tr></tbody></table><p id="22db3bed-dae9-805e-aef2-fd6f4c93bccc" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-806a-8926-fe2d9044391f" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-805f-a6a9-ec3cd8f1dddc"><th id="uQ~j" class="simple-table-header-color simple-table-header">이름</th><th id="~YC_" class="simple-table-header-color simple-table-header">타입</th><th id="XLgJ" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8063-82bf-f7b3ca9f2559"><td id="uQ~j" class="">search_results</td><td id="~YC_" class="">List[Data]</td><td id="XLgJ" class="">그래프 기반 문서 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체의 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-80e4-9514-cec40577bec4"/><h2 id="22db3bed-dae9-804b-96a0-c44a2e2da17f" class="">Hyper-Converged Database (HCD)</h2><p id="22db3bed-dae9-8006-b822-c726b287e00c" class="">
+</p><p id="22db3bed-dae9-80bd-a2f2-e3320c3d8408" class="">이 컴포넌트는 <strong>HCD(Hyper-Converged Database)를 기반으로 벡터 스토어를 구현</strong>합니다.</p><p id="22db3bed-dae9-80b2-83e9-e3e4eeead8aa" class="">HCD 벡터 스토어를 사용하려면, 배포 중인 HCD의 컬렉션 이름, 사용자명, 비밀번호, 그리고 HCD Data API 엔드포인트 정보를 입력해야 합니다.</p><p id="22db3bed-dae9-80ab-ba98-fd6e2e0ffc87" class="">엔드포인트는 <code>http[s]://도메인명 또는 IP[:포트]</code> 형태로 작성해야 하며, 예: <code>http://192.0.2.250:8181</code></p><p id="22db3bed-dae9-8068-acf5-cb8195dbcc04" class=""><code>도메인명</code> 또는 <code>IP 주소</code>는 HCD API 연결 주소에 맞게 변경해 주세요.</p><p id="22db3bed-dae9-8073-8740-c21c64d7e52c" class="">임베딩 데이터를 삽입하려면, 임베딩 모델 및 파일 로더와 연결해 사용하세요.</p><figure id="22db3bed-dae9-8083-8721-c88c92f376c9" class="image"><a href="image%2046.png"><img style="width:2294px" src="image%2046.png"/></a></figure><p id="22db3bed-dae9-80c6-88d8-f501f7d40172" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-80a6-98ca-ebfd20c79ded" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-809b-90f8-e0d8928f2309"><th id="JJ{?" class="simple-table-header-color simple-table-header">이름</th><th id="oAzo" class="simple-table-header-color simple-table-header">표시 이름</th><th id="E[|D" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80f2-8cfa-d6eca3419ef6"><td id="JJ{?" class="">collection_name</td><td id="oAzo" class="">Collection Name</td><td id="E[|D" class="">벡터를 저장할 HCD 내 컬렉션 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8071-b1f1-c3ed52502ccd"><td id="JJ{?" class="">username</td><td id="oAzo" class="">HCD Username</td><td id="E[|D" class="">HCD 접근을 위한 사용자명입니다. 기본값: <code>&quot;hcd-superuser&quot;</code> (필수)</td></tr><tr id="22db3bed-dae9-80bf-b7cd-fefae4502248"><td id="JJ{?" class="">password</td><td id="oAzo" class="">HCD Password</td><td id="E[|D" class="">HCD 접근을 위한 비밀번호입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8056-bcd9-c547de57012b"><td id="JJ{?" class="">api_endpoint</td><td id="oAzo" class="">HCD API Endpoint</td><td id="E[|D" class="">HCD 서비스의 API 엔드포인트 URL입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8085-be61-dc4d9b6363c2"><td id="JJ{?" class="">search_input</td><td id="oAzo" class="">Search Input</td><td id="E[|D" class="">유사도 검색을 위한 쿼리 문자열입니다.</td></tr><tr id="22db3bed-dae9-801b-b2a8-c7d769806005"><td id="JJ{?" class="">ingest_data</td><td id="oAzo" class="">Ingest Data</td><td id="E[|D" class="">벡터 스토어에 삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-80e1-92f7-ce54535a9719"><td id="JJ{?" class="">namespace</td><td id="oAzo" class="">Namespace</td><td id="E[|D" class="">선택적 항목으로, 사용할 HCD 내 네임스페이스입니다. 기본값: <code>&quot;default_namespace&quot;</code></td></tr><tr id="22db3bed-dae9-80fb-aea3-d22a4a22851a"><td id="JJ{?" class="">ca_certificate</td><td id="oAzo" class="">CA Certificate</td><td id="E[|D" class="">TLS 연결 시 사용할 선택적 CA 인증서입니다.</td></tr><tr id="22db3bed-dae9-80fb-912c-dd7730159baf"><td id="JJ{?" class="">metric</td><td id="oAzo" class="">Metric</td><td id="E[|D" class="">벡터 간 비교에 사용할 선택적 거리 메트릭입니다. 사용 가능한 옵션: <code>&quot;cosine&quot;</code>, <code>&quot;dot_product&quot;</code>, <code>&quot;euclidean&quot;</code></td></tr><tr id="22db3bed-dae9-8057-9eb5-fdd78a31f74b"><td id="JJ{?" class="">batch_size</td><td id="oAzo" class="">Batch Size</td><td id="E[|D" class="">한 번에 처리할 데이터 개수입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-8095-821f-f199d93fc285"><td id="JJ{?" class="">bulk_insert_batch_concurrency</td><td id="oAzo" class="">Bulk Insert Batch Concurrency</td><td id="E[|D" class="">일괄 삽입 작업의 병렬 처리 수준입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-808e-9ef3-d7ef3f7a8d26"><td id="JJ{?" class="">bulk_insert_overwrite_concurrency</td><td id="oAzo" class="">Bulk Insert Overwrite Concurrency</td><td id="E[|D" class="">기존 데이터를 덮어쓰는 일괄 삽입의 병렬 처리 수준입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-8000-9dad-c1ca236c36ce"><td id="JJ{?" class="">bulk_delete_concurrency</td><td id="oAzo" class="">Bulk Delete Concurrency</td><td id="E[|D" class="">일괄 삭제 작업의 병렬 처리 수준입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-80e8-b807-d0e9aeacecca"><td id="JJ{?" class="">setup_mode</td><td id="oAzo" class="">Setup Mode</td><td id="E[|D" class="">벡터 스토어 설정 방식입니다. <code>&quot;Sync&quot;</code>, <code>&quot;Async&quot;</code>, <code>&quot;Off&quot;</code> 중 선택 가능하며 기본값은 <code>&quot;Sync&quot;</code>입니다.</td></tr><tr id="22db3bed-dae9-80f0-b9dd-ec710106a7e1"><td id="JJ{?" class="">pre_delete_collection</td><td id="oAzo" class="">Pre Delete Collection</td><td id="E[|D" class="">새 컬렉션을 만들기 전에 기존 컬렉션을 삭제할지 여부를 나타내는 불리언 값입니다.</td></tr><tr id="22db3bed-dae9-8020-8eb7-d4037c5e5ad3"><td id="JJ{?" class="">metadata_indexing_include</td><td id="oAzo" class="">Metadata Indexing Include</td><td id="E[|D" class="">인덱싱에 포함할 메타데이터 필드 목록입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-8051-badb-dc8a39cc3109"><td id="JJ{?" class="">embedding</td><td id="oAzo" class="">Embedding or Astra Vectorize</td><td id="E[|D" class="">임베딩 모델 또는 Astra Vectorize 설정을 입력할 수 있습니다.</td></tr><tr id="22db3bed-dae9-8054-8e41-d586a6633b28"><td id="JJ{?" class="">metadata_indexing_exclude</td><td id="oAzo" class="">Metadata Indexing Exclude</td><td id="E[|D" class="">인덱싱에서 제외할 메타데이터 필드 목록입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-8026-be97-daefc0387e1c"><td id="JJ{?" class="">collection_indexing_policy</td><td id="oAzo" class="">Collection Indexing Policy</td><td id="E[|D" class="">컬렉션의 인덱싱 정책을 정의한 딕셔너리입니다. 선택사항입니다.</td></tr><tr id="22db3bed-dae9-80f3-9258-d1dd768d5443"><td id="JJ{?" class="">number_of_results</td><td id="oAzo" class="">Number of Results</td><td id="E[|D" class="">검색 시 반환할 결과 수입니다. 기본값은 <code>4</code>입니다.</td></tr><tr id="22db3bed-dae9-8036-8eee-e0697e68eaff"><td id="JJ{?" class="">search_type</td><td id="oAzo" class="">Search Type</td><td id="E[|D" class="">사용할 검색 유형입니다. <code>&quot;Similarity&quot;</code>, <code>&quot;Similarity with score threshold&quot;</code>, <code>&quot;MMR (Max Marginal Relevance)&quot;</code> 중 선택할 수 있으며 기본값은 <code>&quot;Similarity&quot;</code>입니다.</td></tr><tr id="22db3bed-dae9-8090-8d6f-e86baf92f006"><td id="JJ{?" class="">search_score_threshold</td><td id="oAzo" class="">Search Score Threshold</td><td id="E[|D" class="">검색 결과의 최소 유사도 점수 임계값입니다. 기본값은 <code>0</code>입니다.</td></tr><tr id="22db3bed-dae9-8072-8892-c56d0efc8569"><td id="JJ{?" class="">search_filter</td><td id="oAzo" class="">Search Metadata Filter</td><td id="E[|D" class="">검색 쿼리에 적용할 필터 딕셔너리입니다. 선택사항입니다.</td></tr></tbody></table><p id="22db3bed-dae9-807d-be9d-c0601a2d8332" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-801f-8b8c-dcb7207e9ca2" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80e5-b88e-f7ec843da7dc"><th id="uH^B" class="simple-table-header-color simple-table-header">이름</th><th id="{yar" class="simple-table-header-color simple-table-header">타입</th><th id=";Sbn" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80c6-9861-e00383d8d871"><td id="uH^B" class="">vector_store</td><td id="{yar" class="">HyperConvergedDatabaseVectorStore</td><td id=";Sbn" class="">설정된 HCD 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8011-941e-d263fd05eecb"><td id="uH^B" class="">search_results</td><td id="{yar" class="">List[Data]</td><td id=";Sbn" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체의 리스트로 반환됩니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80a6-a79e-dd656a6b9c33"/><h2 id="22db3bed-dae9-80ac-bb78-cdc9725b6e8f" class="">Milvus</h2><p id="22db3bed-dae9-8023-be6b-e8317705a60b" class="">
+</p><p id="22db3bed-dae9-80ce-803c-cfb5af151fd9" class="">이 컴포넌트는 <strong>검색 기능이 포함된 Milvus 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-80f4-ae3a-e7893946cd96" class="">자세한 내용은 <a href="https://milvus.io/docs">Milvus 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-801d-977f-e08dcf92484c" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8079-96e4-d33f6aa7f6be" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-808a-b043-c4222646c980"><th id="[&gt;AB" class="simple-table-header-color simple-table-header">이름</th><th id="zmtD" class="simple-table-header-color simple-table-header">타입</th><th id="?pZ[" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80f4-8a22-e60ac2c0531f"><td id="[&gt;AB" class="">collection_name</td><td id="zmtD" class="">문자열</td><td id="?pZ[" class="">Milvus 컬렉션의 이름입니다.</td></tr><tr id="22db3bed-dae9-807a-892c-ebb98b5a9ae2"><td id="[&gt;AB" class="">collection_description</td><td id="zmtD" class="">문자열</td><td id="?pZ[" class="">Milvus 컬렉션에 대한 설명입니다.</td></tr><tr id="22db3bed-dae9-8078-ba45-c48b625b512e"><td id="[&gt;AB" class="">uri</td><td id="zmtD" class="">문자열</td><td id="?pZ[" class="">Milvus 연결을 위한 URI입니다.</td></tr><tr id="22db3bed-dae9-80cd-96ca-e6271b7e4cad"><td id="[&gt;AB" class="">password</td><td id="zmtD" class="">SecretString</td><td id="?pZ[" class="">Milvus에 연결할 때 사용할 비밀번호입니다.</td></tr><tr id="22db3bed-dae9-80b4-b452-ef63feffaec5"><td id="[&gt;AB" class="">username</td><td id="zmtD" class="">SecretString</td><td id="?pZ[" class="">Milvus에 연결할 때 사용할 사용자명입니다.</td></tr><tr id="22db3bed-dae9-808e-91fa-ea26ef4a90c4"><td id="[&gt;AB" class="">batch_size</td><td id="zmtD" class="">정수</td><td id="?pZ[" class="">한 번에 처리할 데이터 개수입니다.</td></tr><tr id="22db3bed-dae9-808a-98ed-f86c3eaa354e"><td id="[&gt;AB" class="">search_query</td><td id="zmtD" class="">문자열</td><td id="?pZ[" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80e0-adde-d3c8d2600e1f"><td id="[&gt;AB" class="">ingest_data</td><td id="zmtD" class="">데이터</td><td id="?pZ[" class="">벡터 스토어에 삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-802c-98a4-c77fcbf3e20e"><td id="[&gt;AB" class="">embedding</td><td id="zmtD" class="">임베딩</td><td id="?pZ[" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-8071-a5ee-d7ee9cbf7e8f"><td id="[&gt;AB" class="">number_of_results</td><td id="zmtD" class="">정수</td><td id="?pZ[" class="">검색 시 반환할 결과 수입니다.</td></tr><tr id="22db3bed-dae9-80d5-8225-f5833bf4340f"><td id="[&gt;AB" class="">search_type</td><td id="zmtD" class="">문자열</td><td id="?pZ[" class="">수행할 검색의 유형입니다.</td></tr><tr id="22db3bed-dae9-804a-91a6-c557aa7e5ab8"><td id="[&gt;AB" class="">search_score_threshold</td><td id="zmtD" class="">실수</td><td id="?pZ[" class="">검색 결과의 최소 유사도 점수입니다.</td></tr><tr id="22db3bed-dae9-8013-898a-d6c0be197a19"><td id="[&gt;AB" class="">search_filter</td><td id="zmtD" class="">딕셔너리</td><td id="?pZ[" class="">검색 쿼리에 사용할 메타데이터 필터입니다.</td></tr><tr id="22db3bed-dae9-80ee-abd7-c8166ea0b300"><td id="[&gt;AB" class="">setup_mode</td><td id="zmtD" class="">문자열</td><td id="?pZ[" class="">벡터 스토어를 설정하는 모드입니다.</td></tr><tr id="22db3bed-dae9-80c8-99ef-c09017ead340"><td id="[&gt;AB" class="">vector_dimensions</td><td id="zmtD" class="">정수</td><td id="?pZ[" class="">벡터의 차원 수입니다.</td></tr><tr id="22db3bed-dae9-801b-8489-c618b7e459a2"><td id="[&gt;AB" class="">pre_delete_collection</td><td id="zmtD" class="">불리언</td><td id="?pZ[" class="">새로운 컬렉션을 만들기 전에 기존 컬렉션을 삭제할지 여부입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8017-bca6-c5c361c1b9c5" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-80fe-99df-f5e55c40eff9" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8044-bb81-e41331b4c213"><th id="^Ij|" class="simple-table-header-color simple-table-header">이름</th><th id="@uex" class="simple-table-header-color simple-table-header">타입</th><th id="xUX&gt;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80f1-b8b1-f3603008f6b3"><td id="^Ij|" class="">vector_store</td><td id="@uex" class="">Milvus</td><td id="xUX&gt;" class="">위 설정값으로 구성된 Milvus 벡터 스토어 인스턴스입니다.</td></tr></tbody></table><hr id="22db3bed-dae9-8052-a969-f9c810cd7080"/><h2 id="22db3bed-dae9-8056-8d86-eaf0863f5001" class="">MongoDB Atlas</h2><p id="22db3bed-dae9-80d0-ad1a-e4799bde3433" class="">이 컴포넌트는 <strong>검색 기능이 포함된 MongoDB Atlas 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-803f-86b4-ed8369741b18" class="">자세한 내용은 <a href="https://www.mongodb.com/docs/atlas/atlas-vector-search/tutorials/vector-search-quick-start/">MongoDB Atlas 벡터 검색 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8009-98d1-c8c78e6b868d" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8075-9432-fbe825e2c86b" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80ba-b936-cff02276b956"><th id="rXoc" class="simple-table-header-color simple-table-header">이름</th><th id="M?{C" class="simple-table-header-color simple-table-header">타입</th><th id="L=rB" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80f7-853a-d5f65dd3e2bd"><td id="rXoc" class="">mongodb_atlas_cluster_uri</td><td id="M?{C" class="">SecretString</td><td id="L=rB" class="">MongoDB Atlas 클러스터의 연결 URI입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-803d-9335-c006b615e613"><td id="rXoc" class="">enable_mtls</td><td id="M?{C" class="">불리언</td><td id="L=rB" class="">mTLS 인증을 활성화합니다. 기본값: <code>false</code></td></tr><tr id="22db3bed-dae9-803b-b796-c6f5936e2cf0"><td id="rXoc" class="">mongodb_atlas_client_cert</td><td id="M?{C" class="">SecretString</td><td id="L=rB" class="">mTLS 인증을 위한 클라이언트 인증서와 개인 키를 포함한 값입니다. mTLS 사용 시 필수입니다.</td></tr><tr id="22db3bed-dae9-80e8-b123-e51a93828626"><td id="rXoc" class="">db_name</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">사용할 데이터베이스 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-805a-a65d-c30723a1cc84"><td id="rXoc" class="">collection_name</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">사용할 컬렉션 이름입니다. 필수 항목입니다.</td></tr><tr id="22db3bed-dae9-8003-b5d5-cec66e081ded"><td id="rXoc" class="">index_name</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">Atlas Search 인덱스 이름입니다. Vector Search여야 합니다. 필수입니다.</td></tr><tr id="22db3bed-dae9-80f0-a047-dd3066be69f0"><td id="rXoc" class="">insert_mode</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">문서를 삽입하는 방식입니다. <code>&quot;append&quot;</code> 또는 <code>&quot;overwrite&quot;</code> 중 선택. 기본값: <code>&quot;append&quot;</code></td></tr><tr id="22db3bed-dae9-807e-b6d1-d9cad0d17a28"><td id="rXoc" class="">embedding</td><td id="M?{C" class="">임베딩</td><td id="L=rB" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22db3bed-dae9-8037-8655-e736c004b9ea"><td id="rXoc" class="">number_of_results</td><td id="M?{C" class="">정수</td><td id="L=rB" class="">검색 결과로 반환할 수입니다. 기본값: <code>4</code></td></tr><tr id="22db3bed-dae9-803c-85ce-dc56b36437e7"><td id="rXoc" class="">index_field</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">인덱싱할 필드입니다. 기본값: <code>&quot;embedding&quot;</code></td></tr><tr id="22db3bed-dae9-80eb-9d27-d0354102c0cf"><td id="rXoc" class="">filter_field</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">인덱스를 필터링할 필드입니다.</td></tr><tr id="22db3bed-dae9-806b-8eb7-e62c4dfbf737"><td id="rXoc" class="">number_dimensions</td><td id="M?{C" class="">정수</td><td id="L=rB" class="">임베딩 컨텍스트 길이입니다. 기본값: <code>1536</code></td></tr><tr id="22db3bed-dae9-8017-ad11-c1f939fc0bdf"><td id="rXoc" class="">similarity</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">벡터 간 유사도 측정 방식입니다. <code>&quot;cosine&quot;</code>, <code>&quot;euclidean&quot;</code>, <code>&quot;dotProduct&quot;</code> 중 선택. 기본값: <code>&quot;cosine&quot;</code></td></tr><tr id="22db3bed-dae9-80ac-bd8b-c6a5c88db5c7"><td id="rXoc" class="">quantization</td><td id="M?{C" class="">문자열</td><td id="L=rB" class="">양자화 방식입니다. 메모리 절약을 위해 32비트 float를 더 작은 타입으로 변환합니다. <code>&quot;scalar&quot;</code> 또는 <code>&quot;binary&quot;</code> 선택 가능.</td></tr></tbody></table><p id="22db3bed-dae9-8024-ae27-c8242444825b" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-8066-ae7e-d8a7913c7352" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8022-8fce-d13b4c2a68a4"><th id="@ru=" class="simple-table-header-color simple-table-header">이름</th><th id="QH[|" class="simple-table-header-color simple-table-header">타입</th><th id="EMt@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8053-bafa-c7f7f0be813d"><td id="@ru=" class="">vector_store</td><td id="QH[|" class="">MongoDBAtlasVectorSearch</td><td id="EMt@" class="">MongoDB Atlas 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8016-a99a-c9b357cad4eb"><td id="@ru=" class="">search_results</td><td id="QH[|" class="">List[Data]</td><td id="EMt@" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-803b-970d-c88dbae660ea"/><h2 id="22db3bed-dae9-8090-8048-db8ee638c29d" class="">Opensearch</h2><p id="22db3bed-dae9-8030-86c1-cb679dd23343" class="">이 컴포넌트는 <strong>검색 기능이 포함된 OpenSearch 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-80fd-90e4-ebdd551d8633" class="">자세한 내용은 <a href="https://opensearch.org/platform/search/vector-database.html">OpenSearch 벡터 검색 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-805d-9067-c4191400d221" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8063-9cd8-ef92b37e46b6" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-800e-849c-e3763bf7457c"><th id="aCZK" class="simple-table-header-color simple-table-header">이름</th><th id="nEyp" class="simple-table-header-color simple-table-header">타입</th><th id="EYLq" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-801e-baf3-e8fbf7755db8"><td id="aCZK" class="">opensearch_url</td><td id="nEyp" class="">문자열</td><td id="EYLq" class="">OpenSearch 클러스터의 URL (예: <code>https://192.168.1.1:9200</code>)</td></tr><tr id="22db3bed-dae9-80af-9311-e2e6b9a55d84"><td id="aCZK" class="">index_name</td><td id="nEyp" class="">문자열</td><td id="EYLq" class="">벡터를 저장할 인덱스 이름입니다.</td></tr><tr id="22db3bed-dae9-8053-b239-ff85ef47fe82"><td id="aCZK" class="">search_input</td><td id="nEyp" class="">문자열</td><td id="EYLq" class="">검색 쿼리입니다. 비워두면 전체 문서를 조회하거나 하이브리드 검색을 사용할 수 있습니다.</td></tr><tr id="22db3bed-dae9-80d1-8424-fdbcc0390618"><td id="aCZK" class="">ingest_data</td><td id="nEyp" class="">데이터</td><td id="EYLq" class="">삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-803f-ba8e-d95d8f8ce7f1"><td id="aCZK" class="">embedding</td><td id="nEyp" class="">임베딩</td><td id="EYLq" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-8013-bd66-cf38f2da71c7"><td id="aCZK" class="">search_type</td><td id="nEyp" class="">문자열</td><td id="EYLq" class=""><code>&quot;similarity&quot;</code>, <code>&quot;similarity_score_threshold&quot;</code>, <code>&quot;mmr&quot;</code> 중 선택 가능합니다.</td></tr><tr id="22db3bed-dae9-806c-95e8-f4a9674c4b3d"><td id="aCZK" class="">number_of_results</td><td id="nEyp" class="">정수</td><td id="EYLq" class="">검색 결과 수입니다.</td></tr><tr id="22db3bed-dae9-80a0-950d-e8f19eab6d83"><td id="aCZK" class="">search_score_threshold</td><td id="nEyp" class="">실수</td><td id="EYLq" class="">검색 결과의 최소 유사도 점수입니다.</td></tr><tr id="22db3bed-dae9-8073-894d-d4ff53dd9ea6"><td id="aCZK" class="">username</td><td id="nEyp" class="">문자열</td><td id="EYLq" class="">OpenSearch 클러스터 사용자명입니다.</td></tr><tr id="22db3bed-dae9-80ee-b5b9-ffe50a58596d"><td id="aCZK" class="">password</td><td id="nEyp" class="">SecretString</td><td id="EYLq" class="">OpenSearch 클러스터 비밀번호입니다.</td></tr><tr id="22db3bed-dae9-801d-b444-e8134686a7f6"><td id="aCZK" class="">use_ssl</td><td id="nEyp" class="">불리언</td><td id="EYLq" class="">SSL 사용 여부입니다.</td></tr><tr id="22db3bed-dae9-8039-b56b-f9f4bf712e20"><td id="aCZK" class="">verify_certs</td><td id="nEyp" class="">불리언</td><td id="EYLq" class="">인증서 검증 여부입니다.</td></tr><tr id="22db3bed-dae9-80f7-94b2-d62fe9934592"><td id="aCZK" class="">hybrid_search_query</td><td id="nEyp" class="">문자열</td><td id="EYLq" class="">JSON 형식의 하이브리드 검색 쿼리입니다. 벡터 유사도와 키워드 매칭을 결합할 수 있습니다.</td></tr></tbody></table><p id="22db3bed-dae9-80b9-a52d-c2da1a33d7c6" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-8029-9838-cc6e60eca2a2" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8099-8a34-fd055634a62a"><th id="HYgO" class="simple-table-header-color simple-table-header">이름</th><th id="HsBY" class="simple-table-header-color simple-table-header">타입</th><th id="Z\?X" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8020-a600-de712f876f43"><td id="HYgO" class="">vector_store</td><td id="HsBY" class="">OpenSearchVectorSearch</td><td id="Z\?X" class="">OpenSearch 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-806c-9a21-cf08a2185bfc"><td id="HYgO" class="">search_results</td><td id="HsBY" class="">List[Data]</td><td id="Z\?X" class="">유사도 검색 결과 (<a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트)</td></tr></tbody></table><hr id="22cb3bed-dae9-80a8-8818-d0d5a1d1b2d2"/><h2 id="22db3bed-dae9-80d5-95a8-d9bfc6ac129d" class="">PGVector</h2><p id="22db3bed-dae9-801e-84c6-d46240323a2c" class="">
+</p><p id="22db3bed-dae9-800b-be5d-c91b1302f918" class="">이 컴포넌트는 <strong>검색 기능이 포함된 PGVector 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-8027-bfef-c487e4d7fda0" class="">자세한 내용은 <a href="https://github.com/pgvector/pgvector">PGVector 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8072-addf-cd01c110db3e" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-804c-b49c-ec821cc9080a" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8053-a06e-c4de9c679a52"><th id="^ybD" class="simple-table-header-color simple-table-header">이름</th><th id="iL]p" class="simple-table-header-color simple-table-header">타입</th><th id="m_k:" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-805c-944d-f023a6ceaa89"><td id="^ybD" class="">pg_server_url</td><td id="iL]p" class="">SecretString</td><td id="m_k:" class="">PostgreSQL 서버의 연결 문자열입니다.</td></tr><tr id="22db3bed-dae9-8038-82be-f638235aa3a8"><td id="^ybD" class="">collection_name</td><td id="iL]p" class="">문자열</td><td id="m_k:" class="">벡터 스토어로 사용할 테이블 이름입니다.</td></tr><tr id="22db3bed-dae9-801f-989c-fd0452750e15"><td id="^ybD" class="">search_query</td><td id="iL]p" class="">문자열</td><td id="m_k:" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80bf-a5d9-ff4f75b09bab"><td id="^ybD" class="">ingest_data</td><td id="iL]p" class="">데이터</td><td id="m_k:" class="">벡터 스토어에 삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-80e9-aa38-d0f199fb3a00"><td id="^ybD" class="">embedding</td><td id="iL]p" class="">임베딩</td><td id="m_k:" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-80a5-8933-f29455586ca7"><td id="^ybD" class="">number_of_results</td><td id="iL]p" class="">정수</td><td id="m_k:" class="">검색 결과로 반환할 개수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8050-9b8b-d02a01221ec5" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-801b-86dc-e8093227517b" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80a7-ae53-eb5b051bee74"><th id="kwp&gt;" class="simple-table-header-color simple-table-header">이름</th><th id="XpJm" class="simple-table-header-color simple-table-header">표시 이름</th><th id="UEO=" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80bb-95c9-fdba340aa08c"><td id="kwp&gt;" class="">vector_store</td><td id="XpJm" class="">Vector Store</td><td id="UEO=" class="">설정된 PGVector 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80dc-a657-cf2438485d28"><td id="kwp&gt;" class="">search_results</td><td id="XpJm" class="">Search Results</td><td id="UEO=" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-806d-810e-f9b206cb30c8"/><h2 id="22db3bed-dae9-8077-bbf8-ef48515f3a08" class="">Pinecone</h2><p id="22db3bed-dae9-803b-bbd8-d50cff1fc57e" class="">
+</p><p id="22db3bed-dae9-80fc-961c-dc9b40b7aedc" class="">이 컴포넌트는 <strong>검색 기능이 포함된 Pinecone 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-804b-91a7-c40ae84ef4fc" class="">자세한 내용은 <a href="https://docs.pinecone.io/home">Pinecone 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-808d-8069-f7381ab9f5d8" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-80c3-b3a7-fe0e8cd8fb9c" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8086-8dee-e74764ba75a2"><th id="B}}M" class="simple-table-header-color simple-table-header">이름</th><th id="Oap~" class="simple-table-header-color simple-table-header">타입</th><th id="}vWT" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-801f-b45a-cf1465d5ed86"><td id="B}}M" class="">index_name</td><td id="Oap~" class="">문자열</td><td id="}vWT" class="">Pinecone 인덱스 이름입니다.</td></tr><tr id="22db3bed-dae9-8059-990c-c406ca9b24af"><td id="B}}M" class="">namespace</td><td id="Oap~" class="">문자열</td><td id="}vWT" class="">인덱스의 네임스페이스입니다.</td></tr><tr id="22db3bed-dae9-80c1-bb27-e885944fbb64"><td id="B}}M" class="">distance_strategy</td><td id="Oap~" class="">문자열</td><td id="}vWT" class="">벡터 간 거리 계산에 사용할 전략입니다.</td></tr><tr id="22db3bed-dae9-8052-bae9-df1400e80d73"><td id="B}}M" class="">pinecone_api_key</td><td id="Oap~" class="">SecretString</td><td id="}vWT" class="">Pinecone API 키입니다.</td></tr><tr id="22db3bed-dae9-8080-b47a-c7f10413f539"><td id="B}}M" class="">text_key</td><td id="Oap~" class="">문자열</td><td id="}vWT" class="">텍스트로 사용할 필드 키입니다.</td></tr><tr id="22db3bed-dae9-80ab-890c-e7248a248a55"><td id="B}}M" class="">search_query</td><td id="Oap~" class="">문자열</td><td id="}vWT" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80d8-a8dd-c915b7f00ca1"><td id="B}}M" class="">ingest_data</td><td id="Oap~" class="">데이터</td><td id="}vWT" class="">벡터 스토어에 삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-8080-b382-fb95f2472368"><td id="B}}M" class="">embedding</td><td id="Oap~" class="">임베딩</td><td id="}vWT" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-80ed-b42c-c7ed0dcd4964"><td id="B}}M" class="">number_of_results</td><td id="Oap~" class="">정수</td><td id="}vWT" class="">검색 결과로 반환할 개수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8030-a9d5-f9758b93dee6" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-8080-bb11-e26acd141661" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-808d-a364-fbabb1a0ec86"><th id=":B&gt;{" class="simple-table-header-color simple-table-header">이름</th><th id="VlXs" class="simple-table-header-color simple-table-header">표시 이름</th><th id="nWA\" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80d1-881d-c65af860844d"><td id=":B&gt;{" class="">vector_store</td><td id="VlXs" class="">Vector Store</td><td id="nWA\" class="">설정된 Pinecone 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-804c-9700-f7a1f9c4b53b"><td id=":B&gt;{" class="">search_results</td><td id="VlXs" class="">Search Results</td><td id="nWA\" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-80a1-a091-e6580c28c134"/><h2 id="22db3bed-dae9-807a-a929-e887537fd224" class="">Qdrant</h2><p id="22db3bed-dae9-80be-9041-d2e7ca74c50a" class="">
+</p><p id="22db3bed-dae9-8003-ace1-e66a44592e7e" class="">이 컴포넌트는 <strong>검색 기능이 포함된 Qdrant 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-80ba-b30e-dbd2f459893b" class="">자세한 내용은 <a href="https://qdrant.tech/documentation/">Qdrant 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8042-adb5-fd17720ef351" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8054-9002-f46f8905edbc" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80e0-8a41-f0fbd5eba5f4"><th id="vvuk" class="simple-table-header-color simple-table-header">이름</th><th id="WchE" class="simple-table-header-color simple-table-header">타입</th><th id="UGB&gt;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-806f-9f4b-d46b783566e0"><td id="vvuk" class="">collection_name</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">Qdrant 컬렉션 이름입니다.</td></tr><tr id="22db3bed-dae9-80b8-9449-fe7dbb9c3f52"><td id="vvuk" class="">host</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">Qdrant 서버 호스트입니다.</td></tr><tr id="22db3bed-dae9-80e8-924d-ddfc201c59a8"><td id="vvuk" class="">port</td><td id="WchE" class="">정수</td><td id="UGB&gt;" class="">Qdrant 서버 포트입니다.</td></tr><tr id="22db3bed-dae9-80f6-aa77-ccfc389151da"><td id="vvuk" class="">grpc_port</td><td id="WchE" class="">정수</td><td id="UGB&gt;" class="">Qdrant gRPC 포트입니다.</td></tr><tr id="22db3bed-dae9-80dc-9167-fd471875dae1"><td id="vvuk" class="">api_key</td><td id="WchE" class="">SecretString</td><td id="UGB&gt;" class="">Qdrant API 키입니다.</td></tr><tr id="22db3bed-dae9-804c-adea-f669d3c678b5"><td id="vvuk" class="">prefix</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">Qdrant에서 사용할 프리픽스입니다.</td></tr><tr id="22db3bed-dae9-804e-9022-e89ea33ec103"><td id="vvuk" class="">timeout</td><td id="WchE" class="">정수</td><td id="UGB&gt;" class="">Qdrant 작업의 타임아웃 시간입니다.</td></tr><tr id="22db3bed-dae9-807d-8987-f4ccc467fd88"><td id="vvuk" class="">path</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">Qdrant 경로입니다.</td></tr><tr id="22db3bed-dae9-805b-a54a-cd9b36599788"><td id="vvuk" class="">url</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">Qdrant 서버 URL입니다.</td></tr><tr id="22db3bed-dae9-80f0-96cb-e63985416244"><td id="vvuk" class="">distance_func</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">벡터 간 유사도를 계산할 함수입니다.</td></tr><tr id="22db3bed-dae9-80bb-b30c-fc219dfb39e6"><td id="vvuk" class="">content_payload_key</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">콘텐츠 페이로드 키입니다.</td></tr><tr id="22db3bed-dae9-809d-9331-ff4cd75b9c36"><td id="vvuk" class="">metadata_payload_key</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">메타데이터 페이로드 키입니다.</td></tr><tr id="22db3bed-dae9-80d0-929f-f6b687b5569f"><td id="vvuk" class="">search_query</td><td id="WchE" class="">문자열</td><td id="UGB&gt;" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80a0-9f07-e48c68c0fb1a"><td id="vvuk" class="">ingest_data</td><td id="WchE" class="">데이터</td><td id="UGB&gt;" class="">벡터 스토어에 삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-804b-b6c4-c8cab9594c70"><td id="vvuk" class="">embedding</td><td id="WchE" class="">임베딩</td><td id="UGB&gt;" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-80d7-a0de-f83e039962ca"><td id="vvuk" class="">number_of_results</td><td id="WchE" class="">정수</td><td id="UGB&gt;" class="">검색 결과로 반환할 개수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80e8-9de8-f9b376aab49f" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-80a6-a484-cc1f2becdd45" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8077-adbc-d8122e667d5a"><th id="]f]_" class="simple-table-header-color simple-table-header">이름</th><th id="r{]^" class="simple-table-header-color simple-table-header">타입</th><th id="gaxk" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8047-9a19-cb88530f8ceb"><td id="]f]_" class="">vector_store</td><td id="r{]^" class="">Qdrant</td><td id="gaxk" class="">설정된 Qdrant 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80bc-9101-e4190e4972cf"><td id="]f]_" class="">search_results</td><td id="r{]^" class="">List[Data]</td><td id="gaxk" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-8058-997a-d2affe10dcab"/><h2 id="22db3bed-dae9-8030-a8ca-ecd970b34b89" class="">Redis</h2><p id="22db3bed-dae9-8018-804e-e3bd8447b983" class="">
+</p><p id="22db3bed-dae9-8086-b811-c2d377d11d37" class="">이 컴포넌트는 <strong>검색 기능이 포함된 Redis 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-8004-9feb-c50a8e854366" class="">자세한 내용은 <a href="https://redis.io/docs/latest/develop/interact/search-and-query/advanced-concepts/vectors/">Redis 벡터 검색 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-808f-a28a-e1885fe01040" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8045-a02e-caece1679cfb" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8045-bc5c-c9d6d58fa725"><th id="dBHu" class="simple-table-header-color simple-table-header">이름</th><th id="tLMl" class="simple-table-header-color simple-table-header">타입</th><th id="If=@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8012-91e5-d134db792778"><td id="dBHu" class="">redis_server_url</td><td id="tLMl" class="">SecretString</td><td id="If=@" class="">Redis 서버 연결 문자열입니다.</td></tr><tr id="22db3bed-dae9-8081-9f60-d4fd10662fcc"><td id="dBHu" class="">redis_index_name</td><td id="tLMl" class="">문자열</td><td id="If=@" class="">Redis 인덱스 이름입니다.</td></tr><tr id="22db3bed-dae9-80b9-a18c-c5b68a7706b0"><td id="dBHu" class="">code</td><td id="tLMl" class="">문자열</td><td id="If=@" class="">고급 사용자용 Redis 커스텀 코드입니다.</td></tr><tr id="22db3bed-dae9-80cc-badf-e8b0d0700f26"><td id="dBHu" class="">schema</td><td id="tLMl" class="">문자열</td><td id="If=@" class="">Redis 인덱스 스키마입니다.</td></tr><tr id="22db3bed-dae9-80c1-87ee-d986c7f613ec"><td id="dBHu" class="">search_query</td><td id="tLMl" class="">문자열</td><td id="If=@" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80c2-9aef-e3816e58c812"><td id="dBHu" class="">ingest_data</td><td id="tLMl" class="">데이터</td><td id="If=@" class="">삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-8033-8f18-e238f204608e"><td id="dBHu" class="">number_of_results</td><td id="tLMl" class="">정수</td><td id="If=@" class="">검색 결과 수입니다.</td></tr><tr id="22db3bed-dae9-80f9-bb5e-f51167425f13"><td id="dBHu" class="">embedding</td><td id="tLMl" class="">임베딩</td><td id="If=@" class="">사용할 임베딩 함수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8040-871e-e9e0da58702d" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-8066-902f-d4b869dcc079" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8086-8921-deeed4497802"><th id="SXvm" class="simple-table-header-color simple-table-header">이름</th><th id="}nvG" class="simple-table-header-color simple-table-header">타입</th><th id="zOj{" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80cc-8f51-c7d4647b6669"><td id="SXvm" class="">vector_store</td><td id="}nvG" class="">Redis</td><td id="zOj{" class="">설정된 Redis 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-804d-b9dc-d9918c54f635"><td id="SXvm" class="">search_results</td><td id="}nvG" class="">List[Data]</td><td id="zOj{" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-80ac-9b00-f2484b332cef"/><h2 id="22db3bed-dae9-804f-b252-e71b344f8385" class="">Supabase</h2><p id="22db3bed-dae9-806a-9983-ecc3438875cf" class="">
+</p><p id="22db3bed-dae9-808f-a284-f617a37ecefb" class="">이 컴포넌트는 <strong>Supabase 벡터 스토어와의 연결을 생성</strong>합니다.</p><p id="22db3bed-dae9-800d-b73f-f25b6b866c59" class="">자세한 내용은 <a href="https://supabase.com/docs/guides/ai">Supabase 벡터 검색 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-809e-b411-dbb7c138def5" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8074-b672-e46210cd949b" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8019-92dc-e75de8bfd906"><th id="gRhD" class="simple-table-header-color simple-table-header">이름</th><th id="yqZd" class="simple-table-header-color simple-table-header">타입</th><th id="^V[x" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-808f-a83a-db84b325f057"><td id="gRhD" class="">supabase_url</td><td id="yqZd" class="">문자열</td><td id="^V[x" class="">Supabase 인스턴스의 URL입니다.</td></tr><tr id="22db3bed-dae9-809d-8186-d4dbb57bdc6a"><td id="gRhD" class="">supabase_service_key</td><td id="yqZd" class="">SecretString</td><td id="^V[x" class="">Supabase 인증용 서비스 키입니다.</td></tr><tr id="22db3bed-dae9-809b-b6e1-d202fcb95e4e"><td id="gRhD" class="">table_name</td><td id="yqZd" class="">문자열</td><td id="^V[x" class="">Supabase에서 사용할 테이블 이름입니다.</td></tr><tr id="22db3bed-dae9-8035-9304-c515ae99c900"><td id="gRhD" class="">query_name</td><td id="yqZd" class="">문자열</td><td id="^V[x" class="">사용할 쿼리 이름입니다.</td></tr><tr id="22db3bed-dae9-80c2-8d28-d50117c1d5da"><td id="gRhD" class="">search_query</td><td id="yqZd" class="">문자열</td><td id="^V[x" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-8094-b810-f7b5da70ebdc"><td id="gRhD" class="">ingest_data</td><td id="yqZd" class="">데이터</td><td id="^V[x" class="">삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-80bc-bc12-d57bd69a2a9f"><td id="gRhD" class="">embedding</td><td id="yqZd" class="">임베딩</td><td id="^V[x" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-8045-87fb-dd9b65ad4898"><td id="gRhD" class="">number_of_results</td><td id="yqZd" class="">정수</td><td id="^V[x" class="">검색 결과 수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80ca-a71c-c39ef3c579b5" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-8049-8dfb-c290acb762d2" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8012-a1d2-ec9d2f892a39"><th id="=;{n" class="simple-table-header-color simple-table-header">이름</th><th id="ZOVH" class="simple-table-header-color simple-table-header">타입</th><th id="SrSM" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80de-ae97-dcd5a4b4da24"><td id="=;{n" class="">vector_store</td><td id="ZOVH" class="">SupabaseVectorStore</td><td id="SrSM" class="">설정된 Supabase 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80b2-abb2-d18efc1b63b3"><td id="=;{n" class="">search_results</td><td id="ZOVH" class="">List[Data]</td><td id="SrSM" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-80af-9bcb-d7f02b72a305"/><h2 id="22db3bed-dae9-80e0-9b73-c7eaf1de7d9a" class="">Upstash</h2><p id="22db3bed-dae9-8068-a6f0-f07441f4942f" class="">
+</p><p id="22db3bed-dae9-80c2-9c83-d1c4ebac6314" class="">이 컴포넌트는 <strong>검색 기능이 포함된 Upstash 벡터 스토어</strong>를 생성합니다.</p><p id="22db3bed-dae9-802e-87e0-c6b11907aff2" class="">자세한 내용은 <a href="https://upstash.com/docs/introduction">Upstash 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8080-aab2-c210bdb135c1" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8015-8b80-ec454fdd67d0" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8063-8ccf-f1e5a0f18cbe"><th id="Ptco" class="simple-table-header-color simple-table-header">이름</th><th id="Y[Q?" class="simple-table-header-color simple-table-header">타입</th><th id="?zy&gt;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8031-80a9-c8b12f0cb584"><td id="Ptco" class="">index_url</td><td id="Y[Q?" class="">문자열</td><td id="?zy&gt;" class="">Upstash 인덱스의 URL입니다.</td></tr><tr id="22db3bed-dae9-8069-beb9-d30af9d52de1"><td id="Ptco" class="">index_token</td><td id="Y[Q?" class="">SecretString</td><td id="?zy&gt;" class="">Upstash 인덱스의 인증 토큰입니다.</td></tr><tr id="22db3bed-dae9-80e3-8d00-c4b020af7e88"><td id="Ptco" class="">text_key</td><td id="Y[Q?" class="">문자열</td><td id="?zy&gt;" class="">텍스트로 사용할 필드 키입니다.</td></tr><tr id="22db3bed-dae9-8046-a218-df368fb19ffd"><td id="Ptco" class="">namespace</td><td id="Y[Q?" class="">문자열</td><td id="?zy&gt;" class="">인덱스에 사용할 네임스페이스입니다.</td></tr><tr id="22db3bed-dae9-8065-8b58-f0e90f6f6077"><td id="Ptco" class="">search_query</td><td id="Y[Q?" class="">문자열</td><td id="?zy&gt;" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-8046-bbe6-fed2143f7d58"><td id="Ptco" class="">metadata_filter</td><td id="Y[Q?" class="">문자열</td><td id="?zy&gt;" class="">메타데이터 기준으로 문서를 필터링합니다.</td></tr><tr id="22db3bed-dae9-80f8-8ebe-efe626318b76"><td id="Ptco" class="">ingest_data</td><td id="Y[Q?" class="">데이터</td><td id="?zy&gt;" class="">삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-809e-b9a3-c2f6adcec41e"><td id="Ptco" class="">embedding</td><td id="Y[Q?" class="">임베딩</td><td id="?zy&gt;" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-803e-a21b-f27b73801a5c"><td id="Ptco" class="">number_of_results</td><td id="Y[Q?" class="">정수</td><td id="?zy&gt;" class="">검색 결과 수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80b8-b8b8-d10aba9b3019" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-80dc-a50b-f8fb9fdb1e6e" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8020-b904-e1d29576d870"><th id="E{G?" class="simple-table-header-color simple-table-header">이름</th><th id="Z[fG" class="simple-table-header-color simple-table-header">타입</th><th id="WPn|" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80e2-ac78-e4d165f08239"><td id="E{G?" class="">vector_store</td><td id="Z[fG" class="">UpstashVectorStore</td><td id="WPn|" class="">설정된 Upstash 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-80b6-8f27-e89445662c7f"><td id="E{G?" class="">search_results</td><td id="Z[fG" class="">List[Data]</td><td id="WPn|" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-807d-8d49-c25132322fcc"/><h2 id="22db3bed-dae9-80f1-88c2-f3755b1997f1" class="">Vectara</h2><p id="22db3bed-dae9-809a-a468-e45278f6882b" class="">
+</p><p id="22db3bed-dae9-8096-9206-dc8c0e6730cf" class="">이 컴포넌트는 <strong>Vectara 벡터 스토어를 생성하고 검색 기능을 제공합니다.</strong></p><p id="22db3bed-dae9-8044-a2c2-de95c52d1960" class="">자세한 내용은 <a href="https://docs.vectara.com/docs/">Vectara 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-8019-8139-c8278ec497f3" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-8085-9a74-e39e75915c3e" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-803c-92a4-c133bcf752b1"><th id="yrud" class="simple-table-header-color simple-table-header">이름</th><th id="TTP=" class="simple-table-header-color simple-table-header">타입</th><th id="JHs`" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80cb-9ee9-df1fbcd35fb8"><td id="yrud" class="">vectara_customer_id</td><td id="TTP=" class="">문자열</td><td id="JHs`" class="">Vectara 고객 ID입니다.</td></tr><tr id="22db3bed-dae9-8050-98bc-c82fd49fd43c"><td id="yrud" class="">vectara_corpus_id</td><td id="TTP=" class="">문자열</td><td id="JHs`" class="">Vectara 코퍼스 ID입니다.</td></tr><tr id="22db3bed-dae9-80d2-8a2e-d0de42c5aec6"><td id="yrud" class="">vectara_api_key</td><td id="TTP=" class="">SecretString</td><td id="JHs`" class="">Vectara API 키입니다.</td></tr><tr id="22db3bed-dae9-8080-b04f-dae60cc79c82"><td id="yrud" class="">embedding</td><td id="TTP=" class="">임베딩 (선택사항)</td><td id="JHs`" class="">사용할 임베딩 함수입니다.</td></tr><tr id="22db3bed-dae9-80b5-acc0-cfb2f017368e"><td id="yrud" class="">ingest_data</td><td id="TTP=" class="">List[Document/Data]</td><td id="JHs`" class="">삽입할 데이터입니다.</td></tr><tr id="22db3bed-dae9-80a3-835b-de42a94dcf97"><td id="yrud" class="">search_query</td><td id="TTP=" class="">문자열</td><td id="JHs`" class="">유사도 검색에 사용할 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80f8-8612-c77081a8ef59"><td id="yrud" class="">number_of_results</td><td id="TTP=" class="">정수</td><td id="JHs`" class="">검색 결과 수입니다.</td></tr></tbody></table><p id="22db3bed-dae9-805a-a20f-fcf41d0cc75f" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-80b3-9e4a-c497c1c34a38" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80ae-b815-e40cbf5c3171"><th id="o?S~" class="simple-table-header-color simple-table-header">이름</th><th id="XHS`" class="simple-table-header-color simple-table-header">타입</th><th id="NYIg" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80da-aa03-c27ef5adf7c8"><td id="o?S~" class="">vector_store</td><td id="XHS`" class="">VectaraVectorStore</td><td id="NYIg" class="">설정된 Vectara 벡터 스토어 인스턴스입니다.</td></tr><tr id="22db3bed-dae9-8048-9eed-f6eefe5aaacf"><td id="o?S~" class="">search_results</td><td id="XHS`" class="">List[Data]</td><td id="NYIg" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-8015-b159-dd3684336e0f"/><h2 id="22db3bed-dae9-80e0-9221-f2f1d095493a" class="">Vectara Search</h2><p id="22db3bed-dae9-80b1-85ec-f61a53c59b48" class="">
+</p><p id="22db3bed-dae9-8012-8a39-f1a7022dc8ba" class="">이 컴포넌트는 <strong>입력값에 따라 Vectara 벡터 스토어를 검색</strong>합니다.</p><p id="22db3bed-dae9-8023-8d51-e58436baa3fb" class="">자세한 내용은 <a href="https://docs.vectara.com/docs/">Vectara 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-807f-9c00-e3cbf1235d07" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-809e-9b90-ff2f6a5a9b71" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80bb-a696-c74670bf9684"><th id="IKPg" class="simple-table-header-color simple-table-header">이름</th><th id="ZQTz" class="simple-table-header-color simple-table-header">타입</th><th id="{o&gt;I" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80ac-926d-cd9faed5f28d"><td id="IKPg" class="">search_type</td><td id="ZQTz" class="">문자열</td><td id="{o&gt;I" class="">검색 유형입니다. 예: <code>&quot;Similarity&quot;</code>, <code>&quot;MMR&quot;</code></td></tr><tr id="22db3bed-dae9-8059-878e-fb6eebb9800f"><td id="IKPg" class="">input_value</td><td id="ZQTz" class="">문자열</td><td id="{o&gt;I" class="">검색 쿼리입니다.</td></tr><tr id="22db3bed-dae9-80fc-a03a-c472d5947ef4"><td id="IKPg" class="">vectara_customer_id</td><td id="ZQTz" class="">문자열</td><td id="{o&gt;I" class="">Vectara 고객 ID입니다.</td></tr><tr id="22db3bed-dae9-80ca-a53e-e7438d040ddc"><td id="IKPg" class="">vectara_corpus_id</td><td id="ZQTz" class="">문자열</td><td id="{o&gt;I" class="">Vectara 코퍼스 ID입니다.</td></tr><tr id="22db3bed-dae9-8019-b7cb-f68a816feace"><td id="IKPg" class="">vectara_api_key</td><td id="ZQTz" class="">SecretString</td><td id="{o&gt;I" class="">Vectara API 키입니다.</td></tr><tr id="22db3bed-dae9-80f1-9908-f99299c85971"><td id="IKPg" class="">files_url</td><td id="ZQTz" class="">List[String]</td><td id="{o&gt;I" class="">초기화를 위한 파일 URL 목록입니다. 선택사항입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8040-a647-fd810cabda32" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-801f-b5c8-e90018a0f3ed" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-801b-bf12-da36e0821e55"><th id="ZGBH" class="simple-table-header-color simple-table-header">이름</th><th id="q{=O" class="simple-table-header-color simple-table-header">타입</th><th id="]@by" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-808b-bea6-e0602b8740e1"><td id="ZGBH" class="">search_results</td><td id="q{=O" class="">List[Data]</td><td id="]@by" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-80ea-94ff-e003bc333526"/><h2 id="22db3bed-dae9-80d6-88c2-c35169b6f28d" class="">Weaviate</h2><p id="22db3bed-dae9-80c7-9f8d-d4d35b251b0c" class="">
+</p><p id="22db3bed-dae9-8032-a9e4-d26d8c242bb9" class="">이 컴포넌트는 <strong>Weaviate 벡터 스토어를 구성하여 텍스트 및 문서의 인덱싱과 검색을 최적화</strong>합니다.</p><p id="22db3bed-dae9-80a9-ba61-e3a03118efbd" class="">자세한 내용은 <a href="https://weaviate.io/developers/weaviate">Weaviate 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-80ea-a8d9-d6f6e56309f9" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-80c6-ad66-c40bf39e0024" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-803c-8e10-c90519da3ad9"><th id="dp;V" class="simple-table-header-color simple-table-header">이름</th><th id="]qfv" class="simple-table-header-color simple-table-header">타입</th><th id="vbQW" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8091-8bd9-e63634e7fb03"><td id="dp;V" class="">weaviate_url</td><td id="]qfv" class="">문자열</td><td id="vbQW" class="">기본 Weaviate 인스턴스의 URL입니다.</td></tr><tr id="22db3bed-dae9-8023-8f63-d2db72e60065"><td id="dp;V" class="">search_by_text</td><td id="]qfv" class="">불리언</td><td id="vbQW" class="">텍스트 기반 검색 여부를 지정합니다.</td></tr><tr id="22db3bed-dae9-804a-bc02-c7468aed9e84"><td id="dp;V" class="">api_key</td><td id="]qfv" class="">SecretString</td><td id="vbQW" class="">인증을 위한 선택적 API 키입니다.</td></tr><tr id="22db3bed-dae9-8052-ac2e-e78e3d52ed2b"><td id="dp;V" class="">index_name</td><td id="]qfv" class="">문자열</td><td id="vbQW" class="">선택적 인덱스 이름입니다.</td></tr><tr id="22db3bed-dae9-8083-9b87-d7d92fbcbd4f"><td id="dp;V" class="">text_key</td><td id="]qfv" class="">문자열</td><td id="vbQW" class="">텍스트를 추출할 기본 키입니다.</td></tr><tr id="22db3bed-dae9-800c-8b97-f6be014ebc0e"><td id="dp;V" class="">input</td><td id="]qfv" class="">문서</td><td id="vbQW" class="">검색 또는 저장할 문서입니다.</td></tr><tr id="22db3bed-dae9-8014-9cb2-f2856dee90d3"><td id="dp;V" class="">embedding</td><td id="]qfv" class="">임베딩</td><td id="vbQW" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22db3bed-dae9-8054-9c6b-e5d0494a556e"><td id="dp;V" class="">attributes</td><td id="]qfv" class="">List[String]</td><td id="vbQW" class="">선택적으로 추가할 속성 목록입니다.</td></tr></tbody></table><p id="22db3bed-dae9-8031-94c9-c2d2be3e530e" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-804b-997e-d8691c7f5343" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-80ab-a57b-c0e0cdcd2913"><th id="gNR{" class="simple-table-header-color simple-table-header">이름</th><th id="[W=Y" class="simple-table-header-color simple-table-header">타입</th><th id="VhZO" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-80a6-b47a-da56ca4b9588"><td id="gNR{" class="">vector_store</td><td id="[W=Y" class="">WeaviateVectorStore</td><td id="VhZO" class="">설정된 Weaviate 벡터 스토어 인스턴스입니다.</td></tr></tbody></table><hr id="22db3bed-dae9-80f9-b178-f59797de8af2"/><h2 id="22db3bed-dae9-8022-89c0-ce8d7fffe8e0" class="">Weaviate Search</h2><p id="22db3bed-dae9-804f-aabf-c7b94159e69f" class="">
+</p><p id="22db3bed-dae9-801c-a555-e408f302628d" class="">이 컴포넌트는 <strong>입력값과 유사한 문서를 Weaviate 벡터 스토어에서 검색</strong>합니다.</p><p id="22db3bed-dae9-80c3-aaa4-f2bf9875d7e4" class="">자세한 내용은 <a href="https://weaviate.io/developers/weaviate">Weaviate 공식 문서</a>를 참고하세요.</p><p id="22db3bed-dae9-80a0-937b-e701dd2f4a16" class=""><strong>입력값</strong></p><table id="22db3bed-dae9-80b4-a52d-ec9bcd5076a9" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8019-99ba-df7f36f20801"><th id="}jNB" class="simple-table-header-color simple-table-header">이름</th><th id="nOf&gt;" class="simple-table-header-color simple-table-header">타입</th><th id="{;hb" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-801f-a852-db9f2dcef1fc"><td id="}jNB" class="">search_type</td><td id="nOf&gt;" class="">문자열</td><td id="{;hb" class="">검색 유형입니다. 예: <code>&quot;Similarity&quot;</code>, <code>&quot;MMR&quot;</code></td></tr><tr id="22db3bed-dae9-80fa-bdbc-d4a3a7e9e423"><td id="}jNB" class="">input_value</td><td id="nOf&gt;" class="">문자열</td><td id="{;hb" class="">검색 쿼리입니다.</td></tr><tr id="22db3bed-dae9-8002-937e-cbe7125c2834"><td id="}jNB" class="">weaviate_url</td><td id="nOf&gt;" class="">문자열</td><td id="{;hb" class="">기본 Weaviate 인스턴스의 URL입니다.</td></tr><tr id="22db3bed-dae9-8000-88c2-cee433081a6c"><td id="}jNB" class="">search_by_text</td><td id="nOf&gt;" class="">불리언</td><td id="{;hb" class="">텍스트 기반 검색 여부를 지정합니다.</td></tr><tr id="22db3bed-dae9-8079-aa28-d9216ba76b82"><td id="}jNB" class="">api_key</td><td id="nOf&gt;" class="">SecretString</td><td id="{;hb" class="">인증을 위한 선택적 API 키입니다.</td></tr><tr id="22db3bed-dae9-804c-ae15-c6fe519e422a"><td id="}jNB" class="">index_name</td><td id="nOf&gt;" class="">문자열</td><td id="{;hb" class="">선택적 인덱스 이름입니다.</td></tr><tr id="22db3bed-dae9-8014-8e2b-cd5e4b1bf120"><td id="}jNB" class="">text_key</td><td id="nOf&gt;" class="">문자열</td><td id="{;hb" class="">텍스트를 추출할 기본 키입니다.</td></tr><tr id="22db3bed-dae9-80af-80b2-c2841823c9a6"><td id="}jNB" class="">embedding</td><td id="nOf&gt;" class="">임베딩</td><td id="{;hb" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22db3bed-dae9-801b-a06a-ec03eb340d31"><td id="}jNB" class="">attributes</td><td id="nOf&gt;" class="">List[String]</td><td id="{;hb" class="">선택적으로 검색에 사용할 속성 목록입니다.</td></tr></tbody></table><p id="22db3bed-dae9-80fd-9420-cfb26ec74a7d" class=""><strong>출력값</strong></p><table id="22db3bed-dae9-80f0-abe6-eeab6e080735" class="simple-table"><thead class="simple-table-header"><tr id="22db3bed-dae9-8014-a076-da63a1b8e845"><th id="OMbl" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;||z" class="simple-table-header-color simple-table-header">타입</th><th id="M}Om" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22db3bed-dae9-8036-bd7b-c8642e46289c"><td id="OMbl" class="">search_results</td><td id="&gt;||z" class="">List[Data]</td><td id="M}Om" class="">유사도 검색 결과이며, <a href="https://chatgpt.com/concepts-objects#data-object">Data</a> 객체 리스트로 제공됩니다.</td></tr></tbody></table><hr id="22db3bed-dae9-8077-8eeb-ef3c8c0fe5ec"/><p id="22db3bed-dae9-8061-a47b-ef7d96591a4b" class="">
+</p><p id="22db3bed-dae9-80a2-86c9-f8cdcf862c81" class="">
+</p><p id="22db3bed-dae9-80e1-8fb9-ed72a47d6e1b" class=""><em>*이 문서는 </em><em><a href="https://docs.langflow.org/components-vectorstores">https://docs.langflow.org/components-vectorstores</a></em><em> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</em></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

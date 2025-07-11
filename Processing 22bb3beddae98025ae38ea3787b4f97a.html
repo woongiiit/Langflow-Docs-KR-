@@ -1,0 +1,823 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Processing</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8025-ae38-ea3787b4f97a" class="page sans"><header><h1 class="page-title">Processing</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22cb3bed-dae9-801e-8c5c-f4aef38bbbf2" class="">프로세싱 (Processing) 컴포넌트</h1><h3 id="22cb3bed-dae9-805b-bbc4-cd20a43ffa8e" class="">: Components &gt; Processing</h3><p id="22cb3bed-dae9-80a8-ad15-cf74bebd1a2a" class="">
+</p><p id="22cb3bed-dae9-8078-b913-f63cb5d81799" class="">Langflow의 <strong>Processing 컴포넌트</strong>는 플로우 내 데이터를 처리하고 변환합니다.</p><p id="22cb3bed-dae9-804b-a869-c0a037b932ff" class="">
+</p><hr id="22cb3bed-dae9-8027-bb7f-d55bbf4dfca5"/><p id="22cb3bed-dae9-8093-b3a1-e3aef767636d" class="">
+</p><h2 id="22cb3bed-dae9-80d4-b860-f292b35434ab" class="">플로우에서 Processing 컴포넌트 사용하기</h2><p id="22cb3bed-dae9-8033-aea1-d268b8c945a3" class="">
+</p><p id="22cb3bed-dae9-80a1-97be-d08bcd4b4da4" class=""><code>Split Text</code> 처리 컴포넌트는 들어오는 <code>Data</code>를 여러 청크(chunk)로 분할하여 벡터 스토어 컴포넌트에 임베딩할 수 있도록 합니다.</p><p id="22cb3bed-dae9-8034-9db9-e2ca4e9084d2" class="">청크 크기(chunk size), 중첩(overlap), 구분자(separator)를 조절하여 벡터 스토어에서 검색할 때의 문맥과 세분화 정도를 제어할 수 있습니다.</p><figure id="22cb3bed-dae9-80f3-ae7a-deea79ada111" class="image"><a href="image%2030.png"><img style="width:709.9874877929688px" src="image%2030.png"/></a></figure><hr id="22cb3bed-dae9-80d5-bbb9-f5059d73908a"/><p id="22cb3bed-dae9-8033-ac24-f383e61dc3dc" class="">
+</p><h2 id="22cb3bed-dae9-80b4-9925-e7bf0cdcf264" class="">DataFrame 연산(DataFrame operations)</h2><p id="22cb3bed-dae9-8061-a038-cb93c5b57053" class="">
+</p><p id="22cb3bed-dae9-80ba-9a61-fb6ac14a57db" class="">이 컴포넌트는 <code>DataFrame</code>의 행(row)과 열(column)에 대해 다양한 연산을 수행합니다.</p><p id="22cb3bed-dae9-80f2-8a6b-eb4270ec17d2" class=""><code>DataFrame Operations</code> 컴포넌트를 사용하려면, <code>DataFrame</code>을 출력하는 컴포넌트를 해당 컴포넌트의 입력에 연결하세요.</p><p id="22cb3bed-dae9-8006-b07b-d5b424d94e7a" class="">아래 예시에서는 API로부터 JSON 데이터를 가져와 <code>Smart function</code> 컴포넌트로 평탄화(flatten)하여 테이블 형식의 <code>DataFrame</code>을 생성한 후, <code>DataFrame Operations</code> 컴포넌트로 필터링 연산을 수행합니다.</p><figure id="22cb3bed-dae9-8018-8bb0-fbcd2d48358e" class="image"><a href="image%2031.png"><img style="width:709.9874877929688px" src="image%2031.png"/></a></figure><ol type="1" id="22cb3bed-dae9-8020-b8ae-fc326d9ea741" class="numbered-list" start="1"><li><strong>API Request</strong> 컴포넌트로부터 <code>source</code>와 <code>result</code> 필드만 포함된 데이터를 가져옵니다. 이 예시에서는 실제 데이터가 <code>result</code> 필드 내부에 중첩되어 있습니다.</li></ol><ol type="1" id="22cb3bed-dae9-80b3-a382-f70ef7ffb18e" class="numbered-list" start="2"><li><strong>Smart function</strong> 컴포넌트를 API Request에 연결하고, <strong>Language model</strong>(이 예시에서는 Groq 모델)도 연결하세요.</li></ol><ol type="1" id="22cb3bed-dae9-802a-9225-dac5a757fa31" class="numbered-list" start="3"><li>Groq 모델 컴포넌트에 Groq API 키를 입력합니다.</li></ol><ol type="1" id="22cb3bed-dae9-805a-b697-e4fc9b5a48df" class="numbered-list" start="4"><li>Smart function 컴포넌트의 <strong>Instructions</strong> 필드에 다음과 같이 자연어로 입력하여 데이터를 평탄화하세요.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-8030-8b66-d17339e8b432" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">I want to explode the result column out into a Data object
+</code></pre><p id="22cb3bed-dae9-808e-a115-dfe7690284bb" class=""><strong>Tip:</strong> Instructions 필드에 구두점(punctuation)을 포함하면 오류가 발생할 수 있으니 피하십시오.</p></li></ol><ol type="1" id="22cb3bed-dae9-8070-a2a3-c63a8a6e00a6" class="numbered-list" start="5"><li>Smart function 컴포넌트에서 <strong>Run component</strong>를 클릭하여 흐름을 실행합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8026-9fb3-e1d052e1b7db" class="numbered-list" start="6"><li>Smart function 컴포넌트에서 <strong>Inspect output</strong>을 클릭하면, 다음과 같은 구조화된 <code>DataFrame</code>을 확인할 수 있습니다.</li></ol><table id="22cb3bed-dae9-80f4-9a4a-d5e0b924c038" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8024-a31e-d48bc649c37a"><th id="qrr{" class="simple-table-header-color simple-table-header">id</th><th id="eLGg" class="simple-table-header-color simple-table-header">name</th><th id="FE&gt;|" class="simple-table-header-color simple-table-header">company</th><th id="QDF~" class="simple-table-header-color simple-table-header">username</th><th id="^blJ" class="simple-table-header-color simple-table-header">email</th><th id="E&gt;]M" class="simple-table-header-color simple-table-header">address</th><th id="QKyI" class="simple-table-header-color simple-table-header">zip</th></tr></thead><tbody><tr id="22cb3bed-dae9-8078-b230-c8a26425d9be"><td id="qrr{" class="">1</td><td id="eLGg" class="">Emily Johnson</td><td id="FE&gt;|" class="">ABC Corporation</td><td id="QDF~" class="">emily_johnson</td><td id="^blJ" class=""><a href="mailto:emily.johnson@abccorporation.com">emily.johnson@abccorporation.com</a></td><td id="E&gt;]M" class="">123 Main St</td><td id="QKyI" class="">12345</td></tr><tr id="22cb3bed-dae9-8039-9930-e09c5fc81dbf"><td id="qrr{" class="">2</td><td id="eLGg" class="">Michael Williams</td><td id="FE&gt;|" class="">XYZ Corp</td><td id="QDF~" class="">michael_williams</td><td id="^blJ" class=""><a href="mailto:michael.williams@xyzcorp.com">michael.williams@xyzcorp.com</a></td><td id="E&gt;]M" class="">456 Elm Ave</td><td id="QKyI" class="">67890</td></tr></tbody></table><ol type="1" id="22cb3bed-dae9-8030-925b-d31810611ea7" class="numbered-list" start="1"><li><code>DataFrame Operations</code> 컴포넌트와 <code>Chat Output</code> 컴포넌트를 플로우에 추가합니다.</li></ol><ol type="1" id="22cb3bed-dae9-801a-8a62-e8d6914aafdd" class="numbered-list" start="2"><li><code>DataFrame Operations</code> 컴포넌트의 <strong>Operation</strong> 필드에서 <code>Filter</code>를 선택합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8015-a37a-f22c3081fef3" class="numbered-list" start="3"><li><strong>Column Name</strong> 필드에 필터링할 열 이름(예: <code>name</code>)을 입력합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80e2-a8ba-f53580b380d7" class="numbered-list" start="4"><li>Playground에서 <strong>Run Flow</strong>를 클릭하면, 지정한 열의 값이 추출됩니다.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-809f-9b98-e9de0aab2d5f" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">name
+Emily Johnson
+Michael Williams
+John Smith
+...
+</code></pre><h3 id="22cb3bed-dae9-8051-a1fc-e6b9ca1ce0f6" class="">연산(Operation) 목록</h3><p id="22cb3bed-dae9-8099-b3a6-ed78ec63ca28" class="">이 컴포넌트가 지원하는 <code>pandas</code> <code>DataFrame</code> 연산은 다음과 같습니다:</p><table id="22cb3bed-dae9-804d-9680-fc192ced1afc" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8078-8277-ddd2ec81ce37"><th id="hjbz" class="simple-table-header-color simple-table-header">작업(Operation)</th><th id="b}ts" class="simple-table-header-color simple-table-header">필수 입력값</th><th id="K~u=" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e2-9dc2-d38b7f70d916"><td id="hjbz" class="">Add Column</td><td id="b}ts" class="">new_column_name, new_column_value</td><td id="K~u=" class="">상수 값으로 새 열 추가</td></tr><tr id="22cb3bed-dae9-8022-869e-e9017b9ee144"><td id="hjbz" class="">Drop Column</td><td id="b}ts" class="">column_name</td><td id="K~u=" class="">지정한 열 제거</td></tr><tr id="22cb3bed-dae9-80d0-834f-e69b7b936773"><td id="hjbz" class="">Filter</td><td id="b}ts" class="">column_name, filter_value</td><td id="K~u=" class="">열 값으로 행 필터링</td></tr><tr id="22cb3bed-dae9-8009-bc08-d1cc2c595df0"><td id="hjbz" class="">Head</td><td id="b}ts" class="">num_rows</td><td id="K~u=" class="">처음 n개 행 반환</td></tr><tr id="22cb3bed-dae9-8094-9c17-d1fbd73e86cd"><td id="hjbz" class="">Rename Column</td><td id="b}ts" class="">column_name, new_column_name</td><td id="K~u=" class="">기존 열 이름 변경</td></tr><tr id="22cb3bed-dae9-809b-a0a4-d6c3650e9620"><td id="hjbz" class="">Replace Value</td><td id="b}ts" class="">column_name, replace_value, replacement_value</td><td id="K~u=" class="">열 값 교체</td></tr><tr id="22cb3bed-dae9-803f-b534-e073a497ad8a"><td id="hjbz" class="">Select Columns</td><td id="b}ts" class="">columns_to_select</td><td id="K~u=" class="">특정 열 선택</td></tr><tr id="22cb3bed-dae9-8087-8e0c-fbe79c2c8fe5"><td id="hjbz" class="">Sort</td><td id="b}ts" class="">column_name, ascending</td><td id="K~u=" class="">열 기준 정렬</td></tr><tr id="22cb3bed-dae9-8048-ae13-ff18d20233be"><td id="hjbz" class="">Tail</td><td id="b}ts" class="">num_rows</td><td id="K~u=" class="">마지막 n개 행 반환</td></tr></tbody></table><h3 id="22cb3bed-dae9-8074-a465-ee6bddd9a2a2" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-80f3-a7c5-e999b382a19f" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-8067-805a-d577da0d9d1a" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-803f-90ef-c88c8d71d163"><th id="hOHq" class="simple-table-header-color simple-table-header">이름</th><th id="p^mT" class="simple-table-header-color simple-table-header">표시 이름</th><th id="ebm{" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80d4-815d-db7806c937b8"><td id="hOHq" class="">df</td><td id="p^mT" class="">DataFrame</td><td id="ebm{" class="">연산을 수행할 입력 <code>DataFrame</code></td></tr><tr id="22cb3bed-dae9-8019-8514-d7e435a688a3"><td id="hOHq" class="">operation</td><td id="p^mT" class="">Operation</td><td id="ebm{" class="">수행할 <code>DataFrame</code> 연산. 옵션: Add Column, Drop Column, Filter, Head, Rename Column, Replace Value, Select Columns, Sort, Tail</td></tr><tr id="22cb3bed-dae9-80bd-b2dc-ec0035e47d5a"><td id="hOHq" class="">column_name</td><td id="p^mT" class="">Column Name</td><td id="ebm{" class="">연산 대상 열 이름</td></tr><tr id="22cb3bed-dae9-80cd-98d8-d5cb23417b5d"><td id="hOHq" class="">filter_value</td><td id="p^mT" class="">Filter Value</td><td id="ebm{" class="">행을 필터링할 값</td></tr><tr id="22cb3bed-dae9-8018-b472-eed6f93859b1"><td id="hOHq" class="">ascending</td><td id="p^mT" class="">Sort Ascending</td><td id="ebm{" class="">오름차순 정렬 여부 (<code>True</code> 또는 <code>False</code>)</td></tr><tr id="22cb3bed-dae9-801d-9283-eda5e8fa16f7"><td id="hOHq" class="">new_column_name</td><td id="p^mT" class="">New Column Name</td><td id="ebm{" class="">새 열 이름 (이름 변경 또는 열 추가 시)</td></tr><tr id="22cb3bed-dae9-8032-9cb6-c889e38f7420"><td id="hOHq" class="">new_column_value</td><td id="p^mT" class="">New Column Value</td><td id="ebm{" class="">새 열에 채울 상수 값</td></tr><tr id="22cb3bed-dae9-801c-a3a7-df160d8bf185"><td id="hOHq" class="">columns_to_select</td><td id="p^mT" class="">Columns to Select</td><td id="ebm{" class="">선택할 열 이름 목록</td></tr><tr id="22cb3bed-dae9-8011-89be-d9dae593b151"><td id="hOHq" class="">num_rows</td><td id="p^mT" class="">Number of Rows</td><td id="ebm{" class="">Head/Tail 연산 시 반환할 행 개수 (기본값: 5)</td></tr><tr id="22cb3bed-dae9-8015-8104-e7566f9582cd"><td id="hOHq" class="">replace_value</td><td id="p^mT" class="">Value to Replace</td><td id="ebm{" class="">교체할 기존 값</td></tr><tr id="22cb3bed-dae9-805b-b77f-c2ce5ed9d384"><td id="hOHq" class="">replacement_value</td><td id="p^mT" class="">Replacement Value</td><td id="ebm{" class="">새로 대체할 값</td></tr></tbody></table><p id="22cb3bed-dae9-801a-b8e9-e071a17f378b" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-8033-bc6c-c86dd27d4099" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ca-b957-e8ec57e67e70"><th id="Tp&gt;Q" class="simple-table-header-color simple-table-header">이름</th><th id="&lt;PQ;" class="simple-table-header-color simple-table-header">표시 이름</th><th id="=MjH" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8043-a06c-e7fd07884af8"><td id="Tp&gt;Q" class="">output</td><td id="&lt;PQ;" class="">DataFrame</td><td id="=MjH" class="">연산 후 생성된 결과 <code>DataFrame</code></td></tr></tbody></table><hr id="22cb3bed-dae9-80a8-826e-d84ae52d1c4f"/><p id="22cb3bed-dae9-806d-8111-c77bc8343dd5" class="">
+</p><h2 id="22cb3bed-dae9-8034-a379-fe7d9b2b6117" class="">데이터 연산(Data operations)</h2><p id="22cb3bed-dae9-8040-b7aa-cd6a6c1a62b9" class="">
+</p><p id="22cb3bed-dae9-80e5-938a-e7801e900278" class="">이 컴포넌트는 <code>Data</code> 객체에 대해 다음과 같은 연산을 수행합니다: 키 선택, 리터럴 평가, 데이터 결합, 값 필터링, 추가/업데이트, 키 제거, 키 이름 변경 등.</p><ol type="1" id="22cb3bed-dae9-80c4-92a2-e80392149222" class="numbered-list" start="1"><li>이 컴포넌트를 사용해보려면 먼저 <code>Data</code>를 출력하는 컴포넌트를 <code>Data Operations</code> 컴포넌트의 입력에 연결하세요.</li></ol><ol type="1" id="22cb3bed-dae9-80b1-89ec-e5d5c9eb727f" class="numbered-list" start="2"><li><strong>Operations</strong> 필드에서 수행할 연산을 선예시로 Webhook 컴포넌트에 아래 요청을 보내 보세요. <code>YOUR_FLOW_ID</code> 부분에 실제 플로우 ID를 넣어주세요:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80bf-af72-c06e964046fb" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">curl -X POST &quot;http://localhost:7860/api/v1/webhook/YOUR_FLOW_ID&quot; \
+  -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Leanne Graham&quot;,
+    &quot;username&quot;: &quot;Bret&quot;,
+    &quot;email&quot;: &quot;Sincere@april.biz&quot;,
+    &quot;address&quot;: {
+      &quot;street&quot;: &quot;Kulas Light&quot;,
+      &quot;suite&quot;: &quot;Apt. 556&quot;,
+      &quot;city&quot;: &quot;Gwenborough&quot;,
+      &quot;zipcode&quot;: &quot;92998-3874&quot;,
+      &quot;geo&quot;: {
+        &quot;lat&quot;: &quot;-37.3159&quot;,
+        &quot;lng&quot;: &quot;81.1496&quot;
+      }
+    },
+    &quot;phone&quot;: &quot;1-770-736-8031 x56442&quot;,
+    &quot;website&quot;: &quot;hildegard.org&quot;,
+    &quot;company&quot;: {
+      &quot;name&quot;: &quot;Romaguera-Crona&quot;,
+      &quot;catchPhrase&quot;: &quot;Multi-layered client-server neural-net&quot;,
+      &quot;bs&quot;: &quot;harness real-time e-markets&quot;
+    }
+  }&#x27;
+</code></pre><ol type="1" id="22cb3bed-dae9-80a0-9bd8-c9e96bf76687" class="numbered-list" start="4"><li><code>Data Operations</code> 컴포넌트에서 <code>Select Keys</code> 연산을 선택해서 사용자 정보의 일부분을 뽑아내 보세요. 다른 key를 추가하려면 Add More 을 클릭하세요</li></ol><figure id="22cb3bed-dae9-80b1-8326-d00a066a7940" class="image"><a href="image%2032.png"><img style="width:4000px" src="image%2032.png"/></a></figure><ol type="1" id="22cb3bed-dae9-80cd-afad-eccf4c6bbe9d" class="numbered-list" start="5"><li><code>name</code>, <code>username</code>, <code>email</code> 키를 지정하면 다음과 같은 결과가 나옵니다:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80d0-9d8e-c1f0af909e67" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+  &quot;name&quot;: &quot;Leanne Graham&quot;,
+  &quot;username&quot;: &quot;Bret&quot;,
+  &quot;email&quot;: &quot;Sincere@april.biz&quot;
+}
+</code></pre><h3 id="22cb3bed-dae9-8094-9028-f634d44479c3" class="">연산(Operation) 목록</h3><table id="22cb3bed-dae9-806c-9567-e506f3dcc019" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8011-9bd0-cdb157a7e1a6"><th id="ryiR" class="simple-table-header-color simple-table-header">연산(Operation)</th><th id="^@mX" class="simple-table-header-color simple-table-header">필수 입력값</th><th id="=PKY" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8022-a929-e1c6a1f798c4"><td id="ryiR" class="">Select Keys</td><td id="^@mX" class="">select_keys_input</td><td id="=PKY" class="">데이터에서 특정 키 선택</td></tr><tr id="22cb3bed-dae9-80c7-b147-d620131342b9"><td id="ryiR" class="">Literal Eval</td><td id="^@mX" class="">없음</td><td id="=PKY" class="">문자열 값을 Python 리터럴로 평가</td></tr><tr id="22cb3bed-dae9-80e3-a09b-fc065259447c"><td id="ryiR" class="">Combine</td><td id="^@mX" class="">없음</td><td id="=PKY" class="">여러 <code>Data</code> 객체를 하나로 병합</td></tr><tr id="22cb3bed-dae9-80a1-ac75-d0eaba7467b8"><td id="ryiR" class="">Filter Values</td><td id="^@mX" class="">filter_key, filter_values, operator</td><td id="=PKY" class="">키-값 쌍 기준으로 데이터 필터링</td></tr><tr id="22cb3bed-dae9-8070-96d3-fa6870cac24f"><td id="ryiR" class="">Append or Update</td><td id="^@mX" class="">append_update_data</td><td id="=PKY" class="">키-값 쌍 추가 또는 업데이트</td></tr><tr id="22cb3bed-dae9-80e2-8314-dd6c5b46dc7a"><td id="ryiR" class="">Remove Keys</td><td id="^@mX" class="">remove_keys_input</td><td id="=PKY" class="">지정한 키 제거</td></tr><tr id="22cb3bed-dae9-80ae-88d0-fed6fb543dc3"><td id="ryiR" class="">Rename Keys</td><td id="^@mX" class="">rename_keys_input</td><td id="=PKY" class="">키 이름 변경</td></tr></tbody></table><h3 id="22cb3bed-dae9-80d1-92c3-c190d7c32ee2" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-8017-81bb-cfad4bdcb8fc" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-803d-9316-ce78634516c2" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80cf-8b0e-cca8ce068168"><th id="JdFa" class="simple-table-header-color simple-table-header">이름</th><th id="dYn@" class="simple-table-header-color simple-table-header">표시 이름</th><th id=":=tQ" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e9-805a-cc5e67cdaf5e"><td id="JdFa" class="">data</td><td id="dYn@" class="">Data</td><td id=":=tQ" class="">연산 대상 <code>Data</code> 객체</td></tr><tr id="22cb3bed-dae9-8060-b7f4-c1d4920baf45"><td id="JdFa" class="">operations</td><td id="dYn@" class="">Operations</td><td id=":=tQ" class="">수행할 연산</td></tr><tr id="22cb3bed-dae9-801a-9ab1-cd8b616d7da1"><td id="JdFa" class="">select_keys_input</td><td id="dYn@" class="">Select Keys</td><td id=":=tQ" class="">선택할 키 목록</td></tr><tr id="22cb3bed-dae9-800c-a3b9-f9b7f62d5e0f"><td id="JdFa" class="">filter_key</td><td id="dYn@" class="">Filter Key</td><td id=":=tQ" class="">필터링할 키</td></tr><tr id="22cb3bed-dae9-80d6-9478-feb2f0181187"><td id="JdFa" class="">operator</td><td id="dYn@" class="">Comparison Operator</td><td id=":=tQ" class="">비교 연산자 (<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code> 등)</td></tr><tr id="22cb3bed-dae9-80b0-ab74-fefc0715ba8a"><td id="JdFa" class="">filter_values</td><td id="dYn@" class="">Filter Values</td><td id=":=tQ" class="">필터링할 값 목록</td></tr><tr id="22cb3bed-dae9-80ed-86bb-c2c69fd54f51"><td id="JdFa" class="">append_update_data</td><td id="dYn@" class="">Append or Update</td><td id=":=tQ" class="">추가 또는 업데이트할 키-값 쌍</td></tr><tr id="22cb3bed-dae9-8026-b525-de68739eec64"><td id="JdFa" class="">remove_keys_input</td><td id="dYn@" class="">Remove Keys</td><td id=":=tQ" class="">제거할 키 목록</td></tr><tr id="22cb3bed-dae9-8036-baee-dc4e53f5fc38"><td id="JdFa" class="">rename_keys_input</td><td id="dYn@" class="">Rename Keys</td><td id=":=tQ" class="">변경할 키 이름 목록</td></tr></tbody></table><p id="22cb3bed-dae9-80dd-97ca-fa095d10b502" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-80e5-b7c4-c4d5f7aaa2cb" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80df-b3eb-eef1b3ad5aa5"><th id=":Q}s" class="simple-table-header-color simple-table-header">이름</th><th id="j&lt;g&lt;" class="simple-table-header-color simple-table-header">표시 이름</th><th id="H\yL" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c5-a68b-cb7ec1718659"><td id=":Q}s" class="">data_output</td><td id="j&lt;g&lt;" class="">Data</td><td id="H\yL" class="">연산 후 생성된 <code>Data</code> 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-805c-bd1e-e3f3e5238fec"/><h2 id="22cb3bed-dae9-8063-ac47-f9338c27c0e3" class="">Data to DataFrame</h2><p id="22cb3bed-dae9-8085-8679-cff265d24df4" class="">이 컴포넌트는 하나 이상의 <code>Data</code> 객체를 <code>DataFrame</code>으로 변환합니다. 각 <code>Data</code> 객체는 결과 <code>DataFrame</code>의 한 행(row)이 되고, <code>.data</code> 속성의 필드는 열(column)이 되며, <code>.text</code> 필드가 있으면 <code>text</code> 열로 배치됩니다.</p><ol type="1" id="22cb3bed-dae9-800f-8526-fbec263c0cb7" class="numbered-list" start="1"><li><code>Data</code>를 출력하는 컴포넌트를 <code>Data to DataFrame</code> 컴포넌트의 입력에 연결합니다. 예시에서는 Webhook 컴포넌트를 연결합니다.</li></ol><ol type="1" id="22cb3bed-dae9-801c-9f63-f3c5562dcd57" class="numbered-list" start="2"><li><code>Chat Output</code> 컴포넌트를 <code>Data to DataFrame</code> 컴포넌트의 출력에 연결하여 결과를 확인합니다.</li></ol><figure id="22cb3bed-dae9-80d5-870f-d4a6c3254f87" class="image"><a href="image%2033.png"><img style="width:709.9874877929688px" src="image%2033.png"/></a></figure><ol type="1" id="22cb3bed-dae9-801e-87d5-c587e5a4b233" class="numbered-list" start="3"><li>다음과 같이 Webhook에 POST 요청을 보내 데이터와 텍스트를 전송하세요. <code>YOUR_FLOW_ID</code>를 실제 플로우 ID로 교체합니다:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-808e-8a32-de2f5348c948" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">curl -X POST &quot;http://localhost:7860/api/v1/webhook/YOUR_FLOW_ID&quot; \
+  -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{
+    &quot;text&quot;: &quot;Alex Cruz - Employee Profile&quot;,
+    &quot;data&quot;: {
+      &quot;Name&quot;: &quot;Alex Cruz&quot;,
+      &quot;Role&quot;: &quot;Developer&quot;,
+      &quot;Department&quot;: &quot;Engineering&quot;
+    }
+  }&#x27;
+</code></pre></li></ol><ol type="1" id="22cb3bed-dae9-80e4-b86a-c1e881410410" class="numbered-list" start="4"><li>Playground에서 플로우를 실행하면, 다음과 같은 <code>DataFrame</code>으로 변환된 결과를 확인할 수 있습니다:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80b6-8c8a-db9986da0cb1" class="code"><code class="language-Bash">| text                         | data                                                                    |
+|:-----------------------------|:------------------------------------------------------------------------|
+| Alex Cruz - Employee Profile | {&#x27;Name&#x27;: &#x27;Alex Cruz&#x27;, &#x27;Role&#x27;: &#x27;Developer&#x27;, &#x27;Department&#x27;: &#x27;Engineering&#x27;} |
+</code></pre><ol type="1" id="22cb3bed-dae9-80ca-88ef-d13be256d77a" class="numbered-list" start="5"><li>다른 직원 데이터로 다시 요청을 보내 보세요:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-806d-bbd8-ee3f6918ed39" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">curl -X POST &quot;http://localhost:7860/api/v1/webhook/YOUR_FLOW_ID&quot; \
+  -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{
+    &quot;text&quot;: &quot;Kalani Smith - Employee Profile&quot;,
+    &quot;data&quot;: {
+      &quot;Name&quot;: &quot;Kalani Smith&quot;,
+      &quot;Role&quot;: &quot;Designer&quot;,
+      &quot;Department&quot;: &quot;Design&quot;
+    }
+  }&#x27;
+</code></pre></li></ol><ol type="1" id="22cb3bed-dae9-8043-ac1d-f2ebbcec5c9c" class="numbered-list" start="6"><li>Playground에서 동일하게 <code>DataFrame</code>으로 변환된 것을 확인합니다:</li></ol><table id="22cb3bed-dae9-80fa-b633-c7860686d8b8" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-808a-9469-cf74a6cc9974"><th id="NY&gt;W" class="simple-table-header-color simple-table-header">text</th><th id="jk\a" class="simple-table-header-color simple-table-header">data</th></tr></thead><tbody><tr id="22cb3bed-dae9-8084-b466-e5181ec7e5b5"><td id="NY&gt;W" class="">Kalani Smith - Employee Profile</td><td id="jk\a" class="">{&#x27;Name&#x27;: &#x27;Kalani Smith&#x27;, &#x27;Role&#x27;: &#x27;Designer&#x27;, &#x27;Department&#x27;: &#x27;Design&#x27;}</td></tr></tbody></table><h3 id="22cb3bed-dae9-809c-9503-d592a2f40478" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-8050-b945-e112381b2ea1" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-80db-b74c-d95535732787" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8079-8d0f-fbca4228ef0c"><th id="tdHg" class="simple-table-header-color simple-table-header">이름</th><th id="GQL~" class="simple-table-header-color simple-table-header">표시 이름</th><th id="nUoo" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ef-8683-f86323655973"><td id="tdHg" class="">data_list</td><td id="GQL~" class="">Data or Data List</td><td id="nUoo" class="">변환할 하나 이상의 <code>Data</code> 객체 리스트</td></tr></tbody></table><p id="22cb3bed-dae9-80d4-85fd-df0601e44f33" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-8007-a061-fd4e1ca4adb9" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80cb-b340-fa4f08161485"><th id="O]Ql" class="simple-table-header-color simple-table-header">이름</th><th id="`~?N" class="simple-table-header-color simple-table-header">표시 이름</th><th id="DmLt" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8097-8435-cc008a83da53"><td id="O]Ql" class="">dataframe</td><td id="`~?N" class="">DataFrame</td><td id="DmLt" class="">생성된 <code>DataFrame</code></td></tr></tbody></table><hr id="22cb3bed-dae9-80dd-a421-c9108eee6a32"/><p id="22cb3bed-dae9-8009-b88b-f2a7a4887063" class="">
+</p><h2 id="22cb3bed-dae9-806e-bbbf-c70a7aa38ac9" class="">LLM Router</h2><p id="22cb3bed-dae9-804b-9301-f455e8069797" class="">
+</p><p id="22cb3bed-dae9-8039-b522-cc6ba67722b2" class="">이 컴포넌트는 여러 언어 모델(LLM) 간 요청을 최적화(품질, 속도, 비용 등) 기준에 따라 라우팅합니다.</p><h3 id="22cb3bed-dae9-800f-8033-eb6b0364fa82" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-8061-8775-ea716e84c7a9" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-80ed-920f-ffdd2b9dbd52" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8056-9e0d-cc6da6964351"><th id="h{DO" class="simple-table-header-color simple-table-header">이름</th><th id="gUpU" class="simple-table-header-color simple-table-header">표시 이름</th><th id="ZpHm" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8019-83db-d00c3162badf"><td id="h{DO" class="">models</td><td id="gUpU" class="">Language Models</td><td id="ZpHm" class="">라우팅 대상이 될 LLM 목록</td></tr><tr id="22cb3bed-dae9-80e6-aed7-c55d9094bfca"><td id="h{DO" class="">input_value</td><td id="gUpU" class="">Input</td><td id="ZpHm" class="">라우팅할 입력 메시지</td></tr><tr id="22cb3bed-dae9-80f6-b3a6-d13a3d51005c"><td id="h{DO" class="">judge_llm</td><td id="gUpU" class="">Judge LLM</td><td id="ZpHm" class="">최적의 모델을 평가해 선택할 LLM</td></tr><tr id="22cb3bed-dae9-80fb-96ac-f16f5fef0dec"><td id="h{DO" class="">optimization</td><td id="gUpU" class="">Optimization</td><td id="ZpHm" class="">품질, 속도, 비용, 균형 중 최적화 우선순위</td></tr></tbody></table><p id="22cb3bed-dae9-80dc-89fc-cb2970f71b93" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-804a-8586-d41789c706ea" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8052-97e2-c74147ecc515"><th id="?:Lk" class="simple-table-header-color simple-table-header">이름</th><th id="xXbv" class="simple-table-header-color simple-table-header">표시 이름</th><th id="X^WG" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b3-be7d-d0e1fbbcd767"><td id="?:Lk" class="">output</td><td id="xXbv" class="">Output</td><td id="X^WG" class="">선택된 모델의 응답</td></tr><tr id="22cb3bed-dae9-80d3-b756-d9bb57d5f7a9"><td id="?:Lk" class="">selected_model</td><td id="xXbv" class="">Selected Model</td><td id="X^WG" class="">선택된 모델 이름</td></tr></tbody></table><hr id="22cb3bed-dae9-8070-a5a9-d536b330d0f1"/><h2 id="22cb3bed-dae9-8096-bf7a-e9119ed608b2" class="">Message to Data</h2><p id="22cb3bed-dae9-80db-87db-c195152b5a50" class="">이 컴포넌트는 <code>Message</code> 객체를 <code>Data</code> 객체로 변환합니다.</p><h3 id="22cb3bed-dae9-8028-9ed4-cb41e3e498d9" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-8094-b865-c2e2cf88c4f6" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-8018-9a2d-c564f9f6da94" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-807c-b238-c5f53810e55c"><th id="oavQ" class="simple-table-header-color simple-table-header">이름</th><th id="[b~B" class="simple-table-header-color simple-table-header">표시 이름</th><th id="QbUI" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8085-8797-fc900176887c"><td id="oavQ" class="">message</td><td id="[b~B" class="">Message</td><td id="QbUI" class="">변환할 <code>Message</code> 객체</td></tr></tbody></table><p id="22cb3bed-dae9-800a-90dd-f858cdd5566a" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-80b8-99f5-cb68879b5642" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-803b-95f1-dbf24e611318"><th id="kIoX" class="simple-table-header-color simple-table-header">이름</th><th id="UcND" class="simple-table-header-color simple-table-header">표시 이름</th><th id="vZWA" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80aa-b407-d61a8e72d430"><td id="kIoX" class="">data</td><td id="UcND" class="">Data</td><td id="vZWA" class="">생성된 <code>Data</code> 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-80ca-92f3-f53990b4fad1"/><p id="22cb3bed-dae9-8017-a92a-f203c3b01d43" class="">
+</p><h2 id="22cb3bed-dae9-80dd-ac8c-cda9646d9f1f" class="">Parser</h2><p id="22cb3bed-dae9-80cb-9151-c46a74b2c8b5" class="">
+</p><p id="22cb3bed-dae9-8020-9ffd-cb90ce85460e" class="">이 컴포넌트는 <code>DataFrame</code> 또는 <code>Data</code> 객체를 템플릿에 따라 텍스트로 포맷팅하며, <code>stringify</code> 모드를 사용해 입력을 문자열로 바로 변환할 수도 있습니다.</p><p id="22cb3bed-dae9-807b-88b8-eb9b0258403e" class="">템플릿 변수는 Prompt 컴포넌트와 동일하게 중괄호(<code>{}</code>) 안에 작성합니다. <code>DataFrame</code>인 경우 열 이름을, <code>Data</code>인 경우 <code>{text}</code>를 사용하세요.</p><h3 id="22cb3bed-dae9-8026-a4a6-c29b18435b13" class="">사용 예시: Structured Output과 함께 사용하기</h3><ol type="1" id="22cb3bed-dae9-807a-997c-c13f9d88b712" class="numbered-list" start="1"><li><strong>Structured Output</strong> 컴포넌트의 <code>DataFrame</code> 출력을 <code>Parser</code> 컴포넌트의 입력으로 연결합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8036-a7d0-d6e9888ab8e2" class="numbered-list" start="2"><li><strong>File</strong> 컴포넌트를 Structured Output의 <code>Message</code> 입력에 연결합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80d1-8690-d724ee195ff3" class="numbered-list" start="3"><li><strong>OpenAI 모델</strong> 컴포넌트의 Language Model 출력을 Structured Output의 해당 입력에 연결합니다.</li></ol><figure id="22cb3bed-dae9-806e-a9e3-ea0ce611f1a6" class="image"><a href="image%2034.png"><img style="width:2300px" src="image%2034.png"/></a></figure><ol type="1" id="22cb3bed-dae9-80a6-a35f-e167a6c39df0" class="numbered-list" start="4"><li>Structured Output 컴포넌트에서 <strong>Open Table</strong>을 클릭하여 테이블을 만듭니다. 기본적으로 <code>Name</code>, <code>Description</code>, <code>Type</code>, <code>Multiple</code> 행이 제공됩니다.</li></ol><ol type="1" id="22cb3bed-dae9-80b3-8715-d21691cce67a" class="numbered-list" start="5"><li>파일에서 로드한 데이터에 맞춰 <code>id</code>, <code>name</code>, <code>email</code> 등 필요한 행을 추가하고, 모두 <code>string</code> 타입으로 설정합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8049-953e-dc2f2fc8a39e" class="numbered-list" start="6"><li>Parser 컴포넌트의 <strong>Template</strong> 필드에 다음과 같은 마크다운 템플릿을 입력합니다:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-8030-b8e6-d93b765fa15a" class="code"><code class="language-Markdown" style="white-space:pre-wrap;word-break:break-all"># Employee Profile
+## Personal Information
+- **Name:** {name}
+- **ID:** {id}
+- **Email:** {email}
+</code></pre></li></ol><ol type="1" id="22cb3bed-dae9-80bb-9364-c3d8f4d986ad" class="numbered-list" start="7"><li>Parser 컴포넌트에서 <strong>Run component</strong>를 클릭하여 실행합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80b0-8d2f-fa8eeb0ca62f" class="numbered-list" start="8"><li><strong>Inspect output</strong>을 클릭하면 포맷팅된 텍스트를 확인할 수 있습니다.</li></ol><ol type="1" id="22cb3bed-dae9-8017-a845-fb4f1d1e4d6c" class="numbered-list" start="9"><li>필요하다면 <code>Chat Output</code> 컴포넌트를 연결하고 Playground에서 결과를 확인하세요.</li></ol><p id="22cb3bed-dae9-805b-ba42-eb2a5373b12b" class="">추가 예시: Market Research 템플릿 흐름에서 <code>Structured Output</code> 결과를 <code>Parser</code>로 포맷팅하는 방법을 참고하세요.</p><h3 id="22cb3bed-dae9-80da-9a43-ec60cd0f5bce" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-807c-93ba-e196b1eb52a3" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-80c4-bb9f-d18616b01905" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80e4-be67-ee1d5aac10ae"><th id="MkN{" class="simple-table-header-color simple-table-header">이름</th><th id="RxH@" class="simple-table-header-color simple-table-header">표시 이름</th><th id="vtJI" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8033-b10c-ce56b86451b2"><td id="MkN{" class="">mode</td><td id="RxH@" class="">Mode</td><td id="vtJI" class=""><code>&quot;Parser&quot;</code> 또는 <code>&quot;Stringify&quot;</code> 모드 선택</td></tr><tr id="22cb3bed-dae9-8039-8af3-d4aea68e38ee"><td id="MkN{" class="">pattern</td><td id="RxH@" class="">Template</td><td id="vtJI" class="">중괄호 변수를 사용한 포맷 템플릿</td></tr><tr id="22cb3bed-dae9-8048-8280-c423d65a065e"><td id="MkN{" class="">input_data</td><td id="RxH@" class="">Data or DataFrame</td><td id="vtJI" class="">파싱할 입력 데이터</td></tr><tr id="22cb3bed-dae9-80e7-84db-dd16ffadbe0c"><td id="MkN{" class="">sep</td><td id="RxH@" class="">Separator</td><td id="vtJI" class="">행 또는 항목을 구분할 구분자 (기본값: 줄바꿈)</td></tr><tr id="22cb3bed-dae9-8010-b78a-cf5934b349ff"><td id="MkN{" class="">clean_data</td><td id="RxH@" class="">Clean Data</td><td id="vtJI" class=""><code>stringify</code> 모드 시 빈 행/줄을 제거할지 여부</td></tr></tbody></table><p id="22cb3bed-dae9-802e-8457-d69e5c130559" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-8078-b209-e067519c2a64" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b4-826e-c7d19b473adf"><th id="`^v?" class="simple-table-header-color simple-table-header">이름</th><th id="`oBQ" class="simple-table-header-color simple-table-header">표시 이름</th><th id="NIII" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8080-9ded-f1413181f515"><td id="`^v?" class="">parsed_text</td><td id="`oBQ" class="">Parsed Text</td><td id="NIII" class="">생성된 텍스트 메시지(<code>Message</code> 객체)</td></tr></tbody></table><hr id="22cb3bed-dae9-80e9-80f6-c087969a10f7"/><p id="22cb3bed-dae9-804f-a121-fa92d0b64e91" class="">
+</p><h2 id="22cb3bed-dae9-8068-a010-f9de83a1e847" class="">Regex Extractor</h2><p id="22cb3bed-dae9-8011-8a97-db7ad8f6ae71" class="">
+</p><p id="22cb3bed-dae9-80be-a607-e7bee3475160" class="">이 컴포넌트는 정규식(regular expression)을 사용해 텍스트에서 특정 패턴을 추출합니다.</p><ol type="1" id="22cb3bed-dae9-8083-8e8d-c8733382b85c" class="numbered-list" start="1"><li><code>Regex Extractor</code>를 URL 컴포넌트와 <code>Chat Output</code> 컴포넌트에 연결합니다.</li></ol><figure id="22cb3bed-dae9-8037-adbd-d7353e8d53b2" class="image"><a href="image%2035.png"><img style="width:709.9750366210938px" src="image%2035.png"/></a></figure><ol type="1" id="22cb3bed-dae9-8029-88d8-d6d68225fad4" class="numbered-list" start="2"><li><code>Regex Extractor</code>의 패턴 입력 필드에 다음 정규식을 입력하여 Wikipedia 메인 페이지의 “In the News” 섹션 첫 문단을 추출해 보세요:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80b9-be8d-c3b6b40a1960" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">In the news\s*\n(.*?)(?=\n\n)
+</code></pre><p id="22cb3bed-dae9-8054-9006-e72775d04070" class=""><strong>결과</strong>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80e7-99dd-f9a4fbd0f0d7" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Peruvian writer and Nobel Prize in Literature laureate Mario Vargas Llosa (pictured) dies at the age of 89.
+</code></pre></li></ol><hr id="22cb3bed-dae9-8040-a1da-d4d71ba93af7"/><p id="22cb3bed-dae9-80fc-bd79-dd593adf083f" class="">
+</p><h2 id="22cb3bed-dae9-80ef-a823-cced8413f5d2" class="">Save to File 컴포넌트</h2><p id="22cb3bed-dae9-802c-a86e-c18c8878e837" class="">
+</p><p id="22cb3bed-dae9-8032-8e91-ce5bcda28e6c" class="">이 컴포넌트는 <code>DataFrame</code>, <code>Data</code>, 또는 <code>Message</code>를 다양한 파일 형식으로 저장합니다.</p><ol type="1" id="22cb3bed-dae9-801c-9c94-e751baf6bcf7" class="numbered-list" start="1"><li>플로우에서 <code>DataFrame</code>, <code>Data</code>, 또는 <code>Message</code>를 출력하는 컴포넌트를 <strong>Save to File</strong> 컴포넌트의 입력에 연결합니다. 아래 예시는 Webhook 컴포넌트를 두 개의 Save to File 컴포넌트에 연결하여 서로 다른 출력 형식을 보여줍니다.<figure id="22cb3bed-dae9-8089-9bd6-ea8d4f9cd944" class="image"><a href="image%2036.png"><img style="width:681.9874877929688px" src="image%2036.png"/></a></figure></li></ol><ol type="1" id="22cb3bed-dae9-8057-913a-d819eef4d7ae" class="numbered-list" start="2"><li><strong>Input Type</strong> 필드에서 예상되는 입력 타입을 선택합니다. 이 예시에서는 Webhook의 <code>Data</code>를 입력으로 사용합니다.</li></ol><ol type="1" id="22cb3bed-dae9-800d-9ea9-c31ff9ed8a31" class="numbered-list" start="3"><li><strong>File Format</strong> 필드에서 저장할 파일 형식을 선택합니다. 이 예시에서는 한 컴포넌트는 <code>.md</code>, 다른 컴포넌트는 <code>.xlsx</code>를 사용합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8028-bd50-c7120e182ee3" class="numbered-list" start="4"><li><strong>File Path</strong> 필드에 저장할 파일 경로를 입력합니다. 이 예시에서는 <code>./output/employees.xlsx</code>와 <code>./output/employees.md</code>를 사용했습니다. 상대 경로와 절대 경로 모두 지원하며, 필요한 디렉터리가 없으면 자동으로 생성됩니다.<p id="22cb3bed-dae9-803d-81a3-db944b4d9ad5" class=""><strong>Tip:</strong> <code>file_format</code>과 일치하지 않는 확장자를 입력하면, 컴포넌트가 자동으로 올바른 확장자를 파일명 뒤에 붙여줍니다. 예: <code>file_format</code>이 <code>csv</code>일 때 <code>./output/test.txt</code>를 입력하면 <code>./output/test.txt.csv</code>로 저장됩니다.</p></li></ol><ol type="1" id="22cb3bed-dae9-8065-ac3f-c93c683bc849" class="numbered-list" start="5"><li>Webhook에 JSON 데이터를 POST 요청으로 전송합니다(<code>YOUR_FLOW_ID</code>를 실제 플로우 ID로 교체).<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80e0-8f55-d956f46716bd" class="code"><code class="language-Shell" style="white-space:pre-wrap;word-break:break-all">curl -X POST &quot;http://localhost:7860/api/v1/webhook/YOUR_FLOW_ID&quot; \
+-H &#x27;Content-Type: application/json&#x27; \
+-d &#x27;{
+    &quot;Name&quot;: [&quot;Alex Cruz&quot;, &quot;Kalani Smith&quot;, &quot;Noam Johnson&quot;],
+    &quot;Role&quot;: [&quot;Developer&quot;, &quot;Designer&quot;, &quot;Manager&quot;],
+    &quot;Department&quot;: [&quot;Engineering&quot;, &quot;Design&quot;, &quot;Management&quot;]
+}&#x27;
+</code></pre></li></ol><ol type="1" id="22cb3bed-dae9-808e-adaa-f0b8dd821dbf" class="numbered-list" start="6"><li>로컬 파일 시스템의 <code>output</code> 디렉터리를 열면, <code>.xlsx</code>와 <code>.md</code> 파일이 생성된 것을 확인할 수 있습니다.<table id="22cb3bed-dae9-8083-b9ae-c403ebeab657" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8073-a020-fd57c4a7f25f"><th id="v;gt" class="simple-table-header-color simple-table-header">Name</th><th id="McXz" class="simple-table-header-color simple-table-header">Role</th><th id="C^kT" class="simple-table-header-color simple-table-header">Department</th></tr></thead><tbody><tr id="22cb3bed-dae9-809f-8be4-e056d85f1071"><td id="v;gt" class="">Alex Cruz</td><td id="McXz" class="">Developer</td><td id="C^kT" class="">Engineering</td></tr><tr id="22cb3bed-dae9-801d-b798-d19a046ad9b3"><td id="v;gt" class="">Kalani Smith</td><td id="McXz" class="">Designer</td><td id="C^kT" class="">Design</td></tr><tr id="22cb3bed-dae9-80c7-a8bb-ea2770d823be"><td id="v;gt" class="">Noam Johnson</td><td id="McXz" class="">Manager</td><td id="C^kT" class="">Management</td></tr></tbody></table></li></ol><hr id="22cb3bed-dae9-80f2-9cdc-c9bdfb14ff47"/><h3 id="22cb3bed-dae9-8074-a25c-eed74e66718a" class="">파일 입력 형식 옵션</h3><ul id="22cb3bed-dae9-80eb-a684-fd9785537eeb" class="bulleted-list"><li style="list-style-type:disc"><strong>DataFrame</strong> 및 <strong>Data</strong> 입력에서 생성 가능한 형식:<ul id="22cb3bed-dae9-800d-85c7-e582054d43db" class="bulleted-list"><li style="list-style-type:circle"><code>csv</code></li></ul><ul id="22cb3bed-dae9-8048-aa37-e9a489b2c4d6" class="bulleted-list"><li style="list-style-type:circle"><code>excel</code></li></ul><ul id="22cb3bed-dae9-8058-9b29-eedd04e78d85" class="bulleted-list"><li style="list-style-type:circle"><code>json</code></li></ul><ul id="22cb3bed-dae9-80b6-8d62-dabf79123c24" class="bulleted-list"><li style="list-style-type:circle"><code>markdown</code></li></ul><ul id="22cb3bed-dae9-80d5-b252-f7b0f3671800" class="bulleted-list"><li style="list-style-type:circle"><code>pdf</code></li></ul></li></ul><ul id="22cb3bed-dae9-8046-a3a4-fb06a691f34c" class="bulleted-list"><li style="list-style-type:disc"><strong>Message</strong> 입력에서 생성 가능한 형식:<ul id="22cb3bed-dae9-801c-beed-fda0ac97454c" class="bulleted-list"><li style="list-style-type:circle"><code>txt</code></li></ul><ul id="22cb3bed-dae9-80d6-8eb6-fd6fd86a7f50" class="bulleted-list"><li style="list-style-type:circle"><code>json</code></li></ul><ul id="22cb3bed-dae9-80f5-8f5d-e19f3e75b5ca" class="bulleted-list"><li style="list-style-type:circle"><code>markdown</code></li></ul><ul id="22cb3bed-dae9-8065-8ff5-d43b8bc958a6" class="bulleted-list"><li style="list-style-type:circle"><code>pdf</code></li></ul></li></ul><hr id="22cb3bed-dae9-80ca-b486-e94d30acfad5"/><h3 id="22cb3bed-dae9-8024-a7c8-fc376d660832" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-80d2-b687-f9c6a0dcb5ab" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-805f-8420-f1a50f03e8c0" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8061-b759-ce735be36067"><th id="|EAT" class="simple-table-header-color simple-table-header">이름</th><th id="Z\PM" class="simple-table-header-color simple-table-header">표시 이름</th><th id="]KvA" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8018-826a-cb8187ee3975"><td id="|EAT" class="">input_text</td><td id="Z\PM" class="">Input Text</td><td id="]KvA" class="">분석 및 패턴 추출 대상 텍스트</td></tr><tr id="22cb3bed-dae9-80ca-b681-c1e40b6d3803"><td id="|EAT" class="">pattern</td><td id="Z\PM" class="">Regex Pattern</td><td id="]KvA" class="">텍스트에서 매칭할 정규식 패턴</td></tr><tr id="22cb3bed-dae9-807c-95cb-f783c37b01d8"><td id="|EAT" class="">input_type</td><td id="Z\PM" class="">Input Type</td><td id="]KvA" class="">저장할 입력 타입</td></tr><tr id="22cb3bed-dae9-8035-a45e-f8fffbe86f07"><td id="|EAT" class="">df</td><td id="Z\PM" class="">DataFrame</td><td id="]KvA" class="">저장할 <code>DataFrame</code></td></tr><tr id="22cb3bed-dae9-8092-9e81-ce694de6b201"><td id="|EAT" class="">data</td><td id="Z\PM" class="">Data</td><td id="]KvA" class="">저장할 <code>Data</code> 객체</td></tr><tr id="22cb3bed-dae9-80fc-860d-cc19a178dee3"><td id="|EAT" class="">message</td><td id="Z\PM" class="">Message</td><td id="]KvA" class="">저장할 <code>Message</code> 객체</td></tr><tr id="22cb3bed-dae9-8075-9fd0-f4b04b14631a"><td id="|EAT" class="">file_format</td><td id="Z\PM" class="">File Format</td><td id="]KvA" class="">저장할 파일 형식</td></tr><tr id="22cb3bed-dae9-808c-b32b-f3562e07e413"><td id="|EAT" class="">file_path</td><td id="Z\PM" class="">File Path</td><td id="]KvA" class="">확장자를 포함한 전체 파일 경로</td></tr></tbody></table><p id="22cb3bed-dae9-8099-aa99-e48107fd6edc" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-80b3-8687-d205aa7fc9e4" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d8-a70b-c9406f547597"><th id="s~`Q" class="simple-table-header-color simple-table-header">이름</th><th id="ebd]" class="simple-table-header-color simple-table-header">표시 이름</th><th id="j|}~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80f7-8407-c10da685c061"><td id="s~`Q" class="">data</td><td id="ebd]" class="">Data</td><td id="j|}~" class="">추출된 매칭 결과를 <code>Data</code> 객체 목록으로 반환</td></tr><tr id="22cb3bed-dae9-8092-8402-e822721ea8b9"><td id="s~`Q" class="">text</td><td id="ebd]" class="">Message</td><td id="j|}~" class="">추출된 매칭 결과를 <code>Message</code> 객체로 포맷하여 반환</td></tr><tr id="22cb3bed-dae9-80b4-bd65-fa393c0653ac"><td id="s~`Q" class="">confirmation</td><td id="ebd]" class="">Confirmation</td><td id="j|}~" class="">파일 저장 완료 후 반환되는 확인 메시지</td></tr></tbody></table><hr id="22cb3bed-dae9-805c-ac9a-c36ea51c6e1b"/><p id="22cb3bed-dae9-80da-966d-db1df389536d" class="">
+</p><h2 id="22cb3bed-dae9-80e0-a2b8-e423f2bc92ae" class="">Smart function 컴포넌트</h2><p id="22cb3bed-dae9-8081-a5f9-d4dd89fec37e" class="">
+</p><p id="22cb3bed-dae9-80e1-9934-e550a1639153" class="">이 컴포넌트는 LLM을 사용해 구조화된 데이터를 필터링하거나 변환하는 Lambda 함수를 생성합니다.</p><p id="22cb3bed-dae9-8091-8b63-f24896605942" class="">Language Model 컴포넌트와 연결한 뒤 <strong>Instructions</strong> 필드에 자연어로 지침을 입력하면, 해당 지침에 맞는 함수를 생성해 데이터를 처리합니다.</p><blockquote id="22cb3bed-dae9-807d-9917-e8d2e63517a7" class="">예시: https://jsonplaceholder.typicode.com/users API에서 JSON 데이터를 가져와, extract emails 지시를 입력하면 이메일 주소 목록을 추출하는 함수를 생성합니다.</blockquote><figure id="22cb3bed-dae9-80c6-879a-c55a01d40e29" class="image"><a href="image%2037.png"><img style="width:709.9874877929688px" src="image%2037.png"/></a></figure><h3 id="22cb3bed-dae9-801f-8725-fd6a05ae78a8" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-8074-a0a1-ed7784c9561f" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-80a3-a585-c5d444a556a6" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-801e-bf3b-f03be3ff2f25"><th id="GOte" class="simple-table-header-color simple-table-header">이름</th><th id="lgag" class="simple-table-header-color simple-table-header">표시 이름</th><th id="J=|w" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-802a-a6c0-c2a9116d2150"><td id="GOte" class="">data</td><td id="lgag" class="">Data</td><td id="J=|w" class="">필터링 또는 변환할 구조화된 데이터 객체</td></tr><tr id="22cb3bed-dae9-80d4-944e-e36fb3d41acc"><td id="GOte" class="">llm</td><td id="lgag" class="">Language Model</td><td id="J=|w" class="">모델 컴포넌트 연결 포트</td></tr><tr id="22cb3bed-dae9-8045-9ec9-d04d930aa4e9"><td id="GOte" class="">filter_instruction</td><td id="lgag" class="">Instructions</td><td id="J=|w" class="">Lambda 함수로 처리할 데이터 지시 (예: <code>&#x27;status&#x27;가 &#x27;active&#x27;인 항목만 포함하도록 필터링</code>)</td></tr><tr id="22cb3bed-dae9-807f-a583-e28f41673447"><td id="GOte" class="">sample_size</td><td id="lgag" class="">Sample Size</td><td id="J=|w" class="">대용량 데이터인 경우, 앞뒤에서 샘플링할 문자 수</td></tr><tr id="22cb3bed-dae9-8099-9c1f-c53ec9c935b5"><td id="GOte" class="">max_size</td><td id="lgag" class="">Max Size</td><td id="J=|w" class="">데이터가 &quot;대용량&quot;으로 간주될 문자 수 임계값</td></tr></tbody></table><p id="22cb3bed-dae9-80be-9232-c1a9ddb52fec" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-80b8-aa4f-cb8ea4b209fa" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-805a-b78f-e74658bcc106"><th id="^aGM" class="simple-table-header-color simple-table-header">이름</th><th id="TYmr" class="simple-table-header-color simple-table-header">표시 이름</th><th id="{vEn" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-806c-9f55-e77c3b98a7c9"><td id="^aGM" class="">filtered_data</td><td id="TYmr" class="">Filtered Data</td><td id="{vEn" class="">필터링 또는 변환된 <code>Data</code> 객체</td></tr><tr id="22cb3bed-dae9-807e-9169-f616e6377dd6"><td id="^aGM" class="">dataframe</td><td id="TYmr" class="">DataFrame</td><td id="{vEn" class="">결과 데이터를 <code>DataFrame</code>으로 반환</td></tr></tbody></table><hr id="22cb3bed-dae9-8052-853b-c4b32f0b6f8d"/><p id="22cb3bed-dae9-8002-9964-eeb4e520b595" class="">
+</p><h2 id="22cb3bed-dae9-8015-83fd-c824581f6b14" class="">Split Text 컴포넌트</h2><p id="22cb3bed-dae9-80ea-b162-dff36f8a081a" class="">
+</p><p id="22cb3bed-dae9-806c-8b1d-ed113609253e" class="">이 컴포넌트는 텍스트를 지정한 기준에 따라 청크(chunk)로 분할합니다. 토큰화 및 벡터베이스 임베딩을 위한 데이터 준비에 적합합니다.</p><ul id="22cb3bed-dae9-8044-adc6-efb2b235418f" class="bulleted-list"><li style="list-style-type:disc"><strong>Chunks</strong> 출력: 개별 텍스트 청크 목록 (<code>Data</code> 객체)</li></ul><ul id="22cb3bed-dae9-8043-8ed9-ea39c490e7aa" class="bulleted-list"><li style="list-style-type:disc"><strong>DataFrame</strong> 출력: 메타데이터가 포함된 구조화된 테이블</li></ul><ol type="1" id="22cb3bed-dae9-806a-942b-eb778fbade11" class="numbered-list" start="1"><li>텍스트 또는 <code>DataFrame</code>을 출력하는 컴포넌트를 <strong>Split Text</strong> 컴포넌트의 <strong>Data</strong> 포트에 연결합니다. (예: URL 컴포넌트)<figure id="22cb3bed-dae9-800f-bab3-d0bef31b8bbf" class="image"><a href="image%2038.png"><img style="width:2198px" src="image%2038.png"/></a></figure></li></ol><ol type="1" id="22cb3bed-dae9-8022-8961-fa2de7913a15" class="numbered-list" start="2"><li><strong>Separator</strong>, <strong>Chunk Size</strong>, <strong>Chunk Overlap</strong> 파라미터를 설정합니다.<ul id="22cb3bed-dae9-801d-9cfd-e94e422981ec" class="bulleted-list"><li style="list-style-type:disc">우선순위: Separator → Chunk Size → Chunk Overlap</li></ul><ul id="22cb3bed-dae9-80cd-9fb8-c6f021bf88df" class="bulleted-list"><li style="list-style-type:disc">Separator로 분할한 후, <code>chunk_size</code>보다 긴 세그먼트는 추가로 잘라냅니다.</li></ul><ul id="22cb3bed-dae9-8090-b823-d2495eb31faa" class="bulleted-list"><li style="list-style-type:disc">이후 청크 간 문맥 유지를 위해 <code>chunk_overlap</code>을 적용합니다.</li></ul></li></ol><ol type="1" id="22cb3bed-dae9-8089-9010-ce5d1aca9782" class="numbered-list" start="3"><li><strong>DataFrame</strong> 출력에 <strong>Chat Output</strong> 컴포넌트를 연결하고 Playground에서 <strong>Run Flow</strong>를 클릭합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80e1-8045-f3ee358298df" class="numbered-list" start="4"><li>구분자 <code>},</code> 기준으로 JSON 객체가 분할된 테이블이 출력됩니다.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80b2-9177-fa1a800e07dc" class="code"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+  &quot;userId&quot;: 1,
+  &quot;id&quot;: 1,
+  ...
+},
+{
+  &quot;userId&quot;: 2,
+  &quot;id&quot;: 2,
+  ...
+},
+</code></pre></li></ol><ol type="1" id="22cb3bed-dae9-8081-aac4-c16052f3f7a5" class="numbered-list" start="5"><li>Separator를 비운 후 다시 실행하면, 50자 청크에 10자 중첩으로 분할된 텍스트가 출력됩니다.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80d3-ac2b-c0e34315527d" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">First chunk:  &quot;title&quot;: &quot;Introduction to Artificial Intelligence&quot;&quot;
+Second chunk: &quot;elligence&quot;, &quot;body&quot;: &quot;Learn the basics of Artif&quot;
+Third chunk:  &quot;s of Artificial Intelligence and its applications&quot;
+</code></pre></li></ol><h3 id="22cb3bed-dae9-800b-8fe4-c53613d37308" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-80ed-9a88-eff3cbc12e57" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-800b-9909-f99d1c311961" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-808d-82f4-d05586e7fcd3"><th id="=^rx" class="simple-table-header-color simple-table-header">이름</th><th id="zX=G" class="simple-table-header-color simple-table-header">표시 이름</th><th id="|Bh|" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ad-bf5d-c9f6dd71b9ce"><td id="=^rx" class="">data_inputs</td><td id="zX=G" class="">Input Documents</td><td id="|Bh|" class="">분할할 <code>Data</code> 또는 <code>DataFrame</code></td></tr><tr id="22cb3bed-dae9-80ec-b318-fc5c6d960b15"><td id="=^rx" class="">chunk_overlap</td><td id="zX=G" class="">Chunk Overlap</td><td id="|Bh|" class="">청크 간 중첩 문자 수 (기본값: 200)</td></tr><tr id="22cb3bed-dae9-807e-8b04-d71b88aaecde"><td id="=^rx" class="">chunk_size</td><td id="zX=G" class="">Chunk Size</td><td id="|Bh|" class="">각 청크의 최대 문자 수 (기본값: 1000)</td></tr><tr id="22cb3bed-dae9-8096-b99a-e1a55a4c43fc"><td id="=^rx" class="">separator</td><td id="zX=G" class="">Separator</td><td id="|Bh|" class="">분할 기준 문자열 (기본값: 줄바꿈)</td></tr><tr id="22cb3bed-dae9-8031-b710-c0537a38f75a"><td id="=^rx" class="">text_key</td><td id="zX=G" class="">Text Key</td><td id="|Bh|" class="">텍스트 필드로 사용할 키 (기본값: <code>text</code>)</td></tr></tbody></table><p id="22cb3bed-dae9-809e-a8e4-d42621137773" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-803b-815e-f46219d38bf4" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-807e-a679-fae8aa2bf5e0"><th id="Rkcv" class="simple-table-header-color simple-table-header">이름</th><th id="}&gt;bO" class="simple-table-header-color simple-table-header">표시 이름</th><th id="tZ&lt;M" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8009-b925-c6f041600b7a"><td id="Rkcv" class="">chunks</td><td id="}&gt;bO" class="">Chunks</td><td id="tZ&lt;M" class="">분할된 텍스트 청크 목록 (<code>Data</code>)</td></tr><tr id="22cb3bed-dae9-80da-a21f-f3dd8cfa87d1"><td id="Rkcv" class="">dataframe</td><td id="}&gt;bO" class="">DataFrame</td><td id="tZ&lt;M" class="">분할된 텍스트 청크 테이블 (<code>DataFrame</code>)</td></tr></tbody></table><hr id="22cb3bed-dae9-80eb-a22a-e5c2072a638b"/><p id="22cb3bed-dae9-80f7-89fe-ed907c695eff" class="">
+</p><h2 id="22cb3bed-dae9-80e4-8625-ff59abf52646" class="">Update data 컴포넌트</h2><p id="22cb3bed-dae9-8033-9290-ec0ea9e8ee71" class="">
+</p><p id="22cb3bed-dae9-80a5-bb54-f4c15be473a0" class="">이 컴포넌트는 지정된 필드를 사용해 기존 <code>Data</code> 객체를 동적으로 업데이트하거나 필드를 추가합니다.</p><h3 id="22cb3bed-dae9-80f2-87b1-ecc380101277" class="">매개변수(Parameters)</h3><p id="22cb3bed-dae9-8080-9138-ff31bdcd1f0b" class=""><strong>입력값(Inputs)</strong></p><table id="22cb3bed-dae9-8057-9a17-d3d047975e1d" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-803e-b50a-eaa6d7f47f71"><th id="n~_a" class="simple-table-header-color simple-table-header">이름</th><th id="~~TJ" class="simple-table-header-color simple-table-header">표시 이름</th><th id="Pz`p" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-805a-b15b-e8f5a7559d6f"><td id="n~_a" class="">old_data</td><td id="~~TJ" class="">Data</td><td id="Pz`p" class="">업데이트할 기존 <code>Data</code> 객체</td></tr><tr id="22cb3bed-dae9-803d-8856-d8927f47386d"><td id="n~_a" class="">number_of_fields</td><td id="~~TJ" class="">Number of Fields</td><td id="Pz`p" class="">추가할 필드 개수 (최대 15)</td></tr><tr id="22cb3bed-dae9-80c2-b20e-ee950e96ca35"><td id="n~_a" class="">text_key</td><td id="~~TJ" class="">Text Key</td><td id="Pz`p" class="">텍스트 콘텐츠에 사용할 키</td></tr><tr id="22cb3bed-dae9-8067-94e1-e51ec7248d3c"><td id="n~_a" class="">text_key_validator</td><td id="~~TJ" class="">Text Key Validator</td><td id="Pz`p" class="">텍스트 키 유효성 검사 옵션</td></tr></tbody></table><p id="22cb3bed-dae9-803a-bef3-fd6804de0186" class=""><strong>출력값(Outputs)</strong></p><table id="22cb3bed-dae9-8001-9a80-ed1c4875a20a" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80eb-8310-fcaf5c0fcb5b"><th id="xvY;" class="simple-table-header-color simple-table-header">이름</th><th id="v}_o" class="simple-table-header-color simple-table-header">표시 이름</th><th id=";B;;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-805e-a077-c164c8a0521e"><td id="xvY;" class="">data</td><td id="v}_o" class="">Data</td><td id=";B;;" class="">업데이트된 <code>Data</code> 객체 목록</td></tr></tbody></table><hr id="22cb3bed-dae9-80b0-9334-c88803026b80"/><p id="22cb3bed-dae9-8049-9c5d-e8fca313d65b" class="">
+</p><h2 id="22cb3bed-dae9-80d4-853b-c6114d8c11ef" class="">Legacy 컴포넌트</h2><p id="22cb3bed-dae9-8033-bcc6-f485dd7e3eac" class="">
+</p><p id="22cb3bed-dae9-80f9-afab-ed40174d2d99" class="">더 이상 활발히 개발되지 않는 이전 버전 컴포넌트들입니다. 가능하면 최신 컴포넌트를 사용하세요.</p><h3 id="22cb3bed-dae9-8095-acae-f5a57af3b954" class="">Alter metadata</h3><p id="22cb3bed-dae9-8010-84ad-d9806803ba71" class=""><strong>중요:</strong> Legacy 컴포넌트입니다. 대신 <strong>Data operations</strong> 컴포넌트를 사용하세요.</p><p id="22cb3bed-dae9-8038-bf56-ce5348e79672" class="">
+</p><p id="22cb3bed-dae9-8048-b4a2-f5e7faf9a100" class="">입력 객체(Message/Data)의 메타데이터를 추가·업데이트·제거합니다.</p><h3 id="22cb3bed-dae9-80a4-bd21-d71d590fdac7" class="">매개변수</h3><p id="22cb3bed-dae9-8017-8345-d57f430c438d" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-808b-b32b-d57eecc8fac9" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-803b-b847-eab7a5abce4f"><th id="aJD}" class="simple-table-header-color simple-table-header">이름</th><th id="nafe" class="simple-table-header-color simple-table-header">표시 이름</th><th id="&lt;uI~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a0-ad87-e807950f22eb"><td id="aJD}" class="">input_value</td><td id="nafe" class="">Input</td><td id="&lt;uI~" class="">메타데이터를 추가할 대상 객체(Message 또는 Data)</td></tr><tr id="22cb3bed-dae9-80d7-abec-deb7a786d88f"><td id="aJD}" class="">text_in</td><td id="nafe" class="">User Text</td><td id="&lt;uI~" class="">&#x27;text&#x27; 속성에 담길 텍스트 (빈 값 무시)</td></tr><tr id="22cb3bed-dae9-80c5-8701-d150cd091f37"><td id="aJD}" class="">metadata</td><td id="nafe" class="">Metadata</td><td id="&lt;uI~" class="">추가할 메타데이터</td></tr><tr id="22cb3bed-dae9-8043-904e-ec58a28e66cf"><td id="aJD}" class="">remove_fields</td><td id="nafe" class="">Fields to Remove</td><td id="&lt;uI~" class="">제거할 메타데이터 키 목록</td></tr></tbody></table><p id="22cb3bed-dae9-80ac-8fd3-c02e563ab863" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8004-a8ee-f56d3d1af7a5" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8081-bef8-cd588079d383"><th id="JQIl" class="simple-table-header-color simple-table-header">이름</th><th id=":Ztv" class="simple-table-header-color simple-table-header">표시 이름</th><th id="=h:f" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c6-bd14-e0ed6b7b9c31"><td id="JQIl" class="">data</td><td id=":Ztv" class="">Data</td><td id="=h:f" class="">메타데이터가 반영된 객체 목록</td></tr></tbody></table><hr id="22cb3bed-dae9-8021-916d-f98a9ef5c567"/><p id="22cb3bed-dae9-8049-91b9-c3ca9c3e71d9" class="">
+</p><h3 id="22cb3bed-dae9-8062-b21d-f1a1a4c691f2" class="">Combine data</h3><p id="22cb3bed-dae9-8077-bceb-db74dc6ebe4b" class="">
+</p><p id="22cb3bed-dae9-80f6-b328-e77067385301" class=""><strong>중요:</strong> Legacy 컴포넌트(구 Merge Data)입니다.</p><p id="22cb3bed-dae9-801b-a811-d38e3b0a64a1" class="">
+</p><p id="22cb3bed-dae9-802d-9dbf-ffe6b90651b1" class="">여러 <code>Data</code> 객체를 하나로 병합합니다.</p><h3 id="22cb3bed-dae9-80d4-8890-c5b9ed78eb9f" class="">매개변수</h3><p id="22cb3bed-dae9-80c0-bdb0-c87adbbb8bb7" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-802c-858c-c9f6d89e1765" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80f9-bdb4-d48c80134439"><th id="sGA]" class="simple-table-header-color simple-table-header">이름</th><th id="irXJ" class="simple-table-header-color simple-table-header">표시 이름</th><th id="quz]" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b2-9afe-ff8f4700dd91"><td id="sGA]" class="">data</td><td id="irXJ" class="">Data</td><td id="quz]" class="">병합할 <code>Data</code> 객체 목록</td></tr></tbody></table><p id="22cb3bed-dae9-8067-b97a-f5cae31e1a4d" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80b8-992a-f994a7d910dd" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8079-a348-e6e39aeb9c2b"><th id="jQsE" class="simple-table-header-color simple-table-header">이름</th><th id="JHOi" class="simple-table-header-color simple-table-header">표시 이름</th><th id="\rkb" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8000-97f5-c6dad5281f49"><td id="jQsE" class="">merged_data</td><td id="JHOi" class="">Merged Data</td><td id="\rkb" class="">병합된 단일 <code>Data</code> 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-80cf-8a38-ff1b0b703660"/><p id="22cb3bed-dae9-80c8-9ad4-e77ab9afd5e0" class="">
+</p><h3 id="22cb3bed-dae9-80d8-a18b-d496e4cd6ff4" class="">Combine text</h3><p id="22cb3bed-dae9-808b-9de3-e46546d9b8e8" class="">
+</p><p id="22cb3bed-dae9-8027-962a-d5cf50cbc3e5" class=""><strong>중요:</strong> Legacy 컴포넌트입니다.</p><p id="22cb3bed-dae9-8008-a4ec-c45e2a853cfb" class="">
+</p><p id="22cb3bed-dae9-809e-803b-e0c12ac1737f" class="">두 개의 텍스트를 지정한 구분자로 연결합니다.</p><ol type="1" id="22cb3bed-dae9-80c5-9813-fb3f526c2d6e" class="numbered-list" start="1"><li>두 개의 Message 출력 컴포넌트를 <strong>Combine Text</strong> 컴포넌트의 <strong>First Text</strong>／<strong>Second Text</strong>에 연결합니다.<figure id="22cb3bed-dae9-8090-a2ed-f1bca41d915c" class="image"><a href="image%2039.png"><img style="width:681.9874877929688px" src="image%2039.png"/></a></figure></li></ol><ol type="1" id="22cb3bed-dae9-80dc-b462-f84c8e80c073" class="numbered-list" start="2"><li>각 Text Input에 텍스트를 입력합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80a6-817d-da45ac31ef4c" class="numbered-list" start="3"><li><strong>Delimiter</strong> 필드에 구분자(예: <code>\n\n **end first text** \n\n **start second text**</code>)를 입력합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80d1-b1c1-e148e30fa592" class="numbered-list" start="4"><li>Chat Output을 연결하고 Playground에서 <strong>Run Flow</strong>를 클릭하면 결과를 확인할 수 있습니다.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80c2-a74e-fc53dc2b9b6a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">This is the first text. Let&#x27;s combine text!
+end first text
+start second text
+Here&#x27;s the second part. We&#x27;ll see how combining text works.
+</code></pre><h3 id="22cb3bed-dae9-80c1-9705-ffdbc73abee0" class="">매개변수</h3><p id="22cb3bed-dae9-806b-a35e-d4820cae7b85" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80a1-a1f0-c3740187cd67" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8098-bbe0-cad20ca5c081"><th id="wBw{" class="simple-table-header-color simple-table-header">이름</th><th id="vKA`" class="simple-table-header-color simple-table-header">표시 이름</th><th id="{ZJf" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b1-a6f3-f4963fecf079"><td id="wBw{" class="">first_text</td><td id="vKA`" class="">First Text</td><td id="{ZJf" class="">첫 번째 텍스트</td></tr><tr id="22cb3bed-dae9-801e-a4c0-dfc48a48cabf"><td id="wBw{" class="">second_text</td><td id="vKA`" class="">Second Text</td><td id="{ZJf" class="">두 번째 텍스트</td></tr><tr id="22cb3bed-dae9-808a-a56c-f8d9f91be3dc"><td id="wBw{" class="">delimiter</td><td id="vKA`" class="">Delimiter</td><td id="{ZJf" class="">텍스트 사이에 삽입할 문자열 (기본값: 공백)</td></tr></tbody></table><p id="22cb3bed-dae9-8072-8377-efa99a32c3a8" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-807a-b0c7-ca03b1e4ff40" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b3-8045-ee184a2b9d05"><th id="YrHf" class="simple-table-header-color simple-table-header">이름</th><th id="nmZZ" class="simple-table-header-color simple-table-header">표시 이름</th><th id="Y^Gj" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-802a-b96d-cd0099f576a6"><td id="YrHf" class="">message</td><td id="nmZZ" class="">Message</td><td id="Y^Gj" class="">결합된 텍스트를 담은 Message</td></tr></tbody></table><hr id="22cb3bed-dae9-80a8-b9ad-ea31ea24536b"/><p id="22cb3bed-dae9-801b-9708-d39978d9060e" class="">
+</p><h3 id="22cb3bed-dae9-80b6-8ec6-e3c6f0717f28" class="">Create data</h3><p id="22cb3bed-dae9-8038-b601-e1e0fde1cdd4" class="">
+</p><p id="22cb3bed-dae9-80b3-b22b-e8dada19bb51" class=""><strong>중요:</strong> Legacy 컴포넌트입니다.</p><p id="22cb3bed-dae9-8073-9d9c-df73f4564a7f" class="">
+</p><p id="22cb3bed-dae9-80b9-8104-e6caf50e92f6" class="">지정한 필드 개수로 <code>Data</code> 객체를 동적으로 생성합니다.</p><h3 id="22cb3bed-dae9-8038-b8c3-d24f44221415" class="">매개변수</h3><p id="22cb3bed-dae9-80b2-8f08-c860d811064d" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8087-b0cd-e2b4ff8d877d" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8018-9dce-ee80042c483f"><th id="\;zj" class="simple-table-header-color simple-table-header">이름</th><th id="^Itd" class="simple-table-header-color simple-table-header">표시 이름</th><th id="=h[g" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c0-a0fa-c8f38c67cf3c"><td id="\;zj" class="">number_of_fields</td><td id="^Itd" class="">Number of Fields</td><td id="=h[g" class="">생성할 필드 개수</td></tr><tr id="22cb3bed-dae9-8019-aa1e-e2dda9ec97c3"><td id="\;zj" class="">text_key</td><td id="^Itd" class="">Text Key</td><td id="=h[g" class="">텍스트 콘텐츠로 사용할 키</td></tr><tr id="22cb3bed-dae9-8078-af75-f3c21bf54f55"><td id="\;zj" class="">text_key_validator</td><td id="^Itd" class="">Text Key Validator</td><td id="=h[g" class="">텍스트 키 유효성 검사 옵션</td></tr></tbody></table><p id="22cb3bed-dae9-80c2-ad1e-e6809eb1242e" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8009-8fc1-f83303024ea2" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ac-8b5b-f6140f072607"><th id="Zyc\" class="simple-table-header-color simple-table-header">이름</th><th id="?kcY" class="simple-table-header-color simple-table-header">표시 이름</th><th id="i?]]" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b1-9cfe-dd28d39d56d7"><td id="Zyc\" class="">data</td><td id="?kcY" class="">Data</td><td id="i?]]" class="">생성된 <code>Data</code> 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-804c-aaba-dc09bf670781"/><h3 id="22cb3bed-dae9-8058-afbd-da9f68817961" class="">Filter data</h3><p id="22cb3bed-dae9-8050-a104-dc7559e8f539" class="">
+</p><p id="22cb3bed-dae9-8088-a597-c144e5cad35e" class=""><strong>중요:</strong> Legacy 컴포넌트입니다. 대신 <strong>Data operations</strong> 컴포넌트를 사용하세요.</p><p id="22cb3bed-dae9-8068-9328-c7dbf765b8e9" class="">
+</p><p id="22cb3bed-dae9-8066-a1b6-d9f5a6e9744c" class=""><code>Data</code> 객체에서 특정 키 목록으로 필터링합니다.</p><h3 id="22cb3bed-dae9-80fd-8c2b-e66602ae3b2c" class="">매개변수</h3><p id="22cb3bed-dae9-8038-bba6-e158d16df32b" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-800f-90d5-f3a805cceb2b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8027-87d4-c0c3eac8985e"><th id="QSPf" class="simple-table-header-color simple-table-header">이름</th><th id="epPy" class="simple-table-header-color simple-table-header">표시 이름</th><th id="EeUE" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80fe-8310-db3ea2eac82c"><td id="QSPf" class="">data</td><td id="epPy" class="">Data</td><td id="EeUE" class="">필터링할 <code>Data</code> 객체</td></tr><tr id="22cb3bed-dae9-80a0-a732-f525f0d48bf4"><td id="QSPf" class="">filter_criteria</td><td id="epPy" class="">Filter Criteria</td><td id="EeUE" class="">필터링할 키 목록</td></tr></tbody></table><p id="22cb3bed-dae9-80e7-9024-c1d2b4406a44" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-805a-9d0a-d70198918ff8" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ca-9a12-fbebe2724b76"><th id="{olH" class="simple-table-header-color simple-table-header">이름</th><th id="Z|Q}" class="simple-table-header-color simple-table-header">표시 이름</th><th id="d[Fz" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-807f-b069-c03f0e804603"><td id="{olH" class="">filtered_data</td><td id="Z|Q}" class="">Filtered Data</td><td id="d[Fz" class="">필터링된 <code>Data</code> 객체 목록</td></tr></tbody></table><hr id="22cb3bed-dae9-8027-8e72-e257c638ec25"/><p id="22cb3bed-dae9-8047-98c5-fe3b1dc0170d" class="">
+</p><h3 id="22cb3bed-dae9-80a6-91d4-fa2bbde341b6" class="">Filter values</h3><p id="22cb3bed-dae9-8040-92dc-d42599a8efd7" class="">
+</p><p id="22cb3bed-dae9-8019-8d18-efe3fbb647f7" class=""><strong>중요:</strong> Legacy 컴포넌트입니다. 대신 <strong>Data operations</strong> 컴포넌트를 사용하세요.</p><p id="22cb3bed-dae9-8028-962e-e09a73030ecf" class="">
+</p><p id="22cb3bed-dae9-8054-9524-df18b13d1542" class="">키, 값, 연산자 기준으로 데이터 리스트를 필터링합니다.</p><h3 id="22cb3bed-dae9-8012-940b-c8196063e12c" class="">매개변수</h3><p id="22cb3bed-dae9-80c8-8ae8-d37d00e4a258" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8006-ae57-e2dc52dcc740" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80c4-a528-c676836fa8e9"><th id="zO[B" class="simple-table-header-color simple-table-header">이름</th><th id="s^wJ" class="simple-table-header-color simple-table-header">표시 이름</th><th id="{]Aj" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80dd-a08f-ea2d7639ce13"><td id="zO[B" class="">input_data</td><td id="s^wJ" class="">Input data</td><td id="{]Aj" class="">필터링할 데이터 리스트</td></tr><tr id="22cb3bed-dae9-8017-b46f-cc36ee38ebb0"><td id="zO[B" class="">filter_key</td><td id="s^wJ" class="">Filter Key</td><td id="{]Aj" class="">필터 대상 키</td></tr><tr id="22cb3bed-dae9-8035-9b86-cf01c0542849"><td id="zO[B" class="">filter_value</td><td id="s^wJ" class="">Filter Value</td><td id="{]Aj" class="">필터링할 값</td></tr><tr id="22cb3bed-dae9-8041-9978-f0a1fa0c493b"><td id="zO[B" class="">operator</td><td id="s^wJ" class="">Comparison Operator</td><td id="{]Aj" class="">비교 연산자 (<code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code> 등)</td></tr></tbody></table><p id="22cb3bed-dae9-80a3-a32b-d55a2b7e55c8" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80ad-ad14-d0494c32dc00" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ab-85b8-cbac3bf109fe"><th id="h}Od" class="simple-table-header-color simple-table-header">이름</th><th id="MD:N" class="simple-table-header-color simple-table-header">표시 이름</th><th id=":PA{" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80eb-aeac-db5f7add2a3f"><td id="h}Od" class="">filtered_data</td><td id="MD:N" class="">Filtered data</td><td id=":PA{" class="">필터링된 데이터 리스트</td></tr></tbody></table><hr id="22cb3bed-dae9-8065-9075-d594ed882a8d"/><p id="22cb3bed-dae9-8047-979e-e8268aae4f1d" class="">
+</p><h3 id="22cb3bed-dae9-8035-a67e-d808de2a67f5" class="">JSON cleaner</h3><p id="22cb3bed-dae9-8045-868f-fc8ed9a987a5" class="">
+</p><p id="22cb3bed-dae9-8086-af72-ee0bd140a707" class=""><strong>중요:</strong> Legacy 컴포넌트입니다. 대신 <strong>Data operations</strong> 등을 사용하세요.</p><p id="22cb3bed-dae9-8031-8c00-e4a1151518c1" class="">
+</p><p id="22cb3bed-dae9-80db-84c0-faa11c293ea4" class="">JSON 문자열을 사양에 맞게 정리(clean)합니다.</p><h3 id="22cb3bed-dae9-80e6-8768-c8a60c4f39c8" class="">매개변수</h3><p id="22cb3bed-dae9-80d2-af61-c45816a192d7" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-800d-aa1e-d70fbc431508" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ef-8d38-ed0b0ff645b4"><th id="X|\_" class="simple-table-header-color simple-table-header">이름</th><th id="HroZ" class="simple-table-header-color simple-table-header">표시 이름</th><th id="nxML" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8005-823b-e8524609e735"><td id="X|\_" class="">json_str</td><td id="HroZ" class="">JSON String</td><td id="nxML" class="">정리할 JSON 문자열 (비표준 JSON 포함)</td></tr><tr id="22cb3bed-dae9-80ea-9937-e98ea605dbcb"><td id="X|\_" class="">remove_control_chars</td><td id="HroZ" class="">Remove Control Characters</td><td id="nxML" class="">True일 경우 제어 문자(ASCII 0–31,127)를 제거</td></tr><tr id="22cb3bed-dae9-80a1-a44d-cfba584f1fbc"><td id="X|\_" class="">normalize_unicode</td><td id="HroZ" class="">Normalize Unicode</td><td id="nxML" class="">True일 경우 Unicode를 NFC 형태로 정규화</td></tr><tr id="22cb3bed-dae9-80f0-9341-d35febf39806"><td id="X|\_" class="">validate_json</td><td id="HroZ" class="">Validate JSON</td><td id="nxML" class="">True일 경우 JSON 파싱을 시도해 유효성 검사 후 오류 시 ValueError 발생</td></tr></tbody></table><p id="22cb3bed-dae9-809f-a134-e08be18536d1" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8018-8ca0-ca45c43b9a85" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-802e-b486-e50093e27eee"><th id="~v@k" class="simple-table-header-color simple-table-header">이름</th><th id="cpT=" class="simple-table-header-color simple-table-header">표시 이름</th><th id="yOc@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8087-be86-f3856061638b"><td id="~v@k" class="">output</td><td id="cpT=" class="">Cleaned JSON String</td><td id="yOc@" class="">정리된 JSON 문자열</td></tr></tbody></table><hr id="22cb3bed-dae9-8005-b2f4-c55f8f2840c8"/><p id="22cb3bed-dae9-8091-85ae-d46a2c25d286" class="">
+</p><h3 id="22cb3bed-dae9-80e9-aed3-d2b0136db654" class="">Parse DataFrame</h3><p id="22cb3bed-dae9-80db-8ee9-d0137c557b4d" class="">
+</p><p id="22cb3bed-dae9-8001-a483-e64d4e9abe13" class=""><strong>중요:</strong> Legacy 컴포넌트입니다. 대신 <strong>Parser</strong> 컴포넌트를 사용하세요.</p><p id="22cb3bed-dae9-80a5-8547-c6b35c1837ef" class="">
+</p><p id="22cb3bed-dae9-80e4-97c2-e6852f104d6f" class=""><code>DataFrame</code>을 템플릿에 따라 텍스트로 변환합니다.</p><h3 id="22cb3bed-dae9-80b2-863b-f41480945717" class="">매개변수</h3><p id="22cb3bed-dae9-80df-bf39-dfd6dec5cfd6" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8076-89c6-ec7319ea9200" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-804c-8dd0-d5e7cba809a1"><th id="qIJD" class="simple-table-header-color simple-table-header">이름</th><th id="wi`f" class="simple-table-header-color simple-table-header">표시 이름</th><th id="?gM:" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8085-b37b-e292c7c3a177"><td id="qIJD" class="">df</td><td id="wi`f" class="">DataFrame</td><td id="?gM:" class="">변환할 <code>DataFrame</code></td></tr><tr id="22cb3bed-dae9-8082-a93c-e3d6f7784d56"><td id="qIJD" class="">template</td><td id="wi`f" class="">Template</td><td id="?gM:" class=""><code>{column_name}</code> 플레이스홀더 사용</td></tr><tr id="22cb3bed-dae9-80af-9bff-ed6ec52ceb00"><td id="qIJD" class="">sep</td><td id="wi`f" class="">Separator</td><td id="?gM:" class="">행 구분 문자열</td></tr></tbody></table><p id="22cb3bed-dae9-80f0-b108-e7eec7ca0333" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8028-bc1f-d882060b5b93" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80bf-9c15-fb12b49fb7cd"><th id="BYVa" class="simple-table-header-color simple-table-header">이름</th><th id="|rgt" class="simple-table-header-color simple-table-header">표시 이름</th><th id="Qxr?" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-806d-aaa0-ca73ae789170"><td id="BYVa" class="">text</td><td id="|rgt" class="">Text</td><td id="Qxr?" class="">모든 행을 하나의 텍스트로 결합</td></tr></tbody></table><hr id="22cb3bed-dae9-8017-9c55-c0ce5a240dd6"/><h3 id="22cb3bed-dae9-80c4-a535-ee71bfbccef5" class="">Parse JSON</h3><p id="22cb3bed-dae9-80cc-9bc2-de680cdf81b2" class="">
+</p><p id="22cb3bed-dae9-8016-b255-f27c093064da" class=""><strong>중요:</strong> Legacy 컴포넌트입니다.</p><p id="22cb3bed-dae9-80a4-87b7-d20b9be3b31c" class="">
+</p><p id="22cb3bed-dae9-8052-85e9-ff49d6087594" class="">JQ 쿼리를 사용해 JSON 필드를 추출·변환합니다.</p><h3 id="22cb3bed-dae9-80ae-8722-dc4ddea7b969" class="">매개변수</h3><p id="22cb3bed-dae9-809b-9f09-cfc7cebde7c4" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80d1-a0c6-f3c30e79d438" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-802d-9544-dd1fb4545254"><th id="R]cW" class="simple-table-header-color simple-table-header">이름</th><th id="x`RH" class="simple-table-header-color simple-table-header">표시 이름</th><th id="js_\" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8007-bc95-e0f6cb4abab9"><td id="R]cW" class="">input_value</td><td id="x`RH" class="">Input</td><td id="js_\" class="">필터링할 <code>Message</code> 또는 <code>Data</code></td></tr><tr id="22cb3bed-dae9-8034-b8bf-dd8069603c3d"><td id="R]cW" class="">query</td><td id="x`RH" class="">JQ Query</td><td id="js_\" class="">JQ 쿼리</td></tr></tbody></table><p id="22cb3bed-dae9-8087-bb94-cb00ac005813" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8060-abd8-f5ece0600032" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80bb-816c-f2f1c20db404"><th id="n~J;" class="simple-table-header-color simple-table-header">이름</th><th id="sFJq" class="simple-table-header-color simple-table-header">표시 이름</th><th id="^A&gt;\" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-809d-85d6-f3b09e6d671d"><td id="n~J;" class="">filtered_data</td><td id="sFJq" class="">Filtered Data</td><td id="^A&gt;\" class="">필터링된 <code>Data</code> 객체 목록</td></tr></tbody></table><hr id="22cb3bed-dae9-80f7-a5f1-e293819b9355"/><p id="22cb3bed-dae9-808c-96e8-dacd415426e6" class="">
+</p><h3 id="22cb3bed-dae9-80e7-a84b-fc50cade7439" class="">Select data</h3><p id="22cb3bed-dae9-80a2-8555-cc4051177ae9" class="">
+</p><p id="22cb3bed-dae9-8024-9426-f8bd7c5def7f" class=""><strong>중요:</strong> Legacy 컴포넌트입니다. 대신 <strong>Data operations</strong> 컴포넌트를 사용하세요.</p><p id="22cb3bed-dae9-8066-a282-e079bdbafd79" class="">
+</p><p id="22cb3bed-dae9-807f-9d2c-c3683b4f7356" class="">데이터 목록에서 특정 인덱스의 데이터를 선택합니다.</p><h3 id="22cb3bed-dae9-80e8-870b-d9cf54f7350f" class="">매개변수</h3><p id="22cb3bed-dae9-8057-b752-e629e8d58303" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-802e-a40f-c8113894e3f8" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8059-8298-ebcd5f0f0b0c"><th id="oZqp" class="simple-table-header-color simple-table-header">이름</th><th id="B@o&gt;" class="simple-table-header-color simple-table-header">표시 이름</th><th id="JhLW" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80eb-a710-fdba78116ac6"><td id="oZqp" class="">data_list</td><td id="B@o&gt;" class="">Data List</td><td id="JhLW" class="">선택 대상 데이터 목록</td></tr><tr id="22cb3bed-dae9-80d0-aa45-ca6af8c21430"><td id="oZqp" class="">data_index</td><td id="B@o&gt;" class="">Data Index</td><td id="JhLW" class="">선택할 인덱스</td></tr></tbody></table><p id="22cb3bed-dae9-80ec-a1db-fd3cb41767e2" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8056-85af-dc19602175e4" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80e8-bb45-c607ecf4c411"><th id="JbVF" class="simple-table-header-color simple-table-header">이름</th><th id="|S]X" class="simple-table-header-color simple-table-header">표시 이름</th><th id="`Y{O" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b9-8e0e-e65c66f388b4"><td id="JbVF" class="">selected_data</td><td id="|S]X" class="">Selected Data</td><td id="`Y{O" class="">선택된 <code>Data</code> 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-80b7-bfb4-fe4978a66b85"/><p id="22cb3bed-dae9-80c1-932e-db47209c7033" class="">
+</p><p id="22cb3bed-dae9-808c-ad76-f0df6dd31b72" class="">
+</p><p id="22cb3bed-dae9-80d3-acb5-f5c400e1fe39" class="">*이 문서는 <a href="https://docs.langflow.org/components-processing#use-a-processing-component-in-a-flow">https://docs.langflow.org/components-processing</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22cb3bed-dae9-80e2-825e-e5e84ae5f837" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

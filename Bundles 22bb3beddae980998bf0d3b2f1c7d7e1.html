@@ -1,0 +1,709 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Bundles</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8099-8bf0-d3b2f1c7d7e1" class="page sans"><header><h1 class="page-title">Bundles</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22bb3bed-dae9-8180-9352-f29a7148b8ce" class="">번들 (Bundles) 컴포넌트 </h1><h3 id="22bb3bed-dae9-814c-b990-f1e23b846d6e" class="">   : Components &gt; Bundles</h3><p id="22bb3bed-dae9-8148-8d74-dd8f3dacd78c" class="">
+</p><p id="22bb3bed-dae9-81c8-963f-e18f2c1bd467" class=""><strong>번들 (Bundles)</strong>은 외부 서비스 제공자(프로바이더)별로 묶여 제공되는 서드파티 컴포넌트 모음입니다.</p><p id="22bb3bed-dae9-812d-af9c-db824fb89a75" class="">자세한 내용은 각 번들 제공자의 공식 문서를 참고하시기 바랍니다.</p><p id="22bb3bed-dae9-8133-a17c-e6ed74da72c3" class="">아래는 Bundles 메뉴에 포함된 대표적인 에이전트(Agent) 컴포넌트들입니다.</p><p id="22bb3bed-dae9-81d9-a9cb-e3e37e5b68b1" class="">
+</p><hr id="22bb3bed-dae9-81a3-b00a-c578b7915c94"/><p id="22bb3bed-dae9-81eb-ba64-d17715a16e96" class="">
+</p><h2 id="22bb3bed-dae9-81b6-b52c-d628032cb79a" class="">1. CrewAI Agent</h2><p id="22bb3bed-dae9-8115-9923-e2423cf2f9dd" class="">
+</p><p id="22bb3bed-dae9-810f-ac32-ca23e414b782" class="">CrewAI Agent는 역할(role), 목표(goal), 배경(backstory), 사용할 도구(tools) 등을 설정하여 <strong>특정 임무를 수행하는 AI 에이전트</strong>를 만들 수 있는 컴포넌트입니다. 여러 에이전트를 구성한 ‘크루’를 만들어 협업 형태 작업도 가능합니다.</p><table id="22bb3bed-dae9-8167-a742-d71aa85153b5" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81c8-8252-f235a80722b1"><th id="[;A]" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="sbQo" class="simple-table-header-color simple-table-header">표기</th><th id="l;t\" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8121-8dd2-e35a6141fce8"><td id="[;A]" class="">role</td><td id="sbQo" class="">Role</td><td id="l;t\" class="">에이전트의 역할</td></tr><tr id="22bb3bed-dae9-8142-9fae-fd6057984e7c"><td id="[;A]" class="">goal</td><td id="sbQo" class="">Goal</td><td id="l;t\" class="">에이전트의 목표</td></tr><tr id="22bb3bed-dae9-81ee-aa72-d2db3827decf"><td id="[;A]" class="">backstory</td><td id="sbQo" class="">Backstory</td><td id="l;t\" class="">에이전트의 배경</td></tr><tr id="22bb3bed-dae9-819e-894c-f322313be0c2"><td id="[;A]" class="">tools</td><td id="sbQo" class="">Tools</td><td id="l;t\" class="">에이전트가 사용할 수 있는 도구 목록</td></tr><tr id="22bb3bed-dae9-81db-8e43-e17689cca555"><td id="[;A]" class="">llm</td><td id="sbQo" class="">Language Model</td><td id="l;t\" class="">에이전트가 사용하는 언어 모델</td></tr><tr id="22bb3bed-dae9-81bf-b659-cb69b27b0a33"><td id="[;A]" class="">memory</td><td id="sbQo" class="">Memory</td><td id="l;t\" class="">에이전트가 메모리를 사용할지 여부</td></tr><tr id="22bb3bed-dae9-81c9-9efe-e4bbd18a6ff2"><td id="[;A]" class="">verbose</td><td id="sbQo" class="">Verbose</td><td id="l;t\" class="">상세 로그 출력 여부</td></tr><tr id="22bb3bed-dae9-811e-b8fb-f75b72cab85d"><td id="[;A]" class="">allow_delegation</td><td id="sbQo" class="">Allow Delegation</td><td id="l;t\" class="">다른 에이전트에게 작업 위임 허용 여부</td></tr><tr id="22bb3bed-dae9-817a-90b2-c16d55d142e8"><td id="[;A]" class="">allow_code_execution</td><td id="sbQo" class="">Allow Code Execution</td><td id="l;t\" class="">코드 실행 허용 여부</td></tr><tr id="22bb3bed-dae9-8159-b4c0-db84058ad7e6"><td id="[;A]" class="">kwargs</td><td id="sbQo" class="">kwargs</td><td id="l;t\" class="">에이전트에 전달할 추가 키워드 인자</td></tr></tbody></table><table id="22bb3bed-dae9-81ec-b6aa-c7a6fb7f455f" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-817e-8dc2-e2dfddd4850b"><th id="_XWH" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="dn}k" class="simple-table-header-color simple-table-header">표기</th><th id="lCfF" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81dc-ba71-d80c8a6326c8"><td id="_XWH" class="">output</td><td id="dn}k" class="">Agent</td><td id="lCfF" class="">생성된 CrewAI 에이전트 객체</td></tr></tbody></table><p id="22bb3bed-dae9-81f5-9e22-e3986aae6502" class="">
+</p><p id="22bb3bed-dae9-81b4-bb35-cc4d665f1ae3" class="">자세한 내용은 <a href="https://docs.crewai.com/en/introduction">CrewAI 공식 문서</a>를 참고하세요.</p><hr id="22bb3bed-dae9-8175-aacf-c5da3ba435d0"/><p id="22bb3bed-dae9-8175-b152-e4b9555ee784" class="">
+</p><h2 id="22bb3bed-dae9-8104-8a46-e086f2eb6d2b" class="">2. Hierarchical Crew</h2><p id="22bb3bed-dae9-81a5-a965-e420695c16c3" class="">
+</p><p id="22bb3bed-dae9-8145-a125-dc32941ad67a" class="">이 컴포넌트는 여러 에이전트를 계층 구조로 조직해 <strong>매니저가 관리하는 크루</strong>를 구성하고, 여러 작업(Task)을 분배해 협업하도록 합니다.</p><table id="22bb3bed-dae9-81af-9ad2-d908ac5617ba" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8149-a7fc-f8c4df519438"><th id="}\t&lt;" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="U`Pn" class="simple-table-header-color simple-table-header">표기</th><th id="aZ^g" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81f6-83cd-d802bcc10aa7"><td id="}\t&lt;" class="">agents</td><td id="U`Pn" class="">Agents</td><td id="aZ^g" class="">크루 구성원 에이전트 객체 리스트</td></tr><tr id="22bb3bed-dae9-8187-91fc-d45e06e1408e"><td id="}\t&lt;" class="">tasks</td><td id="U`Pn" class="">Tasks</td><td id="aZ^g" class="">실행할 HierarchicalTask 객체 리스트</td></tr><tr id="22bb3bed-dae9-81bc-9c1c-d9081e9a23ee"><td id="}\t&lt;" class="">manager_llm</td><td id="U`Pn" class="">Manager LLM</td><td id="aZ^g" class="">매니저 에이전트용 언어 모델</td></tr><tr id="22bb3bed-dae9-8158-b174-e7de353b731b"><td id="}\t&lt;" class="">manager_agent</td><td id="U`Pn" class="">Manager Agent</td><td id="aZ^g" class="">매니저 역할을 할 특정 에이전트</td></tr><tr id="22bb3bed-dae9-8123-a904-f0aad03a2b0f"><td id="}\t&lt;" class="">verbose</td><td id="U`Pn" class="">Verbose</td><td id="aZ^g" class="">상세 로그 출력 여부</td></tr><tr id="22bb3bed-dae9-81bd-8891-d0e884c0c414"><td id="}\t&lt;" class="">memory</td><td id="U`Pn" class="">Memory</td><td id="aZ^g" class="">크루의 메모리 설정</td></tr><tr id="22bb3bed-dae9-8190-826d-dfbbfb33d4ad"><td id="}\t&lt;" class="">use_cache</td><td id="U`Pn" class="">Use Cache</td><td id="aZ^g" class="">결과 캐싱 사용 여부</td></tr><tr id="22bb3bed-dae9-81fb-89dc-d2d3b3f42640"><td id="}\t&lt;" class="">max_rpm</td><td id="U`Pn" class="">Max RPM</td><td id="aZ^g" class="">분당 최대 요청 횟수</td></tr><tr id="22bb3bed-dae9-8149-b3a9-c75816bc2773"><td id="}\t&lt;" class="">share_crew</td><td id="U`Pn" class="">Share Crew</td><td id="aZ^g" class="">크루 정보를 에이전트 간 공유할지 여부</td></tr><tr id="22bb3bed-dae9-81e3-a77f-cb47a519bb64"><td id="}\t&lt;" class="">function_calling_llm</td><td id="U`Pn" class="">Function Calling LLM</td><td id="aZ^g" class="">함수 호출용 언어 모델</td></tr></tbody></table><table id="22bb3bed-dae9-813d-a316-e31e08d8b745" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81d5-8df8-e56506bf17a6"><th id="flT:" class="simple-table-header-color simple-table-header">Name</th><th id="kwzU" class="simple-table-header-color simple-table-header">Display Name</th><th id="cl:^" class="simple-table-header-color simple-table-header">Info</th></tr></thead><tbody><tr id="22bb3bed-dae9-812f-93e3-d821776aa94b"><td id="flT:" class="">crew</td><td id="kwzU" class="">Crew</td><td id="cl:^" class="">계층형 작업 실행이 가능한 Crew 객체</td></tr></tbody></table><p id="22bb3bed-dae9-813c-90d2-cf816596b8d4" class="">자세한 설명은 <a href="https://docs.crewai.com/en/introduction">CrewAI 문서</a>를 참고하세요.</p><p id="22bb3bed-dae9-81d3-b16d-e70ea8d82d81" class="">
+</p><hr id="22bb3bed-dae9-810f-acf9-d68b701e152c"/><p id="22bb3bed-dae9-81d8-bcf6-ead756f77a29" class="">
+</p><h2 id="22bb3bed-dae9-810f-8e51-d9514e7d9190" class="">3. CSV Agent</h2><p id="22bb3bed-dae9-81c3-8073-d1e25e092554" class="">
+</p><p id="22bb3bed-dae9-8182-86b1-cb738f5ee3d7" class="">CSV 파일과 LLM을 기반으로 <strong>표 형식 데이터 작업</strong>이 가능한 에이전트를 만들 수 있습니다.</p><table id="22bb3bed-dae9-817e-966d-f21693935bf2" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-814f-ab23-e360c64b866f"><th id="NiQH" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="QFwJ" class="simple-table-header-color simple-table-header">표기</th><th id="NdgS" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81cb-9ecf-c5effb5e3990"><td id="NiQH" class="">llm</td><td id="QFwJ" class="">LanguageModel</td><td id="NdgS" class="">사용할 언어 모델</td></tr><tr id="22bb3bed-dae9-81cd-b314-f076941cd55c"><td id="NiQH" class="">path</td><td id="QFwJ" class="">File</td><td id="NdgS" class="">CSV 파일 경로</td></tr><tr id="22bb3bed-dae9-8171-86be-c01423953e9a"><td id="NiQH" class="">agent_type</td><td id="QFwJ" class="">Agent Type</td><td id="NdgS" class="">생성할 에이전트 유형</td></tr></tbody></table><table id="22bb3bed-dae9-813b-ba26-dfdef71a305c" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81e8-86fa-e50a83ce8afb"><th id="yga&lt;" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="Oe{P" class="simple-table-header-color simple-table-header">표기</th><th id="fbOM" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81b2-b302-e8af0ae9088b"><td id="yga&lt;" class="">agent</td><td id="Oe{P" class="">AgentExecutor</td><td id="fbOM" class="">생성된 CSV 에이전트 인스턴스</td></tr></tbody></table><hr id="22bb3bed-dae9-81d4-a7cd-fbf039b834be"/><p id="22bb3bed-dae9-8139-ae72-d94076d2a5ea" class="">
+</p><h2 id="22bb3bed-dae9-8176-b6c7-c3f40cbda207" class="">4. OpenAI Tools Agent</h2><p id="22bb3bed-dae9-815c-8202-f07f3d96dfb8" class="">
+</p><p id="22bb3bed-dae9-8161-a98c-d3365d170b54" class="">OpenAI LLM과 다양한 도구(Tools)를 연동하여 <strong>문제 해결형 에이전트</strong>를 구성하는 컴포넌트입니다.</p><table id="22bb3bed-dae9-8129-9c50-efa4d6694d57" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8138-9751-dff448fe30d6"><th id="FNvZ" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="^QZl" class="simple-table-header-color simple-table-header">표기</th><th id="C_[L" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81e6-b922-eea8a4b1b50f"><td id="FNvZ" class="">llm</td><td id="^QZl" class="">LanguageModel</td><td id="C_[L" class="">사용할 언어 모델</td></tr><tr id="22bb3bed-dae9-8117-ba49-d358e057d085"><td id="FNvZ" class="">tools</td><td id="^QZl" class="">List of Tools</td><td id="C_[L" class="">에이전트에 제공할 툴 목록</td></tr><tr id="22bb3bed-dae9-81d4-9783-eb1883988829"><td id="FNvZ" class="">system_prompt</td><td id="^QZl" class="">System Prompt</td><td id="C_[L" class="">에이전트의 맥락 제공용 시스템 프롬프트</td></tr><tr id="22bb3bed-dae9-8149-9597-e2e6e3218ca7"><td id="FNvZ" class="">input_value</td><td id="^QZl" class="">Input Value</td><td id="C_[L" class="">에이전트가 처리할 사용자 입력</td></tr><tr id="22bb3bed-dae9-81cb-9a7e-fff6a2191156"><td id="FNvZ" class="">memory</td><td id="^QZl" class="">Memory</td><td id="C_[L" class="">맥락 유지를 위한 메모리</td></tr><tr id="22bb3bed-dae9-81d0-84b5-c77288b1966f"><td id="FNvZ" class="">max_iterations</td><td id="^QZl" class="">Integer</td><td id="C_[L" class="">에이전트가 반복 실행할 최대 횟수</td></tr><tr id="22bb3bed-dae9-8124-af57-eca67b4700c3"><td id="FNvZ" class="">verbose</td><td id="^QZl" class="">Boolean</td><td id="C_[L" class="">중간 단계 출력 등 상세 로그 출력 여부</td></tr><tr id="22bb3bed-dae9-8196-8712-d5726396087e"><td id="FNvZ" class="">handle_parsing_errors</td><td id="^QZl" class="">Boolean</td><td id="C_[L" class="">실행 중 파싱 에러를 처리할지 여부</td></tr></tbody></table><table id="22bb3bed-dae9-81e1-88c1-de52011ee220" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8186-a031-ece473f3aacf"><th id="LOQZ" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="D[d}" class="simple-table-header-color simple-table-header">표기</th><th id="hC`l" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-815e-b56c-ca42d3899f96"><td id="LOQZ" class="">agent</td><td id="D[d}" class="">AgentExecutor</td><td id="hC`l" class="">OpenAI Tools 에이전트 인스턴스</td></tr><tr id="22bb3bed-dae9-8143-9278-cd984e1d7c2e"><td id="LOQZ" class="">output</td><td id="D[d}" class="">String</td><td id="hC`l" class="">입력 실행에 대한 결과 출력</td></tr></tbody></table><hr id="22bb3bed-dae9-8125-8ea4-f9e79e3810ae"/><p id="22bb3bed-dae9-8193-87ab-e31d361ea080" class="">
+</p><h2 id="22bb3bed-dae9-811f-86f6-cf8a73cbeead" class="">5. OpenAPI Agent</h2><p id="22bb3bed-dae9-812f-98f2-ce8b6601d7e2" class="">
+</p><p id="22bb3bed-dae9-81eb-8602-edfc34fb6570" class="">OpenAPI 명세를 기반으로 외부 API와 <strong>자동 상호작용</strong>하는 에이전트를 구성할 수 있는 컴포넌트입니다.</p><table id="22bb3bed-dae9-8166-9004-e4b3a234b281" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-812e-936f-ca53ca2a261b"><th id="ARsN" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="iXNi" class="simple-table-header-color simple-table-header">표기</th><th id="t]kK" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-815a-8ddd-d96ff0c3f173"><td id="ARsN" class="">llm</td><td id="iXNi" class="">LanguageModel</td><td id="t]kK" class="">사용할 언어 모델</td></tr><tr id="22bb3bed-dae9-8141-bf5a-f23c80e38e3e"><td id="ARsN" class="">openapi_spec</td><td id="iXNi" class="">OpenAPI Spec</td><td id="t]kK" class="">서비스의 OpenAPI 명세</td></tr><tr id="22bb3bed-dae9-814f-b4db-c049a7527df0"><td id="ARsN" class="">base_url</td><td id="iXNi" class="">Base URL</td><td id="t]kK" class="">API의 기본 URL</td></tr><tr id="22bb3bed-dae9-8129-a0c8-ef067ef9bb5f"><td id="ARsN" class="">headers</td><td id="iXNi" class="">Dict</td><td id="t]kK" class="">API 요청용 선택적 헤더</td></tr><tr id="22bb3bed-dae9-8137-99f8-f757daee754f"><td id="ARsN" class="">agent_executor_kwargs</td><td id="iXNi" class="">Agent Executor kwargs</td><td id="t]kK" class="">에이전트 실행에 필요한 추가 인자</td></tr></tbody></table><table id="22bb3bed-dae9-811a-99d8-d6e7148d7a79" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81ff-9d45-cdfbcff0e176"><th id="arLG" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="&gt;BsB" class="simple-table-header-color simple-table-header">표기</th><th id="Bo]J" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-819a-83cd-fbdad32ede2b"><td id="arLG" class="">agent</td><td id="&gt;BsB" class="">AgentExecutor</td><td id="Bo]J" class="">OpenAPI 에이전트 인스턴스</td></tr></tbody></table><p id="22bb3bed-dae9-8125-88e5-d5028907251c" class="">
+</p><hr id="22bb3bed-dae9-8151-a458-d125ddb7d339"/><p id="22bb3bed-dae9-815a-8c55-fb6f618c5988" class="">
+</p><h2 id="22bb3bed-dae9-8153-9ab5-cc10e29901f4" class="">6. Sequential Crew</h2><p id="22bb3bed-dae9-81d1-930e-f9559620240c" class="">
+</p><p id="22bb3bed-dae9-8130-8fe5-e5d51f09a87b" class="">여러 에이전트가 <strong>순차적으로 작업(Task)을 수행</strong>하도록 구성하는 컴포넌트입니다.</p><table id="22bb3bed-dae9-81c6-9993-ec18f3dd17a0" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8138-b27f-c2ac420b588e"><th id="ked&lt;" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="&lt;^};" class="simple-table-header-color simple-table-header">표기</th><th id="Q;Us" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8183-98c5-f487931c459b"><td id="ked&lt;" class="">agents</td><td id="&lt;^};" class="">Agents</td><td id="Q;Us" class="">크루 구성원 에이전트 객체 리스트</td></tr><tr id="22bb3bed-dae9-812a-adde-ff4da0060b47"><td id="ked&lt;" class="">tasks</td><td id="&lt;^};" class="">Tasks</td><td id="Q;Us" class="">실행할 SequentialTask 객체 리스트</td></tr><tr id="22bb3bed-dae9-81d2-bd8c-c60c760f3521"><td id="ked&lt;" class="">verbose</td><td id="&lt;^};" class="">Verbose</td><td id="Q;Us" class="">상세 로그 출력 여부</td></tr><tr id="22bb3bed-dae9-8127-8a15-f6547e6a23e8"><td id="ked&lt;" class="">memory</td><td id="&lt;^};" class="">Memory</td><td id="Q;Us" class="">크루의 메모리 설정</td></tr><tr id="22bb3bed-dae9-81b8-bbfc-cc9af2d46ffa"><td id="ked&lt;" class="">use_cache</td><td id="&lt;^};" class="">Use Cache</td><td id="Q;Us" class="">결과 캐싱 사용 여부</td></tr><tr id="22bb3bed-dae9-81b3-9059-c456fa46c91a"><td id="ked&lt;" class="">max_rpm</td><td id="&lt;^};" class="">Max RPM</td><td id="Q;Us" class="">분당 최대 요청 횟수</td></tr><tr id="22bb3bed-dae9-8154-9be8-c6bd07e88406"><td id="ked&lt;" class="">share_crew</td><td id="&lt;^};" class="">Share Crew</td><td id="Q;Us" class="">크루 정보를 에이전트 간 공유할지 여부</td></tr><tr id="22bb3bed-dae9-81d4-a2a1-e22ba674d93a"><td id="ked&lt;" class="">function_calling_llm</td><td id="&lt;^};" class="">Function Calling LLM</td><td id="Q;Us" class="">함수 호출용 언어 모델</td></tr></tbody></table><table id="22bb3bed-dae9-8154-9a98-d85444563e0e" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81d5-b6b3-cb5c78345912"><th id="y{B}" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="wItL" class="simple-table-header-color simple-table-header">표기</th><th id="BJb^" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8199-a1f3-dd384f690cd7"><td id="y{B}" class="">crew</td><td id="wItL" class="">Crew</td><td id="BJb^" class="">순차 작업 실행 Crew 객체</td></tr></tbody></table><hr id="22bb3bed-dae9-8143-9459-cdfcfa3b4696"/><p id="22bb3bed-dae9-816c-807e-f584d1ab55b8" class="">
+</p><h2 id="22bb3bed-dae9-815f-8a90-cbf0f378314d" class="">7. Sequential Task Agent</h2><p id="22bb3bed-dae9-81d2-bba8-e68e46fdcb75" class="">
+</p><p id="22bb3bed-dae9-817e-99bb-d7cf77d48802" class="">CrewAI 기반의 에이전트를 이용해 **순차 작업 구조(Task + Agent)**를 정의할 수 있는 컴포넌트입니다.</p><table id="22bb3bed-dae9-81a4-8ae8-de6d0bc1a7ba" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8102-8686-fdc4aec97bd4"><th id="TLl[" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="DU;n" class="simple-table-header-color simple-table-header">표기</th><th id="a{nd" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8166-be05-e19278923bb3"><td id="TLl[" class="">role</td><td id="DU;n" class="">Role</td><td id="a{nd" class="">에이전트의 역할</td></tr><tr id="22bb3bed-dae9-81a0-98d7-c5959598d556"><td id="TLl[" class="">goal</td><td id="DU;n" class="">Goal</td><td id="a{nd" class="">에이전트의 목표</td></tr><tr id="22bb3bed-dae9-8189-9ba6-e374689096f7"><td id="TLl[" class="">backstory</td><td id="DU;n" class="">Backstory</td><td id="a{nd" class="">에이전트의 배경 이야기</td></tr><tr id="22bb3bed-dae9-8175-b45a-f28585156265"><td id="TLl[" class="">tools</td><td id="DU;n" class="">Tools</td><td id="a{nd" class="">에이전트가 사용할 수 있는 도구 목록</td></tr><tr id="22bb3bed-dae9-8139-890d-d1d19cfeacf4"><td id="TLl[" class="">llm</td><td id="DU;n" class="">Language Model</td><td id="a{nd" class="">에이전트가 사용하는 언어 모델</td></tr><tr id="22bb3bed-dae9-810f-a6ba-da8900fe5bd2"><td id="TLl[" class="">memory</td><td id="DU;n" class="">Memory</td><td id="a{nd" class="">에이전트가 메모리를 사용할지 여부</td></tr><tr id="22bb3bed-dae9-817a-af1e-ee44eb906d48"><td id="TLl[" class="">verbose</td><td id="DU;n" class="">Verbose</td><td id="a{nd" class="">상세 로그 출력 여부</td></tr><tr id="22bb3bed-dae9-817a-8ba0-f4f8bed79cad"><td id="TLl[" class="">allow_delegation</td><td id="DU;n" class="">Allow Delegation</td><td id="a{nd" class="">다른 에이전트에게 작업 위임 허용 여부</td></tr><tr id="22bb3bed-dae9-81b3-917b-e285aee5540a"><td id="TLl[" class="">allow_code_execution</td><td id="DU;n" class="">Allow Code Execution</td><td id="a{nd" class="">코드 실행 허용 여부</td></tr><tr id="22bb3bed-dae9-81b7-ae73-db51ccfc0100"><td id="TLl[" class="">agent_kwargs</td><td id="DU;n" class="">Agent kwargs</td><td id="a{nd" class="">추가 키워드 인자</td></tr><tr id="22bb3bed-dae9-81ac-8fa8-ce72aa08f7e9"><td id="TLl[" class="">task_description</td><td id="DU;n" class="">Task Description</td><td id="a{nd" class="">작업의 목적과 실행에 대한 설명</td></tr><tr id="22bb3bed-dae9-8164-8809-ef528b8f4b59"><td id="TLl[" class="">expected_output</td><td id="DU;n" class="">Expected Task Output</td><td id="a{nd" class="">기대되는 작업 결과</td></tr><tr id="22bb3bed-dae9-81e7-9447-f5e1285ce7fd"><td id="TLl[" class="">async_execution</td><td id="DU;n" class="">Async Execution</td><td id="a{nd" class="">비동기 작업 실행 여부</td></tr><tr id="22bb3bed-dae9-812b-822c-ce78eb9bd47c"><td id="TLl[" class="">previous_task</td><td id="DU;n" class="">Previous Task</td><td id="a{nd" class="">이전 작업(연결용)</td></tr></tbody></table><table id="22bb3bed-dae9-81bd-b375-f04a233643b9" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81db-affe-ecdebe2f8b77"><th id="]|Nq" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id=";_`a" class="simple-table-header-color simple-table-header">표기</th><th id="M@dL" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81b6-9b3d-e086b4090f6b"><td id="]|Nq" class="">task_output</td><td id=";_`a" class="">Sequential Task</td><td id="M@dL" class="">생성된 SequentialTask 객체 리스트</td></tr></tbody></table><p id="22bb3bed-dae9-810e-b7a8-c3cca0fbcc9e" class="">
+</p><hr id="22bb3bed-dae9-818f-a5dd-e460a431d962"/><p id="22bb3bed-dae9-8169-9b0d-d8d73810c863" class="">
+</p><h2 id="22bb3bed-dae9-81e7-959f-f20f36922871" class="">8. SQL Agent</h2><p id="22bb3bed-dae9-8125-a9f4-ce4aa2ce53e3" class="">
+</p><p id="22bb3bed-dae9-8135-b5f4-e230e37fec01" class="">SQL 데이터베이스와 연동하여 쿼리 작성/실행 및 결과 해석을 수행하는 에이전트 목적 컴포넌트입니다.</p><table id="22bb3bed-dae9-810e-9647-eab0feb95f3d" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8186-8ff8-ff6e331636e0"><th id="TSwm" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="D^[g" class="simple-table-header-color simple-table-header">표기</th><th id="zDl[" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-816b-bd21-f6a6f3142b07"><td id="TSwm" class="">llm</td><td id="D^[g" class="">LanguageModel</td><td id="zDl[" class="">사용할 언어 모델</td></tr><tr id="22bb3bed-dae9-8149-84a4-fb22d99cfb56"><td id="TSwm" class="">database</td><td id="D^[g" class="">Database</td><td id="zDl[" class="">SQL 데이터베이스 연결</td></tr><tr id="22bb3bed-dae9-811e-b0c2-d065702e055d"><td id="TSwm" class="">top_k</td><td id="D^[g" class="">Integer</td><td id="zDl[" class="">SELECT 쿼리 반환 결과 개수</td></tr><tr id="22bb3bed-dae9-8106-82d0-f4bf90c867b9"><td id="TSwm" class="">use_tools</td><td id="D^[g" class="">Boolean</td><td id="zDl[" class="">쿼리 실행에 툴 사용 여부</td></tr><tr id="22bb3bed-dae9-81b2-b9c2-ec0aa4d76f67"><td id="TSwm" class="">return_intermediate_steps</td><td id="D^[g" class="">Boolean</td><td id="zDl[" class="">중간 단계 반환 여부</td></tr><tr id="22bb3bed-dae9-81fc-b3f5-eb60b799b211"><td id="TSwm" class="">max_iterations</td><td id="D^[g" class="">Integer</td><td id="zDl[" class="">최대 반복 횟수</td></tr><tr id="22bb3bed-dae9-818a-9bbf-fdbb03a92ee0"><td id="TSwm" class="">max_execution_time</td><td id="D^[g" class="">Integer</td><td id="zDl[" class="">최대 실행 시간(초)</td></tr><tr id="22bb3bed-dae9-8182-b035-daab9e9d0a07"><td id="TSwm" class="">early_stopping_method</td><td id="D^[g" class="">String</td><td id="zDl[" class="">조기 종료 방식</td></tr><tr id="22bb3bed-dae9-8106-b26e-fa7fa8489c78"><td id="TSwm" class="">verbose</td><td id="D^[g" class="">Boolean</td><td id="zDl[" class="">에이전트의 중간 생각 출력 여부</td></tr></tbody></table><table id="22bb3bed-dae9-8112-8281-e7aade922bf0" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-811a-bd92-c9ac84bae82d"><th id="j?@n" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="QPc~" class="simple-table-header-color simple-table-header">표기</th><th id="zr^S" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81a6-98a5-ed5569f0c5d0"><td id="j?@n" class="">agent</td><td id="QPc~" class="">AgentExecutor</td><td id="zr^S" class="">SQL 에이전트 인스턴스</td></tr></tbody></table><hr id="22bb3bed-dae9-8165-942a-f4daedeb995f"/><p id="22bb3bed-dae9-8171-a021-faaff9e2bcee" class="">
+</p><h2 id="22bb3bed-dae9-8177-92af-d4d2d9f070aa" class="">9. Tool Calling Agent</h2><p id="22bb3bed-dae9-81ae-8851-e01151c01f2a" class="">
+</p><p id="22bb3bed-dae9-81b1-85bf-f80dbbbf32bc" class="">여러 언어 모델과 연결하여 <strong>구조화된 툴 호출</strong>이 가능한 에이전트 구성을 지원하는 컴포넌트입니다.</p><table id="22bb3bed-dae9-811f-91ea-d04c2365af30" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8136-95b6-e0c2c3b1c203"><th id=";XOB" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="\cwL" class="simple-table-header-color simple-table-header">표기</th><th id="pok@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-810a-af62-e60a42debc4c"><td id=";XOB" class="">llm</td><td id="\cwL" class="">LanguageModel</td><td id="pok@" class="">사용할 언어 모델</td></tr><tr id="22bb3bed-dae9-8130-bbf4-c736d7259687"><td id=";XOB" class="">tools</td><td id="\cwL" class="">List[Tool]</td><td id="pok@" class="">에이전트가 사용할 수 있는 도구 리스트</td></tr><tr id="22bb3bed-dae9-8172-bbc3-c2168ef89a15"><td id=";XOB" class="">system_message</td><td id="\cwL" class="">System Message</td><td id="pok@" class="">에이전트용 시스템 메시지</td></tr><tr id="22bb3bed-dae9-818a-b81c-c2df2feb0e6f"><td id=";XOB" class="">return_intermediate_steps</td><td id="\cwL" class="">Boolean</td><td id="pok@" class="">중간 단계 반환 여부</td></tr><tr id="22bb3bed-dae9-814a-8e8c-c13382f321bc"><td id=";XOB" class="">max_iterations</td><td id="\cwL" class="">Integer</td><td id="pok@" class="">최대 반복 횟수</td></tr><tr id="22bb3bed-dae9-81e7-ad7b-ef8c8d0dac82"><td id=";XOB" class="">max_execution_time</td><td id="\cwL" class="">Integer</td><td id="pok@" class="">최대 실행 시간(초)</td></tr><tr id="22bb3bed-dae9-81b6-a4a5-ea15b558077d"><td id=";XOB" class="">early_stopping_method</td><td id="\cwL" class="">String</td><td id="pok@" class="">조기 종료 방식</td></tr><tr id="22bb3bed-dae9-81e5-a8ce-df588edd1673"><td id=";XOB" class="">verbose</td><td id="\cwL" class="">Boolean</td><td id="pok@" class="">에이전트의 중간 생각 출력 여부</td></tr></tbody></table><table id="22bb3bed-dae9-8126-a9c7-c7d35751718b" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81dc-8c35-f1c7953b79e5"><th id="ER{T" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id="@XNK" class="simple-table-header-color simple-table-header">표기</th><th id="W`{k" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8120-b8dd-c5be9b306ab7"><td id="ER{T" class="">agent</td><td id="@XNK" class="">AgentExecutor</td><td id="W`{k" class="">Tool Calling 에이전트 인스턴스</td></tr></tbody></table><hr id="22bb3bed-dae9-8198-a520-fbd7cb391caa"/><p id="22bb3bed-dae9-8192-a01e-dcf65b8bd18f" class="">
+</p><h2 id="22bb3bed-dae9-81bd-924c-f724ced1ab2d" class="">10. XML Agent</h2><p id="22bb3bed-dae9-8160-bc31-ec0147a18e6d" class="">
+</p><p id="22bb3bed-dae9-8151-b594-e4ef79ab0760" class="">LangChain 기반의 XML 포맷 명령을 사용해 툴을 호출하는 에이전트 컴포넌트입니다.</p><table id="22bb3bed-dae9-810b-aa02-dcb023b81342" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81e5-93e1-d8cedd451515"><th id="W`@H" class="simple-table-header-color simple-table-header">입력값 (Inputs)</th><th id="ul~P" class="simple-table-header-color simple-table-header">표기</th><th id="WHfL" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-81a2-8c1a-e0a1a22c9ddd"><td id="W`@H" class="">llm</td><td id="ul~P" class="">LanguageModel</td><td id="WHfL" class="">사용할 언어 모델</td></tr><tr id="22bb3bed-dae9-81db-83eb-d94aa6f82013"><td id="W`@H" class="">user_prompt</td><td id="ul~P" class="">User Prompt</td><td id="WHfL" class="">XML 포맷 지시가 포함된 사용자 프롬프트</td></tr><tr id="22bb3bed-dae9-8187-b825-ce4f0ace2ee0"><td id="W`@H" class="">tools</td><td id="ul~P" class="">List[Tool]</td><td id="WHfL" class="">사용할 수 있는 도구 리스트</td></tr></tbody></table><table id="22bb3bed-dae9-8116-aa68-d012696efa8e" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-81df-8618-e8334269a286"><th id="uUQv" class="simple-table-header-color simple-table-header">출력값 (Outputs)</th><th id=";w@o" class="simple-table-header-color simple-table-header">표기</th><th id="mOxw" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8147-a4d5-dc9ee9930290"><td id="uUQv" class="">agent</td><td id=";w@o" class="">AgentExecutor</td><td id="mOxw" class="">XML 에이전트 인스턴스</td></tr></tbody></table><p id="22bb3bed-dae9-8120-9383-f0127aa22ba9" class="">
+</p><hr id="22bb3bed-dae9-8165-9694-c3368814a06e"/><p id="22bb3bed-dae9-8132-af7d-d33db50dde59" class="">
+</p><p id="22bb3bed-dae9-81bb-aec2-e11f22a6a37e" class="">*이 문서는 <a href="https://docs.langflow.org/components-agents">https://docs.langflow.org/components-agents</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22bb3bed-dae9-8015-8f06-fce817199e45" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,693 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Data</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80b8-9214-e10b6eb9a08b" class="page sans"><header><h1 class="page-title">Data</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22bb3bed-dae9-80dc-9202-fc2507307915" class="">데이터 (Data) 컴포넌트</h1><h3 id="22bb3bed-dae9-801c-ae05-de54e67b296e" class="">   : Components &gt; Data</h3><p id="22bb3bed-dae9-8050-babd-c77cffade07a" class="">
+</p><p id="22bb3bed-dae9-8012-b7b5-d74d9e506c11" class="">데이터 컴포넌트(Data component)는 외부 데이터 소스에서 데이터를 불러와 플로우에 입력하는 역할을 합니다.</p><p id="22bb3bed-dae9-80b3-8422-d761160bfb5b" class="">일부 데이터 컴포넌트는 데이터를 불러오는 과정에서</p><p id="22bb3bed-dae9-8053-9a41-eae5393f0213" class="">HTML 등 원시(raw) 데이터를 텍스트로 변환하거나,</p><p id="22bb3bed-dae9-80f0-894c-ed037acb8c54" class="">불러온 파일의 타입을 검증하는 등 기본적인 전처리·타입 체크를 수행합니다.</p><p id="22bb3bed-dae9-804d-8060-cd60c2fd6edc" class="">
+</p><hr id="22bb3bed-dae9-8081-9c2f-f5495b0a8a7e"/><p id="22bb3bed-dae9-8022-b696-c300de53c018" class="">
+</p><h2 id="22bb3bed-dae9-80f3-ad39-c192e9983e82" class="">1. 플로우에서 데이터 컴포넌트 사용하기</h2><p id="22bb3bed-dae9-80df-bae0-d90366df98a1" class="">
+</p><p id="22bb3bed-dae9-80fe-a5cc-d1e4588e61d4" class=""><strong>URL 데이터 컴포넌트</strong>는 여러 개의 URL로부터 콘텐츠를 불러올 수 있습니다.</p><ul id="22bb3bed-dae9-808a-b91a-eb7fb962ab76" class="bulleted-list"><li style="list-style-type:disc">컴포넌트의 <strong>URLs</strong> 입력란에 불러오고 싶은 URL을 입력하세요.</li></ul><ul id="22bb3bed-dae9-80e9-99a9-d32040884ab6" class="bulleted-list"><li style="list-style-type:disc">여러 개의 URL을 추가하려면 <strong>Add URL</strong> 버튼을 클릭하세요.</li></ul><ul id="22bb3bed-dae9-80ef-ab9c-e3be53e83879" class="bulleted-list"><li style="list-style-type:disc">또는, Message 타입 출력을 제공하는 다른 컴포넌트(예: Chat Input 컴포넌트)와 연결하여<p id="22bb3bed-dae9-8052-9814-fcc24451f97c" class="">해당 컴포넌트로부터 URL 목록을 받아올 수도 있습니다.</p></li></ul><p id="22bb3bed-dae9-809f-a580-cfc39c25bc96" class="">
+</p><p id="22bb3bed-dae9-801b-b3fc-e398b68c2d1a" class="">아래 예(문서 수집 파이프라인)에서는 URL 컴포넌트가 원시 HTML 데이터를 불러와</p><p id="22bb3bed-dae9-80f0-bd42-dbaece43f733" class="">텍스트 분할기(Text Splitter)로 전달하고,</p><p id="22bb3bed-dae9-80ee-9f73-f215b509e9d3" class="">이후 벡터 데이터베이스가 이를 임베딩 및 인덱싱합니다.</p><figure id="22bb3bed-dae9-80ea-badf-dee38c50bd6b" class="image"><a href="image%2010.png"><img style="width:2306px" src="image%2010.png"/></a></figure><p id="22bb3bed-dae9-80a8-ba52-d3b068351c57" class="">
+</p><hr id="22bb3bed-dae9-8021-a804-ec8ba65b8023"/><p id="22bb3bed-dae9-80c0-871e-c1ce1394c7be" class="">
+</p><h2 id="22bb3bed-dae9-8086-90c9-f519b56a1548" class="">2. 주요 데이터 컴포넌트별 설명</h2><p id="22bb3bed-dae9-8081-a7ab-cca3e16894ff" class="">
+</p><h3 id="22bb3bed-dae9-809a-a532-c0806c701b53" class="">API 요청 (API Request)</h3><ul id="22bb3bed-dae9-8071-9206-e1ba3e00d13d" class="bulleted-list"><li style="list-style-type:disc">이 컴포넌트는 URL 또는 cURL 명령어를 사용해 HTTP 요청을 보냅니다.</li></ul><ul id="22bb3bed-dae9-80e6-af42-f614305156d6" class="bulleted-list"><li style="list-style-type:disc"><strong>Data</strong> 출력을, 입력을 받을 수 있는 다른 컴포넌트(예: Chat Output)와 연결해 사용할 수 있습니다.</li></ul><p id="22bb3bed-dae9-802f-b767-f7f89fc7b000" class="">
+</p><figure id="22bb3bed-dae9-8030-bc78-e81bac1c8ecb" class="image"><a href="image%2011.png"><img style="width:709.984375px" src="image%2011.png"/></a></figure><p id="22bb3bed-dae9-80e8-87e7-fa6ed3ef9a5d" class=""><strong>사용 방법</strong></p><ul id="22bb3bed-dae9-8014-9d17-cfe5cc77363d" class="bulleted-list"><li style="list-style-type:disc">URLs 입력란에 엔드포인트를 입력합니다.<p id="22bb3bed-dae9-8038-b3d1-ca8cc312424b" class="">예: <code>https://dummy-json.mock.beeceptor.com/posts</code> (블로그 게시글 API)</p></li></ul><ul id="22bb3bed-dae9-8057-b914-ecf725f7b7c3" class="bulleted-list"><li style="list-style-type:disc">Method(요청 방식)에는 GET, POST, PATCH, PUT, DELETE 중 하나를 입력할 수 있습니다.</li></ul><ul id="22bb3bed-dae9-8022-8020-d1d4fef305ff" class="bulleted-list"><li style="list-style-type:disc">Use cURL 버튼을 켜면 cURL 명령어를 붙여넣는 입력란이 추가됩니다.<p id="22bb3bed-dae9-802a-be2b-da36ae19ac6e" class="">(예시: <code>curl -v https://dummy-json.mock.beeceptor.com/posts</code>)</p></li></ul><ul id="22bb3bed-dae9-800e-acf0-efa5457823d7" class="bulleted-list"><li style="list-style-type:disc">Playground에서 <strong>Run Flow</strong>를 클릭하면 요청 결과가 Result에 표시됩니다.</li></ul><p id="22bb3bed-dae9-80b7-837b-f42e43c72991" class=""><strong>입력 파라미터</strong></p><table id="22bb3bed-dae9-8087-b685-de4bb47d9056" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-807f-bbb4-ef3451c315cd"><th id="Mfc}" class="simple-table-header-color simple-table-header">이름</th><th id="@OAh" class="simple-table-header-color simple-table-header">표기</th><th id="}n}m" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80da-b95c-c6fe18621a55"><td id="Mfc}" class="">urls</td><td id="@OAh" class="">URLs</td><td id="}n}m" class="">하나 이상의 URL, 쉼표로 구분</td></tr><tr id="22bb3bed-dae9-80b8-ae49-e16579cc93ad"><td id="Mfc}" class="">curl</td><td id="@OAh" class="">cURL</td><td id="}n}m" class="">cURL 명령어 입력란</td></tr><tr id="22bb3bed-dae9-80e8-bc5b-de95cf1e2ac1"><td id="Mfc}" class="">method</td><td id="@OAh" class="">Method</td><td id="}n}m" class="">HTTP 요청 방식 (GET 등)</td></tr><tr id="22bb3bed-dae9-8087-b30e-c7e053a7fc80"><td id="Mfc}" class="">use_curl</td><td id="@OAh" class="">Use cURL</td><td id="}n}m" class="">cURL 입력 활성화 여부</td></tr><tr id="22bb3bed-dae9-80b6-ae4f-eda7adf57471"><td id="Mfc}" class="">query_params</td><td id="@OAh" class="">Query Parameters</td><td id="}n}m" class="">URL에 추가할 쿼리 파라미터</td></tr><tr id="22bb3bed-dae9-8001-8b53-e2e3b9eb87e6"><td id="Mfc}" class="">body</td><td id="@OAh" class="">Body</td><td id="}n}m" class="">POST, PATCH, PUT 요청 시 전송할 데이터(딕셔너리)</td></tr><tr id="22bb3bed-dae9-80ca-b8f8-c6bec6ce75c5"><td id="Mfc}" class="">headers</td><td id="@OAh" class="">Headers</td><td id="}n}m" class="">요청 헤더(딕셔너리)</td></tr><tr id="22bb3bed-dae9-8091-b754-c8295784e93d"><td id="Mfc}" class="">timeout</td><td id="@OAh" class="">Timeout</td><td id="}n}m" class="">요청 제한 시간(초)</td></tr><tr id="22bb3bed-dae9-8009-a2e3-cf8040939567"><td id="Mfc}" class="">follow_redirects</td><td id="@OAh" class="">Follow Redirects</td><td id="}n}m" class="">리다이렉트 허용 여부</td></tr><tr id="22bb3bed-dae9-8031-874f-cf40b2044b99"><td id="Mfc}" class="">save_to_file</td><td id="@OAh" class="">Save to File</td><td id="}n}m" class="">응답을 임시 파일로 저장할지 여부</td></tr><tr id="22bb3bed-dae9-809e-89e1-c8168ff2869e"><td id="Mfc}" class="">include_httpx_metadata</td><td id="@OAh" class="">Include HTTPx Metadata</td><td id="}n}m" class="">헤더, 상태코드 등 메타데이터 포함 여부</td></tr></tbody></table><p id="22bb3bed-dae9-805a-8b63-ee05c809c5ba" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-80dc-83aa-f845cca23f74" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8062-b14a-dbbb91cabba6"><th id="dkCD" class="simple-table-header-color simple-table-header">이름</th><th id="L^Xb" class="simple-table-header-color simple-table-header">표시 이름</th><th id="rm:\" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-805b-ac6a-ece0b9e22f31"><td id="dkCD" class="">data</td><td id="L^Xb" class="">Data</td><td id="rm:\" class="">요청 결과. source URL과 결과를 포함한 Data 객체 반환</td></tr><tr id="22bb3bed-dae9-80f4-ae79-f3640a0041f2"><td id="dkCD" class="">dataframe</td><td id="L^Xb" class="">DataFrame</td><td id="rm:\" class="">요청 결과를 표 형태로 변환</td></tr></tbody></table><hr id="22bb3bed-dae9-80cc-a847-d122b34a5524"/><h3 id="22bb3bed-dae9-80b0-a49d-f6921cdd6e52" class="">디렉토리(Directory)</h3><ul id="22bb3bed-dae9-80a8-b9c2-d7228fe1e11a" class="bulleted-list"><li style="list-style-type:disc">지정한 디렉토리에서 파일을 재귀적으로 불러옵니다.</li></ul><ul id="22bb3bed-dae9-80c9-9c56-dcc9c96b0493" class="bulleted-list"><li style="list-style-type:disc">파일 타입, 탐색 깊이, 동시처리(concurrency) 등 다양한 옵션 지원</li></ul><p id="22bb3bed-dae9-80e0-a88e-c8c2f7dc75ca" class=""><strong>입력 파라미터</strong></p><table id="22bb3bed-dae9-806a-8658-db269e9810c8" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80a1-9dc9-ea2a1e13d91e"><th id="bDcO" class="simple-table-header-color simple-table-header">입력</th><th id="s`C:" class="simple-table-header-color simple-table-header">타입</th><th id="H;FS" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80a8-a643-c077ee4a17e7"><td id="bDcO" class="">path</td><td id="s`C:" class="">MessageTextInput</td><td id="H;FS" class="">파일을 불러올 디렉토리 경로</td></tr><tr id="22bb3bed-dae9-80d8-9b9b-d6fae65fdf78"><td id="bDcO" class="">types</td><td id="s`C:" class="">MessageTextInput</td><td id="H;FS" class="">불러올 파일 타입 (미입력 시 전체)</td></tr><tr id="22bb3bed-dae9-80c3-8cf9-c0cb16202470"><td id="bDcO" class="">depth</td><td id="s`C:" class="">IntInput</td><td id="H;FS" class="">탐색 깊이</td></tr><tr id="22bb3bed-dae9-80d7-893b-f258c9574bd4"><td id="bDcO" class="">max_concurrency</td><td id="s`C:" class="">IntInput</td><td id="H;FS" class="">동시에 처리할 파일 수</td></tr><tr id="22bb3bed-dae9-8064-96e9-d1c0c46c326d"><td id="bDcO" class="">load_hidden</td><td id="s`C:" class="">BoolInput</td><td id="H;FS" class="">숨김 파일 포함 여부</td></tr><tr id="22bb3bed-dae9-8025-88bf-df42dad02fb4"><td id="bDcO" class="">recursive</td><td id="s`C:" class="">BoolInput</td><td id="H;FS" class="">하위 폴더 재귀 탐색 여부</td></tr><tr id="22bb3bed-dae9-803f-8765-f58b6fae5b17"><td id="bDcO" class="">silent_errors</td><td id="s`C:" class="">BoolInput</td><td id="H;FS" class="">에러 발생 시 예외 미발생 여부</td></tr><tr id="22bb3bed-dae9-802f-ac62-d8aaf51cc056"><td id="bDcO" class="">use_multithreading</td><td id="s`C:" class="">BoolInput</td><td id="H;FS" class="">멀티스레딩 사용 여부</td></tr></tbody></table><p id="22bb3bed-dae9-8015-8533-c93cb406800a" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-80a4-826b-f66a6359b2b4" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-807b-8920-c0c67847b027"><th id="wrMB" class="simple-table-header-color simple-table-header">출력</th><th id="iS^t" class="simple-table-header-color simple-table-header">타입</th><th id="c&gt;Kb" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80d0-875e-d5ee200ff47a"><td id="wrMB" class="">data</td><td id="iS^t" class="">List[Data]</td><td id="c&gt;Kb" class="">불러온 파일 데이터 목록</td></tr><tr id="22bb3bed-dae9-8067-b3c5-d51df9e3a22e"><td id="wrMB" class="">dataframe</td><td id="iS^t" class="">DataFrame</td><td id="c&gt;Kb" class="">표 형태로 변환된 파일 데이터</td></tr></tbody></table><hr id="22bb3bed-dae9-80e6-978a-f0488ab65837"/><h3 id="22bb3bed-dae9-80bc-b077-ce266ef4fa18" class="">파일(File)</h3><ul id="22bb3bed-dae9-807f-bfbe-e052067033f4" class="bulleted-list"><li style="list-style-type:disc">다양한 형식의 파일을 불러와 파싱 후 Data 객체로 변환</li></ul><ul id="22bb3bed-dae9-8000-9ffd-cfb6a4564518" class="bulleted-list"><li style="list-style-type:disc">멀티파일, 병렬처리, 에러 무시 등 옵션 지원</li></ul><p id="22bb3bed-dae9-8006-a68d-f908b94f3c83" class=""><strong>사용 방법</strong></p><ol type="1" id="22bb3bed-dae9-800b-a43e-fbedc80fb9a3" class="numbered-list" start="1"><li><strong>Select files</strong> 버튼 클릭</li></ol><ol type="1" id="22bb3bed-dae9-80f1-94c6-f7ddba287a56" class="numbered-list" start="2"><li>로컬 파일 선택 또는 File management로 불러온 파일 선택 후 <strong>Select file</strong> 클릭</li></ol><ol type="1" id="22bb3bed-dae9-8071-bd50-d17948505a3b" class="numbered-list" start="3"><li>불러온 파일명이 컴포넌트에 표시됨</li></ol><ul id="22bb3bed-dae9-80cc-a098-cdb2d40e14bd" class="bulleted-list"><li style="list-style-type:disc">기본 최대 지원 파일 크기는 100MB</li></ul><ul id="22bb3bed-dae9-8090-adc2-caf17011814d" class="bulleted-list"><li style="list-style-type:disc">변경하려면 <code>-max-file-size-upload</code> 옵션 참고</li></ul><p id="22bb3bed-dae9-80b5-8683-c37c52c45e66" class=""><strong>입력 파라미터</strong></p><table id="22bb3bed-dae9-80ad-89b9-e0f25c2d0665" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-806f-90c9-e2ff97e25873"><th id="IOOD" class="simple-table-header-color simple-table-header">이름</th><th id="yL\U" class="simple-table-header-color simple-table-header">표기</th><th id="WAlC" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80ac-ac16-d11a9378462f"><td id="IOOD" class="">path</td><td id="yL\U" class="">Files</td><td id="WAlC" class="">불러올 파일 경로. 개별 파일 또는 압축파일(아카이브) 지원</td></tr><tr id="22bb3bed-dae9-80ff-bffd-dfb36dd3b216"><td id="IOOD" class="">file_path</td><td id="yL\U" class="">Server File Path</td><td id="WAlC" class="">서버 내 파일 경로가 포함된 Data 객체 또는 Message 객체</td></tr><tr id="22bb3bed-dae9-80d1-9653-cf78f86a2d26"><td id="IOOD" class="">separator</td><td id="yL\U" class="">Separator</td><td id="WAlC" class="">Message 형식 출력 시 구분자</td></tr><tr id="22bb3bed-dae9-802a-ba70-febc6cb37e72"><td id="IOOD" class="">silent_errors</td><td id="yL\U" class="">Silent Errors</td><td id="WAlC" class="">에러 발생 시 예외 미발생</td></tr><tr id="22bb3bed-dae9-8091-906a-e1457386735d"><td id="IOOD" class="">delete_server_file_after_processing</td><td id="yL\U" class="">Delete Server File After Processing</td><td id="WAlC" class="">처리 후 서버 파일 삭제 여부</td></tr><tr id="22bb3bed-dae9-803f-9210-d09c057ca655"><td id="IOOD" class="">ignore_unsupported_extensions</td><td id="yL\U" class="">Ignore Unsupported Extensions</td><td id="WAlC" class="">지원하지 않는 확장자 파일 무시</td></tr><tr id="22bb3bed-dae9-800c-85d3-c51254f06268"><td id="IOOD" class="">ignore_unspecified_files</td><td id="yL\U" class="">Ignore Unspecified Files</td><td id="WAlC" class="">file_path 없는 Data 무시</td></tr><tr id="22bb3bed-dae9-80f6-8f3a-ca95ac339bbc"><td id="IOOD" class="">use_multithreading</td><td id="yL\U" class="">[Deprecated] Use Multithreading</td><td id="WAlC" class="">병렬처리 옵션(권장X)</td></tr><tr id="22bb3bed-dae9-8037-8ecb-c2b2df48fe69"><td id="IOOD" class="">concurrency_multithreading</td><td id="yL\U" class="">Processing Concurrency</td><td id="WAlC" class="">병렬처리 시 동시 처리 파일 수(기본값 1)</td></tr></tbody></table><p id="22bb3bed-dae9-804a-b758-e7665dae9bb3" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-80a7-b9d9-efcf226d8c3b" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8005-960d-d8f6ea1b072c"><th id="YUVE" class="simple-table-header-color simple-table-header">이름</th><th id="ODAR" class="simple-table-header-color simple-table-header">표기</th><th id="|D&gt;E" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80c6-9817-f66d3e8c70ac"><td id="YUVE" class="">data</td><td id="ODAR" class="">Data</td><td id="|D&gt;E" class="">파싱된 파일 내용(Data 객체)</td></tr><tr id="22bb3bed-dae9-80dc-9bd2-c3e2867c78a2"><td id="YUVE" class="">dataframe</td><td id="ODAR" class="">DataFrame</td><td id="|D&gt;E" class="">표 형태로 변환된 파일 내용</td></tr><tr id="22bb3bed-dae9-8075-98ee-cc220b933097"><td id="YUVE" class="">message</td><td id="ODAR" class="">Message</td><td id="|D&gt;E" class="">Message 객체로 반환된 파일 내용</td></tr></tbody></table><p id="22bb3bed-dae9-808f-9a14-df56055b49ce" class=""><strong>지원 파일 유형</strong></p><ul id="22bb3bed-dae9-800b-9c65-d0f8e13b0a7c" class="bulleted-list"><li style="list-style-type:disc">텍스트(.txt), 마크다운(.md, .mdx), CSV(.csv), JSON(.json), YAML(.yaml, .yml), XML(.xml), HTML(.html, .htm)</li></ul><ul id="22bb3bed-dae9-8011-a04f-eb7075f7825f" class="bulleted-list"><li style="list-style-type:disc">PDF(.pdf), Word(.docx), Python(.py), Shell(.sh), SQL(.sql), JavaScript(.js), TypeScript(.ts, .tsx)</li></ul><ul id="22bb3bed-dae9-801f-9916-c67446a7ac34" class="bulleted-list"><li style="list-style-type:disc">아카이브(.zip, .tar, .tgz, .bz2, .gz)</li></ul><hr id="22bb3bed-dae9-80cc-8251-c16f13f5095d"/><h3 id="22bb3bed-dae9-804a-aa7e-e6eb34e2c1fd" class="">SQL 쿼리(SQL Query)</h3><ul id="22bb3bed-dae9-8081-91df-cf282ae7ecb3" class="bulleted-list"><li style="list-style-type:disc">지정한 데이터베이스에 SQL 쿼리를 실행하는 컴포넌트</li></ul><p id="22bb3bed-dae9-8081-a8d9-d012e8da16e2" class=""><strong>입력 파라미터</strong></p><table id="22bb3bed-dae9-8020-8139-ff76ea50243e" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8076-9d85-fcfc63498a68"><th id="=VOK" class="simple-table-header-color simple-table-header">이름</th><th id="qst[" class="simple-table-header-color simple-table-header">표기</th><th id="XpTh" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-802a-9f02-f799ece5536b"><td id="=VOK" class="">query</td><td id="qst[" class="">Query</td><td id="XpTh" class="">실행할 SQL 쿼리</td></tr><tr id="22bb3bed-dae9-80c3-9db7-daaf96e0cf19"><td id="=VOK" class="">database_url</td><td id="qst[" class="">Database URL</td><td id="XpTh" class="">데이터베이스 접속 URL</td></tr><tr id="22bb3bed-dae9-80a3-916b-e722aa5a83dd"><td id="=VOK" class="">include_columns</td><td id="qst[" class="">Include Columns</td><td id="XpTh" class="">결과에 컬럼 포함 여부</td></tr><tr id="22bb3bed-dae9-8019-92c1-efed70550445"><td id="=VOK" class="">passthrough</td><td id="qst[" class="">Passthrough</td><td id="XpTh" class="">에러 발생 시 쿼리문 그대로 반환(예외 발생X)</td></tr><tr id="22bb3bed-dae9-80a5-9491-ece8197b31e9"><td id="=VOK" class="">add_error</td><td id="qst[" class="">Add Error</td><td id="XpTh" class="">에러 내용을 결과에 포함</td></tr></tbody></table><p id="22bb3bed-dae9-80d2-aa81-f266fee40bb8" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-80cc-8f9f-f3da3048f81f" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80d8-8510-f69a9eb8243e"><th id="yQdi" class="simple-table-header-color simple-table-header">이름</th><th id="ERBE" class="simple-table-header-color simple-table-header">표기</th><th id="]y~Z" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8029-b0e1-f22cf9d03b01"><td id="yQdi" class="">result</td><td id="ERBE" class="">Result</td><td id="]y~Z" class="">SQL 쿼리 실행 결과</td></tr></tbody></table><hr id="22bb3bed-dae9-80cb-9ceb-f5f4aede9533"/><h3 id="22bb3bed-dae9-80d9-a4c9-d0584a87bfb8" class="">URL</h3><ul id="22bb3bed-dae9-806b-8213-f3f6e7cecd78" class="bulleted-list"><li style="list-style-type:disc">여러 URL에서 콘텐츠를 불러오고,<p id="22bb3bed-dae9-8043-bf0f-d5e1331f953f" class="">텍스트나 원시 HTML 등 다양한 형식으로 반환할 수 있는 컴포넌트</p><figure id="22bb3bed-dae9-8020-b601-d0931f62cfd0" class="image"><a href="image%2012.png"><img style="width:681.984375px" src="image%2012.png"/></a></figure></li></ul><p id="22bb3bed-dae9-809c-a68c-eb5cf7b072af" class=""><strong>사용 방법</strong></p><ul id="22bb3bed-dae9-804d-9b15-fc1308eb375f" class="bulleted-list"><li style="list-style-type:disc">URLs 입력란에 불러올 URL 입력(여러 개 추가 가능)</li></ul><ul id="22bb3bed-dae9-80e1-a5e1-c4f615142bd6" class="bulleted-list"><li style="list-style-type:disc">Max Depth 옵션으로 크롤링(탐색) 깊이 지정(예: 1이면 해당 페이지만, 2면 한 단계 링크까지)</li></ul><ul id="22bb3bed-dae9-802b-b5be-e437d8c2f566" class="bulleted-list"><li style="list-style-type:disc">연결된 컴포넌트에 따라 DataFrame 또는 Message(텍스트) 등 원하는 형식으로 결과 전달</li></ul><ul id="22bb3bed-dae9-80d8-ae17-c69afd5ebc35" class="bulleted-list"><li style="list-style-type:disc">크롤링 범위를 같은 도메인으로 제한하거나, 비동기 로딩(use_async) 등 고급 옵션 사용 가능</li></ul><p id="22bb3bed-dae9-80a5-a9c2-e4ea9292cf21" class=""><strong>출력 연결 예시</strong></p><ul id="22bb3bed-dae9-8021-9220-ec92f600d579" class="bulleted-list"><li style="list-style-type:disc">URL → DataFrame → Chat Output : 표 형태 결과를 채팅창에 출력</li></ul><ul id="22bb3bed-dae9-8049-a859-cc10c7b5549d" class="bulleted-list"><li style="list-style-type:disc">URL → Message → Regex Extractor : HTML 원문에서 정규표현식으로 원하는 정보 추출</li></ul><figure id="22bb3bed-dae9-80e5-8dc4-e92325d125b4" class="image"><a href="image%2013.png"><img style="width:709.984375px" src="image%2013.png"/></a></figure><p id="22bb3bed-dae9-8071-8753-c71c25d9a4d2" class=""><strong>입력 파라미터</strong></p><table id="22bb3bed-dae9-80e6-81c1-fde6a44d5a3b" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8045-8158-dbe5d27da1b6"><th id="?_p_" class="simple-table-header-color simple-table-header">이름</th><th id="PhgA" class="simple-table-header-color simple-table-header">표기</th><th id="@Els" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-802e-b25b-d7740a134b53"><td id="?_p_" class="">urls</td><td id="PhgA" class="">URLs</td><td id="@Els" class="">불러올 URL(들) 입력, &#x27;+&#x27;로 추가</td></tr><tr id="22bb3bed-dae9-801e-a00d-e37de26f741d"><td id="?_p_" class="">max_depth</td><td id="PhgA" class="">Max Depth</td><td id="@Els" class="">크롤링 깊이(페이지 클릭 단계)</td></tr><tr id="22bb3bed-dae9-809d-8b4f-cd08cbb9601c"><td id="?_p_" class="">prevent_outside</td><td id="PhgA" class="">Prevent Outside</td><td id="@Els" class="">같은 도메인만 크롤링</td></tr><tr id="22bb3bed-dae9-80ab-ac05-e8262e5fc757"><td id="?_p_" class="">use_async</td><td id="PhgA" class="">Use Async</td><td id="@Els" class="">비동기 로딩 활성화</td></tr><tr id="22bb3bed-dae9-807b-a368-cf20ae540992"><td id="?_p_" class="">format</td><td id="PhgA" class="">Output Format</td><td id="@Els" class="">출력 형식(텍스트/HTML 등)</td></tr><tr id="22bb3bed-dae9-804f-b568-c5cdc5833f07"><td id="?_p_" class="">timeout</td><td id="PhgA" class="">Timeout</td><td id="@Els" class="">요청 제한 시간(초)</td></tr><tr id="22bb3bed-dae9-8006-a2d4-c04028885bff"><td id="?_p_" class="">headers</td><td id="PhgA" class="">Headers</td><td id="@Els" class="">요청 헤더(딕셔너리)</td></tr></tbody></table><p id="22bb3bed-dae9-8008-b4c2-ee1a5d17af86" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-80f9-ac5c-d524ef9daab5" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8080-ab72-e2d24c6198c2"><th id="ba}i" class="simple-table-header-color simple-table-header">이름</th><th id="OxAK" class="simple-table-header-color simple-table-header">표기</th><th id="P\:~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80b4-b994-e4bc9f75f6fb"><td id="ba}i" class="">data</td><td id="OxAK" class="">Data</td><td id="P\:~" class="">불러온 데이터 및 메타데이터(List[Data])</td></tr><tr id="22bb3bed-dae9-8044-8a10-ead381f28dfa"><td id="ba}i" class="">text</td><td id="OxAK" class="">Message</td><td id="P\:~" class="">포맷된 텍스트</td></tr><tr id="22bb3bed-dae9-807f-a03f-ff5c1f3bfb1f"><td id="ba}i" class="">dataframe</td><td id="OxAK" class="">DataFrame</td><td id="P\:~" class="">표 형태로 변환된 콘텐츠</td></tr></tbody></table><hr id="22bb3bed-dae9-8001-afb5-d992f96c7787"/><h3 id="22bb3bed-dae9-801b-8c1b-c847463de4f5" class="">웹훅(Webhook)</h3><ul id="22bb3bed-dae9-8085-bb5b-caa92f98c558" class="bulleted-list"><li style="list-style-type:disc">외부 HTTP POST 요청이 들어오면 플로우를 자동으로 실행하는 트리거 컴포넌트</li></ul><ul id="22bb3bed-dae9-80a5-8f87-e81a7b2a85f6" class="bulleted-list"><li style="list-style-type:disc">입력이 유효한 JSON이 아니면 payload 객체로 감싸 처리함</li></ul><ul id="22bb3bed-dae9-80d6-8819-e9c1eb8eb306" class="bulleted-list"><li style="list-style-type:disc">Webhook 컴포넌트를 플로우에 추가하면 API 액세스 패널에 Webhook cURL 코드가 노출됨</li></ul><p id="22bb3bed-dae9-803d-a2fb-edb9b5e3fc08" class=""><strong>활용 예시</strong></p><ul id="22bb3bed-dae9-800d-8819-e7c926335609" class="bulleted-list"><li style="list-style-type:disc">Webhook → Parser → Chat Output 으로 연결하면<p id="22bb3bed-dae9-8092-adb2-fedc5c2bdf9e" class="">외부에서 POST로 데이터를 보내 플로우를 즉시 실행하고,</p><p id="22bb3bed-dae9-8046-9cba-ee86c76e7a4a" class="">결과를 채팅창에 바로 확인 가능</p></li></ul><p id="22bb3bed-dae9-806a-81f8-f5f6e678a74c" class=""><strong>입력 파라미터</strong></p><table id="22bb3bed-dae9-8053-ae4d-ecc77df1a458" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-802d-bc16-ddacba84d7ef"><th id="t{_O" class="simple-table-header-color simple-table-header">이름</th><th id="?l\c" class="simple-table-header-color simple-table-header">표기</th><th id="rzjW" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-809b-b392-d18f7f4d62e0"><td id="t{_O" class="">data</td><td id="?l\c" class="">Payload</td><td id="rzjW" class="">HTTP POST로 외부 시스템에서 받은 데이터</td></tr><tr id="22bb3bed-dae9-8091-9995-d9d1e4fe1e4b"><td id="t{_O" class="">curl</td><td id="?l\c" class="">cURL</td><td id="rzjW" class="">해당 Webhook 요청용 cURL 명령 템플릿</td></tr><tr id="22bb3bed-dae9-8004-a699-f5ad4e340a2c"><td id="t{_O" class="">endpoint</td><td id="?l\c" class="">Endpoint</td><td id="rzjW" class="">Webhook가 요청을 받는 URL 엔드포인트</td></tr></tbody></table><p id="22bb3bed-dae9-8067-ab3c-ea3ce8da6c7b" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-800e-b38c-f6231ebeb4d5" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8005-81df-f2eec72aac28"><th id="D&gt;PI" class="simple-table-header-color simple-table-header">이름</th><th id="Lo`p" class="simple-table-header-color simple-table-header">표기</th><th id=";OG_" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-801c-ac7c-ec4551c3cb7d"><td id="D&gt;PI" class="">output_data</td><td id="Lo`p" class="">Data</td><td id=";OG_" class="">처리된 데이터. 입력이 없으면 빈 Data 반환, 유효 JSON 아닐 경우 payload로 감싸 반환</td></tr></tbody></table><hr id="22bb3bed-dae9-80c7-936c-db6846ae15e0"/><p id="22bb3bed-dae9-80a6-800f-d84de4453ec6" class="">
+</p><h2 id="22bb3bed-dae9-8002-b0ae-de7aead36b8c" class="">3. 레거시(구버전) 컴포넌트</h2><p id="22bb3bed-dae9-808a-be96-d66218eef051" class="">
+</p><ul id="22bb3bed-dae9-808a-a67b-fc7760288a47" class="bulleted-list"><li style="list-style-type:disc">아래 컴포넌트들은 더 이상 공식 지원되지 않지만 사용할 수는 있습니다.</li></ul><h3 id="22bb3bed-dae9-80b8-8f06-c36425d27267" class="">Gmail Loader</h3><ul id="22bb3bed-dae9-8056-9124-deaa91d0149b" class="bulleted-list"><li style="list-style-type:disc">Gmail에서 인증 정보 및 필터 조건에 따라 이메일을 불러오는 컴포넌트</li></ul><p id="22bb3bed-dae9-80cb-a29d-c47071dfbe3b" class=""><strong>입력</strong></p><table id="22bb3bed-dae9-80a4-854e-fa18a213b8e5" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8019-b07c-d817930953ac"><th id="uM@U" class="simple-table-header-color simple-table-header">입력</th><th id="yBz[" class="simple-table-header-color simple-table-header">타입</th><th id="G~=d" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80a2-8eb4-de1d6005c7e7"><td id="uM@U" class="">json_string</td><td id="yBz[" class="">SecretStrInput</td><td id="G~=d" class="">OAuth 2.0 토큰 정보가 담긴 JSON 문자열</td></tr><tr id="22bb3bed-dae9-8027-af78-ed1872a5d8f8"><td id="uM@U" class="">label_ids</td><td id="yBz[" class="">MessageTextInput</td><td id="G~=d" class="">필터링할 라벨 ID(쉼표로 구분)</td></tr><tr id="22bb3bed-dae9-809c-afce-f011730118dc"><td id="uM@U" class="">max_results</td><td id="yBz[" class="">MessageTextInput</td><td id="G~=d" class="">불러올 이메일 최대 개수</td></tr></tbody></table><p id="22bb3bed-dae9-8032-b2b1-c267700aa933" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-805d-a2ed-df596c55b22b" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-800b-8b9e-dc403e4897a1"><th id="X@pW" class="simple-table-header-color simple-table-header">출력</th><th id="E`Zw" class="simple-table-header-color simple-table-header">타입</th><th id="ZM|A" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8023-b767-d270a175b8a5"><td id="X@pW" class="">data</td><td id="E`Zw" class="">Data</td><td id="ZM|A" class="">불러온 이메일 데이터</td></tr></tbody></table><hr id="22bb3bed-dae9-80c9-86c3-e08ab680a64b"/><h3 id="22bb3bed-dae9-80f5-99e4-d6866709212d" class="">Google Drive Loader</h3><ul id="22bb3bed-dae9-80b7-b1a1-d3007607f8cf" class="bulleted-list"><li style="list-style-type:disc">Google Drive에서 인증 정보와 문서 ID로 문서를 불러오는 컴포넌트</li></ul><p id="22bb3bed-dae9-8033-8b51-d0b39f6e1e78" class=""><strong>입력</strong></p><table id="22bb3bed-dae9-800a-b6d3-c7744741f224" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80c1-99d6-fde74e6dc061"><th id="}|\b" class="simple-table-header-color simple-table-header">입력</th><th id="B:sF" class="simple-table-header-color simple-table-header">타입</th><th id="eisN" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8027-9986-dc09afae1232"><td id="}|\b" class="">json_string</td><td id="B:sF" class="">SecretStrInput</td><td id="eisN" class="">OAuth 2.0 토큰 정보가 담긴 JSON 문자열</td></tr><tr id="22bb3bed-dae9-80e5-8ea2-e1979caef6ea"><td id="}|\b" class="">document_id</td><td id="B:sF" class="">MessageTextInput</td><td id="eisN" class="">불러올 구글 드라이브 문서 ID</td></tr></tbody></table><p id="22bb3bed-dae9-80df-b810-cc7c09be5629" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-80b5-8e4a-f10a7383215a" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80a2-8602-f546dd66b6e4"><th id="dEP}" class="simple-table-header-color simple-table-header">출력</th><th id="V{}F" class="simple-table-header-color simple-table-header">타입</th><th id="zIGy" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8035-b6ea-d4217a63f160"><td id="dEP}" class="">docs</td><td id="V{}F" class="">Data</td><td id="zIGy" class="">불러온 문서 데이터</td></tr></tbody></table><hr id="22bb3bed-dae9-8078-a798-c075bcc0c85e"/><h3 id="22bb3bed-dae9-8030-9eb1-c026d66463e1" class="">Google Drive Search</h3><ul id="22bb3bed-dae9-80d9-85ed-eb43e729b710" class="bulleted-list"><li style="list-style-type:disc">Google Drive에서 인증 정보 및 검색 조건으로 파일 검색</li></ul><p id="22bb3bed-dae9-8070-aa8e-e5fd4b8b990c" class=""><strong>입력</strong></p><table id="22bb3bed-dae9-8083-9d2d-d8615a90c8c2" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8046-9d59-f47097e30578"><th id="w;EO" class="simple-table-header-color simple-table-header">입력</th><th id="ofv[" class="simple-table-header-color simple-table-header">타입</th><th id="c\T:" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-801e-b2b7-e7e72d5fefcf"><td id="w;EO" class="">token_string</td><td id="ofv[" class="">SecretStrInput</td><td id="c\T:" class="">OAuth 2.0 토큰 정보가 담긴 JSON 문자열</td></tr><tr id="22bb3bed-dae9-801e-aaae-fbdf2732b619"><td id="w;EO" class="">query_item</td><td id="ofv[" class="">DropdownInput</td><td id="c\T:" class="">검색할 필드</td></tr><tr id="22bb3bed-dae9-8053-b27a-efb5ef31b513"><td id="w;EO" class="">valid_operator</td><td id="ofv[" class="">DropdownInput</td><td id="c\T:" class="">쿼리 연산자</td></tr><tr id="22bb3bed-dae9-8098-a47e-cbdab5cf8877"><td id="w;EO" class="">search_term</td><td id="ofv[" class="">MessageTextInput</td><td id="c\T:" class="">검색할 값</td></tr><tr id="22bb3bed-dae9-800e-a428-d71ea65355e7"><td id="w;EO" class="">query_string</td><td id="ofv[" class="">MessageTextInput</td><td id="c\T:" class="">검색용 쿼리 문자열</td></tr></tbody></table><p id="22bb3bed-dae9-80ff-98f2-fa203cdc6bda" class=""><strong>출력</strong></p><table id="22bb3bed-dae9-8073-8fca-e8a5adf11ec6" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80cd-8a28-d7321ff5ed25"><th id="&lt;vPh" class="simple-table-header-color simple-table-header">출력</th><th id="nwCX" class="simple-table-header-color simple-table-header">타입</th><th id="ExO^" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8000-bd65-e1f49736e06c"><td id="&lt;vPh" class="">doc_urls</td><td id="nwCX" class="">List[str]</td><td id="ExO^" class="">검색된 문서의 URL</td></tr><tr id="22bb3bed-dae9-808f-8dcf-f6e678e89435"><td id="&lt;vPh" class="">doc_ids</td><td id="nwCX" class="">List[str]</td><td id="ExO^" class="">검색된 문서의 ID</td></tr><tr id="22bb3bed-dae9-80e6-be93-cfb60998a1f7"><td id="&lt;vPh" class="">doc_titles</td><td id="nwCX" class="">List[str]</td><td id="ExO^" class="">검색된 문서의 제목</td></tr><tr id="22bb3bed-dae9-8046-82ff-e5722f94a3e7"><td id="&lt;vPh" class="">data</td><td id="nwCX" class="">Data</td><td id="ExO^" class="">문서 제목과 URL을 구조화된 데이터로 반환</td></tr></tbody></table><hr id="22bb3bed-dae9-807e-99e6-e57e8049811b"/><p id="22bb3bed-dae9-80b2-9697-fb3e6b5cf19a" class="">
+</p><p id="22bb3bed-dae9-807b-958d-cff952d0e6f3" class="">*이 문서는 <a href="https://docs.langflow.org/components-data">https://docs.langflow.org/components-data</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22bb3bed-dae9-8007-982e-c44d2a39610e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

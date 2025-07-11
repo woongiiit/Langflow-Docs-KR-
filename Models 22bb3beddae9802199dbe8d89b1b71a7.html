@@ -1,0 +1,731 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Models</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8021-99db-e8d89b1b71a7" class="page sans"><header><h1 class="page-title">Models</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22cb3bed-dae9-80cd-9c4f-ee5b34b06116" class="">모델 (Model) 컴포넌트</h1><h3 id="22cb3bed-dae9-8012-8509-f6ec08942005" class="">: Components &gt; Models</h3><p id="22cb3bed-dae9-803c-8515-dfa8a0c9ea79" class="">
+</p><p id="22cb3bed-dae9-8020-bbc8-fbe744a3b062" class="">모델 컴포넌트는 대형 언어 모델(LLM)을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8079-b5e6-c130f316a4e0" class="">파라미터에 대한 자세한 사항은 각 컴포넌트의 문서를 참고하세요.</p><p id="22cb3bed-dae9-8064-b6d6-d1f6265984c5" class="">
+</p><h2 id="22cb3bed-dae9-804c-a42f-d041e1bdef92" class="">플로우에서 모델 컴포넌트 사용하기</h2><p id="22cb3bed-dae9-803d-9a06-f17d3ffb5546" class="">
+</p><p id="22cb3bed-dae9-800d-9be9-c09e9b3c284a" class="">모델 컴포넌트는 텍스트 생성을 위한 입력(input)과 프롬프트(prompt)를 받아, 생성된 텍스트를 출력 컴포넌트로 전송합니다.</p><p id="22cb3bed-dae9-806e-b026-d7d04b10616c" class="">모델 출력은 Language Model 포트로 전송된 후 Parse Data 컴포넌트로 전달되어 구조화된 데이터 객체로 파싱될 수도 있습니다.</p><p id="22cb3bed-dae9-8081-b8c7-f8c5cf5397c3" class="">아래 예시는 챗봇을 OpenAI 모델을 사용해 만든 플로우입니다. 자세한 내용은 <a href="https://docs.langflow.org/basic-prompting">Basic prompting flow</a>를 참조하세요.</p><figure id="22cb3bed-dae9-8036-8d0e-dddab065d562" class="image"><a href="image%2027.png"><img style="width:2500px" src="image%2027.png"/></a></figure><hr id="22cb3bed-dae9-803c-928e-fa7e7b02f3c6"/><p id="22cb3bed-dae9-8076-a7f4-efa1edf86d9d" class="">
+</p><h2 id="22cb3bed-dae9-801e-ad42-e7e80d22a980" class="">AIML</h2><p id="22cb3bed-dae9-8010-82f7-d443ac7cf08a" class="">
+</p><p id="22cb3bed-dae9-80e3-a4e4-c12f83649e06" class="">이 컴포넌트는 AIML API를 사용하여 ChatOpenAI 모델 인스턴스를 생성합니다.</p><p id="22cb3bed-dae9-8064-8a42-c57ca0f553cd" class="">자세한 내용은 <a href="https://docs.aimlapi.com/">AIML 문서</a>를 참고하세요.</p><p id="22cb3bed-dae9-80df-a3ac-e119468f8b8f" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80f2-b6f8-f61595241d6c" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80b4-8b8e-c244b47a6093" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8053-8171-c8ff12a53b86"><th id="SbOt" class="simple-table-header-color simple-table-header">이름</th><th id="D&gt;Rl" class="simple-table-header-color simple-table-header">타입</th><th id="NW:s" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a7-826e-f8363054308b"><td id="SbOt" class="">max_tokens</td><td id="D&gt;Rl" class="">Integer</td><td id="NW:s" class="">생성할 토큰의 최대 개수입니다. 0으로 설정하면 제한이 없습니다. 범위: 0–128000.</td></tr><tr id="22cb3bed-dae9-8054-995d-caec1432fd6f"><td id="SbOt" class="">model_kwargs</td><td id="D&gt;Rl" class="">Dictionary</td><td id="NW:s" class="">모델에 전달할 추가 키워드 인수입니다.</td></tr><tr id="22cb3bed-dae9-8050-94d6-f3bef8ee0a5f"><td id="SbOt" class="">model_name</td><td id="D&gt;Rl" class="">String</td><td id="NW:s" class="">사용할 AIML 모델 이름입니다. AIML_CHAT_MODELS에 사전 정의된 옵션을 제공합니다.</td></tr><tr id="22cb3bed-dae9-804c-bf45-cff2ad0ac008"><td id="SbOt" class="">aiml_api_base</td><td id="D&gt;Rl" class="">String</td><td id="NW:s" class="">AIML API의 기본 URL입니다. 기본값: <a href="https://api.aimlapi.com/">https://api.aimlapi.com</a></td></tr><tr id="22cb3bed-dae9-803b-96ea-c42ba97bb2aa"><td id="SbOt" class="">api_key</td><td id="D&gt;Rl" class="">SecretString</td><td id="NW:s" class="">모델에 사용할 AIML API 키입니다.</td></tr><tr id="22cb3bed-dae9-803c-8a84-c9b2f31b9528"><td id="SbOt" class="">temperature</td><td id="D&gt;Rl" class="">Float</td><td id="NW:s" class="">출력의 무작위성을 제어합니다. 기본값: 0.1</td></tr></tbody></table><p id="22cb3bed-dae9-8046-bc46-d0beea2da224" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8089-ac57-c60a37d12e5f" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8027-9aef-d916eb9113ea"><th id="&gt;`FR" class="simple-table-header-color simple-table-header">이름</th><th id="~__|" class="simple-table-header-color simple-table-header">타입</th><th id="L?X[" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ff-aec9-d275cb93722f"><td id="&gt;`FR" class="">model</td><td id="~__|" class="">LanguageModel</td><td id="L?X[" class="">지정된 파라미터로 구성된 ChatOpenAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80c9-8229-c8264d216696"/><p id="22cb3bed-dae9-8029-a059-eb459a12550d" class="">
+</p><h2 id="22cb3bed-dae9-8018-8310-d70a1eb9a291" class="">Amazon Bedrock</h2><p id="22cb3bed-dae9-803a-91ed-c1da690e81ca" class="">
+</p><p id="22cb3bed-dae9-801c-ba2b-c293b318a994" class="">이 컴포넌트는 Amazon Bedrock LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-809d-a6ca-c281058509c1" class="">자세한 내용은 <a href="https://docs.aws.amazon.com/bedrock">Amazon Bedrock</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8052-ba64-eff08b1218e1" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8087-bcaf-c2706049f646" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8006-ac2c-f3bff427b502" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8061-9f7d-c6f1ac811e4b"><th id="cyW_" class="simple-table-header-color simple-table-header">이름</th><th id="zWvY" class="simple-table-header-color simple-table-header">타입</th><th id="\eQb" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8036-9d2b-c9356f76eb60"><td id="cyW_" class="">model_id</td><td id="zWvY" class="">String</td><td id="\eQb" class="">사용할 Amazon Bedrock 모델의 ID입니다. 다양한 모델 옵션을 제공합니다.</td></tr><tr id="22cb3bed-dae9-80c5-9344-db89926c8088"><td id="cyW_" class="">aws_access_key</td><td id="zWvY" class="">SecretString</td><td id="\eQb" class="">AWS 인증을 위한 Access Key입니다.</td></tr><tr id="22cb3bed-dae9-8078-911d-f7c264589780"><td id="cyW_" class="">aws_secret_key</td><td id="zWvY" class="">SecretString</td><td id="\eQb" class="">AWS 인증을 위한 Secret Key입니다.</td></tr><tr id="22cb3bed-dae9-80b6-ac0d-e1f14ae75345"><td id="cyW_" class="">aws_session_token</td><td id="zWvY" class="">SecretString</td><td id="\eQb" class="">AWS 계정 세션 토큰입니다.</td></tr><tr id="22cb3bed-dae9-8039-bc0c-e9cc7efd7e8d"><td id="cyW_" class="">credentials_profile_name</td><td id="zWvY" class="">String</td><td id="\eQb" class="">사용할 AWS 자격 증명 프로파일 이름입니다.</td></tr><tr id="22cb3bed-dae9-8092-92a3-dd8c81db2550"><td id="cyW_" class="">region_name</td><td id="zWvY" class="">String</td><td id="\eQb" class="">AWS 리전 이름입니다. 기본값: us-east-1.</td></tr><tr id="22cb3bed-dae9-80eb-9be8-ea22f6d322b2"><td id="cyW_" class="">model_kwargs</td><td id="zWvY" class="">Dictionary</td><td id="\eQb" class="">모델에 전달할 추가 키워드 인수입니다.</td></tr><tr id="22cb3bed-dae9-80e5-aaac-de620e5a448f"><td id="cyW_" class="">endpoint_url</td><td id="zWvY" class="">String</td><td id="\eQb" class="">Bedrock 서비스의 사용자 지정 엔드포인트 URL입니다.</td></tr></tbody></table><p id="22cb3bed-dae9-802e-b08c-ece9376d7612" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80e7-bad4-e12cf2da2445" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a0-88c6-dcda95809ecd"><th id="PE{&gt;" class="simple-table-header-color simple-table-header">이름</th><th id="}BaP" class="simple-table-header-color simple-table-header">타입</th><th id="V:ni" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8063-b0b5-ccf46a4bc9e0"><td id="PE{&gt;" class="">model</td><td id="}BaP" class="">LanguageModel</td><td id="V:ni" class="">지정된 파라미터로 구성된 ChatBedrock 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8061-9997-fa508dc73b11"/><p id="22cb3bed-dae9-80e7-8e8f-e4609d74f923" class="">
+</p><h2 id="22cb3bed-dae9-8000-b078-e5664440ff69" class="">Anthropic</h2><p id="22cb3bed-dae9-8051-bd28-ed504d3e101f" class="">
+</p><p id="22cb3bed-dae9-80c4-9034-dc0d43d12a15" class="">이 컴포넌트는 Anthropic Chat 및 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80c5-b44b-c4c7f01f4c48" class="">자세한 내용은 <a href="https://docs.anthropic.com/en/docs/welcome">Anthropic</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8037-976b-c1b7cc7007d1" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8000-b22f-e2120ed2b3f2" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-804b-90f5-c2b8bab12a94" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-808b-b740-dd480f4fe0c3"><th id="^oco" class="simple-table-header-color simple-table-header">이름</th><th id="ha&gt;W" class="simple-table-header-color simple-table-header">타입</th><th id="RtxN" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c7-a4fe-dfc793412c39"><td id="^oco" class="">max_tokens</td><td id="ha&gt;W" class="">Integer</td><td id="RtxN" class="">생성할 최대 토큰 개수입니다. 0으로 설정하면 제한이 없습니다. 기본값: 4096.</td></tr><tr id="22cb3bed-dae9-80c8-a83f-d453f1eb575e"><td id="^oco" class="">model</td><td id="ha&gt;W" class="">String</td><td id="RtxN" class="">사용할 Anthropic 모델 이름입니다. Claude 3 계열 등 다양한 옵션이 있습니다.</td></tr><tr id="22cb3bed-dae9-80c3-8e5f-c1610f329035"><td id="^oco" class="">anthropic_api_key</td><td id="ha&gt;W" class="">SecretString</td><td id="RtxN" class="">인증을 위한 Anthropic API 키입니다.</td></tr><tr id="22cb3bed-dae9-80dc-bc50-f624f41f1399"><td id="^oco" class="">temperature</td><td id="ha&gt;W" class="">Float</td><td id="RtxN" class="">출력의 무작위성을 제어합니다. 기본값: 0.1</td></tr><tr id="22cb3bed-dae9-809d-b64b-c11699f83d99"><td id="^oco" class="">anthropic_api_url</td><td id="ha&gt;W" class="">String</td><td id="RtxN" class="">Anthropic API 엔드포인트입니다. 지정하지 않으면 <a href="https://api.anthropic.xn--com-5k0o/">https://api.anthropic.com이</a> 기본값입니다.</td></tr><tr id="22cb3bed-dae9-80df-bc76-f2f06a4e71b7"><td id="^oco" class="">prefill</td><td id="ha&gt;W" class="">String</td><td id="RtxN" class="">모델 응답 안내를 위한 사전 입력 텍스트(고급 설정)입니다.</td></tr></tbody></table><p id="22cb3bed-dae9-8095-9fcd-da79a1ea0346" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8068-839c-c340ab7b66b5" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8013-b1f1-f1ef5a5a14a8"><th id="cY~i" class="simple-table-header-color simple-table-header">이름</th><th id="jsvO" class="simple-table-header-color simple-table-header">타입</th><th id="OoxT" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8065-97be-cafb21812ba1"><td id="cY~i" class="">model</td><td id="jsvO" class="">LanguageModel</td><td id="OoxT" class="">지정된 파라미터로 구성된 ChatAnthropic 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8004-acbe-f01c98032c96"/><p id="22cb3bed-dae9-80dd-9a5e-d566787499fd" class="">
+</p><h2 id="22cb3bed-dae9-80a8-9f1e-c304bb2b5b6a" class="">Azure OpenAI</h2><p id="22cb3bed-dae9-80f3-be23-fff6dbdb23db" class="">
+</p><p id="22cb3bed-dae9-80ef-89e9-edee5cbb8f8a" class="">이 컴포넌트는 Azure OpenAI LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8074-a34d-d69e8d982ac4" class="">자세한 내용은 <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/">Azure OpenAI </a>문서를 참고하세요.</p><p id="22cb3bed-dae9-8052-8a2d-ffc355ee0a5e" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80b0-8cce-cbb8470308f2" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80ad-b24f-ca54e2856ee3" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8007-b6eb-f7034fe1a949"><th id="pdaV" class="simple-table-header-color simple-table-header">이름</th><th id="UYpV" class="simple-table-header-color simple-table-header">타입</th><th id="Llux" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80cd-8c2d-f65cafec53ab"><td id="pdaV" class="">Model Name</td><td id="UYpV" class="">String</td><td id="Llux" class="">텍스트 생성을 위해 사용할 Azure OpenAI 모델 이름입니다.</td></tr><tr id="22cb3bed-dae9-807e-a35d-c4f90cb2df4a"><td id="pdaV" class="">Azure Endpoint</td><td id="UYpV" class="">String</td><td id="Llux" class="">Azure 리소스를 포함한 엔드포인트 URL입니다.</td></tr><tr id="22cb3bed-dae9-805d-a9ee-c5f6fb848f7d"><td id="pdaV" class="">Deployment Name</td><td id="UYpV" class="">String</td><td id="Llux" class="">배포 이름을 지정합니다.</td></tr><tr id="22cb3bed-dae9-8005-ba1d-cfdca425703d"><td id="pdaV" class="">API Version</td><td id="UYpV" class="">String</td><td id="Llux" class="">Azure OpenAI API 버전을 지정합니다.</td></tr><tr id="22cb3bed-dae9-809f-b7a0-d3991d7c8c1d"><td id="pdaV" class="">API Key</td><td id="UYpV" class="">SecretString</td><td id="Llux" class="">Azure OpenAI API 키입니다.</td></tr><tr id="22cb3bed-dae9-8012-98fb-ff398702bb44"><td id="pdaV" class="">Temperature</td><td id="UYpV" class="">Float</td><td id="Llux" class="">샘플링 온도를 지정합니다. 기본값: 0.7</td></tr><tr id="22cb3bed-dae9-80d3-82db-c11ea5f6ab78"><td id="pdaV" class="">Max Tokens</td><td id="UYpV" class="">Integer</td><td id="Llux" class="">생성할 최대 토큰 수를 지정합니다. 기본값: 1000</td></tr><tr id="22cb3bed-dae9-8081-97ed-de31268a86a8"><td id="pdaV" class="">Input Value</td><td id="UYpV" class="">String</td><td id="Llux" class="">텍스트 생성에 사용할 입력값입니다.</td></tr><tr id="22cb3bed-dae9-80b7-ab47-f9e14dd242c6"><td id="pdaV" class="">Stream</td><td id="UYpV" class="">Boolean</td><td id="Llux" class="">모델 응답 스트리밍 여부를 지정합니다. 기본값: False</td></tr></tbody></table><p id="22cb3bed-dae9-807f-9d5f-de351c29145a" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-801b-a1d6-ee632eb86e5b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b8-9d64-e32fada4bc9d"><th id="h]RW" class="simple-table-header-color simple-table-header">이름</th><th id="^IJO" class="simple-table-header-color simple-table-header">타입</th><th id="j;]e" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80fe-a9be-fbcb0c5823b8"><td id="h]RW" class="">model</td><td id="^IJO" class="">LanguageModel</td><td id="j;]e" class="">지정된 파라미터로 구성된 AzureOpenAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80f2-a49d-f62cb8bbe5fa"/><p id="22cb3bed-dae9-80e5-9bad-f9ed14b15dea" class="">
+</p><h2 id="22cb3bed-dae9-807e-8d64-f6046810e00f" class="">Cohere</h2><p id="22cb3bed-dae9-8092-9498-d5459e84c5c9" class="">
+</p><p id="22cb3bed-dae9-8042-a12b-ce0d3245652b" class="">이 컴포넌트는 Cohere의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80fe-9a10-c9118347d3b4" class="">자세한 내용은 <a href="https://cohere.ai/">Cohere</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8051-88a1-cda66e31b35c" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80d6-8479-f633e919d812" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8046-8d3c-f6be0dd1c63b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-802d-a548-c295ddfbc398"><th id="ck}M" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;`?a" class="simple-table-header-color simple-table-header">타입</th><th id="rEQo" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8020-bcb8-faecb4cf0e2f"><td id="ck}M" class="">Cohere API Key</td><td id="&gt;`?a" class="">SecretString</td><td id="rEQo" class="">Cohere API 키입니다.</td></tr><tr id="22cb3bed-dae9-80e6-84c4-de342f1e86ff"><td id="ck}M" class="">Max Tokens</td><td id="&gt;`?a" class="">Integer</td><td id="rEQo" class="">생성할 최대 토큰 수를 지정합니다. 기본값: 256</td></tr><tr id="22cb3bed-dae9-8090-a404-c17d7aed0175"><td id="ck}M" class="">Temperature</td><td id="&gt;`?a" class="">Float</td><td id="rEQo" class="">샘플링 온도를 지정합니다. 기본값: 0.75</td></tr><tr id="22cb3bed-dae9-8056-8c17-e3985066548c"><td id="ck}M" class="">Input Value</td><td id="&gt;`?a" class="">String</td><td id="rEQo" class="">텍스트 생성에 사용할 입력값입니다.</td></tr></tbody></table><p id="22cb3bed-dae9-807d-958c-d3f0840f2228" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8058-86ce-f2849691cd32" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-804e-bdae-e60f871583dc"><th id="PZ||" class="simple-table-header-color simple-table-header">이름</th><th id="ah|W" class="simple-table-header-color simple-table-header">타입</th><th id="{WOV" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-805d-a0b8-c363624a721e"><td id="PZ||" class="">model</td><td id="ah|W" class="">LanguageModel</td><td id="{WOV" class="">지정된 파라미터로 구성된 Cohere 모델 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8096-a33b-ff170cb54f55"/><p id="22cb3bed-dae9-80b9-8172-e7d7b1747be1" class="">
+</p><h2 id="22cb3bed-dae9-80b1-a877-c08b3d9fcfa4" class="">DeepSeek</h2><p id="22cb3bed-dae9-802b-8ed2-f768c08657e9" class="">
+</p><p id="22cb3bed-dae9-8088-8070-ead0bea3b1cf" class="">이 컴포넌트는 DeepSeek의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-807a-bd02-d23334894b49" class="">자세한 내용은 <a href="https://api-docs.deepseek.com/">DeepSeek </a>문서를 참고하세요.</p><p id="22cb3bed-dae9-802a-8855-f8d93c1ccbf6" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80ea-b9f2-faff38bdda9a" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8083-b841-cfc236e379e8" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d3-9617-dcf52cc63733"><th id="q@Vy" class="simple-table-header-color simple-table-header">이름</th><th id="jkj;" class="simple-table-header-color simple-table-header">타입</th><th id="Skiu" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8070-b5b7-c201f7a83d5e"><td id="q@Vy" class="">max_tokens</td><td id="jkj;" class="">Integer</td><td id="Skiu" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다. 범위: 0–128000.</td></tr><tr id="22cb3bed-dae9-800e-b467-cf61abd6c8d2"><td id="q@Vy" class="">model_kwargs</td><td id="jkj;" class="">Dictionary</td><td id="Skiu" class="">모델에 전달할 추가 키워드 인수입니다.</td></tr><tr id="22cb3bed-dae9-80a9-8ffb-fde234e6ea17"><td id="q@Vy" class="">json_mode</td><td id="jkj;" class="">Boolean</td><td id="Skiu" class="">True로 설정하면 스키마와 상관없이 JSON 형식으로 출력합니다.</td></tr><tr id="22cb3bed-dae9-80e6-b522-f64e9f5eb545"><td id="q@Vy" class="">model_name</td><td id="jkj;" class="">String</td><td id="Skiu" class="">사용할 DeepSeek 모델 이름입니다. 기본값: deepseek-chat.</td></tr><tr id="22cb3bed-dae9-80d7-9cb0-e016a75601fc"><td id="q@Vy" class="">api_base</td><td id="jkj;" class="">String</td><td id="Skiu" class="">API 요청을 위한 기본 URL입니다. 기본값: <a href="https://api.deepseek.com/">https://api.deepseek.com</a>.</td></tr><tr id="22cb3bed-dae9-805c-b714-f4525a6eb7af"><td id="q@Vy" class="">api_key</td><td id="jkj;" class="">SecretString</td><td id="Skiu" class="">인증을 위한 DeepSeek API 키입니다.</td></tr><tr id="22cb3bed-dae9-80df-a11d-c75944cc00a2"><td id="q@Vy" class="">temperature</td><td id="jkj;" class="">Float</td><td id="Skiu" class="">응답의 무작위성을 제어합니다. 범위: [0.0, 2.0]. 기본값: 1.0</td></tr><tr id="22cb3bed-dae9-80c8-9939-e1cd2214c598"><td id="q@Vy" class="">seed</td><td id="jkj;" class="">Integer</td><td id="Skiu" class="">무작위 수 생성 초기값(seed)입니다. 동일한 seed를 사용하면 재현 가능한 결과, 다른 seed를 사용하면 더 무작위적인 결과를 얻을 수 있습니다.</td></tr></tbody></table><p id="22cb3bed-dae9-80a0-936b-f0bb4007a691" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80a8-893f-dc3cadaf9fa9" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-800c-b436-feb9f62d58fe"><th id="S:Xg" class="simple-table-header-color simple-table-header">이름</th><th id="p|_&lt;" class="simple-table-header-color simple-table-header">타입</th><th id="l\p{" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-809c-b0e9-eb3d9bcbe138"><td id="S:Xg" class="">model</td><td id="p|_&lt;" class="">LanguageModel</td><td id="l\p{" class="">지정된 파라미터로 구성된 ChatOpenAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-804b-929a-ff52d501f864"/><p id="22cb3bed-dae9-80e3-904d-f93c327be91e" class="">
+</p><h2 id="22cb3bed-dae9-80f4-be7a-ef4f5637db5f" class="">Google Generative AI</h2><p id="22cb3bed-dae9-80a6-beee-e84bbeafb48b" class="">
+</p><p id="22cb3bed-dae9-8015-b206-eef8cf2c3b0f" class="">이 컴포넌트는 Google의 Generative AI 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8047-81f6-d4d08e75685a" class="">자세한 내용은<a href="https://cloud.google.com/vertex-ai/docs/"> Google Generative AI</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-800e-9077-d91246614216" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8014-986a-ff7aa29ea70d" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8004-958b-c333e2f8167b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8040-bd34-ce696b8679d2"><th id="JxgU" class="simple-table-header-color simple-table-header">이름</th><th id="pGGG" class="simple-table-header-color simple-table-header">타입</th><th id="xqoK" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8085-87ac-cabe9c066484"><td id="JxgU" class="">Google API Key</td><td id="pGGG" class="">SecretString</td><td id="xqoK" class="">사용할 Google Generative AI API 키입니다.</td></tr><tr id="22cb3bed-dae9-8060-ae12-c79445e34cfa"><td id="JxgU" class="">Model</td><td id="pGGG" class="">String</td><td id="xqoK" class="">사용할 모델 이름(예: &quot;gemini-pro&quot;)</td></tr><tr id="22cb3bed-dae9-8079-bf16-d77cdf3ee641"><td id="JxgU" class="">Max Output Tokens</td><td id="pGGG" class="">Integer</td><td id="xqoK" class="">생성할 최대 토큰 수를 지정합니다.</td></tr><tr id="22cb3bed-dae9-80bd-adb0-e62d80bff671"><td id="JxgU" class="">Temperature</td><td id="pGGG" class="">Float</td><td id="xqoK" class="">추론에 사용할 샘플링 온도를 지정합니다.</td></tr><tr id="22cb3bed-dae9-8022-9502-c457904711f1"><td id="JxgU" class="">Top K</td><td id="pGGG" class="">Integer</td><td id="xqoK" class="">고려할 상위 K개 토큰을 지정합니다.</td></tr><tr id="22cb3bed-dae9-8070-9914-e4ac4d1db085"><td id="JxgU" class="">Top P</td><td id="pGGG" class="">Float</td><td id="xqoK" class="">누적 확률 한계를 지정합니다.</td></tr><tr id="22cb3bed-dae9-8066-9151-cec5d71edd7f"><td id="JxgU" class="">N</td><td id="pGGG" class="">Integer</td><td id="xqoK" class="">각 프롬프트에 대해 생성할 채팅 완성 횟수입니다.</td></tr></tbody></table><p id="22cb3bed-dae9-8020-85b4-ca320e24a80f" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8000-a988-fb1c1cdb03a2" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8067-a731-f31d178b665d"><th id="jw;v" class="simple-table-header-color simple-table-header">이름</th><th id="fViH" class="simple-table-header-color simple-table-header">타입</th><th id="=sgK" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8097-9d21-e55aaf8756ce"><td id="jw;v" class="">model</td><td id="fViH" class="">LanguageModel</td><td id="=sgK" class="">지정된 파라미터로 구성된 ChatGoogleGenerativeAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80fc-8069-c0f6ca978c78"/><h2 id="22cb3bed-dae9-80a6-a669-f66ddbc017b0" class="">Groq</h2><p id="22cb3bed-dae9-802d-8be0-ff3ea6e4e890" class="">이 컴포넌트는 Groq의 언어 모델을 사용하여 텍스트를 생성합니다.</p><ol type="1" id="22cb3bed-dae9-801e-b15a-fac1d265edbd" class="numbered-list" start="1"><li>플로우에서 이 컴포넌트를 사용하려면, Basic prompting flow와 같이 Model로 연결하거나 Agent 컴포넌트를 사용하는 경우 Model Provider로 선택하세요.</li></ol><figure id="22cb3bed-dae9-8003-b2fc-daab6f9a5eb0" class="image"><a href="image%2028.png"><img style="width:709.9874877929688px" src="image%2028.png"/></a></figure><ol type="1" id="22cb3bed-dae9-80b5-a211-e03ececbc050" class="numbered-list" start="2"><li>Groq API Key 필드에 본인의 Groq API 키를 붙여넣습니다. Groq 모델 컴포넌트는 최신 모델 목록을 자동으로 가져옵니다. 목록을 새로고침하려면 Refresh 버튼을 클릭하세요.</li></ol><ol type="1" id="22cb3bed-dae9-80ad-bc04-cf699f6e8ab8" class="numbered-list" start="3"><li>Model 필드에서 사용하려는 Groq 모델을 선택합니다. 이 예시에서는 실시간 대화 인터페이스에 권장되는 llama-3.1-8b-instant를 사용합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8092-be81-c6cb5e8444d4" class="numbered-list" start="4"><li>Prompt 컴포넌트에 다음 텍스트를 입력하세요:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-8052-9f6e-fab1d3162190" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">You are a helpful assistant who supports their claims with sources.
+</code></pre><ol type="1" id="22cb3bed-dae9-80e6-b17b-c5183f1d101b" class="numbered-list" start="5"><li>Playground를 열고 Groq LLM에 질문을 입력하면, 응답에 소스 목록이 포함됩니다.</li></ol><p id="22cb3bed-dae9-8003-9dad-e266d08277aa" class="">자세한 내용은 <a href="https://groq.com/">Groq</a> 문서를 참조하세요.</p><p id="22cb3bed-dae9-8058-b7b8-c934043ceb83" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80e1-9f1a-e0e07e7a8c50" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80d7-8322-e323cedef186" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a5-ab12-c66a5367d128"><th id="o?]]" class="simple-table-header-color simple-table-header">이름</th><th id="IYIV" class="simple-table-header-color simple-table-header">타입</th><th id="u{ZF" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8094-96fe-ee59e18d3f2d"><td id="o?]]" class="">groq_api_key</td><td id="IYIV" class="">SecretString</td><td id="u{ZF" class="">Groq API 키입니다.</td></tr><tr id="22cb3bed-dae9-8021-bbde-ca806d52eb92"><td id="o?]]" class="">groq_api_base</td><td id="IYIV" class="">String</td><td id="u{ZF" class="">API 요청을 위한 기본 URL입니다. 기본값: <a href="https://api.groq.com/">https://api.groq.com</a></td></tr><tr id="22cb3bed-dae9-8050-b64a-d0ddee4ccff2"><td id="o?]]" class="">max_tokens</td><td id="IYIV" class="">Integer</td><td id="u{ZF" class="">생성할 최대 토큰 수입니다.</td></tr><tr id="22cb3bed-dae9-8075-8de0-f47738a06113"><td id="o?]]" class="">temperature</td><td id="IYIV" class="">Float</td><td id="u{ZF" class="">무작위성을 제어합니다. 범위: [0.0, 1.0]. 기본값: 0.1</td></tr><tr id="22cb3bed-dae9-8045-8a25-e85f76e4b20e"><td id="o?]]" class="">n</td><td id="IYIV" class="">Integer</td><td id="u{ZF" class="">각 프롬프트에 대해 생성할 완성 횟수입니다.</td></tr><tr id="22cb3bed-dae9-80bd-9c2d-d43f0f09cddd"><td id="o?]]" class="">model_name</td><td id="IYIV" class="">String</td><td id="u{ZF" class="">사용할 Groq 모델 이름입니다. Groq API로부터 동적으로 가져옵니다.</td></tr><tr id="22cb3bed-dae9-8036-983b-ee17bd0b4060"><td id="o?]]" class="">tool_mode_enabled</td><td id="IYIV" class="">Bool</td><td id="u{ZF" class="">활성화하면 도구와 호환되는 모델만 표시합니다.</td></tr></tbody></table><p id="22cb3bed-dae9-805d-8e1e-da1b05c7eebd" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80fd-8e7c-dffaf8a1c479" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d0-8da8-f22294444ac3"><th id=":FD]" class="simple-table-header-color simple-table-header">이름</th><th id="gSiA" class="simple-table-header-color simple-table-header">타입</th><th id="[W;z" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-804b-82d0-ca849dc749f5"><td id=":FD]" class="">model</td><td id="gSiA" class="">LanguageModel</td><td id="[W;z" class="">지정된 파라미터로 구성된 ChatGroq 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8037-b554-ee99d991a5a0"/><p id="22cb3bed-dae9-80ee-937e-d4a6ba4140cb" class="">
+</p><h2 id="22cb3bed-dae9-801f-a5e2-fd8152e3aa45" class="">Hugging Face API</h2><p id="22cb3bed-dae9-806b-b245-ff26d488bfe1" class="">
+</p><p id="22cb3bed-dae9-803f-adaf-c27d15d3cb33" class="">이 컴포넌트는 Model ID 필드에 지정된 모델을 사용하여 Hugging Face API에 요청을 보내고 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-809c-a02e-ce8681d1891b" class="">Hugging Face API는 Hugging Face Hub에 호스팅된 모델을 위한 호스팅 추론 API로, 인증을 위해 Hugging Face API 토큰이 필요합니다.</p><p id="22cb3bed-dae9-806f-89fe-cf0250a79749" class="">아래 예시는 Basic prompting flow를 기반으로 한 예시로, Hugging Face API 모델 컴포넌트가 OpenAI 모델 컴포넌트를 대체합니다. 서로 다른 호스팅 모델을 선택해 보면, 결과가 어떻게 다른지 확인할 수 있습니다.</p><ol type="1" id="22cb3bed-dae9-80e2-b534-dcc4f4e749f2" class="numbered-list" start="1"><li>Basic prompting flow를 만듭니다.</li></ol><ol type="1" id="22cb3bed-dae9-8019-b71c-f8d1108906ea" class="numbered-list" start="2"><li>OpenAI 모델 컴포넌트를 Hugging Face API 모델 컴포넌트로 교체합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8001-8cb2-c33f61f4a645" class="numbered-list" start="3"><li>Hugging Face API 컴포넌트의 API Token 필드에 자신의 Hugging Face API 토큰을 입력합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80a0-8f39-d87ba498d576" class="numbered-list" start="4"><li>Playground를 열고 모델에 질문을 입력하여 응답을 확인합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8026-892a-cb2a75542380" class="numbered-list" start="5"><li>다양한 모델을 시도하여 성능 차이를 확인해 보세요.</li></ol><p id="22cb3bed-dae9-80b1-bfde-f07c84672fc8" class="">자세한 내용은 <a href="https://huggingface.co/">Hugging Face</a> 문서를 참조하세요.</p><p id="22cb3bed-dae9-80c9-9dbe-e598024016e6" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8026-b7f2-d7127cf1f3c8" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80dc-a754-eb4bad0e1d8d" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806f-9a7b-c7a13f9d1555"><th id="knA?" class="simple-table-header-color simple-table-header">이름</th><th id="rrKp" class="simple-table-header-color simple-table-header">타입</th><th id="\`Ha" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e2-ae2b-d6c78995e516"><td id="knA?" class="">model_id</td><td id="rrKp" class="">String</td><td id="\`Ha" class="">Hugging Face Hub의 모델 ID를 지정합니다(예: &quot;gpt2&quot;, &quot;facebook/bart-large&quot;).</td></tr><tr id="22cb3bed-dae9-80dd-a169-d5d4e0de9da5"><td id="knA?" class="">huggingfacehub_api_token</td><td id="rrKp" class="">SecretString</td><td id="\`Ha" class="">Hugging Face API 토큰입니다.</td></tr><tr id="22cb3bed-dae9-803f-88ae-ecc1faebbd66"><td id="knA?" class="">temperature</td><td id="rrKp" class="">Float</td><td id="\`Ha" class="">출력의 무작위성을 제어합니다. 범위: [0.0, 1.0]. 기본값: 0.7</td></tr><tr id="22cb3bed-dae9-80c8-a759-db4a74d21a71"><td id="knA?" class="">max_new_tokens</td><td id="rrKp" class="">Integer</td><td id="\`Ha" class="">생성할 최대 토큰 수를 지정합니다. 기본값: 512</td></tr><tr id="22cb3bed-dae9-801a-8b72-fc8ba089dbba"><td id="knA?" class="">top_p</td><td id="rrKp" class="">Float</td><td id="\`Ha" class="">Nucleus sampling 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 0.95</td></tr><tr id="22cb3bed-dae9-80c4-bf21-d8d6f9fc1220"><td id="knA?" class="">top_k</td><td id="rrKp" class="">Integer</td><td id="\`Ha" class="">Top-k 샘플링 파라미터입니다. 기본값: 50</td></tr><tr id="22cb3bed-dae9-804d-9023-fa6b047b8fc2"><td id="knA?" class="">model_kwargs</td><td id="rrKp" class="">Dictionary</td><td id="\`Ha" class="">모델에 전달할 추가 키워드 인수입니다.</td></tr></tbody></table><p id="22cb3bed-dae9-80db-8d79-f44d89861254" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8004-8dac-ced364be99ee" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a1-ac8b-e74257cf5891"><th id="AfX{" class="simple-table-header-color simple-table-header">이름</th><th id="BUC&gt;" class="simple-table-header-color simple-table-header">타입</th><th id="Y]Aq" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-803a-9ab0-f02130ae131c"><td id="AfX{" class="">model</td><td id="BUC&gt;" class="">LanguageModel</td><td id="Y]Aq" class="">지정된 파라미터로 구성된 HuggingFaceHub 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80ad-8b96-d852b8aa4e2a"/><p id="22cb3bed-dae9-8068-baf0-ee2835f6944d" class="">
+</p><h2 id="22cb3bed-dae9-80ea-b375-d256f97532a3" class="">IBM watsonx.ai</h2><p id="22cb3bed-dae9-80e4-a096-d7331fe7f009" class="">
+</p><p id="22cb3bed-dae9-80c1-b401-d02969fa690d" class="">이 컴포넌트는 IBM watsonx.ai의 파운데이션 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-806b-934e-c48ac6eaf0da" class="">플로우에서 이 컴포넌트를 사용하려면, 기존 모델 컴포넌트를 IBM watsonx.ai 컴포넌트로 교체하세요.</p><p id="22cb3bed-dae9-8068-9dad-d9d22c9b55b4" class="">예시 플로우:</p><figure id="22cb3bed-dae9-8097-af73-f60010448be7" class="image"><a href="image%2029.png"><img style="width:2364px" src="image%2029.png"/></a></figure><p id="22cb3bed-dae9-805e-880b-eca762cea98f" class="">API endpoint, Project ID, API key, Model Name 값은 IBM watsonx.ai 배포에서 확인할 수 있습니다.</p><p id="22cb3bed-dae9-8097-ae99-d9b1c8d3fa15" class="">자세한 내용은 <a href="https://python.langchain.com/docs/integrations/chat/ibm_watsonx/">Langchain</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-80e7-a9f1-fb372bf6e5b4" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8031-a225-e7c19037c9c1" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80e1-a3e6-df6d586e9e12" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8091-8602-efc22144f1d4"><th id="Y?i&lt;" class="simple-table-header-color simple-table-header">이름</th><th id="`yru" class="simple-table-header-color simple-table-header">타입</th><th id="JBZt" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8058-9924-fc1e8bb84e0a"><td id="Y?i&lt;" class="">url</td><td id="`yru" class="">String</td><td id="JBZt" class="">watsonx API의 기본 URL입니다.</td></tr><tr id="22cb3bed-dae9-8017-be7f-cd80f79c5af6"><td id="Y?i&lt;" class="">project_id</td><td id="`yru" class="">String</td><td id="JBZt" class="">watsonx 프로젝트 ID입니다.</td></tr><tr id="22cb3bed-dae9-802c-ae00-df3603b87d97"><td id="Y?i&lt;" class="">api_key</td><td id="`yru" class="">SecretString</td><td id="JBZt" class="">IBM watsonx API 키입니다.</td></tr><tr id="22cb3bed-dae9-80c2-b805-e2dd70d54068"><td id="Y?i&lt;" class="">model_name</td><td id="`yru" class="">String</td><td id="JBZt" class="">사용할 watsonx 모델 이름입니다. API에서 동적으로 가져옵니다.</td></tr><tr id="22cb3bed-dae9-8086-84a6-ea27292adbd8"><td id="Y?i&lt;" class="">max_tokens</td><td id="`yru" class="">Integer</td><td id="JBZt" class="">생성할 최대 토큰 수입니다. 기본값: 1000.</td></tr><tr id="22cb3bed-dae9-80a4-8296-dad36e09df18"><td id="Y?i&lt;" class="">stop_sequence</td><td id="`yru" class="">String</td><td id="JBZt" class="">생성 중단 시점으로 사용할 시퀀스입니다.</td></tr><tr id="22cb3bed-dae9-80b8-a6d7-e955840f6ab3"><td id="Y?i&lt;" class="">temperature</td><td id="`yru" class="">Float</td><td id="JBZt" class="">출력의 무작위성을 제어합니다. 기본값: 0.1</td></tr><tr id="22cb3bed-dae9-8052-a099-ef7f07a1355f"><td id="Y?i&lt;" class="">top_p</td><td id="`yru" class="">Float</td><td id="JBZt" class="">누클리어스 샘플링 파라미터입니다. 기본값: 0.9</td></tr><tr id="22cb3bed-dae9-8066-a3d5-ed7c56414382"><td id="Y?i&lt;" class="">frequency_penalty</td><td id="`yru" class="">Float</td><td id="JBZt" class="">반복 토큰의 빈도를 제어합니다. 양수는 반복 감소, 음수는 증가 효과. 기본값: 0.5</td></tr><tr id="22cb3bed-dae9-80d2-be4b-c6738aafcc94"><td id="Y?i&lt;" class="">presence_penalty</td><td id="`yru" class="">Float</td><td id="JBZt" class="">새로운 토픽 도입 가능성을 높입니다. 기본값: 0.3</td></tr><tr id="22cb3bed-dae9-8032-814a-ec91691a995e"><td id="Y?i&lt;" class="">seed</td><td id="`yru" class="">Integer</td><td id="JBZt" class="">모델의 랜덤 시드입니다. 기본값: 8</td></tr><tr id="22cb3bed-dae9-80ac-9dce-ffb73f7058cc"><td id="Y?i&lt;" class="">logprobs</td><td id="`yru" class="">Boolean</td><td id="JBZt" class="">출력 토큰의 로그확률을 반환할지 여부입니다. 기본값: True</td></tr><tr id="22cb3bed-dae9-8061-a982-fd2c528480c9"><td id="Y?i&lt;" class="">top_logprobs</td><td id="`yru" class="">Integer</td><td id="JBZt" class="">각 위치에서 반환할 상위 토큰 개수입니다. 기본값: 3</td></tr><tr id="22cb3bed-dae9-80bb-a263-cf896d4fa428"><td id="Y?i&lt;" class="">logit_bias</td><td id="`yru" class="">String</td><td id="JBZt" class="">토큰 ID별 바이어스를 JSON 문자열로 지정합니다.</td></tr></tbody></table><p id="22cb3bed-dae9-80ee-957f-df0297eb5b39" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80e8-be6a-cb6d57eb34dd" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8070-8926-c7018ac02564"><th id="euqi" class="simple-table-header-color simple-table-header">이름</th><th id="dIik" class="simple-table-header-color simple-table-header">타입</th><th id="CSei" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ba-a0da-e818963ada72"><td id="euqi" class="">model</td><td id="dIik" class="">LanguageModel</td><td id="CSei" class="">지정된 파라미터로 구성된 ChatWatsonx 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80b3-96df-cbc42b45fb38"/><p id="22cb3bed-dae9-80ac-9e3e-c0d1b41719c1" class="">
+</p><h2 id="22cb3bed-dae9-80c1-84a1-fc3369a6f7c8" class="">Language model</h2><p id="22cb3bed-dae9-8049-819a-f369f93c336c" class="">
+</p><p id="22cb3bed-dae9-80f1-ab8a-fa4672743941" class="">이 컴포넌트는 OpenAI 또는 Anthropic 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8078-abbe-eed86497146e" class="">LLM 모델을 교체할 때 컴포넌트를 바꾸지 않고, provider 드롭다운에서 제공업체만 전환할 수 있어 플로우를 유지하며 다양한 모델을 실험하고 비교하기에 편리합니다.</p><p id="22cb3bed-dae9-804b-b387-ee769f8b83e9" class="">자세한 내용은 <a href="https://platform.openai.com/docs">OpenAI</a> 문서 및 <a href="https://docs.anthropic.com/">Anthropic</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-80a1-89a4-e36cae7684a0" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80d5-87a5-fa2b112081de" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8019-b7da-fd176165437b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-802a-9af9-cefcd98b8895"><th id="F\tC" class="simple-table-header-color simple-table-header">이름</th><th id="\VQ^" class="simple-table-header-color simple-table-header">타입</th><th id="SCFM" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80aa-acb2-dc5420cc9a55"><td id="F\tC" class="">provider</td><td id="\VQ^" class="">String</td><td id="SCFM" class="">사용할 모델 제공업체입니다. 옵션: &quot;OpenAI&quot;, &quot;Anthropic&quot;. 기본값: &quot;OpenAI&quot;</td></tr><tr id="22cb3bed-dae9-80d5-ac38-d40aa3847a93"><td id="F\tC" class="">model_name</td><td id="\VQ^" class="">String</td><td id="SCFM" class="">사용할 모델 이름입니다. 제공업체에 따라 옵션이 달라집니다.</td></tr><tr id="22cb3bed-dae9-802c-aacb-e4f6fbe6148e"><td id="F\tC" class="">api_key</td><td id="\VQ^" class="">SecretString</td><td id="SCFM" class="">선택한 제공업체 인증용 API 키입니다.</td></tr><tr id="22cb3bed-dae9-8086-b56c-e9346c37d568"><td id="F\tC" class="">input_value</td><td id="\VQ^" class="">String</td><td id="SCFM" class="">모델에 보낼 입력 텍스트입니다.</td></tr><tr id="22cb3bed-dae9-8076-ad19-d997fede29c3"><td id="F\tC" class="">system_message</td><td id="\VQ^" class="">String</td><td id="SCFM" class="">어시스턴트 동작을 설정하는 시스템 메시지입니다(고급).</td></tr><tr id="22cb3bed-dae9-80ca-b593-e526065ea6ae"><td id="F\tC" class="">stream</td><td id="\VQ^" class="">Boolean</td><td id="SCFM" class="">응답 스트리밍 여부입니다. 기본값: False(고급).</td></tr><tr id="22cb3bed-dae9-80da-b1a7-c684f190c5bf"><td id="F\tC" class="">temperature</td><td id="\VQ^" class="">Float</td><td id="SCFM" class="">무작위성 제어 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 0.1(고급).</td></tr></tbody></table><p id="22cb3bed-dae9-807f-ab75-ce76964a7e53" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-804d-8f2f-c8610415509e" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8008-a293-c3279da1154e"><th id="FpTk" class="simple-table-header-color simple-table-header">이름</th><th id="tQr=" class="simple-table-header-color simple-table-header">타입</th><th id="Cb?J" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8052-a0d0-cfd6fe8c6029"><td id="FpTk" class="">model</td><td id="tQr=" class="">LanguageModel</td><td id="Cb?J" class="">지정된 파라미터로 구성된 ChatOpenAI 또는 ChatAnthropic 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80fd-b7ba-ef1533d610bd"/><p id="22cb3bed-dae9-80a0-b8a3-de931f152d63" class="">
+</p><h2 id="22cb3bed-dae9-80e2-acfb-c07034b6c3fa" class="">LMStudio</h2><p id="22cb3bed-dae9-8090-b9ab-f77120df45c3" class="">
+</p><p id="22cb3bed-dae9-80d0-a9ca-d58ae7d0d76d" class="">이 컴포넌트는 LM Studio의 로컬 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80f8-9266-d21387bd92f9" class="">자세한 내용은 <a href="https://lmstudio.ai/">LM Studio</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-801d-b793-c7cc69e389b3" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-802e-b004-c318b853e60e" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-804a-9d93-d695d0235c80" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8015-a0e0-fb6e09583c8c"><th id="L}EC" class="simple-table-header-color simple-table-header">이름</th><th id="Fre&lt;" class="simple-table-header-color simple-table-header">타입</th><th id="SDnU" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80cb-a95f-ca5daa289bc8"><td id="L}EC" class="">base_url</td><td id="Fre&lt;" class="">String</td><td id="SDnU" class="">LM Studio가 실행 중인 URL입니다. 기본값: &quot;<a href="http://localhost:1234/">http://localhost:1234</a>&quot;</td></tr><tr id="22cb3bed-dae9-808d-9363-ddc8a307bba9"><td id="L}EC" class="">max_tokens</td><td id="Fre&lt;" class="">Integer</td><td id="SDnU" class="">생성할 최대 토큰 수입니다. 기본값: 512</td></tr><tr id="22cb3bed-dae9-80e3-ad09-fba562a450b9"><td id="L}EC" class="">temperature</td><td id="Fre&lt;" class="">Float</td><td id="SDnU" class="">무작위성 제어 파라미터입니다. 범위: [0.0, 2.0]. 기본값: 0.7</td></tr><tr id="22cb3bed-dae9-809c-8423-d21b379454ad"><td id="L}EC" class="">top_p</td><td id="Fre&lt;" class="">Float</td><td id="SDnU" class="">누클리어스 샘플링 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 1.0</td></tr><tr id="22cb3bed-dae9-8037-b77d-ef89376b26fc"><td id="L}EC" class="">stop</td><td id="Fre&lt;" class="">List[String]</td><td id="SDnU" class="">해당 문자열이 생성 중 만나면 중단하는 문자열 리스트입니다.</td></tr><tr id="22cb3bed-dae9-80e6-b946-cb0fde572e7a"><td id="L}EC" class="">stream</td><td id="Fre&lt;" class="">Boolean</td><td id="SDnU" class="">응답 스트리밍 여부입니다. 기본값: False</td></tr><tr id="22cb3bed-dae9-80d2-b86d-e55a1665b64a"><td id="L}EC" class="">presence_penalty</td><td id="Fre&lt;" class="">Float</td><td id="SDnU" class="">새로운 주제 도입 시 패널티 조정입니다. 범위: [-2.0, 2.0]. 기본값: 0.0</td></tr><tr id="22cb3bed-dae9-80db-9d7e-c647f6d23e95"><td id="L}EC" class="">frequency_penalty</td><td id="Fre&lt;" class="">Float</td><td id="SDnU" class="">반복 토큰 패널티 조정입니다. 범위: [-2.0, 2.0]. 기본값: 0.0</td></tr></tbody></table><p id="22cb3bed-dae9-80d2-b58b-d3a3edbd0600" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-800b-b179-cbda0177e83d" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80c6-b412-d965c35e867e"><th id="qRai" class="simple-table-header-color simple-table-header">이름</th><th id="EY}c" class="simple-table-header-color simple-table-header">타입</th><th id="ZpKx" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e7-9637-c069f1b1feee"><td id="qRai" class="">model</td><td id="EY}c" class="">LanguageModel</td><td id="ZpKx" class="">지정된 파라미터로 구성된 LMStudio 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8092-ab10-eeb4431b8594"/><p id="22cb3bed-dae9-804d-b1a1-f92d59fe0c65" class="">
+</p><h2 id="22cb3bed-dae9-8096-bcd8-f1bc08727e17" class="">Maritalk</h2><p id="22cb3bed-dae9-8026-aaac-f7aa34053758" class="">
+</p><p id="22cb3bed-dae9-80c3-8ea3-d1d5170cc7e4" class="">이 컴포넌트는 Maritalk LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8064-a69c-fd4b293b0799" class="">자세한 내용은 <a href="https://www.maritalk.com/">Maritalk</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-806b-8e09-e0987be831dd" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8018-938b-c4e8427b53de" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8032-b832-d659aebc738c" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d2-93bb-daf52aa2ec31"><th id="?H|k" class="simple-table-header-color simple-table-header">이름</th><th id="JjKr" class="simple-table-header-color simple-table-header">타입</th><th id="Wioc" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8097-808a-e0e0a5bd712f"><td id="?H|k" class="">max_tokens</td><td id="JjKr" class="">Integer</td><td id="Wioc" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다. 기본값: 512</td></tr><tr id="22cb3bed-dae9-80df-9d26-dbcdcaf6d1f8"><td id="?H|k" class="">model_name</td><td id="JjKr" class="">String</td><td id="Wioc" class="">사용할 Maritalk 모델 이름입니다. 옵션: sabia-2-small, sabia-2-medium. 기본값: sabia-2-small</td></tr><tr id="22cb3bed-dae9-80fb-8661-cbdeee6f8c62"><td id="?H|k" class="">api_key</td><td id="JjKr" class="">SecretString</td><td id="Wioc" class="">Maritalk API 키입니다.</td></tr><tr id="22cb3bed-dae9-8032-b56b-c94a6088f61b"><td id="?H|k" class="">temperature</td><td id="JjKr" class="">Float</td><td id="Wioc" class="">무작위성 제어 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 0.5</td></tr><tr id="22cb3bed-dae9-8037-830b-fefcea59ef44"><td id="?H|k" class="">endpoint_url</td><td id="JjKr" class="">String</td><td id="Wioc" class="">Maritalk API 엔드포인트입니다. 기본값: <a href="https://api.maritalk.com/">https://api.maritalk.com</a></td></tr></tbody></table><p id="22cb3bed-dae9-8038-853e-fc2dfa16dfe0" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80b8-a2ad-f1f30e6c324c" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d4-a5f6-df6c192d28af"><th id="mAdw" class="simple-table-header-color simple-table-header">이름</th><th id="RcDH" class="simple-table-header-color simple-table-header">타입</th><th id="nysI" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e4-acea-cf5f07b091ea"><td id="mAdw" class="">model</td><td id="RcDH" class="">LanguageModel</td><td id="nysI" class="">지정된 파라미터로 구성된 ChatMaritalk 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8096-a202-dfbc626c9c29"/><h2 id="22cb3bed-dae9-800c-9002-eb7a08ca9ca8" class="">Mistral</h2><p id="22cb3bed-dae9-8035-be79-d2e2a029c340" class="">이 컴포넌트는 Mistral AI LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80f6-9d52-d0f5203e79a1" class="">자세한 내용은 <a href="https://docs.mistral.ai/">Mistral AI</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8092-a514-c073867806b9" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8021-8a71-d00e9df88c6d" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80f2-9b50-e5f78aa6ec37" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-800d-8a08-c5ba7b12a9a4"><th id="&lt;TH?" class="simple-table-header-color simple-table-header">이름</th><th id="Ia^O" class="simple-table-header-color simple-table-header">타입</th><th id="CDDQ" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8039-a4fd-d0c08ad35dd8"><td id="&lt;TH?" class="">max_tokens</td><td id="Ia^O" class="">Integer</td><td id="CDDQ" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다(고급).</td></tr><tr id="22cb3bed-dae9-8091-b680-fff071578fc3"><td id="&lt;TH?" class="">model_name</td><td id="Ia^O" class="">String</td><td id="CDDQ" class="">사용할 Mistral AI 모델 이름입니다. 예: open-mixtral-8x7b, codestral-latest 등. 기본값: codestral-latest</td></tr><tr id="22cb3bed-dae9-8047-8a17-d2b43b885e8a"><td id="&lt;TH?" class="">mistral_api_base</td><td id="Ia^O" class="">String</td><td id="CDDQ" class="">Mistral API 기본 URL입니다. 기본값: <a href="https://api.mistral.ai/v1">https://api.mistral.ai/v1</a> (고급)</td></tr><tr id="22cb3bed-dae9-80a2-ae6d-c8057e267b1b"><td id="&lt;TH?" class="">api_key</td><td id="Ia^O" class="">SecretString</td><td id="CDDQ" class="">Mistral API 키입니다.</td></tr><tr id="22cb3bed-dae9-80f5-9755-f74e323a06a2"><td id="&lt;TH?" class="">temperature</td><td id="Ia^O" class="">Float</td><td id="CDDQ" class="">무작위성 제어 파라미터입니다. 기본값: 0.5</td></tr><tr id="22cb3bed-dae9-806a-97e3-fcb9b5f89844"><td id="&lt;TH?" class="">max_retries</td><td id="Ia^O" class="">Integer</td><td id="CDDQ" class="">API 호출 재시도 최대 횟수입니다. 기본값: 5 (고급)</td></tr><tr id="22cb3bed-dae9-80c6-a710-e1a9653df545"><td id="&lt;TH?" class="">timeout</td><td id="Ia^O" class="">Integer</td><td id="CDDQ" class="">API 호출 타임아웃(초)입니다. 기본값: 60 (고급)</td></tr><tr id="22cb3bed-dae9-807d-af19-cb9d46abe404"><td id="&lt;TH?" class="">max_concurrent_requests</td><td id="Ia^O" class="">Integer</td><td id="CDDQ" class="">동시 API 요청 최대 개수입니다. 기본값: 3 (고급)</td></tr><tr id="22cb3bed-dae9-8020-9881-f5823c2f53d9"><td id="&lt;TH?" class="">top_p</td><td id="Ia^O" class="">Float</td><td id="CDDQ" class="">누클리어스 샘플링 파라미터입니다. 기본값: 1 (고급)</td></tr><tr id="22cb3bed-dae9-807e-b570-f08ee0539651"><td id="&lt;TH?" class="">random_seed</td><td id="Ia^O" class="">Integer</td><td id="CDDQ" class="">랜덤 시드입니다. 기본값: 1 (고급)</td></tr><tr id="22cb3bed-dae9-8096-845e-cb479a572ac8"><td id="&lt;TH?" class="">safe_mode</td><td id="Ia^O" class="">Boolean</td><td id="CDDQ" class="">안전 모드 활성화 여부입니다. 기본값: False (고급)</td></tr></tbody></table><p id="22cb3bed-dae9-808a-b306-caa4d3cbb3e1" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8094-aba0-dc8d7ca4888c" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8001-9ca0-ce71fcbeb5ec"><th id="fPOP" class="simple-table-header-color simple-table-header">이름</th><th id="UV&lt;D" class="simple-table-header-color simple-table-header">타입</th><th id="qBQT" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-806a-a6b8-ee9295eb828c"><td id="fPOP" class="">model</td><td id="UV&lt;D" class="">LanguageModel</td><td id="qBQT" class="">지정된 파라미터로 구성된 ChatMistralAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80f3-9b58-cbef67e7f8f6"/><p id="22cb3bed-dae9-8032-972e-fdbf24718744" class="">
+</p><p id="22cb3bed-dae9-80da-984d-e9afc776ae2f" class="">
+</p><h2 id="22cb3bed-dae9-80a2-822e-daec3b7a39ca" class="">Novita AI</h2><p id="22cb3bed-dae9-80b9-923a-e6e15e41829e" class="">
+</p><p id="22cb3bed-dae9-803d-b6aa-d7c325b12fba" class="">이 컴포넌트는 Novita AI의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8058-b420-c59712092e25" class="">자세한 내용은 <a href="https://novita.ai/docs/model-api/reference/llm/llm.html?utm_source=github_langflow&amp;utm_medium=github_readme&amp;utm_campaign=link">Novita</a> AI 문서를 참고하세요.</p><p id="22cb3bed-dae9-80ee-85d5-c59f9d7bbcc9" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8052-ac1e-cfe42f35e9a1" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80aa-939c-dd442a9a551a" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b7-b925-da32d0d4b1b6"><th id="?@}\" class="simple-table-header-color simple-table-header">이름</th><th id="g~Ta" class="simple-table-header-color simple-table-header">타입</th><th id="uSAr" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8097-9ffc-d377aa0e2014"><td id="?@}\" class="">api_key</td><td id="g~Ta" class="">SecretString</td><td id="uSAr" class="">Novita AI API 키입니다.</td></tr><tr id="22cb3bed-dae9-8026-b235-d0fc0ddbce26"><td id="?@}\" class="">model</td><td id="g~Ta" class="">String</td><td id="uSAr" class="">사용할 Novita AI 모델 ID입니다.</td></tr><tr id="22cb3bed-dae9-8068-9b87-cd1c7f032407"><td id="?@}\" class="">max_tokens</td><td id="g~Ta" class="">Integer</td><td id="uSAr" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다.</td></tr><tr id="22cb3bed-dae9-80fa-b859-f09218504580"><td id="?@}\" class="">temperature</td><td id="g~Ta" class="">Float</td><td id="uSAr" class="">무작위성 제어 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 0.7</td></tr><tr id="22cb3bed-dae9-8032-8db2-ce4380c7dcf4"><td id="?@}\" class="">top_p</td><td id="g~Ta" class="">Float</td><td id="uSAr" class="">누클리어스 샘플링 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 1.0</td></tr><tr id="22cb3bed-dae9-8087-87c8-e0e14064c093"><td id="?@}\" class="">frequency_penalty</td><td id="g~Ta" class="">Float</td><td id="uSAr" class="">반복 토큰 빈도 패널티 파라미터입니다. 범위: [0.0, 2.0]. 기본값: 0.0</td></tr><tr id="22cb3bed-dae9-802f-81b5-fa28874bc4d2"><td id="?@}\" class="">presence_penalty</td><td id="g~Ta" class="">Float</td><td id="uSAr" class="">새로운 토픽 도입 패널티 파라미터입니다. 범위: [0.0, 2.0]. 기본값: 0.0</td></tr></tbody></table><p id="22cb3bed-dae9-809f-a329-dd41fd920df0" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8020-ae88-dd91316c7469" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8045-806b-cc69e807e919"><th id="AYHL" class="simple-table-header-color simple-table-header">이름</th><th id="lldt" class="simple-table-header-color simple-table-header">타입</th><th id="mSla" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c7-8690-cf2bdf0187dc"><td id="AYHL" class="">model</td><td id="lldt" class="">LanguageModel</td><td id="mSla" class="">지정된 파라미터로 구성된 Novita AI 모델 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8071-b216-f998e20b4e9c"/><p id="22cb3bed-dae9-800e-9936-c03488d31ebe" class="">
+</p><h2 id="22cb3bed-dae9-8087-8219-ce184bedb41f" class="">NVIDIA</h2><p id="22cb3bed-dae9-8035-ad70-ee268e5c0bfe" class="">
+</p><p id="22cb3bed-dae9-8085-b019-ceebbf1fd184" class="">이 컴포넌트는 NVIDIA LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80b2-b914-ccc190d45316" class="">자세한 내용은 <a href="https://developer.nvidia.com/generative-ai">NVIDIA AI</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-80ed-9705-fe35e1bbe5b9" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8092-bde7-c6ecc6ebe8e8" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80b1-8773-dd932743aafe" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ba-90ac-d8d7ac5bf345"><th id="Blnw" class="simple-table-header-color simple-table-header">이름</th><th id="w}\Y" class="simple-table-header-color simple-table-header">타입</th><th id="~_@M" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-806f-a578-c42d68e0ba9f"><td id="Blnw" class="">max_tokens</td><td id="w}\Y" class="">Integer</td><td id="~_@M" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다(고급).</td></tr><tr id="22cb3bed-dae9-8013-8615-c331d9ee1c1f"><td id="Blnw" class="">model_name</td><td id="w}\Y" class="">String</td><td id="~_@M" class="">사용할 NVIDIA 모델 이름입니다. 기본값: mistralai/mixtral-8x7b-instruct-v0.1</td></tr><tr id="22cb3bed-dae9-80b3-9489-efea0ce63248"><td id="Blnw" class="">base_url</td><td id="w}\Y" class="">String</td><td id="~_@M" class="">NVIDIA API 기본 URL입니다. 기본값: <a href="https://integrate.api.nvidia.com/v1">https://integrate.api.nvidia.com/v1</a></td></tr><tr id="22cb3bed-dae9-803a-8bb6-c727430bb025"><td id="Blnw" class="">nvidia_api_key</td><td id="w}\Y" class="">SecretString</td><td id="~_@M" class="">NVIDIA API 키입니다.</td></tr><tr id="22cb3bed-dae9-809c-8f39-ff3de9228118"><td id="Blnw" class="">temperature</td><td id="w}\Y" class="">Float</td><td id="~_@M" class="">무작위성 제어 파라미터입니다. 기본값: 0.1</td></tr><tr id="22cb3bed-dae9-8049-bf4e-c6b68ac2c4a8"><td id="Blnw" class="">seed</td><td id="w}\Y" class="">Integer</td><td id="~_@M" class="">작업 재현성을 위한 랜덤 시드입니다. 기본값: 1 (고급)</td></tr></tbody></table><p id="22cb3bed-dae9-80e3-98ce-f2f0d06f3759" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-805b-980f-c53e4edb2eb9" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ef-944f-d8b8406f8af4"><th id=":yCo" class="simple-table-header-color simple-table-header">이름</th><th id="Cn_]" class="simple-table-header-color simple-table-header">타입</th><th id="rP:J" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a6-b7f4-c94dc2c1d1e0"><td id=":yCo" class="">model</td><td id="Cn_]" class="">LanguageModel</td><td id="rP:J" class="">지정된 파라미터로 구성된 ChatNVIDIA 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-802f-9d2b-d1347b7cd877"/><p id="22cb3bed-dae9-80ea-ac0e-d881dffab82e" class="">
+</p><h2 id="22cb3bed-dae9-80fc-aa03-fcaa2b37de3e" class="">Ollama</h2><p id="22cb3bed-dae9-80a4-a1c6-ed49c5102e7e" class="">
+</p><p id="22cb3bed-dae9-80f5-847f-f4974c7f25bd" class="">이 컴포넌트는 Ollama의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8089-8016-de2db1479a85" class="">플로우에서 사용하려면 로컬에서 실행 중인 Ollama 서버에 Langflow를 연결하고, 모델을 선택하세요.</p><ol type="1" id="22cb3bed-dae9-8073-81a5-dffb94982f87" class="numbered-list" start="1"><li>Base URL 필드에 Ollama 서버 주소를 입력합니다. 기본값: <a href="http://localhost:11434/">http://localhost:11434</a></li></ol><ol type="1" id="22cb3bed-dae9-8048-93a9-efb220d8495e" class="numbered-list" start="2"><li>모델 목록을 새로고침하려면 Refresh 버튼을 클릭합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80f8-b455-e91a33723f09" class="numbered-list" start="3"><li>Model Name 필드에서 사용할 모델을 선택합니다(예: llama3.2:latest).</li></ol><ol type="1" id="22cb3bed-dae9-8098-b9f5-d9a933224309" class="numbered-list" start="4"><li>Ollama 컴포넌트를 플로우에 연결합니다(예: Agent 컴포넌트의 Custom Model로).</li></ol><p id="22cb3bed-dae9-801c-be18-d981d874513f" class="">자세한 내용은 <a href="https://docs.langflow.org/components-agents">Ollama</a> 문서를 참조하세요.</p><p id="22cb3bed-dae9-8024-8c61-f21f1a6ef349" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80ba-92ec-e45a1af46dea" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8097-8dc2-c729399d3987" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-804b-84aa-de8c147a3ebf"><th id="]k~Z" class="simple-table-header-color simple-table-header">이름</th><th id="@[}_" class="simple-table-header-color simple-table-header">타입</th><th id="U~M~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8088-8fab-e399e4bc53df"><td id="]k~Z" class="">Base URL</td><td id="@[}_" class="">String</td><td id="U~M~" class="">Ollama API 엔드포인트입니다. 기본값: <a href="http://localhost:11434/">http://localhost:11434</a></td></tr><tr id="22cb3bed-dae9-80ba-baa2-f7d68f6e6cfc"><td id="]k~Z" class="">Model Name</td><td id="@[}_" class="">String</td><td id="U~M~" class="">사용할 Ollama 모델 이름입니다.</td></tr><tr id="22cb3bed-dae9-8009-9a40-e706b15cda94"><td id="]k~Z" class="">Temperature</td><td id="@[}_" class="">Float</td><td id="U~M~" class="">응답의 창의성(무작위성)을 제어합니다.</td></tr></tbody></table><p id="22cb3bed-dae9-805d-958b-fc05f83c07e5" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-807d-a721-f508a3071193" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-801a-8a5c-eec09386cee4"><th id="^BD^" class="simple-table-header-color simple-table-header">이름</th><th id="|=IJ" class="simple-table-header-color simple-table-header">타입</th><th id="vbAF" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8022-aa9c-cb8d8ef1245e"><td id="^BD^" class="">model</td><td id="|=IJ" class="">LanguageModel</td><td id="vbAF" class="">지정된 파라미터로 구성된 Ollama 모델 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80d0-a54e-d5b882f3fc0e"/><p id="22cb3bed-dae9-8072-86d8-c327504250fa" class="">
+</p><h2 id="22cb3bed-dae9-80f1-953d-fd1f5e00cafe" class="">OpenAI</h2><p id="22cb3bed-dae9-8022-a0ac-c0e5e82b5eb5" class="">
+</p><p id="22cb3bed-dae9-801b-8477-c4c5345d040e" class="">이 컴포넌트는 OpenAI의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8010-9bb3-dbcfe65dee82" class="">자세한 내용은 <a href="https://beta.openai.com/docs/">OpenAI</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8097-abf3-e4498d62e333" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8030-b9f1-d3bc182baa8b" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80dd-8b97-cec417f76254" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8059-98ed-c55ac483147c"><th id="]Ddx" class="simple-table-header-color simple-table-header">이름</th><th id="OMSC" class="simple-table-header-color simple-table-header">타입</th><th id="e|UG" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a7-9cab-c0999f6aa225"><td id="]Ddx" class="">api_key</td><td id="OMSC" class="">SecretString</td><td id="e|UG" class="">OpenAI API 키입니다.</td></tr><tr id="22cb3bed-dae9-80f0-9817-f4ea981abac1"><td id="]Ddx" class="">model</td><td id="OMSC" class="">String</td><td id="e|UG" class="">사용할 OpenAI 모델 이름입니다. 예: &quot;gpt-3.5-turbo&quot;, &quot;gpt-4&quot;</td></tr><tr id="22cb3bed-dae9-80d9-97fe-efbdcab7b54e"><td id="]Ddx" class="">max_tokens</td><td id="OMSC" class="">Integer</td><td id="e|UG" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다.</td></tr><tr id="22cb3bed-dae9-8005-852e-f345e06965bc"><td id="]Ddx" class="">temperature</td><td id="OMSC" class="">Float</td><td id="e|UG" class="">무작위성 제어 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 0.7</td></tr><tr id="22cb3bed-dae9-802a-802c-fbfcab4de404"><td id="]Ddx" class="">top_p</td><td id="OMSC" class="">Float</td><td id="e|UG" class="">누클리어스 샘플링 파라미터입니다. 범위: [0.0, 1.0]. 기본값: 1.0</td></tr><tr id="22cb3bed-dae9-80bb-8756-f93ae9cd26cd"><td id="]Ddx" class="">frequency_penalty</td><td id="OMSC" class="">Float</td><td id="e|UG" class="">반복 토큰 빈도 패널티 파라미터입니다. 범위: [0.0, 2.0]. 기본값: 0.0</td></tr><tr id="22cb3bed-dae9-80bf-a0e6-dd869c427b94"><td id="]Ddx" class="">presence_penalty</td><td id="OMSC" class="">Float</td><td id="e|UG" class="">새로운 토픽 도입 패널티 파라미터입니다. 범위: [0.0, 2.0]. 기본값: 0.0</td></tr></tbody></table><p id="22cb3bed-dae9-803d-9ce4-e2a30e3804e1" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80e0-ba46-d382913af6f5" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-807f-86bc-fb01f9ba6650"><th id="?~@[" class="simple-table-header-color simple-table-header">이름</th><th id="jMQ;" class="simple-table-header-color simple-table-header">타입</th><th id="QMDd" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8032-9b1d-fa8c69d86838"><td id="?~@[" class="">model</td><td id="jMQ;" class="">LanguageModel</td><td id="QMDd" class="">지정된 파라미터로 구성된 OpenAI 모델 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8018-af8f-d989aa12c1db"/><p id="22cb3bed-dae9-804c-af91-db414dda8cc1" class="">
+</p><h2 id="22cb3bed-dae9-80c7-908f-e00678d97caa" class="">OpenRouter</h2><p id="22cb3bed-dae9-807a-86b7-ef25def1ac82" class="">
+</p><p id="22cb3bed-dae9-8033-ba61-e3f9bc06d7f8" class="">이 컴포넌트는 OpenRouter의 통합 API를 사용하여 다양한 공급자의 AI 모델로부터 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8000-9b5a-f54d44ecc929" class="">자세한 내용은 <a href="https://openrouter.ai/docs">OpenRouter </a>문서를 참고하세요.</p><p id="22cb3bed-dae9-80d2-a3f7-d90451601824" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80b1-9e08-f3239ad88e11" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80ec-85f6-c4acfaae83f8" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d2-9e16-c77fe57636ba"><th id="edWB" class="simple-table-header-color simple-table-header">이름</th><th id="PNo@" class="simple-table-header-color simple-table-header">타입</th><th id="jk|A" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-800a-895a-d21458e1277d"><td id="edWB" class="">api_key</td><td id="PNo@" class="">SecretString</td><td id="jk|A" class="">OpenRouter API 키입니다.</td></tr><tr id="22cb3bed-dae9-80f5-b6fa-f8e8a164be99"><td id="edWB" class="">site_url</td><td id="PNo@" class="">String</td><td id="jk|A" class="">랭킹용 사이트 URL입니다(고급).</td></tr><tr id="22cb3bed-dae9-80cf-9f13-cde3f0e231c0"><td id="edWB" class="">app_name</td><td id="PNo@" class="">String</td><td id="jk|A" class="">랭킹용 앱 이름입니다(고급).</td></tr><tr id="22cb3bed-dae9-8049-9706-e85bbba3fc54"><td id="edWB" class="">provider</td><td id="PNo@" class="">String</td><td id="jk|A" class="">사용할 AI 모델 제공업체입니다.</td></tr><tr id="22cb3bed-dae9-8081-bc98-c3f3ee089f67"><td id="edWB" class="">model_name</td><td id="PNo@" class="">String</td><td id="jk|A" class="">사용할 모델 이름입니다.</td></tr><tr id="22cb3bed-dae9-80c1-ae5f-fa7c45dc44ed"><td id="edWB" class="">temperature</td><td id="PNo@" class="">Float</td><td id="jk|A" class="">무작위성 제어 파라미터입니다. 범위: [0.0, 2.0]. 기본값: 0.7</td></tr><tr id="22cb3bed-dae9-802d-a7e7-c34464af45cc"><td id="edWB" class="">max_tokens</td><td id="PNo@" class="">Integer</td><td id="jk|A" class="">생성할 최대 토큰 수입니다(고급).</td></tr></tbody></table><p id="22cb3bed-dae9-80bb-ae74-ec0e2ec3056e" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8096-a9ec-d64720e3577e" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8079-bbcc-cc0fda8fa6f2"><th id="sorN" class="simple-table-header-color simple-table-header">이름</th><th id="]:^b" class="simple-table-header-color simple-table-header">타입</th><th id="dg_g" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c2-8aaa-db2912f6602a"><td id="sorN" class="">model</td><td id="]:^b" class="">LanguageModel</td><td id="dg_g" class="">지정된 파라미터로 구성된 ChatOpenAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80ef-ac07-e0608d81682e"/><p id="22cb3bed-dae9-80b9-87a1-e61d5a7133f1" class="">
+</p><h2 id="22cb3bed-dae9-8016-9739-d166b5e8401a" class="">Perplexity</h2><p id="22cb3bed-dae9-8022-8f3b-d5939989c469" class="">
+</p><p id="22cb3bed-dae9-808d-bde1-d5e43f9815ae" class="">이 컴포넌트는 Perplexity의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-8082-ac95-e35e9204f577" class="">자세한 내용은<a href="https://perplexity.ai/"> Perplexity</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8012-8bc5-fca2c3f0cc5c" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8060-b6f9-f4c414ea2afa" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80f6-bf97-e3d3c37ffe07" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8015-ba5c-f99546a14f45"><th id="S&lt;eU" class="simple-table-header-color simple-table-header">이름</th><th id="VOFI" class="simple-table-header-color simple-table-header">타입</th><th id="kE`R" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c3-bcba-f373d5a79159"><td id="S&lt;eU" class="">model_name</td><td id="VOFI" class="">String</td><td id="kE`R" class="">사용할 Perplexity 모델 이름입니다. 예: 다양한 Llama 3.1 모델</td></tr><tr id="22cb3bed-dae9-803c-9e94-c92f5e4b4a3d"><td id="S&lt;eU" class="">max_output_tokens</td><td id="VOFI" class="">Integer</td><td id="kE`R" class="">생성할 최대 토큰 수입니다.</td></tr><tr id="22cb3bed-dae9-80e9-9bb3-cc27eac95369"><td id="S&lt;eU" class="">api_key</td><td id="VOFI" class="">SecretString</td><td id="kE`R" class="">Perplexity API 키입니다.</td></tr><tr id="22cb3bed-dae9-8047-8707-cafc18689d46"><td id="S&lt;eU" class="">temperature</td><td id="VOFI" class="">Float</td><td id="kE`R" class="">무작위성 제어 파라미터입니다. 기본값: 0.75</td></tr><tr id="22cb3bed-dae9-8090-a286-cecee9521d45"><td id="S&lt;eU" class="">top_p</td><td id="VOFI" class="">Float</td><td id="kE`R" class="">누클리어스 샘플링 파라미터입니다(고급).</td></tr><tr id="22cb3bed-dae9-8097-b626-e032dc93a016"><td id="S&lt;eU" class="">n</td><td id="VOFI" class="">Integer</td><td id="kE`R" class="">각 프롬프트당 생성할 완료 개수입니다(고급).</td></tr><tr id="22cb3bed-dae9-8081-9ac2-f3b4f71d3746"><td id="S&lt;eU" class="">top_k</td><td id="VOFI" class="">Integer</td><td id="kE`R" class="">Top-k 샘플링 토큰 개수입니다. 양수여야 합니다(고급).</td></tr></tbody></table><p id="22cb3bed-dae9-8055-af4b-c401487121b0" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-800f-924a-cb72d2bc9fee" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8007-bd86-cbda7069d51b"><th id="&gt;JwL" class="simple-table-header-color simple-table-header">이름</th><th id="CoBy" class="simple-table-header-color simple-table-header">타입</th><th id="vI;R" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a9-b287-e7548d142345"><td id="&gt;JwL" class="">model</td><td id="CoBy" class="">LanguageModel</td><td id="vI;R" class="">지정된 파라미터로 구성된 ChatPerplexity 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8057-b406-cc90beed5129"/><p id="22cb3bed-dae9-8004-8c24-dbe7fb6bd445" class="">
+</p><h2 id="22cb3bed-dae9-80c8-88da-dd6a21721792" class="">Qianfan</h2><p id="22cb3bed-dae9-8007-9577-e8b061f2c5f8" class="">
+</p><p id="22cb3bed-dae9-80ed-be7c-db0077587445" class="">이 컴포넌트는 Qianfan의 언어 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80f7-a0b4-dbf0f52095ee" class="">자세한 내용은 <a href="https://github.com/baidubce/bce-qianfan-sdk">Qianfan</a> 문서를 참고하세요.</p><hr id="22cb3bed-dae9-8018-be22-fbaa92651335"/><p id="22cb3bed-dae9-803a-a472-fe308c9184ac" class="">
+</p><h2 id="22cb3bed-dae9-80aa-b6d7-f77881815e49" class="">SambaNova</h2><p id="22cb3bed-dae9-8040-a151-f16c07016d9b" class="">
+</p><p id="22cb3bed-dae9-8001-ba01-f4c6ad41a30b" class="">이 컴포넌트는 SambaNova Cloud의 LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-803d-9fc8-c978c2465173" class="">자세한 내용은 <a href="https://cloud.sambanova.ai/">SambaNova Cloud</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-80e6-b55c-eff3514ecb80" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-800b-90dd-d76745c77337" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8012-948e-d2ebb58c8270" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ba-9d84-e10aa9871a33"><th id="|C]X" class="simple-table-header-color simple-table-header">이름</th><th id="JERm" class="simple-table-header-color simple-table-header">타입</th><th id="BV_V" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8014-98fc-cbbf0da334c4"><td id="|C]X" class="">sambanova_url</td><td id="JERm" class="">String</td><td id="BV_V" class="">API 요청을 위한 기본 URL입니다. 기본값: <a href="https://api.sambanova.ai/v1/chat/completions">https://api.sambanova.ai/v1/chat/completions</a></td></tr><tr id="22cb3bed-dae9-803c-8ccc-eb56a03bc3d7"><td id="|C]X" class="">sambanova_api_key</td><td id="JERm" class="">SecretString</td><td id="BV_V" class="">SambaNova API 키입니다.</td></tr><tr id="22cb3bed-dae9-8026-8835-c4d8d1f4cb58"><td id="|C]X" class="">model_name</td><td id="JERm" class="">String</td><td id="BV_V" class="">사용할 SambaNova 모델 이름입니다.</td></tr><tr id="22cb3bed-dae9-80c7-a8a6-ca032981ac64"><td id="|C]X" class="">max_tokens</td><td id="JERm" class="">Integer</td><td id="BV_V" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다.</td></tr><tr id="22cb3bed-dae9-80ed-aba4-c4d799bc0be0"><td id="|C]X" class="">temperature</td><td id="JERm" class="">Float</td><td id="BV_V" class="">무작위성 제어 파라미터입니다. 기본값: 0.07</td></tr></tbody></table><p id="22cb3bed-dae9-80d0-9373-e1357a429bbf" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-803a-b5e7-ebe9f9dac405" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8072-9021-c9338f8d9d49"><th id="HTEZ" class="simple-table-header-color simple-table-header">이름</th><th id="YXPz" class="simple-table-header-color simple-table-header">타입</th><th id="ZaON" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80fd-b416-cf340e59cddc"><td id="HTEZ" class="">model</td><td id="YXPz" class="">LanguageModel</td><td id="ZaON" class="">지정된 파라미터로 구성된 SambaNova 모델 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-80da-a255-f13553ad9be4"/><p id="22cb3bed-dae9-80d1-a71f-d82f61d541d8" class="">
+</p><h2 id="22cb3bed-dae9-80f1-8204-e795c568b01e" class="">Vertex AI</h2><p id="22cb3bed-dae9-80ad-89dc-ea20e85fee89" class="">
+</p><p id="22cb3bed-dae9-80e8-ba13-f949b79ab4d3" class="">이 컴포넌트는 Google Vertex AI LLM을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-80e9-bd48-d349d48164e1" class="">자세한 내용은 <a href="https://cloud.google.com/vertex-ai">Google Vertex AI</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-8096-ac9e-fb07500499f7" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8066-a109-e63934ddd203" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-8035-b419-f0a5a1784abb" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80eb-9d8b-c800da0717b8"><th id="UDoD" class="simple-table-header-color simple-table-header">이름</th><th id="tDgR" class="simple-table-header-color simple-table-header">타입</th><th id="m=UV" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8086-b77d-c83e0258f74c"><td id="UDoD" class="">credentials</td><td id="tDgR" class="">File</td><td id="m=UV" class="">JSON 형식 인증 파일입니다. 비워두면 환경 변수 사용을 시도합니다.</td></tr><tr id="22cb3bed-dae9-80e9-a032-f734cde4bb52"><td id="UDoD" class="">model_name</td><td id="tDgR" class="">String</td><td id="m=UV" class="">사용할 Vertex AI 모델 이름입니다. 기본값: &quot;gemini-1.5-pro&quot;</td></tr><tr id="22cb3bed-dae9-8047-b12d-f23ac3ffc604"><td id="UDoD" class="">project</td><td id="tDgR" class="">String</td><td id="m=UV" class="">프로젝트 ID입니다(고급).</td></tr><tr id="22cb3bed-dae9-8022-b3a3-d3a192ea9928"><td id="UDoD" class="">location</td><td id="tDgR" class="">String</td><td id="m=UV" class="">Vertex AI API 지역입니다. 기본값: &quot;us-central1&quot;(고급).</td></tr><tr id="22cb3bed-dae9-8005-83d5-d8c0443cbe47"><td id="UDoD" class="">max_output_tokens</td><td id="tDgR" class="">Integer</td><td id="m=UV" class="">생성할 최대 토큰 수입니다(고급).</td></tr><tr id="22cb3bed-dae9-804e-a8d8-d9475518ba85"><td id="UDoD" class="">max_retries</td><td id="tDgR" class="">Integer</td><td id="m=UV" class="">API 호출 재시도 최대 횟수입니다. 기본값: 1(고급).</td></tr><tr id="22cb3bed-dae9-8059-855b-fb538f53b42f"><td id="UDoD" class="">temperature</td><td id="tDgR" class="">Float</td><td id="m=UV" class="">무작위성 제어 파라미터입니다. 기본값: 0.0</td></tr><tr id="22cb3bed-dae9-8089-9391-d3bad1d505fb"><td id="UDoD" class="">top_k</td><td id="tDgR" class="">Integer</td><td id="m=UV" class="">Top-k 필터링용 토큰 개수입니다(고급).</td></tr><tr id="22cb3bed-dae9-809c-a7d0-c49e0e7cb228"><td id="UDoD" class="">top_p</td><td id="tDgR" class="">Float</td><td id="m=UV" class="">누클리어스 샘플링 확률 한계입니다. 기본값: 0.95(고급).</td></tr><tr id="22cb3bed-dae9-80f9-b3a7-fddc14b75965"><td id="UDoD" class="">verbose</td><td id="tDgR" class="">Boolean</td><td id="m=UV" class="">상세 출력 여부입니다. 기본값: False(고급).</td></tr></tbody></table><p id="22cb3bed-dae9-809d-9835-c98239113ced" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-8089-90cd-d64df741ece6" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8064-8123-c1f399e218d7"><th id="_|l=" class="simple-table-header-color simple-table-header">이름</th><th id="_FkJ" class="simple-table-header-color simple-table-header">타입</th><th id="JMrD" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80d3-ae0f-d6ce7f3dbffa"><td id="_|l=" class="">model</td><td id="_FkJ" class="">LanguageModel</td><td id="JMrD" class="">지정된 파라미터로 구성된 ChatVertexAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8094-aaa8-fe4cbcd7894a"/><p id="22cb3bed-dae9-8081-91e3-fb98f2f41c47" class="">
+</p><h2 id="22cb3bed-dae9-8009-8efc-f9c13cadbd18" class="">xAI</h2><p id="22cb3bed-dae9-800d-ab75-de90d3bd20aa" class="">
+</p><p id="22cb3bed-dae9-809c-8bf1-ec3413841ec2" class="">이 컴포넌트는 Grok 등 xAI 모델을 사용하여 텍스트를 생성합니다.</p><p id="22cb3bed-dae9-805b-a241-e5d089b47fe2" class="">자세한 내용은 <a href="https://x.ai/">xAI</a> 문서를 참고하세요.</p><p id="22cb3bed-dae9-80ac-9563-fb2f79294203" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80cd-bbed-e39d59b6203e" class=""><strong>입력값</strong></p><table id="22cb3bed-dae9-80cc-90c6-c1d7d2bc26cd" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-809c-ac42-fe20c455c1e2"><th id="CB;L" class="simple-table-header-color simple-table-header">이름</th><th id="zKZq" class="simple-table-header-color simple-table-header">타입</th><th id="RPk?" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c7-83ae-d23086c38fc9"><td id="CB;L" class="">max_tokens</td><td id="zKZq" class="">Integer</td><td id="RPk?" class="">생성할 최대 토큰 수입니다. 0으로 설정하면 제한이 없습니다. 범위: 0–128000.</td></tr><tr id="22cb3bed-dae9-80ad-b659-c066103c011f"><td id="CB;L" class="">model_kwargs</td><td id="zKZq" class="">Dictionary</td><td id="RPk?" class="">추가 키워드 인수입니다.</td></tr><tr id="22cb3bed-dae9-8049-9fc4-e3de015ea641"><td id="CB;L" class="">json_mode</td><td id="zKZq" class="">Boolean</td><td id="RPk?" class="">True로 설정하면 스키마와 상관없이 JSON 형식으로 출력합니다.</td></tr><tr id="22cb3bed-dae9-80c2-bf13-ef3a3f6ed7f6"><td id="CB;L" class="">model_name</td><td id="zKZq" class="">String</td><td id="RPk?" class="">사용할 xAI 모델 이름입니다. 기본값: grok-2-latest</td></tr><tr id="22cb3bed-dae9-8024-86d9-c9c6038d6e9c"><td id="CB;L" class="">base_url</td><td id="zKZq" class="">String</td><td id="RPk?" class="">API 요청을 위한 기본 URL입니다. 기본값: <a href="https://api.x.ai/v1">https://api.x.ai/v1</a></td></tr><tr id="22cb3bed-dae9-805b-8932-c727c2200f2e"><td id="CB;L" class="">api_key</td><td id="zKZq" class="">SecretString</td><td id="RPk?" class="">xAI API 키입니다.</td></tr><tr id="22cb3bed-dae9-80e6-a0e1-f2ee8f8f84ab"><td id="CB;L" class="">temperature</td><td id="zKZq" class="">Float</td><td id="RPk?" class="">무작위성 제어 파라미터입니다. 기본값: 0.1</td></tr><tr id="22cb3bed-dae9-809a-9c38-e9150f02eb4d"><td id="CB;L" class="">seed</td><td id="zKZq" class="">Integer</td><td id="RPk?" class="">작업 재현성을 위한 시드입니다.</td></tr></tbody></table><p id="22cb3bed-dae9-8044-a52e-d4c21d568fb3" class=""><strong>출력값</strong></p><table id="22cb3bed-dae9-80e7-8ebd-d1ed3f4fe0f7" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8044-aab5-dd0e85089786"><th id="orc}" class="simple-table-header-color simple-table-header">이름</th><th id="&lt;|_C" class="simple-table-header-color simple-table-header">타입</th><th id="}W?[" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8091-82a8-f86d9e4918ab"><td id="orc}" class="">model</td><td id="&lt;|_C" class="">LanguageModel</td><td id="}W?[" class="">지정된 파라미터로 구성된 ChatOpenAI 인스턴스입니다.</td></tr></tbody></table><hr id="22cb3bed-dae9-8088-afbe-f470e1007ad2"/><p id="22cb3bed-dae9-8040-b07a-d5fd46773fca" class="">
+</p><p id="22cb3bed-dae9-801c-80e3-c6651cb0590f" class="">
+</p><p id="22cb3bed-dae9-80bf-b178-e95d162ad075" class=""><em>*</em>이 문서는 <a href="https://docs.langflow.org/components-models">https://docs.langflow.org/components-models</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,716 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Logic</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80d0-84fb-dadbdd964d7b" class="page sans"><header><h1 class="page-title">Logic</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22cb3bed-dae9-8013-8041-f6210214a28c" class="">로직 (Logic) 컴포넌트</h1><h3 id="22cb3bed-dae9-80c8-8f74-cffec7a80e37" class="">: Components &gt; Logic</h3><p id="22cb3bed-dae9-80ad-9b1e-ebbc6b570348" class="">
+</p><p id="22cb3bed-dae9-8090-8d3c-d2dc164a846e" class="">Langflow의 <strong>Logic 컴포넌트</strong>는 라우팅, 조건 처리, 플로우 관리 기능을 제공합니다.</p><hr id="22cb3bed-dae9-805d-84df-d6a38969b8f4"/><p id="22cb3bed-dae9-808d-bd5f-fc875481df24" class="">
+</p><h2 id="22cb3bed-dae9-809a-a730-d06223c8ded6" class="">Logic 컴포넌트 사용법</h2><p id="22cb3bed-dae9-80ee-9294-f99cd8c0cbc1" class="">
+</p><figure id="22cb3bed-dae9-8036-a42b-c3e352fc8128" class="image"><a href="image%2022.png"><img style="width:2676px" src="image%2022.png"/></a></figure><p id="22cb3bed-dae9-803d-9262-d4326f61e54b" class="">
+</p><p id="22cb3bed-dae9-803a-a9cf-f15d46f9b318" class="">이 플로우에서는 <code>Loop</code> 컴포넌트를 활용해 문서 요약을 위한 “for each” 스타일의 반복 처리를 구현합니다.</p><ol type="1" id="22cb3bed-dae9-80cf-b1f5-cde9721e3f6e" class="numbered-list" start="1"><li><code>File</code> 컴포넌트가 로컬 머신의 텍스트 파일을 로드합니다.</li></ol><ol type="1" id="22cb3bed-dae9-802b-92fa-ed22748c0df9" class="numbered-list" start="2"><li><code>Parse Data</code> 컴포넌트는 파일 내용을 구조화된 <code>Data</code> 객체 리스트로 변환합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80ed-8155-e00280d35174" class="numbered-list" start="3"><li><code>Loop</code> 컴포넌트는 이 <code>Data</code> 리스트를 하나씩 꺼내어 <code>Prompt</code> 컴포넌트로 전달하며 요약 작업을 수행합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80f0-a8ff-e9c7dc7fb526" class="numbered-list" start="4"><li>더 이상 처리할 데이터가 없으면 <code>Done</code> 루프가 활성화되어 전체 페이지 수를 집계하고, 추가 <code>Prompt</code>를 통해 문서 전체의 톤을 요약합니다.</li></ol><p id="22cb3bed-dae9-80bb-b6f4-d3de0f97db53" class="">이처럼 <code>Parse Data</code>의 <code>Data List</code> 출력과 <code>Loop</code>의 <code>Data</code> 입력을 연결하면, Langflow 내에서 구조화된 “for each” 요약 플로우를 간단히 표현할 수 있습니다.</p><p id="22cb3bed-dae9-800e-a1e8-d55f17524508" class="">출력 예시는 다음과 같습니다:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22cb3bed-dae9-80ee-8efb-efa8c0e66cb8" class="code"><code class="language-JavaScript">Document Summary
+Total Pages Processed
+Total Pages: 2
+Overall Tone of Document
+Tone: Informative and Instructional
+The documentation outlines microservices architecture patterns and best practices.
+It emphasizes service isolation and inter-service communication protocols.
+The use of asynchronous messaging patterns is recommended for system scalability.
+It includes code examples of REST and gRPC implementations to demonstrate integration approaches.</code></pre><p id="22cb3bed-dae9-8082-a4c2-ff9249158960" class="">
+</p><hr id="22cb3bed-dae9-8057-a7c9-d0d66b6be28d"/><p id="22cb3bed-dae9-80cc-93ef-e3d313d807e3" class="">
+</p><h2 id="22cb3bed-dae9-802a-bc82-cfc88a751953" class="">조건 라우터 (If-Else 컴포넌트)</h2><p id="22cb3bed-dae9-8094-918d-fa2aeb012435" class="">
+</p><p id="22cb3bed-dae9-8076-b03f-ea7198f5da25" class="">이 컴포넌트는 두 문자열을 비교해 메시지를 분기합니다. 지정된 연산자를 사용하여 두 텍스트를 평가한 뒤, 조건이 참일 경우 <code>true_result</code> 포트로, 거짓일 경우 <code>false_result</code> 포트로 메시지를 전달합니다.</p><p id="22cb3bed-dae9-8081-a683-c59c448757ab" class="">연산자는 기본적으로 단일 문자열 비교를 수행하지만, 정규 표현식(regex) 매칭을 통해 여러 단어를 한꺼번에 검색할 수도 있습니다.</p><p id="22cb3bed-dae9-80b5-98ed-da59ed74953e" class="">
+</p><h3 id="22cb3bed-dae9-8041-b2dd-fe8f0a9146ad" class="">사용법: 정규표현식 매칭</h3><ol type="1" id="22cb3bed-dae9-8039-9363-cdb4cb26992a" class="numbered-list" start="1"><li><code>If-Else</code> 컴포넌트의 <code>Text Input</code> 포트를 <code>Chat Input</code> 컴포넌트에 연결합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8028-9f51-e48699ef7768" class="numbered-list" start="2"><li><code>If-Else</code> 컴포넌트 설정:<ul id="22cb3bed-dae9-8011-b34f-ee3d241e9d25" class="bulleted-list"><li style="list-style-type:disc"><strong>Match Text</strong>: <code>.*(urgent|warning|caution).*</code> (이 값 중 하나를 검색)</li></ul><ul id="22cb3bed-dae9-8030-a308-c35c446204a4" class="bulleted-list"><li style="list-style-type:disc"><strong>Operator</strong>: <code>regex</code> (정규표현식 매칭, 대소문자 구분)</li></ul><ul id="22cb3bed-dae9-8093-9124-d520d40895ff" class="bulleted-list"><li style="list-style-type:disc"><strong>Message</strong>: <code>New Message Detected</code> (옵션 필드, <code>True</code>와 <code>False</code> 포트로 메시지 전달)</li></ul></li></ol><ol type="1" id="22cb3bed-dae9-80d3-b586-ef7f5e9e51bc" class="numbered-list" start="3"><li>두 개의 동일한 플로우를 만들어 메시지를 처리합니다. 각 흐름에 <code>OpenAI</code>, <code>Prompt</code>, <code>Chat Output</code> 컴포넌트를 연결합니다.</li></ol><ol type="1" id="22cb3bed-dae9-801c-a755-d21c2cdc3cb4" class="numbered-list" start="4"><li>한 흐름은 <code>If-Else</code> 컴포넌트의 <code>True</code> 포트에, 다른 흐름은 <code>False</code> 포트에 연결합니다.</li></ol><figure id="22cb3bed-dae9-8080-a849-f4f368107dd4" class="image"><a href="image%2023.png"><img style="width:709.9874877929688px" src="image%2023.png"/></a></figure><ol type="1" id="22cb3bed-dae9-8099-894c-cc2ecf482f50" class="numbered-list" start="5"><li>두 <code>OpenAI</code> 컴포넌트에 API 키를 추가합니다.</li></ol><ol type="1" id="22cb3bed-dae9-80ce-bf14-d2c7b9aa5ad7" class="numbered-list" start="6"><li>각 <code>Prompt</code> 컴포넌트에 경로별 동작을 입력합니다.<ul id="22cb3bed-dae9-80ef-b02b-d3a8dfc91be4" class="bulleted-list"><li style="list-style-type:disc"><strong>매칭 시</strong>: &quot;새 메시지가 수신되어 긴급 대기열에 추가되었습니다.&quot;</li></ul><ul id="22cb3bed-dae9-800d-a4f5-d0d305d97e0d" class="bulleted-list"><li style="list-style-type:disc"><strong>매칭되지 않을 시</strong>: &quot;새 메시지가 수신되어 백로그에 추가되었습니다.&quot;</li></ul></li></ol><ol type="1" id="22cb3bed-dae9-80f6-b922-fd4ada312279" class="numbered-list" start="7"><li>Playground를 엽니다.</li></ol><ol type="1" id="22cb3bed-dae9-8069-9969-d60ecdecd271" class="numbered-list" start="8"><li>메시지를 전송하고 <code>If-Else</code> 컴포넌트 평가에 따라 라우팅 결과를 확인합니다.</li></ol><p id="22cb3bed-dae9-806a-9208-ef37b4e7eb76" class=""><strong>User</strong>: A new user was created.</p><p id="22cb3bed-dae9-80f5-beb4-d24b7e3c2ff4" class=""><strong>AI</strong>: A new message has been received and added to the backlog.</p><p id="22cb3bed-dae9-80bf-a73b-ccf6c93c432d" class=""><strong>User</strong>: Sign-in warning: new user locked out.</p><p id="22cb3bed-dae9-8057-947b-fdf308559d6c" class=""><strong>AI</strong>: A new message has been received and added to the Urgent queue. Please review it at your earliest convenience.</p><h3 id="22cb3bed-dae9-80c0-8a6c-c070774e9ced" class="">매개변수</h3><h3 id="22cb3bed-dae9-8021-81f0-e4c666160df0" class="">Inputs</h3><table id="22cb3bed-dae9-809d-a3b3-d30a0bdcbd68" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80ad-95cb-c5bdf2f2452b"><th id="Hc\R" class="simple-table-header-color simple-table-header">이름</th><th id="SYgF" class="simple-table-header-color simple-table-header">타입</th><th id="\gQH" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8027-bc44-e61761286bb8"><td id="Hc\R" class="">input_text</td><td id="SYgF" class="">String</td><td id="\gQH" class="">비교할 기본 텍스트 입력</td></tr><tr id="22cb3bed-dae9-80b4-80c3-efecfb81d2c4"><td id="Hc\R" class="">match_text</td><td id="SYgF" class="">String</td><td id="\gQH" class="">비교 대상 텍스트</td></tr><tr id="22cb3bed-dae9-803d-863f-c030ef110306"><td id="Hc\R" class="">operator</td><td id="SYgF" class="">Dropdown</td><td id="\gQH" class="">비교 연산자 (equals, not equals, contains, starts with, ends with, regex 중 선택). 기본값: equals</td></tr><tr id="22cb3bed-dae9-80a1-9151-c5a251baad00"><td id="Hc\R" class="">case_sensitive</td><td id="SYgF" class="">Boolean</td><td id="\gQH" class=""><code>true</code>일 때 대소문자 구분. regex 연산자에는 적용되지 않음. 기본값: false</td></tr><tr id="22cb3bed-dae9-8076-a848-cb3fb2d3ddd1"><td id="Hc\R" class="">message</td><td id="SYgF" class="">Message</td><td id="\gQH" class="">참/거짓 루트로 전달할 메시지. 선택적 필드</td></tr><tr id="22cb3bed-dae9-809d-a91d-f378c85008f5"><td id="Hc\R" class="">max_iterations</td><td id="SYgF" class="">Integer</td><td id="\gQH" class="">최대 반복 횟수. 기본값: 10</td></tr><tr id="22cb3bed-dae9-8042-b049-cfb6a9a08359"><td id="Hc\R" class="">default_route</td><td id="SYgF" class="">Dropdown</td><td id="\gQH" class="">최대 반복 시 택할 경로 (true_result 또는 false_result). 기본값: false_result</td></tr></tbody></table><h3 id="22cb3bed-dae9-8084-a0a0-f81c2eca560e" class="">Outputs</h3><table id="22cb3bed-dae9-80ee-893d-d9db47235356" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8077-88e9-c280726d9a29"><th id="Jz@_" class="simple-table-header-color simple-table-header">이름</th><th id="B\^Z" class="simple-table-header-color simple-table-header">타입</th><th id="V;WH" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c7-b7b5-d483635cfee1"><td id="Jz@_" class="">true_result</td><td id="B\^Z" class="">Message</td><td id="V;WH" class="">조건이 참일 때의 출력 메시지</td></tr><tr id="22cb3bed-dae9-8067-ab81-e38079aa9557"><td id="Jz@_" class="">false_result</td><td id="B\^Z" class="">Message</td><td id="V;WH" class="">조건이 거짓일 때의 출력 메시지</td></tr></tbody></table><h3 id="22cb3bed-dae9-80c5-b572-f7c9d6d6747e" class="">연산자 동작</h3><ul id="22cb3bed-dae9-8067-99e5-e40f3c8614b1" class="bulleted-list"><li style="list-style-type:disc"><strong>equals</strong>: 정확히 일치하는지 비교</li></ul><ul id="22cb3bed-dae9-8034-9c91-d2b56ec05e64" class="bulleted-list"><li style="list-style-type:disc"><strong>not equals</strong>: 정확히 일치하지 않음을 비교</li></ul><ul id="22cb3bed-dae9-8053-8370-ca33093ec99d" class="bulleted-list"><li style="list-style-type:disc"><strong>contains</strong>: <code>input_text</code>에 <code>match_text</code>가 포함되어 있는지 확인</li></ul><ul id="22cb3bed-dae9-8042-95bc-c1671c665318" class="bulleted-list"><li style="list-style-type:disc"><strong>starts with</strong>: <code>input_text</code>가 <code>match_text</code>로 시작하는지 확인</li></ul><ul id="22cb3bed-dae9-80c2-8a8b-db71e9474a48" class="bulleted-list"><li style="list-style-type:disc"><strong>ends with</strong>: <code>input_text</code>가 <code>match_text</code>로 끝나는지 확인</li></ul><ul id="22cb3bed-dae9-8000-bb2f-fe403df96bec" class="bulleted-list"><li style="list-style-type:disc"><strong>regex</strong>: 정규표현식 매칭 수행 (항상 대소문자 구분, <code>case_sensitive</code> 설정 무시)</li></ul><p id="22cb3bed-dae9-805e-aa47-eb5743781cfd" class="">
+</p><hr id="22cb3bed-dae9-80db-a33d-de5fe6d3dec0"/><p id="22cb3bed-dae9-8087-bd38-cb06a6282216" class="">
+</p><h2 id="22cb3bed-dae9-809d-a4b4-ee1aca4377d6" class="">Listen 컴포넌트</h2><p id="22cb3bed-dae9-8005-a511-d957bf216c26" class="">
+</p><p id="22cb3bed-dae9-801e-a0e8-d31804b53ca5" class="">이 컴포넌트는 알림(notification)을 수신하고, 해당 상태(state)를 가져옵니다.</p><h3 id="22cb3bed-dae9-804c-a761-c50f7ef453c5" class="">Inputs</h3><table id="22cb3bed-dae9-8042-917e-ee29807886b1" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8076-bd94-ec35f396f481"><th id="JNFL" class="simple-table-header-color simple-table-header">이름</th><th id="qziO" class="simple-table-header-color simple-table-header">타입</th><th id="GMQa" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8027-9ce4-dbc6b3aa411d"><td id="JNFL" class="">name</td><td id="qziO" class="">String</td><td id="GMQa" class="">수신할 알림의 이름</td></tr></tbody></table><h3 id="22cb3bed-dae9-80ae-b3c1-d4e8659e09c9" class="">Outputs</h3><table id="22cb3bed-dae9-8010-8ea1-f07626d28d22" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8049-8d31-dee08c0afafc"><th id="\|W~" class="simple-table-header-color simple-table-header">이름</th><th id="OjCT" class="simple-table-header-color simple-table-header">타입</th><th id="c?&gt;l" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80df-a26c-d8ebf0af4d67"><td id="\|W~" class="">output</td><td id="OjCT" class="">Data</td><td id="c?&gt;l" class="">알림에 저장된 상태</td></tr></tbody></table><hr id="22cb3bed-dae9-8084-b47a-c5aded17bdde"/><p id="22cb3bed-dae9-80bc-9f6c-e62fb2d18943" class="">
+</p><h2 id="22cb3bed-dae9-8026-8f4f-e1d2b3ccc353" class="">Loop 컴포넌트</h2><p id="22cb3bed-dae9-801e-8cb8-fc1499753487" class="">
+</p><blockquote id="22cb3bed-dae9-807e-ae39-f20360a6815b" class="">팁: 다른 Loop 컴포넌트 예시는 Research Translation Loop 템플릿을 참조하세요.</blockquote><p id="22cb3bed-dae9-8019-9b41-c722c2c16f51" class="">
+</p><p id="22cb3bed-dae9-80cc-9126-fd84be1cfb9a" class="">이 컴포넌트는 <code>Data</code> 객체 리스트를 순회하며, 한 번에 하나의 항목을 출력하고 루프 입력에서 결과를 집계합니다.</p><p id="22cb3bed-dae9-8035-90f9-dc8d95739e62" class="">아래 예시에서 <code>Loop</code> 컴포넌트는 <code>Load CSV</code> 컴포넌트의 <code>Item</code> 포트를 통해 CSV 파일의 각 행을 반복 처리합니다. 처리된 구조화 데이터를 <code>Chroma DB</code>에 적재하는 동작이 <code>Done</code> 포트에 연결되어 있습니다.</p><p id="22cb3bed-dae9-8016-99c9-dcc18d34536e" class="">
+</p><p id="22cb3bed-dae9-80dd-8a6e-cd5cc9d3756e" class="">1. Loop 컴포넌트는 Load CSV 컴포넌트의 Data를 받아 Item 포트로 출력합니다.<br/>2. 각 CSV 행은 Structured Output 컴포넌트로 변환되어 구조화된 데이터로 처리됩니다. 점선으로 표시된 Structured Output의 Looping 포트는 루프가 재시작되는 지점을 나타냅니다.<br/>3. 더 이상 추출할 행이 없으면 Done 포트에 연결된 동작이 수행됩니다. 여기서는 데이터를 Chroma DB에 로드합니다.<br/><br/></p><figure id="22cb3bed-dae9-8015-80f1-c910b03fc138" class="image"><a href="image%2024.png"><img style="width:3008px" src="image%2024.png"/></a></figure><h3 id="22cb3bed-dae9-8045-882a-f73dc6dd659d" class="">매개변수</h3><h3 id="22cb3bed-dae9-8075-b930-e075026b12e3" class="">Inputs</h3><table id="22cb3bed-dae9-805c-b1c1-ff5585f5d941" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-809c-abf8-fa49afe4dd9c"><th id="~{ar" class="simple-table-header-color simple-table-header">이름</th><th id="]jJN" class="simple-table-header-color simple-table-header">타입</th><th id="g[cs" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80d3-8e49-c0262f84ea25"><td id="~{ar" class="">data</td><td id="]jJN" class="">Data/List</td><td id="g[cs" class="">처리할 초기 <code>Data</code> 객체 리스트</td></tr></tbody></table><h3 id="22cb3bed-dae9-809d-9da8-de8164f2f18f" class="">Outputs</h3><table id="22cb3bed-dae9-80fb-bd68-e70190d119d4" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b7-b462-d2d42760e063"><th id="^A^]" class="simple-table-header-color simple-table-header">이름</th><th id="P&lt;y]" class="simple-table-header-color simple-table-header">타입</th><th id="JOrU" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8031-b4cc-fd73cdb1900d"><td id="^A^]" class="">item</td><td id="P&lt;y]" class="">Data</td><td id="JOrU" class="">현재 처리 중인 <code>Data</code> 항목</td></tr><tr id="22cb3bed-dae9-8048-b91d-fa58839c9683"><td id="^A^]" class="">done</td><td id="P&lt;y]" class="">Data</td><td id="JOrU" class="">모든 항목 처리 후 집계된 결과</td></tr></tbody></table><hr id="22cb3bed-dae9-8080-9aa6-ec3fc0ea7fc9"/><p id="22cb3bed-dae9-801e-8774-eb71af4fba18" class="">
+</p><h2 id="22cb3bed-dae9-80ec-ac1e-f0e708732aef" class="">Notify 컴포넌트</h2><p id="22cb3bed-dae9-8030-a33c-f2ab67a86ac1" class="">
+</p><p id="22cb3bed-dae9-8090-a9f6-d48196c6cc25" class="">이 컴포넌트는 <code>Listen</code> 컴포넌트가 사용할 알림을 생성합니다.</p><h3 id="22cb3bed-dae9-80dd-b39f-dbf635d3f015" class="">매개변수</h3><h3 id="22cb3bed-dae9-8000-be7c-c864d19698de" class="">Inputs</h3><table id="22cb3bed-dae9-80ac-a31f-c37b6ab43f0a" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8004-8873-c5053cc09223"><th id="HJ:U" class="simple-table-header-color simple-table-header">이름</th><th id="Irp_" class="simple-table-header-color simple-table-header">타입</th><th id="AAgz" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-801c-8bad-e90ae94e1d29"><td id="HJ:U" class="">name</td><td id="Irp_" class="">String</td><td id="AAgz" class="">알림의 이름</td></tr><tr id="22cb3bed-dae9-8067-8b04-c2412b1eabc5"><td id="HJ:U" class="">data</td><td id="Irp_" class="">Data</td><td id="AAgz" class="">알림에 저장할 데이터</td></tr><tr id="22cb3bed-dae9-8052-9a1f-eb7806b0f2c2"><td id="HJ:U" class="">append</td><td id="Irp_" class="">Boolean</td><td id="AAgz" class=""><code>true</code>일 때 기존 알림에 데이터를 추가</td></tr></tbody></table><h3 id="22cb3bed-dae9-80f3-b07f-dcd197565092" class="">Outputs</h3><table id="22cb3bed-dae9-8049-8aad-d4c7d0a8fcfe" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80cb-8958-ebf7ef6ecf07"><th id="LZNx" class="simple-table-header-color simple-table-header">이름</th><th id="vU}F" class="simple-table-header-color simple-table-header">타입</th><th id="|cG_" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-802f-bc76-d0de3772f6bc"><td id="LZNx" class="">output</td><td id="vU}F" class="">Data</td><td id="|cG_" class="">알림에 저장된 데이터</td></tr></tbody></table><hr id="22cb3bed-dae9-8071-bb8b-fc69dd7f9035"/><p id="22cb3bed-dae9-80ed-9ccd-ea06235e79ab" class="">
+</p><h2 id="22cb3bed-dae9-80d8-bdb4-f44c8774d925" class="">Pass 컴포넌트</h2><p id="22cb3bed-dae9-808a-b223-fee945b635f9" class="">
+</p><p id="22cb3bed-dae9-8068-9293-c51f8f3f8be7" class="">이 컴포넌트는 입력 메시지를 그대로 전달합니다.</p><h3 id="22cb3bed-dae9-8048-8413-ca0892bb6aa7" class="">매개변수</h3><h3 id="22cb3bed-dae9-80d7-b2cb-ef5bebfd6bd9" class="">Inputs</h3><table id="22cb3bed-dae9-8007-b3c9-eae444221a23" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d8-b14e-ec3e1684bb7b"><th id="Wb]z" class="simple-table-header-color simple-table-header">이름</th><th id="KX@`" class="simple-table-header-color simple-table-header">표시 이름</th><th id="V&lt;`x" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-804f-a0e8-e11873558540"><td id="Wb]z" class="">input_message</td><td id="KX@`" class="">Input Message</td><td id="V&lt;`x" class="">전달할 메시지</td></tr><tr id="22cb3bed-dae9-8046-aa72-c83d657f3cd3"><td id="Wb]z" class="">ignored_message</td><td id="KX@`" class="">Ignored Message</td><td id="V&lt;`x" class="">무시할 메시지 (연속성을 위한 워크어라운드)</td></tr></tbody></table><h3 id="22cb3bed-dae9-8074-8e56-f248ad72632a" class="">Outputs</h3><table id="22cb3bed-dae9-80d5-862c-c3f97aeb3539" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80de-a951-de80dc86fc2d"><th id=";?B|" class="simple-table-header-color simple-table-header">이름</th><th id=":vm_" class="simple-table-header-color simple-table-header">표시 이름</th><th id="U[wu" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80bb-b3e3-eda527c0579a"><td id=";?B|" class="">output_message</td><td id=":vm_" class="">Output Message</td><td id="U[wu" class="">전달된 메시지</td></tr></tbody></table><hr id="22cb3bed-dae9-8010-95ee-d6115d0408cf"/><p id="22cb3bed-dae9-806b-b14a-fb33c8e937bd" class="">
+</p><h2 id="22cb3bed-dae9-80cd-833b-f5b06550822e" class="">Run flow 컴포넌트</h2><p id="22cb3bed-dae9-80ee-afa1-e39d1e3299ff" class="">
+</p><p id="22cb3bed-dae9-8013-a738-cf83238a3655" class="">이 컴포넌트는 Langflow 데이터베이스에 저장된 플로우를 에디터를 열지 않고 실행할 수 있도록 합니다.</p><p id="22cb3bed-dae9-80c3-81f4-c869b82ee02d" class=""><code>Run Flow</code> 컴포넌트는 에이전트(Agent)에 툴(tool)로 연결할 수도 있습니다. 에이전트가 사용할 도구의 이름과 설명 메타데이터는 자동으로 생성됩니다.</p><h3 id="22cb3bed-dae9-8098-9119-eaebef94a2d7" class="">사용법</h3><ol type="1" id="22cb3bed-dae9-80f5-81bb-c8f82f9ebe4c" class="numbered-list" start="1"><li><code>Simple Agent</code> 플로우에 <code>Run Flow</code> 컴포넌트를 추가합니다.</li></ol><ol type="1" id="22cb3bed-dae9-803e-aebe-d4648649d9e8" class="numbered-list" start="2"><li><strong>Flow Name</strong> 메뉴에서 실행할 서브플로우를 선택합니다. 컴포넌트가 해당 플로우의 입력과 출력을 반영하도록 변경됩니다.</li></ol><ol type="1" id="22cb3bed-dae9-800f-a637-fa2913e877c5" class="numbered-list" start="3"><li><code>Run Flow</code> 컴포넌트에서 <strong>Tool Mode</strong>를 활성화합니다.</li></ol><ol type="1" id="22cb3bed-dae9-8054-a6f5-f15aa099fed0" class="numbered-list" start="4"><li><code>Run Flow</code> 컴포넌트를 에이전트의 <strong>Toolset</strong> 입력에 연결합니다.</li></ol><figure id="22cb3bed-dae9-80ad-91cf-c6ea5e1be183" class="image"><a href="image%2025.png"><img style="width:709.9874877929688px" src="image%2025.png"/></a></figure><ol type="1" id="22cb3bed-dae9-80e5-908b-d68e4564a892" class="numbered-list" start="5"><li>플로우를 실행하면 에이전트가 해당 서브플로우를 도구로 사용합니다.</li></ol><h3 id="22cb3bed-dae9-80a2-8070-df3a7e31dfbc" class="">매개변수</h3><h3 id="22cb3bed-dae9-80f7-9553-d17c0b2534dd" class="">Inputs</h3><table id="22cb3bed-dae9-800d-b671-fa529b58542e" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a8-9e24-db2b617f6faf"><th id="pZq^" class="simple-table-header-color simple-table-header">이름</th><th id="VVm^" class="simple-table-header-color simple-table-header">타입</th><th id="SU@m" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-803e-ad4f-ef356a5d6261"><td id="pZq^" class="">flow_name_selected</td><td id="VVm^" class="">Dropdown</td><td id="SU@m" class="">실행할 플로우 이름</td></tr><tr id="22cb3bed-dae9-80a7-be52-e46d03dce65c"><td id="pZq^" class="">flow_tweak_data</td><td id="VVm^" class="">Dict</td><td id="SU@m" class="">플로우 동작을 맞춤 설정할 딕셔너리</td></tr><tr id="22cb3bed-dae9-8032-be06-fd9731ad5520"><td id="pZq^" class="">dynamic inputs</td><td id="VVm^" class="">Various</td><td id="SU@m" class="">선택된 플로우에 따라 생성된 추가 입력</td></tr></tbody></table><h3 id="22cb3bed-dae9-80ad-9cdf-d7954a61564d" class="">Outputs</h3><table id="22cb3bed-dae9-8030-85f9-eb79eae4eb06" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806c-8550-ed213bfa4a69"><th id="?;MO" class="simple-table-header-color simple-table-header">이름</th><th id="Lw^t" class="simple-table-header-color simple-table-header">타입</th><th id="M}Nc" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8024-9792-f17821cbabf1"><td id="?;MO" class="">run_outputs</td><td id="Lw^t" class="">List[...]</td><td id="M}Nc" class="">플로우 실행 결과로 생성된 모든 출력(Data, Message, DataFrame)</td></tr></tbody></table><hr id="22cb3bed-dae9-80d1-9541-dc2640d67c09"/><p id="22cb3bed-dae9-806e-b5be-d4d1724faa30" class="">
+</p><h2 id="22cb3bed-dae9-80dd-b591-d41278d8ea66" class="">Legacy 컴포넌트</h2><p id="22cb3bed-dae9-80c4-9c86-c9bc9c8d93f1" class="">
+</p><p id="22cb3bed-dae9-8013-9787-e57109689391" class="">Legacy 컴포넌트는 더 이상 공식적으로 지원되지는 않지만, 여전히 사용은 가능합니다.</p><hr id="22cb3bed-dae9-80b9-8366-d9ee81c4bb4a"/><h3 id="22cb3bed-dae9-8048-b2bd-ea306ec614e6" class="">데이터 조건 라우터 (Data Conditional Router)</h3><blockquote id="22cb3bed-dae9-8060-94d2-e9d3d5259800" class="">중요: 이 컴포넌트는 Langflow 버전 1.3부터 더 이상 활발히 개발되지 않습니다.</blockquote><p id="22cb3bed-dae9-807f-be4f-eae2fe04a8f0" class="">이 컴포넌트는 지정된 키(key)에 대해 조건을 평가해 <code>Data</code> 객체를 분기합니다. 단일 <code>Data</code> 객체 또는 <code>Data</code> 객체 리스트를 처리할 수 있으며, boolean 검증도 지원합니다.</p><p id="22cb3bed-dae9-807f-a40b-e2e5eb22e5bf" class=""><strong>Inputs</strong></p><table id="22cb3bed-dae9-80cb-b89c-ef59dedb3b86" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806c-bfb3-c77d257d59fc"><th id="J|bm" class="simple-table-header-color simple-table-header">이름</th><th id="xeKR" class="simple-table-header-color simple-table-header">타입</th><th id="tcr~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80d8-aa0f-d58751ebdfdb"><td id="J|bm" class=""><code>data_input</code></td><td id="xeKR" class="">Data</td><td id="tcr~" class="">처리할 <code>Data</code> 객체 또는 <code>Data</code> 객체 리스트. 단일 항목과 리스트 모두 지원합니다.</td></tr><tr id="22cb3bed-dae9-806b-a6e4-f45fc127a57e"><td id="J|bm" class=""><code>key_name</code></td><td id="xeKR" class="">String</td><td id="tcr~" class="">평가할 <code>Data</code> 객체의 키 이름</td></tr><tr id="22cb3bed-dae9-807a-aeea-c81aa59a2609"><td id="J|bm" class=""><code>operator</code></td><td id="xeKR" class="">Dropdown</td><td id="tcr~" class="">적용할 연산자. 기본값은 <code>equals</code>. 사용 가능한 옵션:</td></tr><tr id="22cb3bed-dae9-80b1-8dde-f4ab874ee1a2"><td id="J|bm" class=""><code>equals</code>, <code>not equals</code>, <code>contains</code>, <code>starts with</code>, <code>ends with</code>, <code>boolean validator</code></td><td id="xeKR" class=""></td><td id="tcr~" class=""></td></tr><tr id="22cb3bed-dae9-800a-8e41-fdbe8438418f"><td id="J|bm" class=""><code>compare_value</code></td><td id="xeKR" class="">String</td><td id="tcr~" class="">비교할 값. <code>boolean validator</code> 연산자일 때는 사용되지 않습니다.</td></tr></tbody></table><p id="22cb3bed-dae9-80e3-a660-f1b06f3a76eb" class=""><strong>Outputs</strong></p><table id="22cb3bed-dae9-80a5-a096-ce4bac095b70" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b1-9dfe-e7754ac49253"><th id="wu:Q" class="simple-table-header-color simple-table-header">이름</th><th id="rycz" class="simple-table-header-color simple-table-header">타입</th><th id="|Jmy" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ef-bbbc-d637208d7b0a"><td id="wu:Q" class=""><code>true_output</code></td><td id="rycz" class="">Data/List</td><td id="|Jmy" class="">조건을 만족한 객체들의 출력</td></tr><tr id="22cb3bed-dae9-80be-beff-d16fae2dd3b6"><td id="wu:Q" class=""><code>false_output</code></td><td id="rycz" class="">Data/List</td><td id="|Jmy" class="">조건을 만족하지 않은 객체들의 출력</td></tr></tbody></table><p id="22cb3bed-dae9-80c4-b579-ea7c4b8869df" class=""><strong>연산자 동작 방식</strong></p><ul id="22cb3bed-dae9-8023-8763-d7bb9dca95cf" class="bulleted-list"><li style="list-style-type:disc"><code>equals</code><p id="22cb3bed-dae9-80e1-b6dd-da9c17c0d580" class="">키의 값과 <code>compare_value</code>가 정확히 일치하는지 비교합니다.</p></li></ul><ul id="22cb3bed-dae9-808c-b096-e424e53ce8d2" class="bulleted-list"><li style="list-style-type:disc"><code>not equals</code><p id="22cb3bed-dae9-8026-92d7-ed8ac62c3bfc" class="">정확히 일치하지 않을 때 참입니다.</p></li></ul><ul id="22cb3bed-dae9-8025-b671-dc54a053027b" class="bulleted-list"><li style="list-style-type:disc"><code>contains</code><p id="22cb3bed-dae9-80b6-97be-eb7dba9a0022" class="">키의 값 안에 <code>compare_value</code>가 포함되어 있는지 확인합니다.</p></li></ul><ul id="22cb3bed-dae9-8079-9a28-c7e274f73d58" class="bulleted-list"><li style="list-style-type:disc"><code>starts with</code><p id="22cb3bed-dae9-8041-a2af-e9770faf8a1b" class="">키의 값이 <code>compare_value</code>로 시작하는지 확인합니다.</p></li></ul><ul id="22cb3bed-dae9-801d-a2f0-e78d0d9447df" class="bulleted-list"><li style="list-style-type:disc"><code>ends with</code><p id="22cb3bed-dae9-8098-bd95-dc902d3720e2" class="">키의 값이 <code>compare_value</code>로 끝나는지 확인합니다.</p></li></ul><ul id="22cb3bed-dae9-801c-83f8-f2626467d9eb" class="bulleted-list"><li style="list-style-type:disc"><code>boolean validator</code><p id="22cb3bed-dae9-80a8-9443-dbcd49ae7bc7" class="">키의 값을 불리언처럼 해석합니다. 다음 값들은 <strong>참</strong>으로 간주됩니다:</p><ul id="22cb3bed-dae9-80bb-a637-da18750e87d3" class="bulleted-list"><li style="list-style-type:circle">Boolean <code>true</code></li></ul><ul id="22cb3bed-dae9-80b0-9b7e-f740b7bb3d66" class="bulleted-list"><li style="list-style-type:circle">문자열 <code>&quot;true&quot;</code>, <code>&quot;1&quot;</code>, <code>&quot;yes&quot;</code>, <code>&quot;y&quot;</code>, <code>&quot;on&quot;</code> (대소문자 무시)<p id="22cb3bed-dae9-803f-86cf-e40b2e800157" class="">그 외의 값은 Python의 <code>bool()</code> 함수로 변환합니다.</p></li></ul></li></ul><p id="22cb3bed-dae9-80b1-8982-c71a83860684" class=""><strong>리스트 처리</strong></p><p id="22cb3bed-dae9-8059-aada-ce7ae188e41e" class=""><code>Data</code> 객체 리스트를 입력받았을 때 다음과 같이 동작합니다:</p><ol type="1" id="22cb3bed-dae9-80e5-afaa-f35fa968c9f6" class="numbered-list" start="1"><li>리스트의 각 객체를 개별 평가</li></ol><ol type="1" id="22cb3bed-dae9-8051-b73a-f904b1948cb7" class="numbered-list" start="2"><li>조건을 만족하는 객체는 <code>true_output</code></li></ol><ol type="1" id="22cb3bed-dae9-80f5-b34e-cda422612cf4" class="numbered-list" start="3"><li>조건을 만족하지 않는 객체는 <code>false_output</code></li></ol><ol type="1" id="22cb3bed-dae9-803b-8e7d-ea273e0ef5e3" class="numbered-list" start="4"><li>모든 객체가 한쪽으로만 라우팅되면, 다른 출력은 빈 리스트가 됩니다.</li></ol><hr id="22cb3bed-dae9-8022-845b-fd68c7d4468a"/><p id="22cb3bed-dae9-808c-98cc-cf174146e2bd" class="">
+</p><h2 id="22cb3bed-dae9-80a8-9168-d5a7d21acf4b" class="">중단된 컴포넌트 (Deprecated components)</h2><p id="22cb3bed-dae9-80bf-8d3e-e12a93958dca" class="">
+</p><p id="22cb3bed-dae9-809c-83fb-e38c53792e09" class="">중단된 컴포넌트는 더 이상 개발되지 않으며, 새로운 프로젝트에서는 사용을 권장하지 않습니다.</p><hr id="22cb3bed-dae9-8059-853e-cc0b66679ae6"/><h3 id="22cb3bed-dae9-80ac-98f3-e7bd201f34df" class="">Flow as tool (Flow as tool 컴포넌트)</h3><blockquote id="22cb3bed-dae9-802b-9aab-fcf21771b9fb" class="">중요: 이 컴포넌트는 Langflow 버전 1.1.2부터 지원이 중단되었습니다. 대신 Run flow 컴포넌트를 사용하세요.</blockquote><p id="22cb3bed-dae9-8049-a74b-db73f592c90c" class="">로드된 플로우를 실행하는 함수를 기반으로 도구(tool)를 생성합니다.</p><p id="22cb3bed-dae9-80ee-b067-cbfbca0aec60" class=""><strong>Inputs</strong></p><table id="22cb3bed-dae9-80a1-99be-f74583a74209" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80f1-939b-c60a40518e86"><th id="mCOw" class="simple-table-header-color simple-table-header">이름</th><th id="@MOx" class="simple-table-header-color simple-table-header">타입</th><th id="kgZJ" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80f5-9704-fad6823b56bb"><td id="mCOw" class=""><code>flow_name</code></td><td id="@MOx" class="">Dropdown</td><td id="kgZJ" class="">실행할 플로우의 이름</td></tr><tr id="22cb3bed-dae9-802c-85d8-ffe14f65e89b"><td id="mCOw" class=""><code>tool_name</code></td><td id="@MOx" class="">String</td><td id="kgZJ" class="">생성할 도구의 이름</td></tr><tr id="22cb3bed-dae9-8078-bdf4-c567e172e782"><td id="mCOw" class=""><code>tool_description</code></td><td id="@MOx" class="">String</td><td id="kgZJ" class="">도구에 대한 설명</td></tr><tr id="22cb3bed-dae9-8032-a3d0-fd387e5d6bda"><td id="mCOw" class=""><code>return_direct</code></td><td id="@MOx" class="">Boolean</td><td id="kgZJ" class=""><code>true</code>로 설정하면, 도구 결과를 바로 반환</td></tr></tbody></table><p id="22cb3bed-dae9-80f8-8cea-e5cdd3ef364f" class=""><strong>Outputs</strong></p><table id="22cb3bed-dae9-8017-b84c-df02222d4ea3" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80e5-999a-dab0e29ec18c"><th id="b&lt;^z" class="simple-table-header-color simple-table-header">이름</th><th id="{s`Q" class="simple-table-header-color simple-table-header">타입</th><th id="?=zz" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8062-b181-ef84eed14d54"><td id="b&lt;^z" class=""><code>api_build_tool</code></td><td id="{s`Q" class="">Tool</td><td id="?=zz" class="">생성된 도구 객체</td></tr></tbody></table><hr id="22cb3bed-dae9-80ac-8df9-e94e7621b779"/><h3 id="22cb3bed-dae9-80f5-9185-eb1e2c118ec1" class="">Sub flow (SubFlowComponent)</h3><blockquote id="22cb3bed-dae9-804b-902c-f225c1fada68" class="">중요: 이 컴포넌트는 Langflow 버전 1.1.2부터 지원이 중단되었습니다. 대신 Run flow 컴포넌트를 사용하세요.</blockquote><p id="22cb3bed-dae9-80d9-b508-ca55e44b8737" class="">전체 플로우를 하나의 컴포넌트로 통합합니다. 선택한 플로우의 입력과 출력을 동적으로 생성하여, 주어진 파라미터로 해당 플로우를 실행할 수 있습니다.</p><p id="22cb3bed-dae9-8088-bf9b-ee3cf1d47685" class=""><strong>Inputs</strong></p><table id="22cb3bed-dae9-805e-8f7d-c9d4dad43d6b" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80e0-ab53-e7d2e358fc67"><th id="\{_f" class="simple-table-header-color simple-table-header">이름</th><th id="MmFY" class="simple-table-header-color simple-table-header">타입</th><th id="{;Tb" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-809c-8223-dc828338ca4a"><td id="\{_f" class=""><code>flow_name</code></td><td id="MmFY" class="">Dropdown</td><td id="{;Tb" class="">실행할 플로우의 이름</td></tr></tbody></table><p id="22cb3bed-dae9-80e7-99ea-dc9e3a385362" class=""><strong>Outputs</strong></p><table id="22cb3bed-dae9-8090-8fff-e59262a5bdc0" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806e-ba97-f8015e8ede98"><th id="_yc|" class="simple-table-header-color simple-table-header">이름</th><th id="Op_n" class="simple-table-header-color simple-table-header">타입</th><th id="~Tf~" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e3-abc2-dc8210d8acb1"><td id="_yc|" class=""><code>flow_outputs</code></td><td id="Op_n" class="">List[Data]</td><td id="~Tf~" class="">플로우 실행 결과로 생성된 출력들</td></tr></tbody></table><hr id="22cb3bed-dae9-80f1-ad92-ccfb9453cf9c"/><p id="22cb3bed-dae9-80d9-af90-f16835eaa378" class="">
+</p><p id="22cb3bed-dae9-803c-aff2-f0d53e8455e5" class="">
+</p><p id="22cb3bed-dae9-8041-8be2-c4f1f488df93" class="">*이 문서는 <a href="https://docs.langflow.org/components-logic">https://docs.langflow.org/components-logic</a>문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22cb3bed-dae9-80f5-ab98-fe04aea13145" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

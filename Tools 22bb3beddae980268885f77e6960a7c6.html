@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tools</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8026-8885-f77e6960a7c6" class="page sans"><header><h1 class="page-title">Tools</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22cb3bed-dae9-800f-a960-c12c2e2855e7" class="">툴 (Tool) 컴포넌트</h1><h3 id="22cb3bed-dae9-80ea-b13b-c3a85add741b" class="">  : Components &gt; Tools</h3><p id="22cb3bed-dae9-806d-b4e2-eaf97b96d5d0" class="">
+</p><p id="22cb3bed-dae9-80ba-929c-cce9243bbd02" class="">Langflow의 <strong>툴 (Tool) 컴포넌트</strong>는 일반적으로 Agent 컴포넌트의 <strong>Tools</strong> 포트에 연결됩니다. Agent는 LLM을 추론 엔진으로 사용하여, 연결된 Tool 컴포넌트 중 어떤 도구를 사용해야 문제를 해결할지 결정합니다.</p><h2 id="22db3bed-dae9-806f-9dbc-ece33bc30dcb" class="">툴이란?</h2><p id="22db3bed-dae9-8071-9686-cb56c87eab0e" class="">
+</p><p id="22cb3bed-dae9-8026-90ef-c7efd69a5a3a" class="">툴은 쉽게 말해 Agent가 호출하여 특정 작업을 수행하거나 외부 리소스에 접근할 수 있는 함수(function)입니다. 각 함수는 Agent가 이해할 수 있는 공통 인터페이스를 가진 툴 객체로 래핑(wrap)됩니다. Agent는 시작할 때 사용 가능한 Tool 목록을 받아 이를 통해 어떤 도구가 있는지 인식하며, 각 툴 객체의 설명(description)을 참고해 해당 도구가 수행할 수 있는 작업을 이해합니다. 이후 Agent는 연결된 LLM을 사용해 문제를 추론하고, 가장 적합한 도구를 선택해 호출합니다.</p><hr id="22cb3bed-dae9-8014-add5-c7bcfa7c2f9e"/><p id="22db3bed-dae9-8036-9025-ddfa72cd2fa6" class="">
+</p><h2 id="22cb3bed-dae9-8001-b839-f4643703f045" class="">플로우에서 Tool 사용하기</h2><p id="22db3bed-dae9-8096-9c57-dc3f39bc13c3" class="">
+</p><p id="22cb3bed-dae9-809e-aa52-ff7d43f9fcfa" class="">Tool은 Agent 컴포넌트의 <strong>Tools</strong> 포트에 연결하여 사용합니다.</p><p id="22cb3bed-dae9-80a2-9b70-f08e7aef1352" class="">간단한 Agent 시작 프로젝트(simple agent starter project)에서는 URL과 Calculator 도구를 Agent 컴포넌트에 연결해 사용자의 질문에 답변하도록 구성되어 있습니다. 이때 OpenAI LLM이 Agent의 두뇌 역할을 수행하며, 어떤 도구를 사용할지 결정합니다.</p><figure id="22cb3bed-dae9-8072-ac2a-d4e2ceee0af3" class="image"><a href="image%2041.png"><img style="width:4000px" src="image%2041.png"/></a></figure><p id="22cb3bed-dae9-809f-bbc5-f282fa94eec8" class="">어떤 컴포넌트를 Agent에서 사용할 수 있는 도구로 만들려면, 해당 컴포넌트에서 <strong>Tool Mode</strong> 옵션을 활성화하면 됩니다. Tool Mode를 활성화하면 컴포넌트의 입력(input)이 Agent 호출을 수락하도록 변경됩니다. 만약 연결하려는 컴포넌트에 Tool Mode 옵션이 없다면, 직접 입력 구성을 수정해 도구로 사용할 수 있습니다. 자세한 예시는 <a href="https://docs.langflow.org/agents-tools#make-any-component-a-tool">“Make any component a tool”</a> 문서를 참조하세요.</p><p id="22db3bed-dae9-8074-8ab7-fa78ec20df84" class="">
+</p><hr id="22cb3bed-dae9-805a-8990-c291e9052e0b"/><p id="22db3bed-dae9-80c9-b73a-deb0eac59944" class="">
+</p><h2 id="22cb3bed-dae9-8005-a8fb-e92d074a6d39" class="">개별 Tool 컴포넌트</h2><p id="22db3bed-dae9-80c6-b380-f1f6a976bc7f" class="">
+</p><h3 id="22cb3bed-dae9-8069-80b1-f6c860ea372d" class="">arXiv</h3><p id="22cb3bed-dae9-804c-9d2f-e59dc893e134" class="">이 컴포넌트는 arXiv.org에서 논문을 검색하고 가져옵니다.</p><p id="22cb3bed-dae9-809e-b000-ef7899aadba4" class=""><strong>Parameters</strong></p><p id="22cb3bed-dae9-8012-8513-d674c1122d4b" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80b8-9813-fda302aa556a" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-809b-9e1e-ea20403259c0"><th id="rq[u" class="simple-table-header-color simple-table-header">이름</th><th id="lKuO" class="simple-table-header-color simple-table-header">타입</th><th id="sisE" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8008-bb37-d523eab06c96"><td id="rq[u" class="">search\_query</td><td id="lKuO" class="">String</td><td id="sisE" class="">검색할 arXiv 논문 질의 (예: quantum computing)</td></tr><tr id="22cb3bed-dae9-80ff-8392-d1f97e16f5be"><td id="rq[u" class="">search\_type</td><td id="lKuO" class="">String</td><td id="sisE" class="">검색할 필드</td></tr><tr id="22cb3bed-dae9-80f0-b1b4-d91aeec2f16c"><td id="rq[u" class="">max\_results</td><td id="lKuO" class="">Integer</td><td id="sisE" class="">반환할 최대 결과 수</td></tr></tbody></table><p id="22cb3bed-dae9-80bb-8027-e68ca527e767" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-80c0-8bbe-f0978c9bcca1" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a4-bcf0-cc06cdcbc6d3"><th id="zm@B" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;g&gt;W" class="simple-table-header-color simple-table-header">타입</th><th id="TW^e" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-803d-9d0b-c5e43d9fae1d"><td id="zm@B" class="">papers</td><td id="&gt;g&gt;W" class="">List\[Data]</td><td id="TW^e" class="">가져온 arXiv 논문 목록</td></tr></tbody></table><h3 id="22cb3bed-dae9-8059-b809-c50657e9c832" class="">Astra DB Tool</h3><p id="22cb3bed-dae9-8066-9b55-ead5e92516d9" class="">이 컴포넌트는 Agent가 Astra DB 컬렉션에서 데이터를 조회할 수 있도록 합니다.</p><p id="22cb3bed-dae9-80d3-9d97-de02670b80e1" class="">플로우 예시:</p><figure id="22cb3bed-dae9-80cf-948b-f6dec75474f8" class="image"><a href="image%2042.png"><img style="width:4000px" src="image%2042.png"/></a></figure><ul id="22cb3bed-dae9-80a9-a835-e85439653778" class="bulleted-list"><li style="list-style-type:disc"><strong>Tool Name</strong>과 <strong>Tool Description</strong>은 필수 입력이며, Tool Name에는 공백을 사용할 수 없습니다.</li></ul><ul id="22cb3bed-dae9-80f2-911e-f622e8490351" class="bulleted-list"><li style="list-style-type:disc"><strong>Collection Name</strong>, <strong>Astra DB Application Token</strong>, <strong>Astra DB API Endpoint</strong>는 Astra DB 배포 환경에서 확인할 수 있습니다(자세한 내용은 DataStax 문서 참조).</li></ul><p id="22cb3bed-dae9-801e-a387-f215eed23574" class="">예시에서는 OpenAI Embeddings 컴포넌트를 Astra DB Tool의 <strong>Semantic Search</strong> 기능과 연결했습니다. Semantic Search를 사용하려면 임베딩 모델 또는 Astra DB Vectorize가 활성화되어 있어야 하며, 임베딩 모델이 없으면 오류가 발생합니다. Playground에서 질문을 입력하면 Agent가 Astra DB Tool을 통해 컬렉션 정보를 반환합니다.</p><p id="22cb3bed-dae9-807b-b9ff-c8e347ee79ea" class="">
+</p><hr id="22cb3bed-dae9-80b3-9653-c9e36d81473b"/><p id="22cb3bed-dae9-80ed-be81-c70c1c4f263c" class="">
+</p><h3 id="22cb3bed-dae9-806d-bb82-d94fe5d80f60" class="">Astra DB Tool 파라미터 설정</h3><p id="22cb3bed-dae9-80d1-bbb0-cfcf5b6cc919" class="">
+</p><p id="22cb3bed-dae9-80cc-8154-fc53508553a3" class=""><strong>Tool Parameters</strong> 탭에서 Find 명령에 적용할 필터 파라미터를 정의할 수 있으며, LLM은 이 파라미터 정보를 바탕으로 도구를 호출할 때 적절한 값을 제공합니다.</p><ol type="1" id="22cb3bed-dae9-8032-bbd5-ed3bd12e413a" class="numbered-list" start="1"><li><strong>Add a new row</strong> 클릭</li></ol><ol type="1" id="22cb3bed-dae9-8054-9c6f-fee1e9219a21" class="numbered-list" start="2"><li>다음 예시처럼 설정:<ul id="22cb3bed-dae9-8052-af6f-ff6b611affc1" class="bulleted-list"><li style="list-style-type:disc"><strong>Name</strong>: customer_id</li></ul><ul id="22cb3bed-dae9-8016-9712-ff5c23f2fe74" class="bulleted-list"><li style="list-style-type:disc"><strong>Attribute Name</strong>: 실제 필드명과 동일하면 비워둡니다.</li></ul><ul id="22cb3bed-dae9-80cc-a511-d62790bf85c3" class="bulleted-list"><li style="list-style-type:disc"><strong>Description</strong>: 조회할 고객의 고유 식별자</li></ul><ul id="22cb3bed-dae9-80c7-bb1c-e0d5f02d2ae1" class="bulleted-list"><li style="list-style-type:disc"><strong>Is Metadata</strong>: 메타데이터 필드일 경우 켜기</li></ul><ul id="22cb3bed-dae9-80fb-8700-d9579f14262b" class="bulleted-list"><li style="list-style-type:disc"><strong>Is Mandatory</strong>: 필수 필터일 경우 켜기</li></ul><ul id="22cb3bed-dae9-8049-8558-fad765476311" class="bulleted-list"><li style="list-style-type:disc"><strong>Is Timestamp</strong>: 날짜/시간 필터가 아니면 끄기</li></ul><ul id="22cb3bed-dae9-807d-a05a-f1e72903438f" class="bulleted-list"><li style="list-style-type:disc"><strong>Operator</strong>: <code>$eq</code> (정확 일치)</li></ul></li></ol><p id="22cb3bed-dae9-803e-b7b6-ef9273ac5397" class="">LLM 입력과 무관하게 필터를 고정하려면 <strong>Static Filters</strong> 옵션을 사용하세요.</p><table id="22cb3bed-dae9-8015-b5ba-d02d6b3d12fa" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8039-801e-d4960e2be97c"><th id="}abi" class="simple-table-header-color simple-table-header">파라미터</th><th id="dbFU" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80bc-862d-d76481e9be23"><td id="}abi" class="">Name</td><td id="dbFU" class="">LLM에 노출될 파라미터 이름. 실제 필드명과 일치하거나 더 설명적인 이름 사용 가능.</td></tr><tr id="22cb3bed-dae9-80a8-a0a3-d8886166c1bd"><td id="}abi" class="">Attribute Name</td><td id="dbFU" class="">LLM 이름과 실제 DB 속성이 다를 때 매핑 설정. 예: start_date, end_date로 같은 timestamp 필드 참조.</td></tr><tr id="22cb3bed-dae9-80ed-a0b5-c12070c4a700"><td id="}abi" class="">Description</td><td id="dbFU" class="">LLM이 파라미터를 어떻게 사용해야 하는지 안내. 예: specialty를 소문자로 입력해야 한다고 명시.</td></tr><tr id="22cb3bed-dae9-80a8-950f-d9704da7eeff"><td id="}abi" class="">Is Metadata</td><td id="dbFU" class="">metadata 객체 하위에 저장된 속성일 때 켜기. 쿼리 시 <code>{&quot;metadata.&lt;attribute_name&gt;&quot;:&quot;&lt;value&gt;&quot;}</code> 형태로 처리됩니다.</td></tr><tr id="22cb3bed-dae9-8084-9364-d7da642dae59"><td id="}abi" class="">Is Timestamp</td><td id="dbFU" class="">날짜/시간 필터일 때 켜기. Astrapy 클라이언트가 기대하는 타임스탬프 형식으로 자동 변환해줍니다.</td></tr><tr id="22cb3bed-dae9-806d-a991-ea6caaf15b6a"><td id="}abi" class="">Operator</td><td id="dbFU" class="">필터 연산자 지정. 예: <code>$gt</code>(크다), <code>$lt</code>(작다) 등 유효한 Data API 필터 연산자 사용.</td></tr></tbody></table><p id="22cb3bed-dae9-80a8-98b9-d130ebb8bbe6" class=""><strong>Parameters</strong></p><p id="22cb3bed-dae9-80b7-9ae6-c1009eced073" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80d8-8e1e-ea4b4f22ea9f" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80bc-8d7b-e8b1857f8a07"><th id=":NHF" class="simple-table-header-color simple-table-header">이름</th><th id="f@&lt;A" class="simple-table-header-color simple-table-header">타입</th><th id="N&gt;AS" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-806b-96ef-f24f16410938"><td id=":NHF" class="">Tool Name</td><td id="f@&lt;A" class="">String</td><td id="N&gt;AS" class="">Agent 프롬프트에서 사용될 도구 이름</td></tr><tr id="22cb3bed-dae9-805e-a371-f212f145249e"><td id=":NHF" class="">Tool Description</td><td id="f@&lt;A" class="">String</td><td id="N&gt;AS" class="">도구 설명 (모델이 언제 사용해야 할지 결정)</td></tr><tr id="22cb3bed-dae9-8032-9d51-c67f49f5dc66"><td id=":NHF" class="">Collection Name</td><td id="f@&lt;A" class="">String</td><td id="N&gt;AS" class="">조회할 Astra DB 컬렉션 이름</td></tr><tr id="22cb3bed-dae9-80a2-903f-f69addbaa9b9"><td id=":NHF" class="">Token</td><td id="f@&lt;A" class="">SecretString</td><td id="N&gt;AS" class="">Astra DB 접근을 위한 인증 토큰</td></tr><tr id="22cb3bed-dae9-8085-a832-e9e970e33c10"><td id=":NHF" class="">API Endpoint</td><td id="f@&lt;A" class="">String</td><td id="N&gt;AS" class="">Astra DB API 엔드포인트</td></tr><tr id="22cb3bed-dae9-803c-ad45-e635916ab4c4"><td id=":NHF" class="">Projection Fields</td><td id="f@&lt;A" class="">String</td><td id="N&gt;AS" class="">반환할 속성(콤마 구분), 기본값: \*</td></tr><tr id="22cb3bed-dae9-8093-8ed2-d53099a95256"><td id=":NHF" class="">Tool Parameters</td><td id="f@&lt;A" class="">Dict</td><td id="N&gt;AS" class="">모델이 도구 실행에 채울 파라미터 (필수 파라미터는 느낌표(!) 사용)</td></tr><tr id="22cb3bed-dae9-80c9-9894-c7a8c35729db"><td id=":NHF" class="">Static Filters</td><td id="f@&lt;A" class="">Dict</td><td id="N&gt;AS" class="">쿼리 결과 필터용 속성-값 쌍</td></tr><tr id="22cb3bed-dae9-80bb-b0a3-edef2b3c79a6"><td id=":NHF" class="">Limit</td><td id="f@&lt;A" class="">String</td><td id="N&gt;AS" class="">반환할 문서 수</td></tr></tbody></table><p id="22cb3bed-dae9-8001-a398-d2ad9f01abd0" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-8094-99f8-e5f277ce3e22" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-801d-b64a-fc115c9f229b"><th id="lkuK" class="simple-table-header-color simple-table-header">이름</th><th id="SCEl" class="simple-table-header-color simple-table-header">타입</th><th id="PDh^" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b1-b81d-e5755898d2d9"><td id="lkuK" class="">Data</td><td id="SCEl" class="">List\[Data]</td><td id="PDh^" class="">Projection Fields로 지정한 필드를 포함한 쿼리 결과 Data 객체 목록 (number\_of\_results 제한)</td></tr><tr id="22cb3bed-dae9-8006-ba7c-e9ac99b0eafe"><td id="lkuK" class="">Tool</td><td id="SCEl" class="">StructuredTool</td><td id="PDh^" class="">LangChain StructuredTool 객체 (파라미터 스키마·쿼리 함수 포함)</td></tr></tbody></table><hr id="22cb3bed-dae9-8065-a55e-d26abf2da289"/><p id="22cb3bed-dae9-8051-91b4-cc9099e410f8" class="">
+</p><h3 id="22cb3bed-dae9-801b-8c04-e87e9f2002f2" class="">Astra DB CQL Tool</h3><p id="22cb3bed-dae9-800b-b3ce-c4e44932bf8a" class="">
+</p><p id="22cb3bed-dae9-8094-8262-d28861add2c2" class="">Astra DB CQL 테이블을 조회할 수 있도록 합니다.</p><p id="22cb3bed-dae9-8028-959e-dcc1aca47bed" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80b4-a404-f24b702c0f81" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80cd-8591-eb7684894b89" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8075-a35c-c6808bea99c1"><th id="c&lt;`P" class="simple-table-header-color simple-table-header">이름</th><th id="BA^d" class="simple-table-header-color simple-table-header">타입</th><th id="r|qs" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e0-b701-c22d02f77321"><td id="c&lt;`P" class="">Tool Name</td><td id="BA^d" class="">String</td><td id="r|qs" class="">Agent 프롬프트에서 사용될 도구 이름</td></tr><tr id="22cb3bed-dae9-800c-9791-fd1df76d83e6"><td id="c&lt;`P" class="">Tool Description</td><td id="BA^d" class="">String</td><td id="r|qs" class="">도구 설명 (모델이 어떻게 사용할지 안내)</td></tr><tr id="22cb3bed-dae9-8045-a640-d38c16e0a34a"><td id="c&lt;`P" class="">Keyspace</td><td id="BA^d" class="">String</td><td id="r|qs" class="">Keyspace 이름</td></tr><tr id="22cb3bed-dae9-8078-a3cc-f2e59f1826f3"><td id="c&lt;`P" class="">Table Name</td><td id="BA^d" class="">String</td><td id="r|qs" class="">조회할 CQL 테이블 이름</td></tr><tr id="22cb3bed-dae9-80bf-b332-c13cca24c0ea"><td id="c&lt;`P" class="">Token</td><td id="BA^d" class="">SecretString</td><td id="r|qs" class="">Astra DB 인증 토큰</td></tr><tr id="22cb3bed-dae9-80ae-b2ae-dcd7521c6ede"><td id="c&lt;`P" class="">API Endpoint</td><td id="BA^d" class="">String</td><td id="r|qs" class="">Astra DB API 엔드포인트</td></tr><tr id="22cb3bed-dae9-80be-993b-cbe856c80970"><td id="c&lt;`P" class="">Projection Fields</td><td id="BA^d" class="">String</td><td id="r|qs" class="">반환할 속성(콤마 구분), 기본값: \*</td></tr><tr id="22cb3bed-dae9-8080-a246-fcee69de1b76"><td id="c&lt;`P" class="">Partition Keys</td><td id="BA^d" class="">Dict</td><td id="r|qs" class="">모델이 채워야 할 필수 파라미터</td></tr><tr id="22cb3bed-dae9-8068-9903-ef8ea266a679"><td id="c&lt;`P" class="">Clustering Keys</td><td id="BA^d" class="">Dict</td><td id="r|qs" class="">쿼리 세부화용 선택 파라미터 (필수는 느낌표(!)로 표시)</td></tr><tr id="22cb3bed-dae9-80a2-8744-e3714676cf79"><td id="c&lt;`P" class="">Static Filters</td><td id="BA^d" class="">Dict</td><td id="r|qs" class="">쿼리 결과 필터용 속성-값 쌍</td></tr><tr id="22cb3bed-dae9-8074-ae1f-dd62da4b97b5"><td id="c&lt;`P" class="">Limit</td><td id="BA^d" class="">String</td><td id="r|qs" class="">반환할 레코드 수</td></tr></tbody></table><p id="22cb3bed-dae9-809b-aa1c-dd2535871e04" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-80a9-92f3-d284cd6e0c7e" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-801f-900b-e9037172cf8e"><th id="xSG{" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;_gI" class="simple-table-header-color simple-table-header">타입</th><th id="St=G" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80af-9996-c82996530687"><td id="xSG{" class="">Data</td><td id="&gt;_gI" class="">List\[Data]</td><td id="St=G" class="">Projection Fields로 지정한 필드를 포함한 쿼리 결과 Data 객체 목록 (number\_of\_results 제한)</td></tr><tr id="22cb3bed-dae9-8085-a025-d793ccc636ec"><td id="xSG{" class="">Tool</td><td id="&gt;_gI" class="">StructuredTool</td><td id="St=G" class="">LangChain StructuredTool 객체 (파라미터 스키마·쿼리 함수 포함)</td></tr></tbody></table><hr id="22cb3bed-dae9-8095-aef1-d5cc0faa2732"/><p id="22cb3bed-dae9-8018-98ef-d8be143276c9" class="">
+</p><h3 id="22cb3bed-dae9-80f5-a414-de85095c4e47" class="">Bing Search API</h3><p id="22cb3bed-dae9-80aa-8946-c4f0f00da727" class="">
+</p><p id="22cb3bed-dae9-808b-bbd5-c3991ef06152" class="">Bing Search API를 호출합니다.</p><p id="22cb3bed-dae9-8003-97dd-e922212339b0" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80a9-9546-e2d8b3083fe1" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-806b-80a4-f05bb20ec33c" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8075-9711-de17745b5767"><th id="tv~U" class="simple-table-header-color simple-table-header">이름</th><th id="RVmy" class="simple-table-header-color simple-table-header">타입</th><th id="rxv`" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8062-acf6-d92b56a67c6a"><td id="tv~U" class="">bing\_subscription\_key</td><td id="RVmy" class="">SecretString</td><td id="rxv`" class="">Bing API 구독 키</td></tr><tr id="22cb3bed-dae9-807e-ad2e-f18b5ef665dc"><td id="tv~U" class="">input\_value</td><td id="RVmy" class="">String</td><td id="rxv`" class="">검색 질의</td></tr><tr id="22cb3bed-dae9-8086-a416-e2c1ea929ad7"><td id="tv~U" class="">bing\_search\_url</td><td id="RVmy" class="">String</td><td id="rxv`" class="">사용자 정의 Bing 검색 URL</td></tr><tr id="22cb3bed-dae9-80ea-8ce3-ff1aff27a95f"><td id="tv~U" class="">k</td><td id="RVmy" class="">Integer</td><td id="rxv`" class="">반환할 검색 결과 수</td></tr></tbody></table><p id="22cb3bed-dae9-80a7-a5b3-fe9737903c05" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-80a6-89a4-eec21e95e171" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b6-ac5c-f817cc1d761c"><th id="mA_u" class="simple-table-header-color simple-table-header">이름</th><th id="@b&lt;a" class="simple-table-header-color simple-table-header">타입</th><th id="RN][" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80f1-9793-c8685035818a"><td id="mA_u" class="">results</td><td id="@b&lt;a" class="">List\[Data]</td><td id="RN][" class="">검색 결과 목록</td></tr><tr id="22cb3bed-dae9-80a8-94e1-d1d11469bf7d"><td id="mA_u" class="">tool</td><td id="@b&lt;a" class="">Tool</td><td id="RN][" class="">LangChain에서 사용할 Bing 검색 도구</td></tr></tbody></table><hr id="22cb3bed-dae9-801e-8ab7-c5f0970b3b50"/><p id="22cb3bed-dae9-802c-b59f-eb96f08b2894" class="">
+</p><h3 id="22cb3bed-dae9-809a-89fa-d2e5fe929c99" class="">Combinatorial Reasoner</h3><p id="22cb3bed-dae9-80fc-a71b-e3de3a6beba4" class="">
+</p><p id="22cb3bed-dae9-80b9-84b7-e3389736743a" class="">Icosa의 Combinatorial Reasoning(CR) 파이프라인을 실행해, 최적화된 프롬프트를 생성합니다. 자세한 내용은 Icosa computing을 참조하세요.</p><p id="22cb3bed-dae9-80ff-bf49-cbfc060131ff" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-806b-82c6-e85cf3152046" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-8036-8729-d181562a90d1" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8032-93ac-fc40616034b2"><th id="b?jn" class="simple-table-header-color simple-table-header">이름</th><th id="tir]" class="simple-table-header-color simple-table-header">타입</th><th id="Z?a{" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8004-a575-d05ff99dfff9"><td id="b?jn" class="">prompt</td><td id="tir]" class="">String</td><td id="Z?a{" class="">CR을 실행할 입력 프롬프트</td></tr><tr id="22cb3bed-dae9-802a-8bdd-e4704fea59d4"><td id="b?jn" class="">openai\_api\_key</td><td id="tir]" class="">SecretString</td><td id="Z?a{" class="">OpenAI API 인증 키</td></tr><tr id="22cb3bed-dae9-8025-acd4-ce4e51bb0890"><td id="b?jn" class="">username</td><td id="tir]" class="">String</td><td id="Z?a{" class="">Icosa API 사용자 이름</td></tr><tr id="22cb3bed-dae9-809d-9796-e8e07ec29290"><td id="b?jn" class="">password</td><td id="tir]" class="">SecretString</td><td id="Z?a{" class="">Icosa API 비밀번호</td></tr><tr id="22cb3bed-dae9-80e9-a60a-c15e78283702"><td id="b?jn" class="">model\_name</td><td id="tir]" class="">String</td><td id="Z?a{" class="">이유(reason) 생성을 위한 OpenAI LLM 이름</td></tr></tbody></table><p id="22cb3bed-dae9-8067-8b5c-ecfc2434cc92" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-800e-abc9-d9d33472e069" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8002-bc32-cd85ebaecf5c"><th id=":;Tr" class="simple-table-header-color simple-table-header">이름</th><th id="in;~" class="simple-table-header-color simple-table-header">타입</th><th id="{[T@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8003-b00c-e498fa731a2c"><td id=":;Tr" class="">optimized\_prompt</td><td id="in;~" class="">Message</td><td id="{[T@" class="">최적화된 프롬프트 메시지 객체</td></tr><tr id="22cb3bed-dae9-805e-9811-c4ef4b09230b"><td id=":;Tr" class="">reasons</td><td id="in;~" class="">List\[String]</td><td id="{[T@" class="">포함된 이유 목록</td></tr></tbody></table><hr id="22cb3bed-dae9-8029-8662-d5130445a2a1"/><p id="22cb3bed-dae9-8069-b34f-f8ae7341a804" class="">
+</p><h3 id="22cb3bed-dae9-804d-bb74-fd80b96f36e9" class="">DuckDuckGo search</h3><p id="22cb3bed-dae9-80d2-81a6-c4593bdea11c" class="">
+</p><p id="22cb3bed-dae9-80aa-bf3a-e492b720af76" class="">DuckDuckGo 검색 엔진을 이용한 웹 검색(결과 개수 제한 기능 포함).</p><p id="22cb3bed-dae9-8000-ada7-d2b9e5aa9ccd" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8017-bd83-c1a0702c22c8" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80c0-80a4-dae11870afe4" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-800f-9b14-f6d47e9fb34a"><th id="Pn`T" class="simple-table-header-color simple-table-header">이름</th><th id="Fzps" class="simple-table-header-color simple-table-header">타입</th><th id="gj{T" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-800f-859e-c58fc87074c3"><td id="Pn`T" class="">input\_value</td><td id="Fzps" class="">String</td><td id="gj{T" class="">검색 질의</td></tr><tr id="22cb3bed-dae9-80f6-8347-c68ef78bc54b"><td id="Pn`T" class="">max\_results</td><td id="Fzps" class="">Integer</td><td id="gj{T" class="">반환할 최대 결과 수 (기본값: 5)</td></tr><tr id="22cb3bed-dae9-8085-ba65-d771889a62e0"><td id="Pn`T" class="">max\_snippet\_length</td><td id="Fzps" class="">Integer</td><td id="gj{T" class="">결과 스니펫 최대 길이 (기본값: 100)</td></tr></tbody></table><p id="22cb3bed-dae9-8068-9b70-c09f4329bbc4" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-8010-9a27-c12076321294" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-805e-820b-d7c21aa47810"><th id="~QI|" class="simple-table-header-color simple-table-header">이름</th><th id="=eHC" class="simple-table-header-color simple-table-header">타입</th><th id="vy?J" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80c6-8e3b-d8540aabe496"><td id="~QI|" class="">data</td><td id="=eHC" class="">List\[Data]</td><td id="vy?J" class="">스니펫 및 전체 콘텐츠를 포함한 검색 결과</td></tr><tr id="22cb3bed-dae9-801e-a2ab-c318b6447da5"><td id="~QI|" class="">text</td><td id="=eHC" class="">String</td><td id="vy?J" class="">단일 텍스트로 포맷된 검색 결과</td></tr></tbody></table><hr id="22cb3bed-dae9-8028-ac5c-f22983a1fbe4"/><p id="22cb3bed-dae9-8081-8488-ca7f43d8d8f3" class="">
+</p><h3 id="22cb3bed-dae9-808f-b2df-fa84282a0bb2" class="">Exa Search</h3><p id="22cb3bed-dae9-80ed-b704-d967cb22f1cb" class="">
+</p><p id="22cb3bed-dae9-8005-bbe7-fa5aaad6e154" class="">Exa Search 툴킷을 제공하여 검색 및 콘텐츠 검색을 수행합니다.</p><p id="22cb3bed-dae9-80c2-aea5-f0f3ac83cd9f" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-801a-8756-d18c36412505" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-800e-ac1b-d01231084a22" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80b1-a169-f42ada32e487"><th id="}tAp" class="simple-table-header-color simple-table-header">이름</th><th id="?_Ku" class="simple-table-header-color simple-table-header">타입</th><th id="Acoh" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80d2-ac8e-e1948e458364"><td id="}tAp" class="">metaphor\_api\_key</td><td id="?_Ku" class="">SecretString</td><td id="Acoh" class="">Exa Search API 키</td></tr><tr id="22cb3bed-dae9-80c6-a1dc-c5932e95c238"><td id="}tAp" class="">use\_autoprompt</td><td id="?_Ku" class="">Boolean</td><td id="Acoh" class="">autoprompt 기능 사용 여부 (기본값: true)</td></tr><tr id="22cb3bed-dae9-808b-b4a8-e910308ba1d6"><td id="}tAp" class="">search\_num\_results</td><td id="?_Ku" class="">Integer</td><td id="Acoh" class="">검색 결과 개수 (기본값: 5)</td></tr><tr id="22cb3bed-dae9-80a2-b02a-f8aaa94af96e"><td id="}tAp" class="">similar\_num\_results</td><td id="?_Ku" class="">Integer</td><td id="Acoh" class="">유사 결과 개수 (기본값: 5)</td></tr></tbody></table><p id="22cb3bed-dae9-80ff-a7ad-dd4bfc361dbd" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-8029-89ff-c5a261127852" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8016-ba48-fcf1a5874ec7"><th id="q=ft" class="simple-table-header-color simple-table-header">이름</th><th id="_JPT" class="simple-table-header-color simple-table-header">타입</th><th id="akfm" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-802b-a3bf-c503cea80707"><td id="q=ft" class="">tools</td><td id="_JPT" class="">List\[Tool]</td><td id="akfm" class="">제공되는 검색 도구 목록</td></tr></tbody></table><hr id="22cb3bed-dae9-8016-a32f-d1bb681dc72a"/><p id="22cb3bed-dae9-80cf-9541-c0e853d8bc3a" class="">
+</p><h3 id="22cb3bed-dae9-8075-8a49-f838f51af44a" class="">Glean Search API</h3><p id="22cb3bed-dae9-80ba-a979-d99748cfe8b3" class="">
+</p><p id="22cb3bed-dae9-8063-9cfb-c30db229627d" class="">Glean Search API를 호출합니다.</p><p id="22cb3bed-dae9-806d-adaf-c93afa0b84e9" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8041-a23e-f8d316fcbb69" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-802e-8820-f11e0cbb34bd" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8078-a6f0-ee676376c5ff"><th id="|csT" class="simple-table-header-color simple-table-header">이름</th><th id="UaRP" class="simple-table-header-color simple-table-header">타입</th><th id="e@g|" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-800c-82db-dcf3e17117ee"><td id="|csT" class="">glean\_api\_url</td><td id="UaRP" class="">String</td><td id="e@g|" class="">Glean API URL</td></tr><tr id="22cb3bed-dae9-8040-9dee-c15748fb8b48"><td id="|csT" class="">glean\_access\_token</td><td id="UaRP" class="">SecretString</td><td id="e@g|" class="">Glean API 인증 토큰</td></tr><tr id="22cb3bed-dae9-80c7-9edc-d0f50c486a53"><td id="|csT" class="">query</td><td id="UaRP" class="">String</td><td id="e@g|" class="">검색 질의</td></tr><tr id="22cb3bed-dae9-8063-8ad7-db5c8731c471"><td id="|csT" class="">page\_size</td><td id="UaRP" class="">Integer</td><td id="e@g|" class="">페이지당 결과 수 (기본값: 10)</td></tr><tr id="22cb3bed-dae9-801c-8611-f55a60a72733"><td id="|csT" class="">request\_options</td><td id="UaRP" class="">Dict</td><td id="e@g|" class="">추가 요청 옵션</td></tr></tbody></table><p id="22cb3bed-dae9-80ce-b1ad-cc6e94b846ed" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-80ed-9a46-e7b5e8cb33c6" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8019-8dcb-fbdeac356fa8"><th id="Xqkp" class="simple-table-header-color simple-table-header">이름</th><th id="DzL&lt;" class="simple-table-header-color simple-table-header">타입</th><th id="=QzR" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-802c-88a0-e2769dda8770"><td id="Xqkp" class="">results</td><td id="DzL&lt;" class="">List\[Data]</td><td id="=QzR" class="">검색 결과 목록</td></tr><tr id="22cb3bed-dae9-8064-8a78-fe882e44caad"><td id="Xqkp" class="">tool</td><td id="DzL&lt;" class="">Tool</td><td id="=QzR" class="">Glean Search 도구</td></tr></tbody></table><hr id="22cb3bed-dae9-8096-bbcd-c8346797bbfa"/><p id="22cb3bed-dae9-80e1-91c1-d6fa1cf15c49" class="">
+</p><h3 id="22cb3bed-dae9-80c9-ab62-f7e6f7812ea4" class="">Google Serper API</h3><p id="22cb3bed-dae9-80d6-8a98-fe3aa6c5879c" class="">
+</p><p id="22cb3bed-dae9-80b0-a1ee-da0fc31045ef" class="">Serper.dev의 Google Search API를 호출합니다.</p><p id="22cb3bed-dae9-8018-9dc1-d3ec019f5318" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8084-b851-d958e9265c60" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80c3-ae6a-f947b24f79b0" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80eb-81a3-ee16a205253f"><th id="AG]C" class="simple-table-header-color simple-table-header">이름</th><th id="^zuZ" class="simple-table-header-color simple-table-header">타입</th><th id="=SLL" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80ed-98ba-f9e41c49ad18"><td id="AG]C" class="">serper\_api\_key</td><td id="^zuZ" class="">SecretString</td><td id="=SLL" class="">Serper.dev API 인증 키</td></tr><tr id="22cb3bed-dae9-801f-9a9f-e44b9ea9a7dd"><td id="AG]C" class="">input\_value</td><td id="^zuZ" class="">String</td><td id="=SLL" class="">검색 질의</td></tr><tr id="22cb3bed-dae9-8091-a409-e3507ca99972"><td id="AG]C" class="">k</td><td id="^zuZ" class="">Integer</td><td id="=SLL" class="">반환할 검색 결과 수</td></tr></tbody></table><p id="22cb3bed-dae9-80fd-bd48-cd868405982f" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-80f1-8513-fcd7ce8fa97f" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-803a-96c1-dd7bd582f31b"><th id="Q:Xd" class="simple-table-header-color simple-table-header">이름</th><th id="J_pY" class="simple-table-header-color simple-table-header">타입</th><th id="fUi]" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80be-92dc-ee3bf1fbb65e"><td id="Q:Xd" class="">results</td><td id="J_pY" class="">List\[Data]</td><td id="fUi]" class="">검색 결과 목록</td></tr><tr id="22cb3bed-dae9-80c6-9a72-f7f5dc525bba"><td id="Q:Xd" class="">tool</td><td id="J_pY" class="">Tool</td><td id="fUi]" class="">Google Serper 도구</td></tr></tbody></table><hr id="22cb3bed-dae9-80e4-967c-db13e640a59d"/><p id="22cb3bed-dae9-8027-bf3c-dd6c90ddd962" class="">
+</p><h3 id="22cb3bed-dae9-8098-a8d6-c5d9bae8275e" class="">MCP connection</h3><p id="22cb3bed-dae9-809e-9587-cfb0432a16d1" class="">
+</p><p id="22cb3bed-dae9-8080-a216-d496813be711" class="">다른 플로우를 포함한 Model Context Protocol(MCP) 서버를 Agent 도구로 노출합니다. 자세한 내용은 “Use Langflow as an MCP client”를 참조하세요.</p><hr id="22cb3bed-dae9-80d8-b9af-f43b50ec54d8"/><p id="22cb3bed-dae9-80a5-ba43-f10f228466da" class="">
+</p><h3 id="22cb3bed-dae9-80cf-af20-d0dc1e02d9f8" class="">MCP Tools (deprecated)</h3><p id="22cb3bed-dae9-80bb-afc8-ecd4054f819e" class="">
+</p><p id="22cb3bed-dae9-80cd-a8b1-ebabe9f114e8" class="">Langflow v1.3 이후로 MCP Tools(std<strong>io)</strong> 및 MCP Tools(SSE)는 더 이상 지원되지 않으며, MCP connection 컴포넌트로 대체되었습니다.</p><hr id="22cb3bed-dae9-80e6-ac87-c298fdd5a4fb"/><p id="22cb3bed-dae9-80bb-be02-f894da08d884" class="">
+</p><h3 id="22cb3bed-dae9-8089-aaf9-c6bda7bb095b" class="">Wikidata</h3><p id="22cb3bed-dae9-806d-9d71-e910d6338599" class="">
+</p><p id="22cb3bed-dae9-8063-9d66-e59eba4b0d57" class="">Wikidata API를 이용한 검색을 수행합니다.</p><p id="22cb3bed-dae9-8036-a671-c4830d1af6fd" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-805e-8770-f364ad33efb3" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80a3-bd5e-fedd51a07c63" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8002-a671-ed3ed7776393"><th id="NzqI" class="simple-table-header-color simple-table-header">이름</th><th id="@vv_" class="simple-table-header-color simple-table-header">타입</th><th id="T[cw" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8040-92d3-e997a59b6b48"><td id="NzqI" class="">query</td><td id="@vv_" class="">String</td><td id="T[cw" class="">유사도 검색을 위한 텍스트 질의</td></tr></tbody></table><p id="22cb3bed-dae9-8020-855e-ea18fbcd0831" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-807c-9ed2-d5aff52ac4de" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8043-81fa-c619de41a5a8"><th id="q}VH" class="simple-table-header-color simple-table-header">이름</th><th id="qbH&lt;" class="simple-table-header-color simple-table-header">타입</th><th id="xcRL" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80be-8af8-fbfe2c0b5677"><td id="q}VH" class="">data</td><td id="qbH&lt;" class="">List\[Data]</td><td id="xcRL" class="">Wikidata API 검색 결과를 담은 Data 객체 목록</td></tr><tr id="22cb3bed-dae9-80fb-92c6-e5b2f665ff65"><td id="q}VH" class="">text</td><td id="qbH&lt;" class="">Message</td><td id="xcRL" class="">검색 결과를 포맷한 텍스트 메시지</td></tr></tbody></table><hr id="22cb3bed-dae9-80d4-9a76-cd96904e755c"/><p id="22cb3bed-dae9-802d-bf8d-c728b4330d29" class="">
+</p><h3 id="22cb3bed-dae9-8068-bc7b-f14ca6263ab5" class="">Legacy components</h3><p id="22cb3bed-dae9-80b6-a458-ffeec677a36e" class="">
+</p><p id="22cb3bed-dae9-809c-bfab-df3bbcc08b3f" class="">이전 버전에서 제공되나 더 이상 공식 지원되지 않는 컴포넌트입니다.</p><ul id="22cb3bed-dae9-8065-86d3-dca6dcb929b5" class="bulleted-list"><li style="list-style-type:disc"><strong>Calculator Tool</strong><p id="22cb3bed-dae9-80ba-8885-f9ec11d9d7f2" class="">기본 산술 연산(+,−,×,÷,지수)을 실행합니다.</p><p id="22cb3bed-dae9-804a-9cc2-f29b660955ae" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-809a-9f8b-d7bc399a797c" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-8037-8584-eca48a691420" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80c9-b970-fec70b94dcca"><th id="tHXk" class="simple-table-header-color simple-table-header">이름</th><th id="Dk|z" class="simple-table-header-color simple-table-header">타입</th><th id="JwW`" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80eb-978a-e811e02a8fe4"><td id="tHXk" class="">expression</td><td id="Dk|z" class="">String</td><td id="JwW`" class="">계산할 산술 표현식(예: <code>4*4*(33/22)+12-20</code>)</td></tr></tbody></table><p id="22cb3bed-dae9-80cc-bec0-c3acaafe207b" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-804d-bec9-d62a4672fdd1" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80a5-9f05-f3c2ac40bf1d"><th id="hY|&lt;" class="simple-table-header-color simple-table-header">이름</th><th id="EbL&lt;" class="simple-table-header-color simple-table-header">타입</th><th id="s?or" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8062-8995-c26241e9c033"><td id="hY|&lt;" class="">result</td><td id="EbL&lt;" class="">Tool</td><td id="s?or" class="">LangChain에서 사용할 계산기 도구 객체</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-8088-a239-c483cd9e19e9" class="bulleted-list"><li style="list-style-type:disc"><strong>Google Search API</strong><p id="22cb3bed-dae9-80fe-8d9e-d3fd83bdba57" class="">Google Search API 호출을 지원합니다.</p><p id="22cb3bed-dae9-806d-b64a-c3bca00c4d1d" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-809a-8315-c576aad31029" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-8045-9152-d9afbb35eb59" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-804f-8da9-cfe0d46cf9a1"><th id="mX|o" class="simple-table-header-color simple-table-header">이름</th><th id="Sooc" class="simple-table-header-color simple-table-header">타입</th><th id="q=rK" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80cb-b7bd-e1c2e3fd622e"><td id="mX|o" class="">google\_api\_key</td><td id="Sooc" class="">SecretString</td><td id="q=rK" class="">Google API 인증 키</td></tr><tr id="22cb3bed-dae9-804f-a9ae-cb52a6c6f2f3"><td id="mX|o" class="">google\_cse\_id</td><td id="Sooc" class="">SecretString</td><td id="q=rK" class="">Custom Search Engine ID</td></tr><tr id="22cb3bed-dae9-80f5-843e-f0401c812fec"><td id="mX|o" class="">input\_value</td><td id="Sooc" class="">String</td><td id="q=rK" class="">검색 질의</td></tr><tr id="22cb3bed-dae9-8071-8a9c-fce23bbab6de"><td id="mX|o" class="">k</td><td id="Sooc" class="">Integer</td><td id="q=rK" class="">반환할 검색 결과 수</td></tr></tbody></table><p id="22cb3bed-dae9-801c-bae6-cbb28288b03a" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-809f-828a-fac1eedd2023" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-807e-85e2-d57353352e03"><th id="G:nD" class="simple-table-header-color simple-table-header">이름</th><th id="ndu?" class="simple-table-header-color simple-table-header">타입</th><th id="c}a;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-806c-b2c8-ed8b1b69f960"><td id="G:nD" class="">results</td><td id="ndu?" class="">List\[Data]</td><td id="c}a;" class="">검색 결과를 담은 Data 객체 목록</td></tr><tr id="22cb3bed-dae9-8032-9dd7-e37da463e0cf"><td id="G:nD" class="">tool</td><td id="ndu?" class="">Tool</td><td id="c}a;" class="">LangChain에서 사용할 검색 도구</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-80ec-bdc5-e2331a986196" class="bulleted-list"><li style="list-style-type:disc"><strong>Python Code Structured Tool</strong><p id="22cb3bed-dae9-8016-a887-fdb206cc20aa" class="">Python 코드를 dataclass로 래핑해 구조화된 도구로 생성합니다.</p><p id="22cb3bed-dae9-8087-b9ec-ec67f32270b4" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80a2-9ea7-cacd1f5627f7" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-8084-bc89-e7b5f5791ee7" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806a-ab69-c77164e15c38"><th id="nZF&gt;" class="simple-table-header-color simple-table-header">이름</th><th id="kM?B" class="simple-table-header-color simple-table-header">타입</th><th id="}SRV" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-807a-a710-eade0e864d09"><td id="nZF&gt;" class="">tool\_code</td><td id="kM?B" class="">String</td><td id="}SRV" class="">도구로 만들 Python 코드의 dataclass</td></tr><tr id="22cb3bed-dae9-802e-bd03-c87d4613de76"><td id="nZF&gt;" class="">tool\_name</td><td id="kM?B" class="">String</td><td id="}SRV" class="">도구 이름</td></tr><tr id="22cb3bed-dae9-8093-b6df-cd09754d223b"><td id="nZF&gt;" class="">tool\_description</td><td id="kM?B" class="">String</td><td id="}SRV" class="">도구 설명</td></tr><tr id="22cb3bed-dae9-80bd-b204-ed1d507d7f20"><td id="nZF&gt;" class="">return\_direct</td><td id="kM?B" class="">Boolean</td><td id="}SRV" class="">함수 출력값을 직접 반환할지 여부</td></tr><tr id="22cb3bed-dae9-80fb-95f7-f33c1358e266"><td id="nZF&gt;" class="">tool\_function</td><td id="kM?B" class="">String</td><td id="}SRV" class="">도구로 노출할 함수 이름</td></tr><tr id="22cb3bed-dae9-80db-872c-c9462c2ddb1d"><td id="nZF&gt;" class="">global\_variables</td><td id="kM?B" class="">Dict</td><td id="}SRV" class="">도구에서 사용할 전역 변수 또는 데이터</td></tr></tbody></table><p id="22cb3bed-dae9-801a-9063-e71e763b3ac2" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-806d-9b98-dd3352bd0634" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80f5-8eca-d37297cc3e97"><th id="?Qex" class="simple-table-header-color simple-table-header">이름</th><th id="?V&gt;J" class="simple-table-header-color simple-table-header">타입</th><th id="Y&gt;kX" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-805d-970f-cc94ac5fef07"><td id="?Qex" class="">result\_tool</td><td id="?V&gt;J" class="">Tool</td><td id="Y&gt;kX" class="">생성된 LangChain StructuredTool 객체</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-8033-a9c2-c2feab571e89" class="bulleted-list"><li style="list-style-type:disc"><strong>Python REPL Tool</strong><p id="22cb3bed-dae9-802f-89d5-ea8b5e10c99c" class="">Python REPL(Read-Eval-Print Loop) 환경을 제공합니다.</p><p id="22cb3bed-dae9-80c5-bc53-ffe716f28d0c" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80ad-ae0f-c2a68c4b8d17" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80fb-81d3-cc22524f1eb8" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8058-b149-fe95d7e7280b"><th id="eTb`" class="simple-table-header-color simple-table-header">이름</th><th id="^[_a" class="simple-table-header-color simple-table-header">타입</th><th id="\at]" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-800d-ad01-e3be9e236962"><td id="eTb`" class="">name</td><td id="^[_a" class="">String</td><td id="\at]" class="">도구 이름 (기본값: <code>python_repl</code>)</td></tr><tr id="22cb3bed-dae9-8049-b22f-db4cfda8b8d5"><td id="eTb`" class="">description</td><td id="^[_a" class="">String</td><td id="\at]" class="">도구 기능 설명</td></tr><tr id="22cb3bed-dae9-80b8-aa91-fde80e859a2b"><td id="eTb`" class="">global\_imports</td><td id="^[_a" class="">List\[String]</td><td id="\at]" class="">전역으로 임포트할 모듈 목록 (기본값: <code>math</code>)</td></tr></tbody></table><p id="22cb3bed-dae9-8001-91bf-f0847fa62bc7" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-80b1-bec9-ea85d1ef74a1" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8021-ac53-f50387d23255"><th id="l~H]" class="simple-table-header-color simple-table-header">이름</th><th id="T&lt;vc" class="simple-table-header-color simple-table-header">타입</th><th id="ChPl" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80cf-9bd5-c888834e1ccf"><td id="l~H]" class="">tool</td><td id="T&lt;vc" class="">Tool</td><td id="ChPl" class="">LangChain에서 사용할 REPL 도구 객체</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-800c-aa4a-d17784726a56" class="bulleted-list"><li style="list-style-type:disc"><strong>Retriever Tool</strong><p id="22cb3bed-dae9-8052-9401-e386edb23fde" class="">LangChain retriever와 상호작용하는 도구를 생성합니다.</p><p id="22cb3bed-dae9-801b-873e-ec2025ce1fcc" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-8012-af0f-e9f9ccef5baa" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-806b-bae7-ee8a66de6323" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80f4-92c7-e454ee06298e"><th id="QEoH" class="simple-table-header-color simple-table-header">이름</th><th id="lWro" class="simple-table-header-color simple-table-header">타입</th><th id=";_{d" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80a9-b56f-c18209169c16"><td id="QEoH" class="">retriever</td><td id="lWro" class="">BaseRetriever</td><td id=";_{d" class="">상호작용할 retriever 인스턴스</td></tr><tr id="22cb3bed-dae9-808c-9703-eb2286b28872"><td id="QEoH" class="">name</td><td id="lWro" class="">String</td><td id=";_{d" class="">도구 이름</td></tr><tr id="22cb3bed-dae9-80e4-a081-f931733dc45a"><td id="QEoH" class="">description</td><td id="lWro" class="">String</td><td id=";_{d" class="">도구 기능 설명</td></tr></tbody></table><p id="22cb3bed-dae9-806a-b800-d411dbf3703e" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-8096-b7ee-c762a9004bdf" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8053-a0c5-f8e0923de9b1"><th id="I\Dy" class="simple-table-header-color simple-table-header">이름</th><th id="&gt;}Z?" class="simple-table-header-color simple-table-header">타입</th><th id="vi}i" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b3-b59f-e9ffd8b425dc"><td id="I\Dy" class="">tool</td><td id="&gt;}Z?" class="">Tool</td><td id="vi}i" class="">LangChain에서 사용할 Retriever 도구</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-8091-b32c-cc1a59971dc3" class="bulleted-list"><li style="list-style-type:disc"><strong>Search API</strong><p id="22cb3bed-dae9-80c8-9d64-fb3785f048fa" class="">searchapi.io API를 호출합니다. 자세한 내용은 SearchAPI 문서를 참조하세요.</p><p id="22cb3bed-dae9-803f-b331-cb26f2e338a2" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-807d-96db-f0a3a8af56ef" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-80f1-a6d5-d056df903f6d" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806e-84ff-c518a0f49a05"><th id="}u?o" class="simple-table-header-color simple-table-header">이름</th><th id="kfBm" class="simple-table-header-color simple-table-header">타입</th><th id="Kyha" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80b7-a647-c1b35194395e"><td id="}u?o" class="">engine</td><td id="kfBm" class="">String</td><td id="Kyha" class="">사용할 검색 엔진 (기본값: <code>google</code>)</td></tr><tr id="22cb3bed-dae9-8054-9ba8-d5ca152c0eb9"><td id="}u?o" class="">api\_key</td><td id="kfBm" class="">SecretString</td><td id="Kyha" class="">SearchAPI 인증 키</td></tr><tr id="22cb3bed-dae9-80b1-9e33-c071465b0ac7"><td id="}u?o" class="">input\_value</td><td id="kfBm" class="">String</td><td id="Kyha" class="">API 호출용 검색 질의</td></tr><tr id="22cb3bed-dae9-80a1-86f6-f14c56411ed4"><td id="}u?o" class="">search\_params</td><td id="kfBm" class="">Dict</td><td id="Kyha" class="">추가 검색 매개변수</td></tr></tbody></table><p id="22cb3bed-dae9-8094-b16f-ecd56e9dc095" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-8017-82e7-ed90372253cb" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-805c-acb3-f1fdea9a3ddd"><th id="\UbO" class="simple-table-header-color simple-table-header">이름</th><th id="R|mq" class="simple-table-header-color simple-table-header">타입</th><th id="pjfi" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-8011-8be6-c99548e1ae0b"><td id="\UbO" class="">data</td><td id="R|mq" class="">List\[Data]</td><td id="pjfi" class="">검색 결과를 담은 Data 객체 목록</td></tr><tr id="22cb3bed-dae9-8081-a7ec-c758ce5a57f7"><td id="\UbO" class="">tool</td><td id="R|mq" class="">Tool</td><td id="pjfi" class="">LangChain 워크플로우에 사용할 Tool 객체</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-805a-91e3-ca4ed6d7265d" class="bulleted-list"><li style="list-style-type:disc"><strong>SearXNG Search Tool</strong><p id="22cb3bed-dae9-8079-9440-f5ed2e92758f" class="">SearXNG 메타검색 엔진을 이용한 검색 도구를 생성합니다.</p><p id="22cb3bed-dae9-8005-a46e-da9eb8b9cff0" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80d3-990b-ff0fbbfc45a9" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-802e-a0ad-fc072a087711" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-80d1-aba1-e1269d2fb033"><th id="L|Pf" class="simple-table-header-color simple-table-header">이름</th><th id="OK:M" class="simple-table-header-color simple-table-header">타입</th><th id="GftH" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80e7-9f19-c10e6671c02a"><td id="L|Pf" class="">url</td><td id="OK:M" class="">String</td><td id="GftH" class="">SearXNG 인스턴스의 URL</td></tr><tr id="22cb3bed-dae9-8016-95b0-cd258c55044d"><td id="L|Pf" class="">max\_results</td><td id="OK:M" class="">Integer</td><td id="GftH" class="">반환할 최대 결과 수</td></tr><tr id="22cb3bed-dae9-80cb-9b0f-eb28f4b75ebb"><td id="L|Pf" class="">categories</td><td id="OK:M" class="">List\[String]</td><td id="GftH" class="">검색할 카테고리 목록</td></tr><tr id="22cb3bed-dae9-80e3-97f8-edb4715253a6"><td id="L|Pf" class="">language</td><td id="OK:M" class="">String</td><td id="GftH" class="">검색 결과 언어</td></tr></tbody></table><p id="22cb3bed-dae9-8098-9ea0-d7d70d8cb513" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-801f-a20a-fb67d5ac0c35" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8018-9770-cf8d6b17c87c"><th id="[ap=" class="simple-table-header-color simple-table-header">이름</th><th id="pZNx" class="simple-table-header-color simple-table-header">타입</th><th id="iS{n" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-801e-8ccf-f195391cf60b"><td id="[ap=" class="">result\_tool</td><td id="pZNx" class="">Tool</td><td id="iS{n" class="">LangChain에서 사용할 검색 도구 객체</td></tr></tbody></table></li></ul><ul id="22cb3bed-dae9-8066-9d01-cc55f4e1ed50" class="bulleted-list"><li style="list-style-type:disc"><strong>Wikipedia API</strong><p id="22cb3bed-dae9-80f8-845f-f7da11a01cab" class="">Wikipedia API를 통해 정보 검색을 수행합니다.</p><p id="22cb3bed-dae9-80ed-9e49-c0b9977d15e7" class=""><strong>파라미터</strong></p><p id="22cb3bed-dae9-80f6-afc5-f4a036c02d8a" class=""><strong>Inputs:</strong></p><table id="22cb3bed-dae9-809b-b9c3-e176dc0be248" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-806c-a9ae-c31df080f3fa"><th id="^bc&gt;" class="simple-table-header-color simple-table-header">이름</th><th id="@Pi&gt;" class="simple-table-header-color simple-table-header">타입</th><th id="vhpT" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-805b-be06-d5dc0ddc7779"><td id="^bc&gt;" class="">input\_value</td><td id="@Pi&gt;" class="">String</td><td id="vhpT" class="">검색 질의</td></tr><tr id="22cb3bed-dae9-8049-8354-cb5b2753f5f0"><td id="^bc&gt;" class="">lang</td><td id="@Pi&gt;" class="">String</td><td id="vhpT" class="">언어 코드 (기본값: <code>en</code>)</td></tr><tr id="22cb3bed-dae9-802e-9190-ca4607553f21"><td id="^bc&gt;" class="">k</td><td id="@Pi&gt;" class="">Integer</td><td id="vhpT" class="">반환할 결과 수</td></tr><tr id="22cb3bed-dae9-8093-a139-c88548283830"><td id="^bc&gt;" class="">load\_all\_available\_meta</td><td id="@Pi&gt;" class="">Boolean</td><td id="vhpT" class="">사용 가능한 모든 메타데이터 로드 여부</td></tr><tr id="22cb3bed-dae9-803c-b09b-d800c215edf0"><td id="^bc&gt;" class="">doc\_content\_chars\_max</td><td id="@Pi&gt;" class="">Integer</td><td id="vhpT" class="">문서 내용 최대 문자 수</td></tr></tbody></table><p id="22cb3bed-dae9-80b8-b470-df0f2b731bdd" class=""><strong>Outputs:</strong></p><table id="22cb3bed-dae9-807b-9928-e1ea782df9c9" class="simple-table"><thead class="simple-table-header"><tr id="22cb3bed-dae9-8009-9a66-e72573578692"><th id="[TlR" class="simple-table-header-color simple-table-header">이름</th><th id="qsm&gt;" class="simple-table-header-color simple-table-header">타입</th><th id="q[n{" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22cb3bed-dae9-80cb-8f05-d708e3681004"><td id="[TlR" class="">results</td><td id="qsm&gt;" class="">List\[Data]</td><td id="q[n{" class="">검색 결과를 담은 Data 객체 목록</td></tr><tr id="22cb3bed-dae9-8005-aa47-f2eec907d5e6"><td id="[TlR" class="">tool</td><td id="qsm&gt;" class="">Tool</td><td id="q[n{" class="">LangChain에서 사용할 Wikipedia 도구</td></tr></tbody></table></li></ul><hr id="22cb3bed-dae9-8041-baf0-fb6896207a93"/><p id="22cb3bed-dae9-80f6-abf3-e753349facf5" class="">*이 문서는 <a href="https://docs.langflow.org/components-tools">https://docs.langflow.org/components-tools</a> 문서를 번역/편집한 것으로, 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고해 주세요.</p><p id="22cb3bed-dae9-801c-b153-cb9256c2e331" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

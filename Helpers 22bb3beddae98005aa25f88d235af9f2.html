@@ -1,0 +1,702 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Helpers</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8005-aa25-f88d235af9f2" class="page sans"><header><h1 class="page-title">Helpers</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22bb3bed-dae9-807f-a5fa-c8b5a8af81b1" class="">Helper 컴포넌트</h1><h3 id="22bb3bed-dae9-804e-a389-c3c670533b93" class="">   : Components &gt; Helpers</h3><p id="22bb3bed-dae9-8062-a46f-e64aa25f04bc" class="">
+</p><p id="22bb3bed-dae9-807c-8092-fc8233ab269a" class="">Langflow의 <strong>Helper 컴포넌트</strong>는 플로우(flow) 안에서 데이터를 관리하거나 작업을 수행하고, 다른 컴포넌트와의 상호작용을 돕는 <strong>유틸리티 기능</strong>을 제공합니다.</p><p id="22bb3bed-dae9-80e0-a8e2-e2aa61bb4ae4" class="">
+</p><hr id="22bb3bed-dae9-8008-9db2-f2382ec39d17"/><p id="22bb3bed-dae9-8001-b4f0-fc0070ccb327" class="">
+</p><h2 id="22bb3bed-dae9-809a-953e-c28c09dc9361" class="">플로우에서 Helper 컴포넌트 사용하기</h2><p id="22bb3bed-dae9-80ea-a605-ee333917b04c" class="">
+</p><p id="22bb3bed-dae9-8087-b6ff-f3679b1c9447" class="">Langflow에서의 채팅 메모리(chat memory)는 두 가지 방식으로 저장할 수 있습니다.</p><ol type="1" id="22bb3bed-dae9-8006-96ce-d6041ecaf3e3" class="numbered-list" start="1"><li><code>LCBufferMemory</code>를 이용한 <strong>Langflow 내부 테이블</strong> 저장</li></ol><ol type="1" id="22bb3bed-dae9-8085-ad4d-c19acc224b0d" class="numbered-list" start="2"><li><strong>외부 데이터베이스</strong>에 연결하여 저장</li></ol><p id="22bb3bed-dae9-80b8-a269-c375f5ab85ba" class=""><code>Store Message</code> Helper 컴포넌트는 채팅 내용을 <em>Data 객체</em>로 저장하며, <code>Message History</code> 컴포넌트는 저장된 채팅 내용을 <em>데이터 객체 또는 문자열</em>로 불러옵니다.</p><p id="22bb3bed-dae9-809e-9cad-dd09647f3f34" class="">아래 예시는 <code>Store Message</code>와 <code>Chat Memory</code> 컴포넌트를 사용해 채팅 기록을 AstraDBChatMemory에 저장하고 불러오는 구조를 보여줍니다.</p><h3 id="22bb3bed-dae9-800f-9963-db94d5cd62d4" class="">예시) AstraDB에 채팅 메모리 저장하기</h3><p id="22bb3bed-dae9-8097-bb00-f3ce2ae4466f" class="">아래는 Astra DB Chat Memory, Store Message, Chat Memory 컴포넌트를 사용해 채팅 내역을 저장 / 불러오는 플로우 예시입니다.</p><figure id="22bb3bed-dae9-80b0-9323-fcdce69a0396" class="image"><a href="image%2015.png"><img style="width:3178px" src="image%2015.png"/></a></figure><p id="22bb3bed-dae9-80c6-9912-ef085e1d5bee" class="">
+</p><hr id="22bb3bed-dae9-80b1-b6c1-e8f792e0b489"/><p id="22bb3bed-dae9-80bc-8781-fc02f9267e8f" class="">
+</p><h2 id="22bb3bed-dae9-80e5-9c38-e621786c886d" class="">Batch Run</h2><p id="22bb3bed-dae9-8077-9146-e91942b1baf9" class="">
+</p><p id="22bb3bed-dae9-8082-aec0-e32373253044" class=""><code>Batch Run</code> 컴포넌트는 DataFrame의 <strong>텍스트 컬럼</strong>을 대상으로 **언어 모델(LLM)**을 실행하고, 원본 텍스트와 모델 응답을 포함한 새로운 DataFrame을 반환합니다.</p><h3 id="22bb3bed-dae9-8069-b133-d6473a4a261b" class="">출력 컬럼 구성</h3><ul id="22bb3bed-dae9-80a2-b991-dfc088da0f2b" class="bulleted-list"><li style="list-style-type:disc"><strong>text_input</strong>: 입력 DataFrame의 원본 텍스트</li></ul><ul id="22bb3bed-dae9-8060-95bf-c40d42e98002" class="bulleted-list"><li style="list-style-type:disc"><strong>model_response</strong>: 각 입력에 대한 모델의 응답</li></ul><ul id="22bb3bed-dae9-8041-b39d-f8f5bb6b3dcf" class="bulleted-list"><li style="list-style-type:disc"><strong>batch_index</strong>: 처리 순서를 나타내는 0부터 시작하는 인덱스</li></ul><ul id="22bb3bed-dae9-801a-9456-d416894ddf4b" class="bulleted-list"><li style="list-style-type:disc"><strong>metadata (선택)</strong>: 처리 관련 추가 정보</li></ul><p id="22bb3bed-dae9-807b-a3f9-cae63f3c10bc" class="">이 컬럼들은 <code>Parser</code> 컴포넌트와 연결되었을 때, 중괄호(<code>{}</code>) 안에서 변수처럼 사용할 수 있습니다.</p><hr id="22bb3bed-dae9-80e0-8bc2-d842429dd422"/><h3 id="22bb3bed-dae9-80c8-bc58-cf9a20e30dc9" class="">Batch Run + Parser 컴포넌트 사용법</h3><ol type="1" id="22bb3bed-dae9-8055-88ff-f6ac9465530a" class="numbered-list" start="1"><li>언어 모델 컴포넌트를 Batch Run의 <code>Language model</code> 포트에 연결합니다.</li></ol><ol type="1" id="22bb3bed-dae9-8091-83fa-cc51cea5d15b" class="numbered-list" start="2"><li>CSV 파일 등 DataFrame을 출력하는 컴포넌트를 Batch Run의 <code>DataFrame</code> 입력에 연결합니다.</li></ol><ol type="1" id="22bb3bed-dae9-8060-a455-e2305890ef69" class="numbered-list" start="3"><li>Batch Run의 <code>Batch Results</code> 출력을 Parser 컴포넌트의 입력으로 연결합니다.</li></ol><p id="22bb3bed-dae9-8036-ab3c-efed13efc95b" class="">
+</p><figure id="22bb3bed-dae9-80fa-8a06-fca81ea2d1ac" class="image"><a href="image%2016.png"><img style="width:709.984375px" src="image%2016.png"/></a></figure><p id="22bb3bed-dae9-80d0-a603-f7939b8cf0af" class="">Batch Run 구성 예시:</p><ul id="22bb3bed-dae9-8077-bfc1-cc53dfa2b7b0" class="bulleted-list"><li style="list-style-type:disc"><strong>Column Name</strong>: 불러온 데이터에서 처리할 컬럼 이름 입력 (예: <code>name</code>)</li></ul><ul id="22bb3bed-dae9-8083-bf10-fe6e94cf2607" class="bulleted-list"><li style="list-style-type:disc"><strong>System Message</strong> (선택): LLM에게 모든 행에 대해 어떻게 응답할지 안내하는 메시지 입력 (예: <code>각 이름에 대한 명함을 만들어줘</code>)</li></ul><p id="22bb3bed-dae9-8017-8c8a-d8c2f5d7f0c8" class="">Parser 구성 예시:</p><ul id="22bb3bed-dae9-806b-a51c-fb165694c2c3" class="bulleted-list"><li style="list-style-type:disc"><strong>Template 필드</strong>: Batch Run에서 생성된 컬럼을 다음과 같이 사용 가능:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-805f-8803-c0e82950a5b0" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">record_number: {batch_index}, name: {text_input}, summary: {model_response}
+</code></pre><p id="22bb3bed-dae9-80cb-b709-d4d3d2c104e8" class="">실행 방법:</p><p id="22bb3bed-dae9-803d-abda-d4aed4ae94ba" class="">Parser 컴포넌트에서 <code>Run component</code>를 클릭하여 실행하고, <code>View table</code> 버튼으로 결과를 확인합니다.</p><p id="22bb3bed-dae9-800d-87ca-de2f15718834" class="">필요 시 <code>Chat Output</code> 컴포넌트를 연결하거나 Playground에서 결과를 시각적으로 확인할 수 있습니다.</p><hr id="22bb3bed-dae9-80d8-ad87-d2100d64e1a5"/><p id="22bb3bed-dae9-806d-8e05-ee1c890911b8" class="">
+</p><h3 id="22bb3bed-dae9-8097-bea1-cf467353dd20" class="">Batch Run: 상세 파라미터</h3><p id="22bb3bed-dae9-8031-881f-e45769711372" class="">
+</p><p id="22bb3bed-dae9-80a7-8920-f74a7b3c9571" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-809b-99c1-d1f740aa3500" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80b2-b14f-ed2cab30a4e9"><th id="kGtS" class="simple-table-header-color simple-table-header">이름</th><th id="[i{J" class="simple-table-header-color simple-table-header">타입</th><th id="DmPz" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8049-93a2-c8110d3704fe"><td id="kGtS" class="">model</td><td id="[i{J" class="">HandleInput</td><td id="DmPz" class="">언어 모델 컴포넌트의 &#x27;Language Model&#x27; 출력을 연결 (필수)</td></tr><tr id="22bb3bed-dae9-802a-86f7-d4f16e4fd380"><td id="kGtS" class="">system_message</td><td id="[i{J" class="">MultilineInput</td><td id="DmPz" class="">모든 행에 적용할 시스템 메시지</td></tr><tr id="22bb3bed-dae9-8063-8fe5-c24eaab00ecb"><td id="kGtS" class="">df</td><td id="[i{J" class="">DataFrameInput</td><td id="DmPz" class="">텍스트 메시지를 포함하는 DataFrame (필수)</td></tr><tr id="22bb3bed-dae9-802c-b4da-f13ca2b0ce10"><td id="kGtS" class="">column_name</td><td id="[i{J" class="">MessageTextInput</td><td id="DmPz" class="">텍스트 메시지로 처리할 DataFrame의 컬럼 이름 (미입력 시 TOML 형식으로 전체 컬럼 사용)</td></tr><tr id="22bb3bed-dae9-805f-8b23-c8b5b2f4e62b"><td id="kGtS" class="">output_column_name</td><td id="[i{J" class="">MessageTextInput</td><td id="DmPz" class="">모델 응답이 저장될 컬럼 이름 (기본값: <code>model_response</code>)</td></tr><tr id="22bb3bed-dae9-8074-ad70-fe33fdd97fd9"><td id="kGtS" class="">enable_metadata</td><td id="[i{J" class="">BoolInput</td><td id="DmPz" class="">True일 경우, metadata 정보도 포함함</td></tr></tbody></table><p id="22bb3bed-dae9-809e-949f-cc4a7edd0636" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8078-8051-cd287f481bdf" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80fc-8a0f-c2b18d2f182d"><th id="aR&lt;h" class="simple-table-header-color simple-table-header">이름</th><th id="xF;M" class="simple-table-header-color simple-table-header">타입</th><th id="GQD&gt;" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80ba-91a7-caa7b41c4c94"><td id="aR&lt;h" class="">batch_results</td><td id="xF;M" class="">DataFrame</td><td id="GQD&gt;" class="">원본 컬럼 + 모델 응답 컬럼이 포함된 DataFrame</td></tr></tbody></table><hr id="22bb3bed-dae9-80a9-af3e-fc578b2f7e2e"/><h3 id="22bb3bed-dae9-80f0-acdd-d166bcf09b17" class="">Current Date</h3><p id="22bb3bed-dae9-80ea-ae0f-c86fc29e4fab" class=""><strong>Current Date</strong> 컴포넌트는 설정한 타임존 기준의 <strong>현재 날짜와 시간</strong>을 반환합니다.</p><p id="22bb3bed-dae9-8006-a9fc-f68fad1f6210" class=""><strong>입력값</strong></p><table id="22bb3bed-dae9-80e0-9b6e-f181a6e4063d" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80a8-a5f1-c51569194960"><th id="d?Ef" class="simple-table-header-color simple-table-header">이름</th><th id="ErJ@" class="simple-table-header-color simple-table-header">타입</th><th id="wkyZ" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80b0-8c0d-f39f0000278a"><td id="d?Ef" class="">timezone</td><td id="ErJ@" class="">String</td><td id="wkyZ" class="">원하는 타임존 (예: <code>Asia/Seoul</code>)</td></tr></tbody></table><p id="22bb3bed-dae9-802d-995f-df1adc9668fb" class=""><strong>출력값</strong></p><table id="22bb3bed-dae9-80d7-99e3-f8c1831f36b2" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80cc-b223-c027c29b590c"><th id="oCc`" class="simple-table-header-color simple-table-header">이름</th><th id="hJtj" class="simple-table-header-color simple-table-header">타입</th><th id="\GFp" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-802b-b123-f33eacfc000c"><td id="oCc`" class="">current_date</td><td id="hJtj" class="">String</td><td id="\GFp" class="">해당 타임존 기준의 현재 날짜와 시간</td></tr></tbody></table><hr id="22bb3bed-dae9-800f-ba71-f6561ffee512"/><h3 id="22bb3bed-dae9-8034-8dae-fc74a1ce9179" class="">ID Generator</h3><p id="22bb3bed-dae9-8037-a764-edf636e6b6e3" class=""><strong>ID Generator</strong> 컴포넌트는 고유한 식별자(ID)를 생성합니다.</p><p id="22bb3bed-dae9-806f-b622-e58202c19f91" class=""><strong>출력값</strong></p><table id="22bb3bed-dae9-80a0-af54-fc938ee4dd9c" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80e7-b632-dcde6e0452b9"><th id=":kp:" class="simple-table-header-color simple-table-header">이름</th><th id="x=H;" class="simple-table-header-color simple-table-header">타입</th><th id="vdmQ" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-804a-8e39-f37f735faf9a"><td id=":kp:" class="">id</td><td id="x=H;" class="">String</td><td id="vdmQ" class="">생성된 고유 ID</td></tr></tbody></table><hr id="22bb3bed-dae9-807e-8a75-c50bc0c2ec12"/><h3 id="22bb3bed-dae9-8070-b193-f673e15019af" class="">Message History</h3><blockquote id="22bb3bed-dae9-8082-b2f5-d32f693a77c4" class="">💡 Langflow 1.1 이전에는 &quot;Chat Memory&quot; 컴포넌트로 불렸습니다.</blockquote><p id="22bb3bed-dae9-801b-b177-e5bd7d34cc6e" class=""><code>Message History</code> 컴포넌트는 Langflow 내부 또는 외부 메모리에서 <strong>채팅 메시지를 불러오는 기능</strong>을 합니다.</p><p id="22bb3bed-dae9-8041-a5d3-e1a451019ec1" class="">예시: <code>Message Store</code> 컴포넌트로 전체 대화를 저장하면, <code>Message History</code>가 이를 불러와 <strong>LLM의 응답에 활용할 수 있는 컨텍스트</strong>로 제공합니다.</p><figure id="22bb3bed-dae9-800c-a86b-f06cf6f68e9b" class="image"><a href="image%2017.png"><img style="width:2778px" src="image%2017.png"/></a></figure><p id="22bb3bed-dae9-80c0-8e3e-f0f1624aa4a0" class="">
+</p><p id="22bb3bed-dae9-80b6-a3bc-daf9484cdd07" class=""><strong>입력값</strong></p><table id="22bb3bed-dae9-809a-b2e1-c1c906f9fbeb" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8002-b6fb-fcdac5acfa1d"><th id="kXT=" class="simple-table-header-color simple-table-header">이름</th><th id="Fwez" class="simple-table-header-color simple-table-header">타입</th><th id="fSij" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-802c-9528-cf1c47bc1639"><td id="kXT=" class="">memory</td><td id="Fwez" class="">Memory</td><td id="fSij" class="">외부 메모리 사용 시 입력 (비워두면 Langflow 기본 테이블 사용)</td></tr><tr id="22bb3bed-dae9-808f-a96c-cbd38ef690a7"><td id="kXT=" class="">sender</td><td id="Fwez" class="">String</td><td id="fSij" class="">특정 발신자 유형으로 필터링</td></tr><tr id="22bb3bed-dae9-8083-b628-f6f1d0669e94"><td id="kXT=" class="">sender_name</td><td id="Fwez" class="">String</td><td id="fSij" class="">발신자 이름으로 필터링</td></tr><tr id="22bb3bed-dae9-8063-a244-d69e16ad6e04"><td id="kXT=" class="">n_messages</td><td id="Fwez" class="">Integer</td><td id="fSij" class="">불러올 메시지 수</td></tr><tr id="22bb3bed-dae9-80ad-8b37-c57a9d215c99"><td id="kXT=" class="">session_id</td><td id="Fwez" class="">String</td><td id="fSij" class="">채팅 세션 ID (없으면 현재 세션 사용)</td></tr><tr id="22bb3bed-dae9-80ac-8df0-d1faef6777d1"><td id="kXT=" class="">order</td><td id="Fwez" class="">String</td><td id="fSij" class="">메시지 정렬 순서</td></tr><tr id="22bb3bed-dae9-801a-9ddc-fc38997db593"><td id="kXT=" class="">template</td><td id="Fwez" class="">String</td><td id="fSij" class="">메시지 데이터 포맷 (예: <code>{text}</code>, <code>{sender}</code> 등 사용 가능)</td></tr></tbody></table><p id="22bb3bed-dae9-80e9-b28d-d7a933e30a5d" class=""><strong>출력값</strong></p><table id="22bb3bed-dae9-802f-8ab9-e083009da9ec" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8024-b946-f1531665db37"><th id="yGhn" class="simple-table-header-color simple-table-header">이름</th><th id="bNBQ" class="simple-table-header-color simple-table-header">타입</th><th id="@_N_" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-808a-b31e-d8d8d629418c"><td id="yGhn" class="">messages</td><td id="bNBQ" class="">Data</td><td id="@_N_" class="">메시지를 데이터 객체로 반환</td></tr><tr id="22bb3bed-dae9-80f8-ae68-ca5fc886b42f"><td id="yGhn" class="">messages_text</td><td id="bNBQ" class="">Message</td><td id="@_N_" class="">텍스트 형태로 반환</td></tr><tr id="22bb3bed-dae9-8062-8444-c49284515493"><td id="yGhn" class="">dataframe</td><td id="bNBQ" class="">DataFrame</td><td id="@_N_" class="">DataFrame 형태로 반환</td></tr></tbody></table><hr id="22bb3bed-dae9-8000-985f-eb1e52096b3a"/><h3 id="22bb3bed-dae9-809b-9f80-eae65637c176" class="">Message Store</h3><p id="22bb3bed-dae9-80c9-bf35-cef70775c0bf" class=""><code>Message Store</code>는 채팅 메시지나 텍스트를 Langflow 테이블 또는 외부 메모리에 <strong>저장</strong>하는 컴포넌트입니다.</p><p id="22bb3bed-dae9-8016-aba2-fae10ed75f72" class="">예시: 전체 채팅 내용을 로컬 테이블에 저장하고, 이후 <code>Message History</code>로 불러와 LLM의 응답 맥락으로 활용합니다.</p><figure id="22bb3bed-dae9-80fd-a051-e1e34d740a03" class="image"><a href="image%2018.png"><img style="width:2778px" src="image%2018.png"/></a></figure><p id="22bb3bed-dae9-806e-8190-c001575b8ebd" class=""><strong>입력값</strong></p><table id="22bb3bed-dae9-800f-8f24-e6fc8cb0902a" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80fc-af3b-f60b3999399e"><th id="Xa&gt;k" class="simple-table-header-color simple-table-header">이름</th><th id="^L?Y" class="simple-table-header-color simple-table-header">타입</th><th id="fdae" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8045-a780-cbe32e90c076"><td id="Xa&gt;k" class="">message</td><td id="^L?Y" class="">String</td><td id="fdae" class="">저장할 메시지 내용 (필수)</td></tr><tr id="22bb3bed-dae9-8077-b194-f4cfb19f441c"><td id="Xa&gt;k" class="">memory</td><td id="^L?Y" class="">Memory</td><td id="fdae" class="">외부 메모리 사용 시 입력</td></tr><tr id="22bb3bed-dae9-8066-9013-f7d679a40fe7"><td id="Xa&gt;k" class="">sender</td><td id="^L?Y" class="">String</td><td id="fdae" class="">발신자 유형 (Machine 또는 User)</td></tr><tr id="22bb3bed-dae9-800e-ac82-f8fe0fa2779a"><td id="Xa&gt;k" class="">sender_name</td><td id="^L?Y" class="">String</td><td id="fdae" class="">발신자 이름 (예: AI, User)</td></tr><tr id="22bb3bed-dae9-8096-a2eb-f93274926c5f"><td id="Xa&gt;k" class="">session_id</td><td id="^L?Y" class="">String</td><td id="fdae" class="">채팅 세션 ID (없으면 현재 세션 사용)</td></tr></tbody></table><p id="22bb3bed-dae9-8083-8218-ed00004f7918" class=""><strong>출력값</strong></p><table id="22bb3bed-dae9-8024-977c-d5d6c68bbdf2" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80a6-b4d6-eeab041f835c"><th id="[zb^" class="simple-table-header-color simple-table-header">이름</th><th id="Kh^B" class="simple-table-header-color simple-table-header">타입</th><th id="LXCG" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-805f-a47f-d4ab4cd2ceaa"><td id="[zb^" class="">stored_messages</td><td id="Kh^B" class="">List[Data]</td><td id="LXCG" class="">저장된 메시지 목록</td></tr></tbody></table><hr id="22bb3bed-dae9-8076-9fe2-ef517cf89e7b"/><h2 id="22bb3bed-dae9-8086-a237-fc7f39b23b46" class="">Structured Output</h2><p id="22bb3bed-dae9-805e-8ecd-f376ca1baf42" class="">이 컴포넌트는 <strong>LLM의 응답을 구조화된 데이터 형식</strong>으로 변환합니다.</p><p id="22bb3bed-dae9-8055-a84c-cce0ad7c9d8c" class="">예시: Financial Report Parser 템플릿에서는 구조화되지 않은 재무 보고서를 이 컴포넌트를 통해 정형 데이터로 변환합니다.</p><p id="22bb3bed-dae9-804e-9a93-ce8e5ce42bc5" class="">사용 방법</p><ol type="1" id="22bb3bed-dae9-805a-89ba-d98c7b2fcd73" class="numbered-list" start="1"><li><code>Format Instructions</code> 필드를 통해 LLM에 <strong>출력 구조 지침</strong>을 제공합니다. 이 값은 system prompt로 사용됩니다.</li></ol><ol type="1" id="22bb3bed-dae9-8052-b758-f0d70473d742" class="numbered-list" start="2"><li><code>Output Schema</code> 테이블을 통해 출력 데이터의 구조를 정의합니다.</li></ol><p id="22bb3bed-dae9-80bb-afa1-c56e4645b508" class="">
+</p><figure id="22bb3bed-dae9-8009-b542-f8f65aa74ef5" class="image"><a href="image%2019.png"><img style="width:2554px" src="image%2019.png"/></a></figure><p id="22bb3bed-dae9-80ee-a919-d0f0218b66de" class="">Output Schema 구성</p><table id="22bb3bed-dae9-808c-8dd9-d42c6384178c" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8046-84ff-c2741fa65fac"><th id="\Gog" class="simple-table-header-color simple-table-header">항목</th><th id="OZ\=" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-80e5-8180-e5adb4eac812"><td id="\Gog" class="">Name</td><td id="OZ\=" class="">출력 필드 이름</td></tr><tr id="22bb3bed-dae9-80fb-b928-dd9fb13d6c4a"><td id="\Gog" class="">Description</td><td id="OZ\=" class="">필드의 용도 설명</td></tr><tr id="22bb3bed-dae9-8012-85f9-f1cceba8524c"><td id="\Gog" class="">Type</td><td id="OZ\=" class="">데이터 타입 (<code>str</code>, <code>int</code>, <code>float</code>, <code>bool</code>, <code>list</code>, <code>dict</code>)</td></tr><tr id="22bb3bed-dae9-8094-a8d8-d32020a6dce1"><td id="\Gog" class="">Multiple</td><td id="OZ\=" class="">여러 값을 받을 경우 True (기본값: True)</td></tr></tbody></table><p id="22bb3bed-dae9-808f-8102-d736e1bab7bc" class="">예시 Template</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8083-9674-ce72540607cc" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">EBITDA: {EBITDA}, Net Income: {NET_INCOME}, GROSS_PROFIT: {GROSS_PROFIT}
+</code></pre><p id="22bb3bed-dae9-801b-bbcc-dcd20c91cef0" class="">Playground에서는 다음과 같은 형태로 출력됩니다:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8084-b252-ff20ec88c024" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">EBITDA: 900 million, Net Income: 500 million, GROSS_PROFIT: 1.2 billion
+</code></pre><hr id="22bb3bed-dae9-80a7-94f0-ec650601cd19"/><p id="22bb3bed-dae9-8068-a11b-df61bc4132e9" class="">
+</p><h2 id="22bb3bed-dae9-8047-bd25-eb66d0cf14fb" class="">Legacy 컴포넌트</h2><p id="22bb3bed-dae9-8043-9fdb-de5a10c4617a" class="">
+</p><p id="22bb3bed-dae9-80e6-bec6-c16066498dc5" class="">더 이상 공식 지원되지는 않지만 사용 가능한 이전 컴포넌트입니다.</p><hr id="22bb3bed-dae9-80a3-b796-eeb7e7d7091c"/><h3 id="22bb3bed-dae9-80bf-90e7-dc32020eb0a1" class="">Create List</h3><p id="22bb3bed-dae9-80fb-a839-cc1b7a60e975" class="">동적으로 지정한 수의 필드를 가진 리스트를 생성합니다.</p><table id="22bb3bed-dae9-805c-ba57-c26bc4197eac" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-80c7-82a8-fc78ff88d2b5"><th id="F=f|" class="simple-table-header-color simple-table-header">입력</th><th id="l~~c" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8087-963e-fe9b932bc875"><td id="F=f|" class="">n_fields</td><td id="l~~c" class="">추가할 필드 개수</td></tr><tr id="22bb3bed-dae9-802d-a9ea-f4e01975d1ea"><td id="F=f|" class="">text_key</td><td id="l~~c" class="">필드에 사용할 키</td></tr></tbody></table><table id="22bb3bed-dae9-809e-8aa7-c0d368cda28e" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8020-8cfa-ff442507af8f"><th id="lb{N" class="simple-table-header-color simple-table-header">출력</th><th id="_evT" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8074-998f-d46c3a9ba1df"><td id="lb{N" class="">list</td><td id="_evT" class="">생성된 리스트</td></tr></tbody></table><hr id="22bb3bed-dae9-8097-9dd7-cc645819fd3d"/><h3 id="22bb3bed-dae9-806a-95d9-f56d945c9d3f" class="">Output Parser</h3><p id="22bb3bed-dae9-804d-a3fa-fafb855a16ff" class="">언어 모델의 출력값을 특정 형식으로 변환하는 파서입니다.</p><p id="22bb3bed-dae9-80a6-9a31-dc0a14f7e74a" class="">예를 들어, <strong>CSV 형식 파싱</strong>을 지원하여 응답을 쉼표로 구분된 리스트로 변환할 수 있습니다.</p><blockquote id="22bb3bed-dae9-803e-9841-c9c2f7b4c869" class="">⚠️ 이 컴포넌트는 포맷 지침과 파싱 기능만 제공합니다. 실제 프롬프트는 Prompt 컴포넌트를 통해 작성해야 합니다.</blockquote><h3 id="22bb3bed-dae9-80c3-8050-cf5f44dd41aa" class="">사용 시나리오</h3><ul id="22bb3bed-dae9-807f-8cf5-d6e7fc00836d" class="bulleted-list"><li style="list-style-type:disc">간단한 응답 목록이 필요한 경우 (<code>[&quot;item1&quot;, &quot;item2&quot;, &quot;item3&quot;]</code>)</li></ul><ul id="22bb3bed-dae9-8064-a56e-e25f01babe7c" class="bulleted-list"><li style="list-style-type:disc">복잡한 필드/타입이 필요한 경우에는 <code>Structured Output</code> 사용 권장</li></ul><h3 id="22bb3bed-dae9-80b2-80e1-de97e498376b" class="">사용 방법</h3><ol type="1" id="22bb3bed-dae9-8021-b2f8-dcabb5e7694e" class="numbered-list" start="1"><li><code>Prompt</code> 컴포넌트를 생성하고 <code>format_instructions</code> 출력을 연결</li></ol><ol type="1" id="22bb3bed-dae9-8069-9d27-fa25505b0c40" class="numbered-list" start="2"><li>Prompt 템플릿에서 <code>{format_instructions}</code> 포함:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-804e-a8d1-d41ef6ccb01a" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">{format_instructions}
+Please list three fruits.
+</code></pre><ol type="1" id="22bb3bed-dae9-804a-8b8e-e41381429610" class="numbered-list" start="1"><li><code>output_parser</code> 출력을 LLM에 연결하면, 응답이 Python 리스트 형태로 변환됩니다:</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80c6-a31c-e2de094e0e2c" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">[&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;]
+</code></pre><hr id="22bb3bed-dae9-8015-a1cd-eb0d207051d2"/><h3 id="22bb3bed-dae9-8097-907c-f1a671bc0ca6" class="">Output Parser 파라미터</h3><table id="22bb3bed-dae9-8093-bb36-ef7dd6cdf4ad" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8008-9df7-e59aee85a72a"><th id="bjah" class="simple-table-header-color simple-table-header">이름</th><th id="swR@" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8044-b307-fe0f470f8889"><td id="bjah" class="">parser_type</td><td id="swR@" class="">현재 &quot;CSV&quot;만 지원</td></tr></tbody></table><table id="22bb3bed-dae9-80a3-b1e3-d84ba1d180a6" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-807d-a0cd-c4da811565d2"><th id="C:mv" class="simple-table-header-color simple-table-header">출력</th><th id="HH;M" class="simple-table-header-color simple-table-header">설명</th></tr></thead><tbody><tr id="22bb3bed-dae9-8091-b683-c206a6493299"><td id="C:mv" class="">format_instructions</td><td id="HH;M" class="">프롬프트에 포함시킬 포맷 지침</td></tr><tr id="22bb3bed-dae9-8053-b343-e0250c64c5b6"><td id="C:mv" class="">output_parser</td><td id="HH;M" class="">LLM 응답을 파싱할 수 있는 객체</td></tr></tbody></table><hr id="22bb3bed-dae9-80a4-a35c-cc759dbaa7e0"/><p id="22bb3bed-dae9-80a9-8508-c15f16e61168" class="">
+</p><p id="22bb3bed-dae9-80e8-9e4b-c6a510bf0fa5" class="">
+</p><p id="22bb3bed-dae9-80ef-b3cf-d5d1fb74651d" class="">*이 문서는 <a href="https://docs.langflow.org/components-helpers">https://docs.langflow.org/components-helpers</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

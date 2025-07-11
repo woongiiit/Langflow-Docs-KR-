@@ -1,0 +1,715 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Embeddings</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-8027-a8c1-ead1be7732a2" class="page sans"><header><h1 class="page-title">Embeddings</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22bb3bed-dae9-80d6-bc7a-e9027c7f3b44" class="">임베딩 (Embedding) 컴포넌트</h1><h3 id="22bb3bed-dae9-80d6-bd93-e57a81b614f6" class="">: Components &gt; Embeddings</h3><p id="22bb3bed-dae9-808f-9c92-c606c4501dda" class="">
+</p><p id="22bb3bed-dae9-801a-b570-e58708fcd1a9" class="">Langflow의 <strong>임베딩(Embeddings) 컴포넌트</strong>는 텍스트를 숫자 형태의 **벡터(vector)**로 변환하는 역할을 합니다. 이 벡터는 텍스트의 의미적, 문맥적 의미를 담고 있어, 대규모 언어 모델(LLM)이 복잡한 데이터를 이해하고 처리할 수 있게 돕는 핵심 기능입니다.</p><p id="22bb3bed-dae9-809f-93fd-e2a43b86b6ee" class="">
+</p><hr id="22bb3bed-dae9-80c7-b78a-d545ffde8c72"/><p id="22bb3bed-dae9-8032-af3e-cad817f2fef4" class="">
+</p><h2 id="22bb3bed-dae9-8013-bb23-dca82bf993ce" class="">1. 플로우에서 임베딩 컴포넌트 사용하기</h2><p id="22bb3bed-dae9-80b0-b41d-d192bd257308" class="">
+</p><p id="22bb3bed-dae9-8046-a38d-de3fbcd89bac" class="">임베딩 컴포넌트는 주로 <strong>데이터 수집 파이프라인</strong>에서 사용됩니다. 예를 들어, <code>OpenAI Embeddings</code> 컴포넌트를 벡터 데이터베이스(예: <code>Astra DB</code>)에 연결하면, 텍스트 덩어리(chunks)가 벡터로 변환되어 데이터베이스에 저장됩니다.</p><p id="22bb3bed-dae9-80df-8745-e5d92f3dffdf" class="">이렇게 벡터화된 데이터는 챗봇, 유사성 검색, RAG 에이전트 등 다양한 AI 워크로드에 활용될 수 있습니다.</p><h3 id="22bb3bed-dae9-80b2-acf2-f839091ca733" class="">예시) 문서 벡터화 및 저장 파이프라인</h3><p id="22bb3bed-dae9-809d-ad26-e91dc87cd7e7" class="">아래는 <code>OpenAI Embeddings</code> 컴포넌트를 <code>Astra DB</code> 벡터 스토어에 연결하여 텍스트 데이터를 임베딩하고 저장하는 파이프라인 예시입니다.</p><figure id="22bb3bed-dae9-8043-8cd5-ef186dcef95f" class="image"><a href="image%2014.png"><img style="width:2306px" src="image%2014.png"/></a></figure><hr id="22bb3bed-dae9-80d8-bbca-dd021649f001"/><p id="22bb3bed-dae9-8000-9566-dd7644bf20b7" class="">
+</p><h2 id="22bb3bed-dae9-80a9-ad0f-c1ee60adf280" class="">2. AI/ML</h2><p id="22bb3bed-dae9-80dc-937f-d85341f36ce8" class="">
+</p><p id="22bb3bed-dae9-8073-891c-f98ecfcb270e" class="">AI/ML API를 사용하여 임베딩을 생성합니다.</p><p id="22bb3bed-dae9-8041-81e5-cd45b8ab0a65" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80e8-b5bc-e3ab259ab378" class="simple-table"><tbody><tr id="22bb3bed-dae9-80d4-a273-dde95a5dde7a"><td id="QCEg" class="">이름</td><td id="be=P" class="">타입</td><td id="&gt;Ng?" class="">설명</td></tr><tr id="22bb3bed-dae9-80f6-9018-d82b3713dfde"><td id="QCEg" class="">model_name</td><td id="be=P" class="">String</td><td id="&gt;Ng?" class="">사용할 AI/ML 임베딩 모델의 이름입니다.</td></tr><tr id="22bb3bed-dae9-80c0-9f91-db81e6d5772f"><td id="QCEg" class="">aiml_api_key</td><td id="be=P" class="">SecretString</td><td id="&gt;Ng?" class="">AI/ML 서비스 인증에 필요한 API 키입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-807f-a319-f8b4c1ea4e3f" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-80b9-b9de-d5389c2dfaf9" class="simple-table"><tbody><tr id="22bb3bed-dae9-809f-90f9-c757d7f4fb69"><td id="KS^S" class="">이름</td><td id="NowN" class="">타입</td><td id="GvHM" class="">설명</td></tr><tr id="22bb3bed-dae9-80f1-8365-d78aff8c9b39"><td id="KS^S" class="">embeddings</td><td id="NowN" class="">Embeddings</td><td id="GvHM" class="">임베딩 생성을 위한 <code>AIMLEmbeddingsImpl</code> 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-80dd-ab25-cc9082daba3b"/><p id="22bb3bed-dae9-80a5-8c64-ddb9f07a3ec5" class="">
+</p><h2 id="22bb3bed-dae9-803e-b445-c67f88f265b1" class="">3. Amazon Bedrock Embeddings</h2><p id="22bb3bed-dae9-8021-a17f-f1308257cb12" class="">
+</p><p id="22bb3bed-dae9-80ad-96e2-f049033b8ec4" class="">Amazon Bedrock에서 임베딩 모델을 로드합니다.</p><p id="22bb3bed-dae9-80e8-9570-eca2c35d1324" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-8052-871e-c8e4b446eb2b" class="simple-table"><tbody><tr id="22bb3bed-dae9-8067-a74d-dcdbba1641ae"><td id="@mJH" class="">이름</td><td id="\:s`" class="">타입</td><td id="|jMq" class="">설명</td></tr><tr id="22bb3bed-dae9-805e-842a-f5f4387af7b6"><td id="@mJH" class="">credentials_profile_name</td><td id="\:s`" class="">String</td><td id="|jMq" class="">AWS 자격 증명 프로필 이름입니다. (<code>~/.aws/credentials</code>)</td></tr><tr id="22bb3bed-dae9-803e-bd1a-d06bc2196324"><td id="@mJH" class="">model_id</td><td id="\:s`" class="">String</td><td id="|jMq" class="">호출할 모델의 ID입니다. (예: <code>amazon.titan-embed-text-v1</code>)</td></tr><tr id="22bb3bed-dae9-80b1-bacc-ca468e24d56e"><td id="@mJH" class="">endpoint_url</td><td id="\:s`" class="">String</td><td id="|jMq" class="">기본 AWS 엔드포인트 외에 특정 서비스 엔드포인트를 지정할 때 사용합니다.</td></tr><tr id="22bb3bed-dae9-80cb-bff2-feb3d6ad6a70"><td id="@mJH" class="">region_name</td><td id="\:s`" class="">String</td><td id="|jMq" class="">사용할 AWS 리전입니다. (예: <code>us-west-2</code>)</td></tr></tbody></table><p id="22bb3bed-dae9-8050-86fe-d67fab7b9fd5" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8018-b176-d90dab068c6f" class="simple-table"><tbody><tr id="22bb3bed-dae9-806f-adeb-f921d136c1f7"><td id="RU&gt;n" class="">이름</td><td id=";E?h" class="">타입</td><td id="]jwt" class="">설명</td></tr><tr id="22bb3bed-dae9-8015-97ce-cd4fcaa4ff02"><td id="RU&gt;n" class="">embeddings</td><td id=";E?h" class="">Embeddings</td><td id="]jwt" class="">Amazon Bedrock을 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-8004-b00c-c1fd5e278c01"/><p id="22bb3bed-dae9-8030-a6b4-df279a78bb37" class="">
+</p><h2 id="22bb3bed-dae9-80ee-a2b2-dbdd7cbf4329" class="">4. Astra DB vectorize</h2><p id="22bb3bed-dae9-8085-bbae-ccc07d24976c" class="">
+</p><blockquote id="22bb3bed-dae9-8023-a264-d3dd1e9fd43b" class="">중요<p id="22bb3bed-dae9-8076-88c6-f17727354c2c" class="">이 컴포넌트는 Langflow 버전 1.1.2부터 더 이상 사용되지 않습니다. 대신 Astra DB 벡터 스토어 컴포넌트를 사용하세요.</p></blockquote><p id="22bb3bed-dae9-8048-8d26-eb10266e1fbd" class="">Astra DB 벡터 스토어의 <code>Embeddings</code> 포트에 연결하여 임베딩을 생성합니다. 사용하려면 Astra DB에 <code>vectorize</code> 임베딩 제공자 통합이 활성화된 컬렉션이 필요합니다.</p><p id="22bb3bed-dae9-80fd-9931-e21719c4d1ba" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80dc-91b2-f9559718b981" class="simple-table"><tbody><tr id="22bb3bed-dae9-80a8-ae94-eee90e500ae4"><td id="FLKH" class="">이름</td><td id="TWng" class="">표시 이름</td><td id="&lt;C[v" class="">정보</td></tr><tr id="22bb3bed-dae9-80af-af57-dcf82c45b4d8"><td id="FLKH" class="">provider</td><td id="TWng" class="">Embedding Provider</td><td id="&lt;C[v" class="">사용할 임베딩 제공자입니다.</td></tr><tr id="22bb3bed-dae9-80da-950e-d812a75aac88"><td id="FLKH" class="">model_name</td><td id="TWng" class="">Model Name</td><td id="&lt;C[v" class="">사용할 임베딩 모델입니다.</td></tr><tr id="22bb3bed-dae9-8000-871a-c2b0fe9cc8a9"><td id="FLKH" class="">authentication</td><td id="TWng" class="">Authentication</td><td id="&lt;C[v" class=""><code>vectorize</code> 제공자 자격 증명을 저장한 Astra API 키 이름입니다.</td></tr><tr id="22bb3bed-dae9-80cb-a021-fe4c01851d00"><td id="FLKH" class="">provider_api_key</td><td id="TWng" class="">Provider API Key</td><td id="&lt;C[v" class=""><code>authentication</code> 대신 API 키를 직접 제공할 수 있습니다.</td></tr><tr id="22bb3bed-dae9-8085-8281-c690c698178b"><td id="FLKH" class="">model_parameters</td><td id="TWng" class="">Model Parameters</td><td id="&lt;C[v" class="">추가적인 모델 파라미터입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-80dd-9342-c4e73b626cdc" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-80fb-9f81-d488fb3a3897" class="simple-table"><tbody><tr id="22bb3bed-dae9-8091-b68c-f133fcbb3a2f"><td id="fAq\" class="">이름</td><td id="B\^N" class="">타입</td><td id="vvd[" class="">설명</td></tr><tr id="22bb3bed-dae9-80a9-bdb3-e285bd6b64e2"><td id="fAq\" class="">embeddings</td><td id="B\^N" class="">Embeddings</td><td id="vvd[" class="">Astra <code>vectorize</code>를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-80b8-8b30-d96a16c5fd5b"/><p id="22bb3bed-dae9-806a-8fc0-c603486eb615" class="">
+</p><h2 id="22bb3bed-dae9-801a-bfa4-f95def8a79fa" class="">5. Azure OpenAI Embeddings</h2><p id="22bb3bed-dae9-8019-856b-ea87fad5c4fb" class="">
+</p><p id="22bb3bed-dae9-80ae-8697-cc0428018bb3" class="">Azure OpenAI 모델을 사용하여 임베딩을 생성합니다.</p><p id="22bb3bed-dae9-8064-81d9-d9c564527ac4" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80a9-8b10-c9d631d53074" class="simple-table"><tbody><tr id="22bb3bed-dae9-804e-ab7d-f88bc88e357d"><td id="&gt;{[z" class="">이름</td><td id="LEXN" class="">타입</td><td id="Fnlt" class="">설명</td></tr><tr id="22bb3bed-dae9-8052-8381-f40660bb77ae"><td id="&gt;{[z" class="">Model</td><td id="LEXN" class="">String</td><td id="Fnlt" class="">사용할 모델 이름입니다. (기본값: <code>text-embedding-3-small</code>)</td></tr><tr id="22bb3bed-dae9-8046-9834-cec8d7ed1b91"><td id="&gt;{[z" class="">Azure Endpoint</td><td id="LEXN" class="">String</td><td id="Fnlt" class="">Azure 리소스를 포함한 엔드포인트 주소입니다.</td></tr><tr id="22bb3bed-dae9-8038-80f8-f05b23490081"><td id="&gt;{[z" class="">Deployment Name</td><td id="LEXN" class="">String</td><td id="Fnlt" class="">배포(Deployment)의 이름입니다.</td></tr><tr id="22bb3bed-dae9-8019-af6d-f09008201cc1"><td id="&gt;{[z" class="">API Version</td><td id="LEXN" class="">String</td><td id="Fnlt" class="">사용할 API 버전입니다.</td></tr><tr id="22bb3bed-dae9-80e7-844a-e011ded53ffa"><td id="&gt;{[z" class="">API Key</td><td id="LEXN" class="">String</td><td id="Fnlt" class="">Azure OpenAI 서비스 접근에 필요한 API 키입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-8001-ae73-cc01ca8675d7" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-800d-9442-d61a0158b473" class="simple-table"><tbody><tr id="22bb3bed-dae9-8037-a781-cc914392ef3f"><td id="pLwv" class="">이름</td><td id="xqyb" class="">타입</td><td id="AN{{" class="">설명</td></tr><tr id="22bb3bed-dae9-80b4-87ee-ceb836c02f50"><td id="pLwv" class="">embeddings</td><td id="xqyb" class="">Embeddings</td><td id="AN{{" class="">Azure OpenAI를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-8030-b136-e3c46a6950be"/><p id="22bb3bed-dae9-80e4-965f-f10a503244a5" class="">
+</p><h2 id="22bb3bed-dae9-805c-afab-e3f65b90df72" class="">6. Cloudflare Workers AI Embeddings</h2><p id="22bb3bed-dae9-8036-9530-d93a5770c039" class="">
+</p><p id="22bb3bed-dae9-803a-8bd0-eef499a8987c" class="">Cloudflare Workers AI 모델을 사용하여 임베딩을 생성합니다.</p><p id="22bb3bed-dae9-8024-b9c5-cab8f2e37c30" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80a4-8197-ce2e5abd050b" class="simple-table"><tbody><tr id="22bb3bed-dae9-800f-9fb0-de1ef711b492"><td id="IyIF" class="">이름</td><td id="DzmI" class="">표시 이름</td><td id="em?[" class="">정보</td></tr><tr id="22bb3bed-dae9-804f-9738-c2d7520289d3"><td id="IyIF" class="">account_id</td><td id="DzmI" class="">Cloudflare account ID</td><td id="em?[" class="">Cloudflare 계정 ID입니다.</td></tr><tr id="22bb3bed-dae9-80b3-9fc9-fb66178b8b11"><td id="IyIF" class="">api_token</td><td id="DzmI" class="">Cloudflare API token</td><td id="em?[" class="">Cloudflare API 토큰입니다.</td></tr><tr id="22bb3bed-dae9-8049-b757-c25c413a55d4"><td id="IyIF" class="">model_name</td><td id="DzmI" class="">Model Name</td><td id="em?[" class="">지원되는 모델 목록을 확인하세요.</td></tr><tr id="22bb3bed-dae9-8011-bb55-c9df868936f9"><td id="IyIF" class="">strip_new_lines</td><td id="DzmI" class="">Strip New Lines</td><td id="em?[" class="">입력 텍스트에서 줄바꿈 문자를 제거할지 여부입니다.</td></tr><tr id="22bb3bed-dae9-8015-9f71-f2b1c1765109"><td id="IyIF" class="">batch_size</td><td id="DzmI" class="">Batch Size</td><td id="em?[" class="">한 번에 처리할 텍스트의 수입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-80a2-a1bd-f2082270751e" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8071-b260-c6fb09097d60" class="simple-table"><tbody><tr id="22bb3bed-dae9-8055-bf2d-f8f408e254f5"><td id="hB_\" class="">이름</td><td id="U`Ys" class="">표시 이름</td><td id="vOYn" class="">정보</td></tr><tr id="22bb3bed-dae9-8085-a9c4-ca206d0c7786"><td id="hB_\" class="">embeddings</td><td id="U`Ys" class="">Embeddings</td><td id="vOYn" class="">Cloudflare Workers를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-80fc-ba77-ea900ea073be"/><p id="22bb3bed-dae9-808a-9969-dd812392a9a3" class="">
+</p><h2 id="22bb3bed-dae9-8090-9bf9-fef6374a59c5" class="">7. Cohere Embeddings</h2><p id="22bb3bed-dae9-80a1-b93e-d299e19958ce" class="">
+</p><p id="22bb3bed-dae9-803d-8880-e4584e246a20" class="">Cohere의 임베딩 모델을 로드합니다.</p><p id="22bb3bed-dae9-806e-8c4d-ef43096ac938" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80d9-84eb-d638f1436be7" class="simple-table"><tbody><tr id="22bb3bed-dae9-80fc-ac94-ffec3fbd0975"><td id="CrPF" class="">이름</td><td id="a~Lx" class="">타입</td><td id="R^[V" class="">설명</td></tr><tr id="22bb3bed-dae9-8071-a0fc-d6a21f96171f"><td id="CrPF" class="">cohere_api_key</td><td id="a~Lx" class="">String</td><td id="R^[V" class="">Cohere 서비스 인증을 위한 API 키입니다.</td></tr><tr id="22bb3bed-dae9-804b-9987-ccc1b253626d"><td id="CrPF" class="">model</td><td id="a~Lx" class="">String</td><td id="R^[V" class="">사용할 언어 모델입니다. (기본값: <code>embed-english-v2.0</code>)</td></tr><tr id="22bb3bed-dae9-80f1-b391-fe14a22c8dc0"><td id="CrPF" class="">truncate</td><td id="a~Lx" class="">Boolean</td><td id="R^[V" class="">입력 텍스트를 모델 제약에 맞게 자를지 여부입니다. (기본값: <code>False</code>)</td></tr></tbody></table><p id="22bb3bed-dae9-8024-a357-e1095d129d2b" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-80f9-9635-c3a65141c8c7" class="simple-table"><tbody><tr id="22bb3bed-dae9-8043-8ecc-f7e859755852"><td id="b&gt;aZ" class="">이름</td><td id="LBkA" class="">타입</td><td id="j:gx" class="">설명</td></tr><tr id="22bb3bed-dae9-8057-8f61-dc5faef94923"><td id="b&gt;aZ" class="">embeddings</td><td id="LBkA" class="">Embeddings</td><td id="j:gx" class="">Cohere를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-80df-b86e-eb6053dfb8ce"/><p id="22bb3bed-dae9-8073-905b-e1d30396c234" class="">
+</p><h2 id="22bb3bed-dae9-802a-bfa5-f4231da095b8" class="">8. Embedding similarity</h2><p id="22bb3bed-dae9-8078-aa10-dbfadc9e8961" class="">
+</p><p id="22bb3bed-dae9-80cb-852c-c571b47770c3" class="">두 임베딩 벡터 간의 유사도를 계산합니다.</p><p id="22bb3bed-dae9-80c3-911d-c740958aaf01" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-807b-bb4e-e292cb6d86d3" class="simple-table"><tbody><tr id="22bb3bed-dae9-8031-82bf-ea1b04bbe8cb"><td id="fadQ" class="">이름</td><td id="WiQJ" class="">표시 이름</td><td id="MhCf" class="">정보</td></tr><tr id="22bb3bed-dae9-809b-b824-e2ebf8d94713"><td id="fadQ" class="">embedding_vectors</td><td id="WiQJ" class="">Embedding Vectors</td><td id="MhCf" class="">비교할 두 개의 임베딩 벡터가 포함된 리스트입니다.</td></tr><tr id="22bb3bed-dae9-80e6-ba23-fb484ef0b494"><td id="fadQ" class="">similarity_metric</td><td id="WiQJ" class="">Similarity Metric</td><td id="MhCf" class="">사용할 유사도 측정 기준입니다. (옵션: <code>Cosine Similarity</code>, <code>Euclidean Distance</code> 등)</td></tr></tbody></table><p id="22bb3bed-dae9-8003-8622-e70dc45e5696" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8048-9b52-f3f62c1db0f2" class="simple-table"><tbody><tr id="22bb3bed-dae9-802e-8350-f731c2e0e923"><td id=":vds" class="">이름</td><td id="Ib]a" class="">표시 이름</td><td id=":T:u" class="">정보</td></tr><tr id="22bb3bed-dae9-800a-9ea9-fc16d4f616d8"><td id=":vds" class="">similarity_data</td><td id="Ib]a" class="">Similarity Data</td><td id=":T:u" class="">계산된 유사도 점수와 추가 정보가 담긴 데이터 객체입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-808e-a35b-c6c9bd062f49"/><p id="22bb3bed-dae9-80a1-9eab-c404161a3d25" class="">
+</p><h2 id="22bb3bed-dae9-802b-986b-f25c188cb4ac" class="">9. Google generative AI embeddings</h2><p id="22bb3bed-dae9-803e-8204-d3f61447c9f8" class="">
+</p><p id="22bb3bed-dae9-80bc-aafe-f977b39c5494" class="">Google의 생성형 AI 임베딩 서비스에 연결합니다.</p><p id="22bb3bed-dae9-80b8-861b-fb616b74488b" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-8066-adea-d4076f8dc8d4" class="simple-table"><tbody><tr id="22bb3bed-dae9-80f4-863c-c24082fc3cd6"><td id="Eo?A" class="">이름</td><td id="D&lt;mo" class="">표시 이름</td><td id="bgCW" class="">정보</td></tr><tr id="22bb3bed-dae9-80b5-aa40-da6dbc1438f2"><td id="Eo?A" class="">api_key</td><td id="D&lt;mo" class="">API Key</td><td id="bgCW" class="">Google 생성형 AI 서비스 접근을 위한 API 키입니다. (필수)</td></tr><tr id="22bb3bed-dae9-808c-8d83-dcb09d147338"><td id="Eo?A" class="">model_name</td><td id="D&lt;mo" class="">Model Name</td><td id="bgCW" class="">사용할 임베딩 모델 이름입니다. (기본값: <code>models/text-embedding-004</code>)</td></tr></tbody></table><p id="22bb3bed-dae9-80f2-a853-d6e2b3e86095" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8023-963b-d2ff2081ea0d" class="simple-table"><tbody><tr id="22bb3bed-dae9-80f8-8048-e0a65fc33297"><td id="}IYK" class="">이름</td><td id="V}T[" class="">표시 이름</td><td id="BhwT" class="">정보</td></tr><tr id="22bb3bed-dae9-8041-945a-e7b73155c572"><td id="}IYK" class="">embeddings</td><td id="V}T[" class="">Embeddings</td><td id="BhwT" class="">빌드된 <code>GoogleGenerativeAIEmbeddings</code> 객체입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-8040-91e3-e825356372b6"/><p id="22bb3bed-dae9-8062-b8ac-ca3c1be56201" class="">
+</p><h2 id="22bb3bed-dae9-8026-8346-e763c670f535" class="">10. Hugging Face Embeddings</h2><p id="22bb3bed-dae9-80e2-98d8-e6c6707eb993" class="">
+</p><blockquote id="22bb3bed-dae9-802c-9213-d8bef6e0741f" class="">참고<p id="22bb3bed-dae9-808e-b20f-cd868c7fde80" class="">이 컴포넌트는 Langflow 버전 1.0.18부터 더 이상 사용되지 않습니다. 대신 Hugging Face Embeddings Inference 컴포넌트를 사용하세요.</p></blockquote><p id="22bb3bed-dae9-80c2-b9d6-db98dea54707" class="">로컬에 다운로드된 HuggingFace 모델로 임베딩을 생성합니다. 모델을 가동하기에 충분한 컴퓨팅 리소스가 있는지 확인하시기 바랍니다.</p><p id="22bb3bed-dae9-80a4-9790-c7797e7a28ff" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80a2-b83a-e30d8c0530bc" class="simple-table"><tbody><tr id="22bb3bed-dae9-8049-bbb0-c2008be46c8b"><td id="]C{U" class="">이름</td><td id="&gt;cj]" class="">표시 이름</td><td id="J;dl" class="">정보</td></tr><tr id="22bb3bed-dae9-8035-ae5a-fa92c611f3a6"><td id="]C{U" class="">Cache Folder</td><td id="&gt;cj]" class="">Cache Folder</td><td id="J;dl" class="">HuggingFace 모델을 캐시할 폴더 경로입니다.</td></tr><tr id="22bb3bed-dae9-8003-b15c-ebede778b861"><td id="]C{U" class="">Model Name</td><td id="&gt;cj]" class="">Model Name</td><td id="J;dl" class="">사용할 HuggingFace 모델의 이름입니다.</td></tr><tr id="22bb3bed-dae9-807a-840c-d05173ecbb8c"><td id="]C{U" class="">Multi Process</td><td id="&gt;cj]" class="">Multi-Process</td><td id="J;dl" class="">여러 프로세스를 사용할지 여부입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-807e-966d-ee707e69d054" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-804c-935d-d1395bc3188d" class="simple-table"><tbody><tr id="22bb3bed-dae9-808c-94b0-e3f080873ea8"><td id="TyQX" class="">이름</td><td id=":R}d" class="">표시 이름</td><td id="Jqgv" class="">정보</td></tr><tr id="22bb3bed-dae9-80bc-96f6-f8af4e05fd34"><td id="TyQX" class="">embeddings</td><td id=":R}d" class="">Embeddings</td><td id="Jqgv" class="">생성된 임베딩입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-8067-a59e-c61cfb91f001"/><p id="22bb3bed-dae9-80b7-bcc6-c0e3fbc58784" class="">
+</p><h2 id="22bb3bed-dae9-8052-ac87-c8da6dea0b13" class="">11. Hugging Face embeddings inference</h2><p id="22bb3bed-dae9-8027-be00-d9856dc355b1" class="">
+</p><p id="22bb3bed-dae9-800d-9072-d5823434b34e" class="">Hugging Face Inference API 또는 로컬 호스팅 모델을 사용하여 임베딩을 생성합니다. Inference API 사용 시 API 토큰이 필요합니다.</p><h3 id="22bb3bed-dae9-8057-ab45-ff386daaab8a" class="">로컬 모델 연결 및 사용법</h3><ol type="1" id="22bb3bed-dae9-805d-979c-de130682785e" class="numbered-list" start="1"><li>벡터 스토어 RAG 플로우를 생성하고, 기존 <code>OpenAI Embeddings</code> 컴포넌트를 <code>Hugging Face embeddings inference</code> 컴포넌트로 교체합니다.</li></ol><ol type="1" id="22bb3bed-dae9-80b4-aaba-f7b22a699c7d" class="numbered-list" start="2"><li><code>Hugging Face</code> 컴포넌트를 벡터 스토어(예: <code>Astra DB</code>)의 <code>Embeddings</code> 포트에 연결합니다.</li></ol><ol type="1" id="22bb3bed-dae9-80a7-9722-cbb2fc91ad21" class="numbered-list" start="3"><li><code>Inference Endpoint</code> 필드에 로컬 추론 모델의 URL을 입력합니다. (로컬 추론 시 <code>API Key</code>는 필요 없음)</li></ol><ol type="1" id="22bb3bed-dae9-80be-a21d-e817c8c24336" class="numbered-list" start="4"><li>플로우를 실행하여 로컬 모델로 임베딩을 생성합니다.</li></ol><p id="22bb3bed-dae9-803c-b936-c767b4a5ee38" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-8073-a5a8-dae432b23d10" class="simple-table"><tbody><tr id="22bb3bed-dae9-801c-a374-dccbdca5af75"><td id="W]\:" class="">이름</td><td id="mkf~" class="">표시 이름</td><td id="GOde" class="">정보</td></tr><tr id="22bb3bed-dae9-80a7-b0e8-e17ced1a3c77"><td id="W]\:" class="">API Key</td><td id="mkf~" class="">API Key</td><td id="GOde" class="">Hugging Face Inference API에 접근하기 위한 API 키입니다.</td></tr><tr id="22bb3bed-dae9-8052-a9fe-c58996220f05"><td id="W]\:" class="">API URL</td><td id="mkf~" class="">API URL</td><td id="GOde" class="">Hugging Face Inference API의 URL입니다.</td></tr><tr id="22bb3bed-dae9-8032-8615-f1d1bce5b98f"><td id="W]\:" class="">Model Name</td><td id="mkf~" class="">Model Name</td><td id="GOde" class="">임베딩에 사용할 모델의 이름입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-80d9-bbf0-ef2688a8dd17" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8059-b6fe-ef3a7bd23c9c" class="simple-table"><tbody><tr id="22bb3bed-dae9-80a0-af15-f814b447fe1a"><td id="NcY]" class="">이름</td><td id="lx&gt;d" class="">표시 이름</td><td id="DsCi" class="">정보</td></tr><tr id="22bb3bed-dae9-8001-bff1-eebfd9f1f7de"><td id="NcY]" class="">embeddings</td><td id="lx&gt;d" class="">Embeddings</td><td id="DsCi" class="">생성된 임베딩입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-80f8-8ffa-e2b1f7676f2d"/><p id="22bb3bed-dae9-801a-aa6f-d5c6cd65ae53" class="">
+</p><h2 id="22bb3bed-dae9-8086-bf35-c8613b17958a" class="">12. IBM watsonx embeddings</h2><p id="22bb3bed-dae9-80e3-9005-e4df2190fa53" class="">
+</p><p id="22bb3bed-dae9-8071-9436-e1e8f522d88b" class="">IBM watsonx.ai 파운데이션 모델을 사용하여 임베딩을 생성합니다.</p><p id="22bb3bed-dae9-8088-896d-c547657698b0" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-8072-8413-d80746d34afc" class="simple-table"><tbody><tr id="22bb3bed-dae9-8071-927c-dc842852798d"><td id="uc`w" class="">이름</td><td id="scQg" class="">표시 이름</td><td id="MHZV" class="">정보</td></tr><tr id="22bb3bed-dae9-80c7-b086-fe67e99f632b"><td id="uc`w" class="">url</td><td id="scQg" class="">watsonx API Endpoint</td><td id="MHZV" class="">watsonx.ai API의 기본 URL입니다.</td></tr><tr id="22bb3bed-dae9-80c4-b203-e55849fc9a1a"><td id="uc`w" class="">project_id</td><td id="scQg" class="">watsonx project id</td><td id="MHZV" class="">watsonx.ai 인스턴스의 프로젝트 ID입니다.</td></tr><tr id="22bb3bed-dae9-80af-89fd-c61ec15c79ed"><td id="uc`w" class="">api_key</td><td id="scQg" class="">API Key</td><td id="MHZV" class="">모델에 사용할 API 키입니다.</td></tr><tr id="22bb3bed-dae9-8088-99a1-e6a184949d3b"><td id="uc`w" class="">model_name</td><td id="scQg" class="">Model Name</td><td id="MHZV" class="">사용할 임베딩 모델의 이름입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-806d-8d35-f1be1d195d56" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8087-9b38-f26d86f06fdd" class="simple-table"><tbody><tr id="22bb3bed-dae9-8002-9e5c-ccc780a6fc66"><td id="Ys\s" class="">이름</td><td id="k^Y_" class="">표시 이름</td><td id="=TMb" class="">정보</td></tr><tr id="22bb3bed-dae9-809a-9494-ef1dfdf7ba01"><td id="Ys\s" class="">embeddings</td><td id="k^Y_" class="">Embeddings</td><td id="=TMb" class="">watsonx.ai를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-806a-b296-e72c370e373d"/><p id="22bb3bed-dae9-80e6-b3b5-e282e7b5ba18" class="">
+</p><h2 id="22bb3bed-dae9-80d6-864d-fc387370594a" class="">13. Ollama embeddings</h2><p id="22bb3bed-dae9-8017-9fcd-ee9274a8c79d" class="">
+</p><p id="22bb3bed-dae9-809b-9767-d55c1f0f72f2" class="">로컬에서 실행되는 Ollama 모델을 사용하여 임베딩을 생성합니다.</p><p id="22bb3bed-dae9-809c-8ba6-dadf2b788140" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80cd-8404-cefc48713051" class="simple-table"><tbody><tr id="22bb3bed-dae9-800f-9969-d676b1c8711f"><td id="^{E~" class="">이름</td><td id="fYWU" class="">타입</td><td id="krK;" class="">설명</td></tr><tr id="22bb3bed-dae9-80bb-af17-de798610aa48"><td id="^{E~" class="">Ollama Model</td><td id="fYWU" class="">String</td><td id="krK;" class="">사용할 Ollama 모델의 이름입니다. (기본값: <code>llama2</code>)</td></tr><tr id="22bb3bed-dae9-80b9-ad5f-ced1dd5adf00"><td id="^{E~" class="">Ollama Base URL</td><td id="fYWU" class="">String</td><td id="krK;" class="">Ollama API의 기본 URL입니다. (기본값: <code>http://localhost:11434</code>)</td></tr><tr id="22bb3bed-dae9-807f-8ac7-c942315713b4"><td id="^{E~" class="">Model Temperature</td><td id="fYWU" class="">Float</td><td id="krK;" class="">모델의 온도(무작위성) 매개변수입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-8032-a7a5-c39926fdac37" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8004-94fb-d69dc41ec4d8" class="simple-table"><tbody><tr id="22bb3bed-dae9-80a8-b31a-cc41ec145850"><td id="vJtN" class="">이름</td><td id=":FjR" class="">타입</td><td id="AhZ{" class="">설명</td></tr><tr id="22bb3bed-dae9-80a8-a369-d0372fa962ee"><td id="vJtN" class="">embeddings</td><td id=":FjR" class="">Embeddings</td><td id="AhZ{" class="">Ollama를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-80b8-b988-ddf0848385a5"/><p id="22bb3bed-dae9-803f-aaac-f82f74e32763" class="">
+</p><h2 id="22bb3bed-dae9-8088-ae10-ce8859b4b167" class="">14. OpenAI Embeddings</h2><p id="22bb3bed-dae9-80e4-9b0e-fe8600b742a9" class="">
+</p><p id="22bb3bed-dae9-8046-a5c0-d97e9edfaf81" class="">OpenAI의 임베딩 모델을 로드합니다.</p><p id="22bb3bed-dae9-80a0-bf9e-e78049d13aa0" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-8090-8da4-fc27d9ac75be" class="simple-table"><tbody><tr id="22bb3bed-dae9-807b-91c5-e7b9ef65b81c"><td id="TTdL" class="">이름</td><td id="X&lt;j^" class="">타입</td><td id="X^@c" class="">설명</td></tr><tr id="22bb3bed-dae9-80a6-9265-fc9054d512a0"><td id="TTdL" class="">OpenAI API Key</td><td id="X&lt;j^" class="">String</td><td id="X^@c" class="">OpenAI API 접근에 사용할 API 키입니다.</td></tr><tr id="22bb3bed-dae9-80b7-aaf6-daba9b97f885"><td id="TTdL" class="">Model</td><td id="X&lt;j^" class="">String</td><td id="X^@c" class="">사용할 모델 이름입니다. (기본값: <code>text-embedding-3-small</code>)</td></tr><tr id="22bb3bed-dae9-805a-930a-d7b391ca8d69"><td id="TTdL" class="">Chunk Size</td><td id="X&lt;j^" class="">Integer</td><td id="X^@c" class="">처리할 청크 크기입니다. (기본값: 1000)</td></tr><tr id="22bb3bed-dae9-8051-b6b7-c93520b1d95a"><td id="TTdL" class="">Max Retries</td><td id="X&lt;j^" class="">Integer</td><td id="X^@c" class="">실패한 요청에 대한 최대 재시도 횟수입니다. (기본값: 6)</td></tr><tr id="22bb3bed-dae9-80ff-8754-f9461f778e6c"><td id="TTdL" class="">OpenAI API Base</td><td id="X&lt;j^" class="">String</td><td id="X^@c" class="">OpenAI API의 기본 URL입니다.</td></tr></tbody></table><p id="22bb3bed-dae9-8099-b1e1-f8fb8e8a3d5e" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-8057-bc5f-ca07cc9d5afd" class="simple-table"><tbody><tr id="22bb3bed-dae9-80fa-9694-f1fa056a7757"><td id="MTvP" class="">이름</td><td id="}btI" class="">타입</td><td id="rXd[" class="">설명</td></tr><tr id="22bb3bed-dae9-80a7-9c2b-d20812dc732c"><td id="MTvP" class="">embeddings</td><td id="}btI" class="">Embeddings</td><td id="rXd[" class="">OpenAI를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-8062-8c6a-dcfba31cede2"/><p id="22bb3bed-dae9-8080-940e-c5c0c44d758d" class="">
+</p><h2 id="22bb3bed-dae9-80f5-89ad-de72a1708ea3" class="">15. VertexAI Embeddings</h2><p id="22bb3bed-dae9-80d6-806c-c2b67517a902" class="">
+</p><p id="22bb3bed-dae9-8030-a650-f7f45b57d91a" class="">Google Vertex AI Embeddings API를 사용합니다.</p><p id="22bb3bed-dae9-80d4-bc43-ef00dcf92d72" class=""><strong>입력값 (Inputs)</strong></p><table id="22bb3bed-dae9-80aa-a53d-e7a7c10a48ea" class="simple-table"><tbody><tr id="22bb3bed-dae9-805f-a1d6-f8e430279cb0"><td id="h~^n" class="">이름</td><td id="k~=I" class="">타입</td><td id="&lt;f~V" class="">설명</td></tr><tr id="22bb3bed-dae9-80f3-a3fa-da89fefa32da"><td id="h~^n" class="">credentials</td><td id="k~=I" class="">Credentials</td><td id="&lt;f~V" class="">사용할 GCP 기본 사용자 지정 자격 증명입니다.</td></tr><tr id="22bb3bed-dae9-807a-81f7-dfe0a9bcb051"><td id="h~^n" class="">location</td><td id="k~=I" class="">String</td><td id="&lt;f~V" class="">API 호출 시 사용할 기본 위치입니다. (기본값: <code>us-central1</code>)</td></tr><tr id="22bb3bed-dae9-800d-be7a-c546e25d6a14"><td id="h~^n" class="">model_name</td><td id="k~=I" class="">String</td><td id="&lt;f~V" class="">Vertex AI 언어 모델의 이름입니다. (기본값: <code>text-bison</code>)</td></tr><tr id="22bb3bed-dae9-80c2-a4de-eb7865f632f8"><td id="h~^n" class="">project</td><td id="k~=I" class="">String</td><td id="&lt;f~V" class="">Vertex API 호출 시 사용할 기본 GCP 프로젝트입니다.</td></tr><tr id="22bb3bed-dae9-809d-849a-df698f74dcba"><td id="h~^n" class="">temperature</td><td id="k~=I" class="">Float</td><td id="&lt;f~V" class="">텍스트 생성의 무작위성 정도를 조정합니다. (기본값: 0)</td></tr></tbody></table><p id="22bb3bed-dae9-806e-a0b7-c9681911ffdf" class=""><strong>출력값 (Outputs)</strong></p><table id="22bb3bed-dae9-804e-9700-ef2760c474c9" class="simple-table"><tbody><tr id="22bb3bed-dae9-80f2-a5da-ffc8ab7e1942"><td id="nKsp" class="">이름</td><td id="{v}F" class="">타입</td><td id=";Wd{" class="">설명</td></tr><tr id="22bb3bed-dae9-80c4-8878-c12d92998331"><td id="nKsp" class="">embeddings</td><td id="{v}F" class="">Embeddings</td><td id=";Wd{" class="">VertexAI를 사용해 임베딩을 생성하는 인스턴스입니다.</td></tr></tbody></table><hr id="22bb3bed-dae9-807e-a735-ec50c0cc8757"/><p id="22bb3bed-dae9-8025-b8f6-e9e16f31e4f5" class="">
+</p><p id="22bb3bed-dae9-803e-8f4d-fb1afbf7e142" class="">
+</p><p id="22bb3bed-dae9-8038-977e-da4dfbf03012" class="">*이 문서는 <a href="https://gemini.google.com/app/09e3797d06c148e2?hl=ko">https://gemini.google.com/app/09e3797d06c148e2?hl=ko</a> 문서를 번역/편집한 것으로, 생략되거나 추가된 내용이 있습니다. 자세한 내용은 원문을 참고하시기 바랍니다.</p><p id="22bb3bed-dae9-80ff-9c7e-cb39f70b701e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

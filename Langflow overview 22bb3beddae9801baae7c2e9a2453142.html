@@ -1,0 +1,691 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Langflow overview</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-801b-aae7-c2e9a2453142" class="page sans"><header><h1 class="page-title">Langflow overview</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(71, 70, 68, 0.6);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>생성일</th><td><time>@July 9, 2025 9:27 AM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(71, 70, 68, 0.6);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="22bb3bed-dae9-80b0-8c01-e076b03edcd8" class="">Langflow 개요</h1><p id="22bb3bed-dae9-803a-bbc6-ccd891b5d3e2" class="">이 페이지는 Langflow의 기본 구성 요소를 탐색하며, &quot;플로우(flow)란 무엇인가?&quot;라는 질문에서 시작합니다.</p><h2 id="22bb3bed-dae9-80c9-bd6a-ff209bf28c4f" class="">플로우란 무엇인가?</h2><ul id="22bb3bed-dae9-8078-910f-f80e102124c9" class="bulleted-list"><li style="list-style-type:disc"><em><span style="border-bottom:0.05em solid">플로우(flow)</span></em><span style="border-bottom:0.05em solid">는 애플리케이션의 기능적 표현</span>입니다. 간단히 말해 <span style="border-bottom:0.05em solid">입력을 받아 처리하고 출력을 생성하는 단위</span>라고 보시면 됩니다.</li></ul><ul id="22bb3bed-dae9-80ef-9b32-e1af552d35d9" class="bulleted-list"><li style="list-style-type:disc">플로우는 <strong>워크스페이스</strong>에서 구성하고 연결하는 <strong>컴포넌트(</strong><a href="https://docs.langflow.org/concepts-components">components</a>)로 구성합니다.</li></ul><p id="22bb3bed-dae9-8079-bd61-d7e3ab4eb4e2" class="">
+</p><figure id="22bb3bed-dae9-804c-b591-e97d398eaded" class="image"><a href="image%2049.png"><img style="width:672px" src="image%2049.png"/></a></figure><p id="22bb3bed-dae9-8091-8ec1-c153a6824229" class="">플로우는 위 사진과 같이 OpenAI 챗봇을 4개의 컴포넌트로 만드는 &#x27;기본 프롬프팅 플로우(<a href="https://docs.langflow.org/get-started-quickstart">basic prompting flow</a>)&#x27;처럼 간단하게 구성할 수도 있습니다.</p><ul id="22bb3bed-dae9-80ba-9436-d143daf0271f" class="bulleted-list"><li style="list-style-type:disc">플로우의 각 컴포넌트는 AI 모델이나 데이터 소스와 같은 특정 작업을 수행하는 <strong>노드(Node)</strong>라고 보면 됩니다.</li></ul><ul id="22bb3bed-dae9-803d-a33d-e650628800cf" class="bulleted-list"><li style="list-style-type:disc">각 컴포넌트에는 <strong>구성(Configuration)</strong> 메뉴가 있습니다. 컴포넌트의 <strong>코드</strong>(&lt;&gt;) 버튼을 클릭하면 기본 Python 코드를 볼 수 있습니다.</li></ul><ul id="22bb3bed-dae9-8037-8e87-cc65a3d1361f" class="bulleted-list"><li style="list-style-type:disc">컴포넌트는 <strong>엣지(edges)</strong>로 연결되어 플로우를 형성합니다.</li></ul><p id="22bb3bed-dae9-8006-8c4d-c0d0184059cd" class=""><a href="https://reactflow.dev/learn">React Flow</a>에 익숙하다면, <strong>플로우</strong>는 노드 기반 애플리케이션이고, <strong>컴포넌트</strong>는 노드이며, 컴포넌트 간의 연결은 <strong>엣지</strong>라고 보면 됩니다.</p><p id="22bb3bed-dae9-80aa-9c30-df303f32f6d6" class="">
+</p><h2 id="22bb3bed-dae9-8045-90ee-e3da7bce10a8" class="">플로우의 내부 작동 원리</h2><ol type="1" id="22bb3bed-dae9-803c-9444-f931a8da2f5f" class="numbered-list" start="1"><li>플로우가 실행되면 Langflow는 노드(컴포넌트)와 엣지(컴포넌트 간 연결)로부터 방향성 비순환 그래프(DAG) 객체를 구축하고, 실행 순서를 결정하기 위해 노드를 정렬합니다. </li></ol><ol type="1" id="22bb3bed-dae9-803c-b0d6-e4ff97471f46" class="numbered-list" start="2"><li>그래프 빌드는 개별 컴포넌트의 <code>def_build</code> 함수를 호출하여 노드를 검증하고 준비합니다. 이 그래프는 의존성 순서대로 처리됩니다. </li></ol><ol type="1" id="22bb3bed-dae9-80bf-a49d-c44df01f5ae3" class="numbered-list" start="3"><li>각 노드는 순차적으로 구축되고 실행되며, 각 구축된 노드의 결과는 이전 노드의 결과에 의존하는 노드로 전달됩니다.</li></ol><p id="22bb3bed-dae9-8042-a261-fc9cf606c586" class="">플로우는 다음과 같은 기본 위치의 로컬 디스크에 저장됩니다:</p><ul id="22bb3bed-dae9-804e-ae4e-f01ac9166319" class="bulleted-list"><li style="list-style-type:disc"><strong>Linux 및 WSL</strong>: <code>home/&lt;username&gt;/.cache/langflow/</code></li></ul><ul id="22bb3bed-dae9-8005-af34-f437460d449e" class="bulleted-list"><li style="list-style-type:disc"><strong>macOS</strong>: <code>/Users/&lt;username&gt;/Library/Caches/langflow/</code></li></ul><p id="22bb3bed-dae9-80a8-a060-c445006e226f" class="">플로우 저장 위치는 <code><a href="https://docs.langflow.org/environment-variables#LANGFLOW_CONFIG_DIR">LANGFLOW_CONFIG_DIR</a></code> 환경 변수로 사용자 지정할 수 있습니다.</p><p id="22bb3bed-dae9-804d-b27e-e383d388a68d" class="">
+</p><h2 id="22bb3bed-dae9-80ad-81e3-fda5d7bd278e" class="">Langflow 둘러보기</h2><p id="22bb3bed-dae9-8016-85b8-f0b5f7f0c4f0" class="">Langflow를 처음 사용한다면 처음에는 약간 혼란스러울 수 있습니다. 여기서 투어를 통해 빠르게 방향을 잡고 애플리케이션을 만들기 시작할 수 있도록 안내해 드리겠습니다.</p><p id="22bb3bed-dae9-8056-b508-f407b7ee462b" class="">Langflow에는 네 개의 구별된 영역이 있습니다: <strong>워크스페이스(</strong><a href="https://docs.langflow.org/concepts-overview#workspace">workspace</a>)는 플로우를 구축하는 주요 영역입니다. 왼쪽에 있는 <strong>컴포넌트(</strong><a href="https://docs.langflow.org/concepts-overview#components">components</a>) 메뉴는 사용 가능한 컴포넌트를 나열합니다. <strong>플레이그라운드(</strong><a href="https://docs.langflow.org/concepts-overview#playground">playground</a>)와 <strong>퍼블리시 패널(</strong><a href="https://docs.langflow.org/concepts-overview#publish-pane">publish pane</a>)은 오른쪽 상단 모서리에서 사용할 수 있습니다.</p><figure id="22bb3bed-dae9-80fd-be4f-dcd34db6f46f" class="image"><a href="image%2050.png"><img style="width:709.953125px" src="image%2050.png"/></a><figcaption> <strong>플레이그라운드(</strong><a href="https://docs.langflow.org/concepts-overview#playground">playground</a>)와 <strong>퍼블리시 패널(</strong><a href="https://docs.langflow.org/concepts-overview#publish-pane">publish pane</a>)은 오른쪽 상단 모서리에서 사용할 수 있습니다.</figcaption></figure><p id="22bb3bed-dae9-80e9-8b54-f84f0f0431f7" class="">
+</p><h2 id="22bb3bed-dae9-80c3-b25b-cee3010e5eea" class="">워크스페이스</h2><p id="22bb3bed-dae9-80ea-a4d0-ecfc37282797" class=""><strong>워크스페이스</strong>는 플로우에서 컴포넌트를 연결하고 실행하여 AI 애플리케이션을 만드는 작업 공간입니다.</p><ul id="22bb3bed-dae9-801c-a68e-d78e527b4e83" class="bulleted-list"><li style="list-style-type:disc">워크스페이스를 클릭하고 드래그하여 좌우상하로 이동할 수 있습니다.</li></ul><ul id="22bb3bed-dae9-808f-8947-f0f3e507a203" class="bulleted-list"><li style="list-style-type:disc">위아래로 스크롤하여 워크스페이스를 확대하거나 축소하거나, <strong>확대</strong> 및 <strong>축소</strong> 컨트롤을 사용할 수 있습니다.</li></ul><ul id="22bb3bed-dae9-8039-b963-f71a24fed82f" class="bulleted-list"><li style="list-style-type:disc"><strong>화면에 맞추기(Fit To Zoom)</strong>를 클릭하여 현재 플로우에 워크스페이스를 중앙에 배치합니다.</li></ul><ul id="22bb3bed-dae9-80e6-b0bf-c7010f5a24f8" class="bulleted-list"><li style="list-style-type:disc"><strong>잠금(Lock)</strong>을 클릭하여 워크스페이스를 제자리에 고정하고 실수로 이동하는 것을 방지합니다.</li></ul><ul id="22bb3bed-dae9-80c5-81fe-e414d13f21c3" class="bulleted-list"><li style="list-style-type:disc"><strong>메모 추가</strong>를 클릭하여 코드 주석과 유사하게 플로우에 메모를 추가합니다.</li></ul><p id="22bb3bed-dae9-8037-a83a-e162744ad555" class="">
+</p><figure id="22bb3bed-dae9-806d-8eff-cd0c05667fc4" class="image"><a href="image%2051.png"><img style="width:547.984375px" src="image%2051.png"/></a><figcaption>왼쪽 아래 빨간색 표시 부분이 확대/축소/화면에 맞추기/잠금/메모 추가이다.</figcaption></figure><p id="22bb3bed-dae9-80f9-bfc9-e37208e430c5" class="">
+</p><h2 id="22bb3bed-dae9-803d-9460-cbf0d034140c" class="">컴포넌트</h2><p id="22bb3bed-dae9-80f2-9cfe-cd8e78b3d459" class="">컴포넌트는 플로우의 기본 구성 요소입니다. 자세한 내용은 컴포넌트 개요(<a href="https://docs.langflow.org/concepts-components">Components overview</a>)를 참조하세요.</p><h2 id="22bb3bed-dae9-803a-a5e5-cfa2680fd3dd" class="">플레이그라운드(Playground)</h2><ul id="22bb3bed-dae9-802b-88e0-c4934937ee16" class="bulleted-list"><li style="list-style-type:disc"><strong>플레이그라운드</strong>는 워크스페이스의 현재 플로우를 실행합니다.</li></ul><ul id="22bb3bed-dae9-804e-93c6-f9b8ad1bbb20" class="bulleted-list"><li style="list-style-type:disc">플로우와 채팅하고, 입력과 출력을 보고, AI의 메모리를 수정하여 실시간으로 응답을 조정할 수 있습니다.</li></ul><ul id="22bb3bed-dae9-80af-950b-dde205c36278" class="bulleted-list"><li style="list-style-type:disc"><strong>채팅 입력</strong> 또는 <strong>채팅 출력</strong> 컴포넌트는 <strong>플레이그라운드(</strong> <a href="https://docs.langflow.org/concepts-playground">Playground</a>)에서 열고 실시간으로 테스트할 수 있습니다.</li></ul><figure id="22bb3bed-dae9-8001-8924-ee339c51dced" class="image"><a href="image%2052.png"><img style="width:624px" src="image%2052.png"/></a></figure><p id="22bb3bed-dae9-8076-ae0b-dbdbf1f7403c" class="">
+</p><h2 id="22bb3bed-dae9-807c-be30-d649f181bf6d" class="">퍼블리시 패널</h2><p id="22bb3bed-dae9-80d3-919e-f9af1bd01a96" class=""><strong>퍼블리시</strong> 패널( <a href="https://docs.langflow.org/concepts-publish">Publish pane</a>)은 만든 플로우를 외부에서 사용할 수 있도록 <strong>배포(publish)</strong> 하는 기능을 제공합니다. 아래와 같이 외부 애플리케이션에 플로우를 통합하기 위한 코드 템플릿을 제공합니다.</p><figure id="22bb3bed-dae9-809b-9f45-e22411a3a562" class="image"><a href="image%2053.png"><img style="width:768px" src="image%2053.png"/></a></figure><h3 id="22bb3bed-dae9-80fc-9d24-de1c66e3d2aa" class="">🔹 퍼블리시 패널의 주요 용도</h3><ol type="1" id="22bb3bed-dae9-80f6-b4f8-f42042ac8c51" class="numbered-list" start="1"><li><strong>공유 가능한 링크 생성</strong><ul id="22bb3bed-dae9-8013-839f-fcd814cc5132" class="bulleted-list"><li style="list-style-type:disc">만든 플로우를 외부 사용자에게 <strong>웹 인터페이스로 제공</strong>할 수 있습니다.</li></ul><ul id="22bb3bed-dae9-804a-8dd0-c3b6f3b66fb0" class="bulleted-list"><li style="list-style-type:disc">사용자는 로그인 없이도 해당 링크를 통해 LangChain 기반 챗봇이나 앱을 사용할 수 있습니다.</li></ul></li></ol><ol type="1" id="22bb3bed-dae9-80b4-a2e3-f92b0a9a7528" class="numbered-list" start="2"><li><strong>간단한 웹 UI 인터페이스 제공</strong><ul id="22bb3bed-dae9-80ef-bdc6-f3796c0af5f9" class="bulleted-list"><li style="list-style-type:disc">퍼블리시된 플로우는 기본적으로 Langflow에서 제공하는 <strong>입력 창 / 응답창 UI</strong> 형태로 나타납니다.</li></ul><ul id="22bb3bed-dae9-805a-ab5f-e6b47dc80198" class="bulleted-list"><li style="list-style-type:disc">사용자는 노드 연결을 몰라도 <strong>입력값을 넣고 결과를 확인</strong>할 수 있습니다.</li></ul></li></ol><ol type="1" id="22bb3bed-dae9-8055-9689-df6f89a02c28" class="numbered-list" start="3"><li><strong>API 호출이 아닌, 사용자 친화적인 접근 제공</strong><ul id="22bb3bed-dae9-80e1-a277-ed6db11df9a3" class="bulleted-list"><li style="list-style-type:disc">LangChain 기반 워크플로우를 서버 없이 <strong>빠르게 테스트 / 데모 / 배포</strong>할 수 있는 경로입니다.</li></ul></li></ol><ol type="1" id="22bb3bed-dae9-801f-a45d-dfb32aa928ab" class="numbered-list" start="4"><li><strong>팀원/클라이언트에게 시연하거나 피드백 받기 좋음</strong><ul id="22bb3bed-dae9-80e8-9788-cd5c367823d5" class="bulleted-list"><li style="list-style-type:disc">복잡한 코드나 백엔드 서버 구성 없이도 <strong>클라이언트에게 공유</strong>해서 쉽게 피드백을 받을 수 있습니다.</li></ul></li></ol><p id="22bb3bed-dae9-8015-b9c9-f46ca76920be" class="">
+</p><h2 id="22bb3bed-dae9-805c-921b-efd49b2e479f" class="">로그 보기</h2><ul id="22bb3bed-dae9-807a-883c-cdd1f15feb7a" class="bulleted-list"><li style="list-style-type:disc"><strong>로그</strong> 패널은 워크스페이스 내 모든 컴포넌트 실행에 대한 자세한 기록을 제공합니다.</li></ul><ul id="22bb3bed-dae9-803f-acdf-d35e957d88a6" class="bulleted-list"><li style="list-style-type:disc"><strong>로그</strong> 패널에 액세스하려면 <strong>플로우 이름</strong>을 클릭한 다음 <strong>로그</strong>를 선택합니다.</li></ul><figure id="22bb3bed-dae9-8082-b534-e17c738ba5ec" class="image"><a href="image%2054.png"><img style="width:3200px" src="image%2054.png"/></a></figure><p id="22bb3bed-dae9-8021-acf2-c8c661683a34" class="">
+</p><p id="22bb3bed-dae9-80f4-bc41-fcfc9803c8b6" class="">Langflow는 <code>LANGFLOW_CONFIG_DIR</code> 환경 변수에 지정된 위치에 로그를 저장합니다.</p><p id="22bb3bed-dae9-80b9-a469-e1d0c24e14d9" class="">이 디렉토리의 기본 위치는 운영 체제에 따라 다릅니다.</p><ul id="22bb3bed-dae9-800a-8766-f9e1db345524" class="bulleted-list"><li style="list-style-type:disc"><strong>Linux 및 WSL</strong>: <code>~/.cache/langflow/</code></li></ul><ul id="22bb3bed-dae9-802b-bb25-c598ad421895" class="bulleted-list"><li style="list-style-type:disc"><strong>macOS</strong>: <code>/Users/&lt;username&gt;/Library/Caches/langflow/</code></li></ul><ul id="22bb3bed-dae9-80c5-8f0b-eb8ec7935e13" class="bulleted-list"><li style="list-style-type:disc"><strong>Windows</strong>: <code>%LOCALAPPDATA%\langflow\langflow\Cache</code></li></ul><p id="22bb3bed-dae9-802d-bebe-ed3b5a347a04" class="">로그 파일 위치를 수정하려면:</p><ol type="1" id="22bb3bed-dae9-80fc-895b-f91f2832e271" class="numbered-list" start="1"><li><code>LANGFLOW_LOG_FILE=path/to/logfile.log</code>를 <code>.env</code> 파일에 추가합니다.</li></ol><ol type="1" id="22bb3bed-dae9-8054-bcf1-f511da02d0a4" class="numbered-list" start="2"><li><code>.env</code> 파일의 값으로 Langflow를 시작하려면 <code>uv run langflow run --env-file .env</code>로 Langflow를 시작합니다.</li></ol><p id="22bb3bed-dae9-80c3-94cf-dc01e6c04b1c" class="">예제 <code>.env</code> 파일은 프로젝트 저장소에서 확인할 수 있습니다.</p><h2 id="22bb3bed-dae9-8090-91db-d47f2f1d5524" class="">프로젝트</h2><p id="22bb3bed-dae9-8070-b16c-d48636a8a8f3" class=""><strong>프로젝트</strong> 페이지는 Langflow 워크스페이스에서 생성한 모든 플로우를 표시합니다.</p><figure id="22bb3bed-dae9-8027-be65-c618dc3f854e" class="image"><a href="image%2055.png"><img style="width:4000px" src="image%2055.png"/></a></figure><p id="22bb3bed-dae9-806c-8e90-d662e441b6de" class="">
+</p><p id="22bb3bed-dae9-8044-b669-ce4392e956b9" class=""><strong>스타터 프로젝트</strong>는 모든 새 프로젝트가 처음에 저장되는 기본 공간입니다. 새 프로젝트를 만들려면 <strong>새 프로젝트 만들기(+)</strong>를 클릭합니다.</p><p id="22bb3bed-dae9-80b6-832d-d630246000e8" class="">프로젝트에 플로우를 업로드하려면 <strong>플로우 업로드</strong>를 클릭합니다.</p><figure id="22bb3bed-dae9-80e1-909d-fdbc5f446443" class="image"><a href="image%2056.png"><img style="width:179px" src="image%2056.png"/></a></figure><p id="22bb3bed-dae9-804a-8c9b-e86035a71028" class="">프로젝트에서 플로우를 삭제하려면 플로우의 체크박스를 클릭하여 선택한 다음 <strong>삭제</strong>를 클릭합니다. 한 번의 작업으로 여러 플로우를 선택할 수 있습니다.</p><h3 id="22bb3bed-dae9-80b2-8a1b-ca986b883864" class="">파일 관리( <a href="https://docs.langflow.org/concepts-file-management">Manage files</a>)</h3><p id="22bb3bed-dae9-80c7-bd66-deee949cd41b" class="">Langflow의 <strong>파일 관리</strong> 시스템에서 파일을 업로드, 저장 및 관리합니다.</p><h3 id="22bb3bed-dae9-804e-8fcd-ecaaf313bdbe" class="">옵션 메뉴</h3><p id="22bb3bed-dae9-80b2-b79e-f6b24f38d3b1" class="">프로젝트 이름으로 표시된 드롭다운 메뉴는 Langflow 워크스페이스의 현재 플로우에 대한 여러 관리 및 사용자 지정 옵션을 제공합니다:</p><ul id="22bb3bed-dae9-80cf-9299-dddead11e397" class="bulleted-list"><li style="list-style-type:disc"><strong>새로 만들기</strong>: 처음부터 새 플로우를 만듭니다.</li></ul><ul id="22bb3bed-dae9-803f-a05c-e0c9bf371fcb" class="bulleted-list"><li style="list-style-type:disc"><strong>세부 정보 편집</strong>: 이름, 설명, 엔드포인트 이름과 같은 현재 플로우에 특정한 설정을 조정합니다.</li></ul><ul id="22bb3bed-dae9-805a-b497-c2f236190302" class="bulleted-list"><li style="list-style-type:disc"><strong>로그</strong>: 실행 기록, 오류 및 기타 런타임 이벤트를 포함한 현재 프로젝트의 로그를 봅니다.</li></ul><ul id="22bb3bed-dae9-80fe-ae52-dde803f95f05" class="bulleted-list"><li style="list-style-type:disc"><strong>가져오기</strong>: JSON 파일에서 플로우나 컴포넌트를 워크스페이스로 가져옵니다.</li></ul><ul id="22bb3bed-dae9-808c-95b8-d4ebb4cfd245" class="bulleted-list"><li style="list-style-type:disc"><strong>내보내기</strong>: 현재 플로우를 JSON 파일로 내보냅니다.</li></ul><ul id="22bb3bed-dae9-80fd-97ff-da91f5ff82e9" class="bulleted-list"><li style="list-style-type:disc"><strong>실행 취소</strong>: 프로젝트에서 마지막으로 수행한 작업을 되돌립니다. 키보드 단축키: <code>Control+Z</code>(macOS에서는 <code>Command+Z</code>).</li></ul><ul id="22bb3bed-dae9-8058-b4dc-e3085a088a3c" class="bulleted-list"><li style="list-style-type:disc"><strong>다시 실행</strong>: 이전에 실행 취소한 작업을 다시 적용합니다. 키보드 단축키: <code>Control+Y</code>(macOS에서는 <code>Command+Y</code>).</li></ul><ul id="22bb3bed-dae9-809c-b163-c0fe5fb4c204" class="bulleted-list"><li style="list-style-type:disc"><strong>모두 새로 고침</strong>: 모든 컴포넌트를 새로 고치고 캐시를 삭제합니다.</li></ul><h3 id="22bb3bed-dae9-80b0-931e-f152b15b03e6" class="">설정</h3><p id="22bb3bed-dae9-80e0-8c75-c6c0ac09d810" class="">Langflow 헤더에서 프로필 아이콘을 클릭한 다음 <strong>설정</strong>을 선택하여 전역 변수, Langflow API 키, 키보드 단축키 및 로그 메시지를 포함한 일반 Langflow 설정에 액세스합니다.</p><p id="22bb3bed-dae9-80ad-b4e5-d12a61a5bdce" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

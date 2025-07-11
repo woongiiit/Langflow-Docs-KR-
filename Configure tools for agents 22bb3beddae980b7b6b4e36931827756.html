@@ -1,0 +1,750 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Configure tools for agents</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80b7-b6b4-e36931827756" class="page sans"><header><h1 class="page-title">Configure tools for agents</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(71, 70, 68, 0.6);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>생성일</th><td><time>@July 9, 2025 1:13 PM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(71, 70, 68, 0.6);flex-shrink:0" class="typesMultipleSelect"><path d="M1.91602 4.83789C2.44238 4.83789 2.87305 4.40723 2.87305 3.87402C2.87305 3.34766 2.44238 2.91699 1.91602 2.91699C1.38281 2.91699 0.952148 3.34766 0.952148 3.87402C0.952148 4.40723 1.38281 4.83789 1.91602 4.83789ZM5.1084 4.52344H14.3984C14.7607 4.52344 15.0479 4.23633 15.0479 3.87402C15.0479 3.51172 14.7607 3.22461 14.3984 3.22461H5.1084C4.74609 3.22461 4.45898 3.51172 4.45898 3.87402C4.45898 4.23633 4.74609 4.52344 5.1084 4.52344ZM1.91602 9.03516C2.44238 9.03516 2.87305 8.60449 2.87305 8.07129C2.87305 7.54492 2.44238 7.11426 1.91602 7.11426C1.38281 7.11426 0.952148 7.54492 0.952148 8.07129C0.952148 8.60449 1.38281 9.03516 1.91602 9.03516ZM5.1084 8.7207H14.3984C14.7607 8.7207 15.0479 8.43359 15.0479 8.07129C15.0479 7.70898 14.7607 7.42188 14.3984 7.42188H5.1084C4.74609 7.42188 4.45898 7.70898 4.45898 8.07129C4.45898 8.43359 4.74609 8.7207 5.1084 8.7207ZM1.91602 13.2324C2.44238 13.2324 2.87305 12.8018 2.87305 12.2686C2.87305 11.7422 2.44238 11.3115 1.91602 11.3115C1.38281 11.3115 0.952148 11.7422 0.952148 12.2686C0.952148 12.8018 1.38281 13.2324 1.91602 13.2324ZM5.1084 12.918H14.3984C14.7607 12.918 15.0479 12.6309 15.0479 12.2686C15.0479 11.9062 14.7607 11.6191 14.3984 11.6191H5.1084C4.74609 11.6191 4.45898 11.9062 4.45898 12.2686C4.45898 12.6309 4.74609 12.918 5.1084 12.918Z"></path></svg></span>태그</th><td></td></tr></tbody></table></header><div class="page-body"><h1 id="22bb3bed-dae9-80ed-9e1c-cd48f328a085" class=""><strong>에이전트용 도구 구성</strong></h1><p id="22bb3bed-dae9-80f8-8534-f6acbb191d39" class="">에이전트의 기능을 확장하기 위해 연결된 도구들을 구성합니다.</p><h2 id="22bb3bed-dae9-8075-bb68-c6a01bccf304" class=""><strong>도구 컴포넌트의 동작 편집</strong></h2><p id="22bb3bed-dae9-80cb-b9c6-cb8f26368927" class="">도구의 동작을 편집하려면, 도구 컴포넌트에서 <strong>도구 편집(Edit Tools)</strong>을 클릭하여 해당 <code>name</code> (이름), <code>description</code> (설명), 또는 <code>enabled</code> (활성화) 메타데이터를 수정할 수 있습니다. 이 필드는 연결된 에이전트가 도구를 어떻게 사용하는지 이해하는 데 도움을 줍니다. 에이전트의 프롬프트(입력 지침)를 수정하지 않고도 도구를 이해할 수 있도록 돕습니다.</p><p id="22bb3bed-dae9-8040-80e9-d3a440a9f477" class="">예를 들어, <a href="https://docs.langflow.org/components-data#url">URL</a> 컴포넌트는 <strong>Tool Mode</strong>가 활성화되면 두 가지 동작을 수행할 수 있습니다:</p><table id="22bb3bed-dae9-80af-9848-f391d5efc993" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-808b-a9e4-d3159b9b3c33"><th id="RSH[" class="simple-table-header-color simple-table-header"><strong>도구 이름</strong></th><th id="DyF{" class="simple-table-header-color simple-table-header"><strong>설명</strong></th><th id="|]@=" class="simple-table-header-color simple-table-header"><strong>활성화 여부</strong></th></tr></thead><tbody><tr id="22bb3bed-dae9-8017-bf83-f388fdb76ba7"><td id="RSH[" class=""><code>fetch_content</code></td><td id="DyF{" class="">웹 페이지에서 내용을 재귀적으로 가져오기</td><td id="|]@=" class="">true</td></tr><tr id="22bb3bed-dae9-806c-a00d-ede44df2d92c"><td id="RSH[" class=""><code>fetch_content_as_message</code></td><td id="DyF{" class="">웹 콘텐츠를 메시지 형식으로 가져오기</td><td id="|]@=" class="">true</td></tr></tbody></table><p id="22bb3bed-dae9-800e-b654-cfad1acb8814" class="">Langflow 에이전트는 각 도구의 <code>name</code> (이름)과 <code>description</code> (설명) 메타데이터를 기반으로 도구의 기능을 명확하게 이해할 수 있습니다. <code>enabled</code> (활성화) 값은 도구가 에이전트에게 사용 가능한지 여부를 제어합니다. 에이전트가 도구를 잘못 사용한다고 생각되면, 도구의 설명 메타데이터를 수정하여 에이전트가 도구를 더 잘 이해하도록 도울 수 있습니다.</p><p id="22bb3bed-dae9-8032-8da4-f43da553cff7" class="">도구 이름과 설명은 편집할 수 있지만, 기본 도구 식별자(identifier)는 변경할 수 없습니다. 도구 식별자를 변경하려면, 사용자 정의 컴포넌트를 만들어야 합니다.</p><h2 id="22bb3bed-dae9-805d-981c-fe7eb92fccc0" class=""><strong>에이전트를 도구로 사용하기</strong></h2><p id="22bb3bed-dae9-800c-bc00-d4e1e2058fa1" class="">에이전트 컴포넌트 자체도 <strong>Tool Mode</strong>를 지원하여 멀티 에이전트 흐름을 만들 수 있습니다.</p><ol type="1" id="22bb3bed-dae9-80c8-bdef-dc07522dadd7" class="numbered-list" start="1"><li><a href="https://docs.langflow.org/simple-agent">단순 에이전트 시작 흐름</a>을 생성합니다.</li></ol><ol type="1" id="22bb3bed-dae9-802f-8abf-e6aefacaeff5" class="numbered-list" start="2"><li>두 번째 에이전트 컴포넌트를 흐름에 추가합니다.</li></ol><ol type="1" id="22bb3bed-dae9-808b-bd66-dbd72200000e" class="numbered-list" start="3"><li><strong>에이전트</strong> 컴포넌트에 <strong>Open AI API Key</strong>를 추가합니다.</li></ol><ol type="1" id="22bb3bed-dae9-8028-86c5-f95096a9a8f3" class="numbered-list" start="4"><li><strong>모델 이름</strong> 필드에서 <code>gpt-4.1</code>을 선택합니다.</li></ol><ol type="1" id="22bb3bed-dae9-801c-9674-fca1868477e7" class="numbered-list" start="5"><li><strong>Tool Mode</strong>를 클릭하여 새로운 에이전트를 도구로 사용합니다.</li></ol><ol type="1" id="22bb3bed-dae9-80ef-9e04-eb267f65bc16" class="numbered-list" start="6"><li>새로운 에이전트의 <strong>Toolset</strong> 포트를 이전에 생성한 에이전트의 <strong>Tools</strong> 포트에 연결합니다. 이렇게 하면 새로운 에이전트가 <code>gpt-4.1</code> 모델을 사용하여 큰 맥락을 요구하는 정보 검색 및 스크래핑을 처리하고, 이전에 생성한 에이전트는 이 에이전트를 도구로 사용하게 됩니다.</li></ol><figure id="22bb3bed-dae9-805c-99cd-c2cac0bdeb3f" class="image"><a href="https://docs.langflow.org/assets/images/agent-example-agent-as-tool-0e0b6761f97ce60d6b2476dc4188d37c.png"><img src="https://docs.langflow.org/assets/images/agent-example-agent-as-tool-0e0b6761f97ce60d6b2476dc4188d37c.png"/></a></figure><ol type="1" id="22bb3bed-dae9-8009-979f-d19ba88dd105" class="numbered-list" start="1"><li>새로운 에이전트의 동작을 수정하여 에이전트가 이를 어떻게 사용할지 이해할 수 있도록 합니다. **도구 편집(Edit Tools)**을 클릭하여 <code>name</code> (이름), <code>description</code> (설명), 또는 <code>enabled</code> (활성화) 메타데이터를 수정합니다. 예를 들어 기본 도구 이름은 <code>Agent</code>이지만 이를 <code>Agent-gpt-41</code>으로 수정하고 설명을 <code>복잡한 문제 해결을 위해 gpt-4.1 모델을 사용합니다</code>로 수정할 수 있습니다. 이렇게 하면 연결된 에이전트는 이것이 <code>gpt-4.1</code> 에이전트임을 이해하고, 더 큰 맥락 창을 필요로 하는 작업에 이를 사용하게 됩니다.</li></ol><h2 id="22bb3bed-dae9-80ec-84f1-fdcdf85dd154" class=""><strong>사용자 정의 컴포넌트를 도구로 추가하기</strong></h2><p id="22bb3bed-dae9-8007-8e20-e36c7fda301f" class="">에이전트는 사용자 정의 컴포넌트를 도구로 사용할 수 있습니다.</p><ol type="1" id="22bb3bed-dae9-8095-a37e-e6450677e404" class="numbered-list" start="1"><li>사용자 정의 컴포넌트를 에이전트 흐름에 추가하려면 <strong>새 사용자 정의 컴포넌트(New Custom Component)</strong>를 클릭합니다.</li></ol><ol type="1" id="22bb3bed-dae9-80b5-8664-e10d62baacd6" class="numbered-list" start="2"><li>사용자 정의 Python 코드를 사용자 정의 컴포넌트의 <strong>Code</strong> (코드) 창에 추가합니다. 예를 들어, 텍스트 분석기 컴포넌트를 만들려면 아래의 코드를 추가합니다.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80c8-8260-c8c099505092" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">python
+복사편집
+from langflow.custom import Component
+from langflow.io import MessageTextInput, Output
+from langflow.schema import Data
+import re
+
+class TextAnalyzerComponent(Component):
+    display_name = &quot;Text Analyzer&quot;
+    description = &quot;입력된 텍스트를 분석하고 변환합니다.&quot;
+    documentation: str = &quot;http://docs.langflow.org/components/custom&quot;
+    icon = &quot;chart-bar&quot;
+    name = &quot;TextAnalyzerComponent&quot;
+
+    inputs = [
+        MessageTextInput(
+            name=&quot;input_text&quot;,
+            display_name=&quot;입력 텍스트&quot;,
+            info=&quot;분석할 텍스트를 입력하세요.&quot;,
+            value=&quot;Hello, World!&quot;,
+            tool_mode=True,
+        ),
+    ]
+
+    outputs = [
+        Output(display_name=&quot;분석 결과&quot;, name=&quot;output&quot;, method=&quot;analyze_text&quot;),
+    ]
+
+    def analyze_text(self) -&gt; Data:
+        text = self.input_text
+        # 텍스트 분석
+        word_count = len(text.split())
+        char_count = len(text)
+        sentence_count = len(re.findall(r&#x27;\w+[.!?]&#x27;, text))
+        # 텍스트 변환
+        reversed_text = text[::-1]
+        uppercase_text = text.upper()
+
+        analysis_result = {
+            &quot;original_text&quot;: text,
+            &quot;word_count&quot;: word_count,
+            &quot;character_count&quot;: char_count,
+            &quot;sentence_count&quot;: sentence_count,
+            &quot;reversed_text&quot;: reversed_text,
+            &quot;uppercase_text&quot;: uppercase_text
+        }
+
+        data = Data(value=analysis_result)
+        self.status = data
+        return data
+
+</code></pre><ol type="1" id="22bb3bed-dae9-8095-8816-ce353b336b0c" class="numbered-list" start="1"><li>사용자 정의 컴포넌트를 도구로 사용하려면 <strong>Tool Mode</strong>를 클릭합니다.</li></ol><ol type="1" id="22bb3bed-dae9-80e9-85d4-ff83d3ebde9c" class="numbered-list" start="2"><li>사용자 정의 컴포넌트의 도구 출력을 에이전트의 도구 입력에 연결합니다.</li></ol><ol type="1" id="22bb3bed-dae9-80f7-bb44-f48f2ae531eb" class="numbered-list" start="3"><li><strong>Playground</strong>에서 에이전트에게 <code>이 텍스트에 대해 텍스트 분석기를 사용하세요: &quot;Agents really are thinking machines!&quot;</code>라고 요청합니다.</li></ol><ul id="22bb3bed-dae9-8010-aa99-ee1e9b72b0a3" class="bulleted-list"><li style="list-style-type:disc">응답 예시:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8052-8dec-f67f9ca89480" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">sql
+복사편집
+텍스트 &quot;Agents really are thinking machines!&quot;에 대한 분석 결과:
+원본 텍스트: Agents really are thinking machines!
+단어 수: 5
+문자 수: 36
+문장 수: 1
+뒤집힌 텍스트: !senihcam gnikniht era yllaer stnegA
+대문자 텍스트: AGENTS REALLY ARE THINKING MACHINES!
+
+</code></pre><p id="22bb3bed-dae9-80db-ab9c-e13e88737584" class="">에이전트는 <code>analyze_text</code> 동작을 정확히 호출하고 결과를 Playground에 반환합니다.</p><h2 id="22bb3bed-dae9-8008-a2b3-c5ae32b0ee36" class=""><strong>모든 컴포넌트를 도구로 만들기</strong></h2><p id="22bb3bed-dae9-809b-ac56-d34ee2b9130c" class="">도구 모드 버튼이 없는 컴포넌트를 도구로 사용하려면, 컴포넌트 입력 중 하나에 <code>tool_mode=True</code>를 추가하고, 새로 생성된 <strong>Toolset</strong> 출력을 에이전트의 <strong>Tools</strong> 입력에 연결합니다.</p><p id="22bb3bed-dae9-80a2-974d-cff8ea6e47a2" class="">Langflow는 다음 데이터 유형에 대해 <strong>Tool Mode</strong>를 지원합니다:</p><ul id="22bb3bed-dae9-8044-b417-d8bbf14796f9" class="bulleted-list"><li style="list-style-type:disc"><code>DataInput</code></li></ul><ul id="22bb3bed-dae9-80d8-bea3-d01efbe87729" class="bulleted-list"><li style="list-style-type:disc"><code>DataFrameInput</code></li></ul><ul id="22bb3bed-dae9-808a-8ac3-f64700d3f426" class="bulleted-list"><li style="list-style-type:disc"><code>PromptInput</code></li></ul><ul id="22bb3bed-dae9-80b9-bdc5-d5f1ab56444c" class="bulleted-list"><li style="list-style-type:disc"><code>MessageTextInput</code></li></ul><ul id="22bb3bed-dae9-80a8-9337-e46362872a90" class="bulleted-list"><li style="list-style-type:disc"><code>MultilineInput</code></li></ul><ul id="22bb3bed-dae9-80d8-9697-ddc7d44e2b0b" class="bulleted-list"><li style="list-style-type:disc"><code>DropdownInput</code></li></ul><p id="22bb3bed-dae9-803f-bc1a-c8cc0b6c1d1b" class="">예를 들어, 위의 <a href="https://docs.langflow.org/agents-tools#components-as-tools">사용자 정의 컴포넌트를 도구로 추가하기</a> 예시에서는 <code>MessageTextInput</code> 입력에 <code>tool_mode=True</code>를 추가하여 사용자 정의 컴포넌트를 도구로 사용할 수 있게 했습니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-805d-a518-cdd3cc8feaf6" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">inputs = [
+    MessageTextInput(
+        name=&quot;input_text&quot;,
+        display_name=&quot;입력 텍스트&quot;,
+        info=&quot;분석할 텍스트를 입력하세요.&quot;,
+        value=&quot;Hello, World!&quot;,
+        tool_mode=True,
+    ),
+]</code></pre><h2 id="22bb3bed-dae9-80d6-9080-f85405a897c8" class=""><strong>흐름을 도구로 사용하기</strong></h2><p id="22bb3bed-dae9-80db-831a-c8cf2eff6b9d" class="">에이전트는 워크스페이스에 저장된 흐름을 도구로 사용할 수 있습니다. 이를 위해 <strong>Run flow</strong> 컴포넌트를 사용합니다.</p><ol type="1" id="22bb3bed-dae9-8081-81f1-fee50c95b371" class="numbered-list" start="1"><li><strong>Run flow</strong> 컴포넌트를 클릭하고 드래그하여 워크스페이스에 추가합니다.</li></ol><ol type="1" id="22bb3bed-dae9-8040-a9b0-efdf40a95c84" class="numbered-list" start="2"><li>에이전트가 사용할 흐름을 선택합니다.</li></ol><ol type="1" id="22bb3bed-dae9-806c-ace8-f52cb74bc627" class="numbered-list" start="3"><li>컴포넌트에서 <strong>Tool Mode</strong>를 활성화합니다. 그러면 선택한 흐름이 사용 가능한 동작으로 표시됩니다.</li></ol><ol type="1" id="22bb3bed-dae9-8058-945a-c7e6db069058" class="numbered-list" start="4"><li><strong>Run flow</strong> 컴포넌트의 도구 출력을 에이전트의 도구 입력에 연결합니다.</li></ol><ol type="1" id="22bb3bed-dae9-8095-8d5f-c75ec8d807f1" class="numbered-list" start="5"><li>에이전트에게 <code>내가 질문에 답하기 위해 사용하는 도구는 무엇인가요?</code>라고 묻습니다. 연결된 흐름이 도구로 표시됩니다.</li></ol><ol type="1" id="22bb3bed-dae9-80f3-b12e-ed015e67f804" class="numbered-list" start="6"><li>에이전트에게 연결된 도구를 사용하여 질문에 답하도록 요청</li></ol><figure id="22bb3bed-dae9-80d9-a1ff-f3878e52a2fd" class="image"><a href="image%2061.png"><img style="width:4000px" src="image%2061.png"/></a></figure><p id="22bb3bed-dae9-8094-ade1-e6427d52f271" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

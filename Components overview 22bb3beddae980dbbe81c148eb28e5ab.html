@@ -1,0 +1,745 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Components overview</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80db-be81-c148eb28e5ab" class="page sans"><header><h1 class="page-title">Components overview</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22bb3bed-dae9-81d5-80e4-f67cff2ae8df" class="">컴포넌트 (Component) 개요 </h1><h3 id="22bb3bed-dae9-8136-a7b8-f8dc066aae48" class=""> : Components &gt; Overview</h3><h2 id="22bb3bed-dae9-81aa-8735-d6bc25da19ee" class="">1. 컴포넌트란?</h2><p id="22bb3bed-dae9-8106-bb6c-c73d2c80df2d" class="">
+</p><p id="22bb3bed-dae9-81d7-b68d-c4c366cf2d6d" class="">Langflow에서 <strong>컴포넌트(component)</strong>는 플로우(flow)를 구성하는 가장 기본적인 단위입니다. 쉽게 말해, 각 컴포넌트는 정해진 역할이나 기능을 담당하며, 여러 컴포넌트를 조합해 원하는 데이터 처리 흐름을 만들 수 있습니다.</p><p id="22bb3bed-dae9-8105-86ae-e39029c30337" class="">예를 들어, 데이터를 불러오거나(입력), 처리하거나(가공), 결과를 출력하는(출력) 등 각각의 작업이 컴포넌트 단위로 이루어집니다.</p><p id="22bb3bed-dae9-81a2-b6a5-d89cec80b78e" class="">
+</p><hr id="22bb3bed-dae9-8128-a4ca-f13aaf5f8b88"/><h2 id="22bb3bed-dae9-81ef-8960-f22bb81729e2" class="">2. 컴포넌트 추가하기</h2><p id="22bb3bed-dae9-81e7-b2ba-c97b57b08907" class=""><br/>작업을 시작하려면, 먼저 원하는 컴포넌트를 화면 왼쪽의 <br/><strong>컴포넌트 메뉴</strong>에서 끌어다 작업 공간(Workspace)에 놓으면 됩니다.</p><h3 id="22bb3bed-dae9-817b-a9e0-fc64b5db7ac5" class="">컴포넌트 종류</h3><p id="22bb3bed-dae9-81b6-952b-fd2f6047ebbc" class="">컴포넌트 메뉴는 용도별로 정리되어 있는데, 대표적으로 다음과 같은 종류가 있습니다:</p><ul id="22bb3bed-dae9-81d3-9c4a-dc6291ff0910" class="bulleted-list"><li style="list-style-type:disc"><strong>베타 컴포넌트:</strong> Langflow에서 기본적으로 제공하는 주요 기능들입니다. 아직 정식 버전이 아니므로 실제 서비스 운영에는 권장되지 않습니다.</li></ul><ul id="22bb3bed-dae9-81c2-b302-e55ec739a24e" class="bulleted-list"><li style="list-style-type:disc"><strong>레거시 컴포넌트:</strong> 더 이상 공식 지원하지 않지만, 이전 프로젝트와의 호환을 위해 남아 있습니다. 기본적으로는 메뉴에 보이지 않지만, &#x27;컴포넌트 설정&#x27;에서 표시할 수 있습니다.</li></ul><ul id="22bb3bed-dae9-81e5-a18d-defb398b11cc" class="bulleted-list"><li style="list-style-type:disc"><strong>번들 컴포넌트:</strong> 외부 서비스(프로바이더)와 연동하기 위한 컴포넌트로, 서비스별로 묶여 있습니다.</li></ul><p id="22bb3bed-dae9-81ba-ae68-ec32f19a85bb" class="">
+</p><hr id="22bb3bed-dae9-81f0-b131-cda134e52430"/><p id="22bb3bed-dae9-81a9-8ebc-cb464d46c0b5" class="">
+</p><h2 id="22bb3bed-dae9-81fd-a37d-e5034a659382" class="">3. 컴포넌트 설정 및 연결</h2><p id="22bb3bed-dae9-81ba-b328-ddd6ee418027" class="">
+</p><p id="22bb3bed-dae9-81f6-8273-d8e276efcd94" class="">컴포넌트를 추가했다면, 이제 각각의 입력값, 출력값, 설정값(파라미터)을 원하는 대로 조정할 수 있습니다.</p><p id="22bb3bed-dae9-81e1-a910-e53d85d28552" class="">기본적으로 자주 쓰는 필수 옵션만 보이지만, 더 세밀한 설정이 필요하면 컴포넌트 상단 메뉴(… 또는 Show More)를 클릭해서 추가 옵션을 확인할 수 있습니다.</p><h3 id="22bb3bed-dae9-8174-b8de-dd6e77a2a79a" class="">주요 설정 메뉴</h3><ul id="22bb3bed-dae9-81b6-970b-f9dae14855c5" class="bulleted-list"><li style="list-style-type:disc"><strong>Code:</strong><p id="22bb3bed-dae9-8150-ace9-fe4480cb9f1e" class="">컴포넌트 내부의 Python 코드를 직접 수정할 수 있습니다.</p></li></ul><ul id="22bb3bed-dae9-817b-a493-e70a690c4a13" class="bulleted-list"><li style="list-style-type:disc"><strong>Controls:</strong><p id="22bb3bed-dae9-815f-82e8-fc781069128b" class="">선택 가능한 모든 파라미터(숨겨진 옵션 포함)를 한눈에 볼 수 있습니다.</p></li></ul><ul id="22bb3bed-dae9-8114-8b62-f99349bc97c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Tool Mode:</strong><p id="22bb3bed-dae9-81d0-ae46-eb994ff43616" class="">Agent 컴포넌트와 연동이 필요할 때 사용하는 모드입니다.</p></li></ul><ul id="22bb3bed-dae9-817d-a4e7-e43fe1abddc6" class="bulleted-list"><li style="list-style-type:disc"><strong>Show More:</strong><p id="22bb3bed-dae9-811a-bd7c-c97d375aa4fa" class="">컴포넌트 삭제, 복제 등 기타 추가 기능을 제공합니다.</p><p id="22bb3bed-dae9-80ee-9545-f1936a872824" class="">
+</p><figure id="22bb3bed-dae9-8017-9f0a-f9bc67fe72fe" class="image"><a href="image%207.png"><img style="width:288px" src="image%207.png"/></a></figure></li></ul><hr id="22bb3bed-dae9-81d5-8515-c7456aa64f88"/><p id="22bb3bed-dae9-81d0-adf5-d822bf85a652" class="">
+</p><h2 id="22bb3bed-dae9-81af-941c-ebaf3aa09fa0" class="">4. 컴포넌트 이름 및 설명 바꾸기</h2><p id="22bb3bed-dae9-81f4-8b4a-dd9066bece63" class="">
+</p><p id="22bb3bed-dae9-818f-8cf7-c2c54066c142" class="">작업 공간에서 원하는 컴포넌트를 클릭한 후 <strong>Edit</strong>을 누르면, 이름과 설명을 자유롭게 바꿀 수 있습니다.</p><p id="22bb3bed-dae9-81f9-8636-dd2203c798d0" class="">설명에는 마크다운(Markdown) 문법도 사용할 수 있습니다.</p><p id="22bb3bed-dae9-81f5-8ee0-df7134bfd4bd" class="">
+</p><hr id="22bb3bed-dae9-814d-9848-dc8408040dad"/><p id="22bb3bed-dae9-8188-a41a-d763f18f4121" class="">
+</p><h2 id="22bb3bed-dae9-8109-ab96-f429567bcf3a" class="">5. 컴포넌트 실행하기</h2><p id="22bb3bed-dae9-81bc-b3e6-e56f107c191b" class="">
+</p><p id="22bb3bed-dae9-81e6-acfb-d6cf788eba0a" class="">한 개의 컴포넌트만 실행해보고 싶다면, 해당 컴포넌트를 선택한 뒤 <strong>Run component</strong> 버튼을 누르세요.</p><p id="22bb3bed-dae9-8127-8c62-d28153183b24" class="">실행 결과가 정상적으로 출력되면 <strong>Last Run</strong>이라는 표시가 뜹니다.</p><p id="22bb3bed-dae9-8156-a988-f4f41c5772f0" class="">※ 참고:</p><p id="22bb3bed-dae9-818c-9d9c-f3f035cce1d7" class="">단일 컴포넌트 실행은 전체 플로우 실행과 다릅니다.</p><p id="22bb3bed-dae9-81a3-ab5e-d7891a598059" class="">이 방식으로 실행할 경우, 직접 연결된 이전 단계(Upstream) 컴포넌트는 자동으로 실행되지 않습니다.</p><p id="22bb3bed-dae9-81c1-b792-f3848347d1ef" class="">
+</p><hr id="22bb3bed-dae9-819b-8d53-c760a2d63f19"/><p id="22bb3bed-dae9-8195-b3a0-f05942e489a2" class="">
+</p><h2 id="22bb3bed-dae9-8186-a225-e4b62d82059e" class="">6. 컴포넌트 출력 및 로그 확인</h2><p id="22bb3bed-dae9-81cd-aed6-ea91354398c8" class="">
+</p><p id="22bb3bed-dae9-8109-a48a-c0b2698cdcfe" class="">실행 결과나 내부 처리 로그를 보고 싶다면, 해당 컴포넌트를 선택한 뒤 <strong>Inspect</strong> 버튼을 누르면 됩니다.</p><p id="22bb3bed-dae9-81b1-a353-d3ce3f29eb31" class="">
+</p><hr id="22bb3bed-dae9-810b-bbeb-d07fb3139cfc"/><p id="22bb3bed-dae9-81d1-9ba7-d0651bf3c594" class="">
+</p><h2 id="22bb3bed-dae9-8161-8d4d-e7022d974698" class="">7. 컴포넌트 고정(Freeze) 기능</h2><p id="22bb3bed-dae9-8107-92ee-d3824882abc1" class="">
+</p><p id="22bb3bed-dae9-8195-9fe8-f887b87c733f" class="">컴포넌트 실행 결과가 항상 동일하다면, <strong>Freeze(고정)</strong> 기능을 쓸 수 있습니다.</p><p id="22bb3bed-dae9-819f-abe3-f3d16d7ef908" class="">고정을 하면 해당 컴포넌트뿐만 아니라, 그 컴포넌트로 들어오는 상위 컴포넌트까지 모두 다시 실행되지 않고, 마지막 실행 결과가 그대로 유지됩니다.</p><p id="22bb3bed-dae9-8118-84e2-db7b4dbadf7c" class="">고정하려면, 컴포넌트를 클릭 → 상단 메뉴(Show More) → Freeze를 선택하면 됩니다.</p><p id="22bb3bed-dae9-81bb-a179-fe474d578e73" class="">
+</p><hr id="22bb3bed-dae9-810f-9a63-d2a34a6285c0"/><p id="22bb3bed-dae9-81c1-8bcd-e0701aacabf0" class="">
+</p><h2 id="22bb3bed-dae9-81e7-8b80-dccd346faeb0" class="">8. 컴포넌트 포트(Port)와 데이터 연결</h2><p id="22bb3bed-dae9-81d1-be0c-deba1e515c3d" class="">
+</p><p id="22bb3bed-dae9-8193-9801-ccc371159279" class="">컴포넌트에는 <strong>동그란 포트</strong>가 달려 있습니다.</p><p id="22bb3bed-dae9-81ca-9fd3-fe4924c92e58" class="">이 포트에 선을 연결해 컴포넌트끼리 데이터를 주고받을 수 있습니다.</p><p id="22bb3bed-dae9-810c-984b-eb5db928612b" class="">각 포트의 색상은 데이터 종류(예: 텍스트, 데이터, 임베딩 등)를 의미합니다.</p><p id="22bb3bed-dae9-812e-b3dc-c2f5b3a2f764" class="">마우스를 올리면 연결 가능한 데이터 유형에 대한 안내도 볼 수 있습니다.</p><figure id="22bb3bed-dae9-8083-b111-f9434d5d48d4" class="image" style="text-align:left"><a href="image%208.png"><img style="width:288px" src="image%208.png"/></a></figure><h3 id="22bb3bed-dae9-81ee-b156-ca23ebb83a3f" class="">주요 포트 색상 예시</h3><table id="22bb3bed-dae9-81b0-b547-c0427df5fd60" class="simple-table"><thead class="simple-table-header"><tr id="22bb3bed-dae9-8133-8c56-d642b0c2d140"><th id="zINg" class="simple-table-header-color simple-table-header">데이터 종류</th><th id="MoKX" class="simple-table-header-color simple-table-header">포트 색상</th></tr></thead><tbody><tr id="22bb3bed-dae9-8136-8fe6-fc931e701f22"><td id="zINg" class="">Data</td><td id="MoKX" class="">빨간색</td></tr><tr id="22bb3bed-dae9-817f-a5d4-d2cab0aa8705"><td id="zINg" class="">DataFrame</td><td id="MoKX" class="">분홍색</td></tr><tr id="22bb3bed-dae9-81f1-a39b-d031179f8eff"><td id="zINg" class="">Embeddings</td><td id="MoKX" class="">초록색</td></tr><tr id="22bb3bed-dae9-8167-8288-f56d41eb28a5"><td id="zINg" class="">LanguageModel</td><td id="MoKX" class="">자홍색</td></tr><tr id="22bb3bed-dae9-81dc-8070-ffdd22605839"><td id="zINg" class="">Memory</td><td id="MoKX" class="">주황색</td></tr><tr id="22bb3bed-dae9-8164-af53-fc24ca64247d"><td id="zINg" class="">Message/Text</td><td id="MoKX" class="">남색</td></tr><tr id="22bb3bed-dae9-8105-8792-f9f9a54dc371"><td id="zINg" class="">Tool</td><td id="MoKX" class="">청록색</td></tr><tr id="22bb3bed-dae9-812d-b366-fc3b649a5884"><td id="zINg" class="">Unknown</td><td id="MoKX" class="">회색</td></tr></tbody></table><hr id="22bb3bed-dae9-8167-bba2-c675fb946541"/><p id="22bb3bed-dae9-8198-8674-e4482559be53" class="">
+</p><h2 id="22bb3bed-dae9-81e8-91ff-f5719f8ff468" class="">9. 컴포넌트의 코드 구조와 동작 방식</h2><p id="22bb3bed-dae9-8198-82d3-fa8514cff4d2" class="">
+</p><p id="22bb3bed-dae9-8131-946d-f03c7cb3cda0" class="">모든 컴포넌트는 내부적으로 Python 코드로 동작합니다.</p><p id="22bb3bed-dae9-8161-94a5-fab518d1d57c" class="">이 코드는 입력값, 출력값, 설정값(파라미터), 그리고 실제 동작(함수 등)을 정의합니다.</p><p id="22bb3bed-dae9-81b0-87f5-fd087b39ef42" class="">
+</p><p id="22bb3bed-dae9-8101-8a83-c2958f08880d" class="">모든 컴포넌트는 <code>Component</code>라는 기본 클래스에서 상속받습니다. 예를 들어 <code>RecursiveCharacterTextSplitter</code>는 <code>LCTextSplitterComponent</code>를 상속한 하위 클래스입니다</p><p id="22bb3bed-dae9-8179-a3cb-c36276a5e81a" class="">이 컴포넌트는 다음과 같은 입력값을 받을 수 있습니다.</p><ul id="22bb3bed-dae9-818f-bc9b-fa870b758cf1" class="bulleted-list"><li style="list-style-type:disc">chunk_size(조각 크기)</li></ul><ul id="22bb3bed-dae9-817f-a8fe-dced75e999ad" class="bulleted-list"><li style="list-style-type:disc">chunk_overlap(겹치는 길이)</li></ul><ul id="22bb3bed-dae9-81e9-8071-da15d0440f13" class="bulleted-list"><li style="list-style-type:disc">data_input(입력 데이터)</li></ul><ul id="22bb3bed-dae9-81b0-a844-ff22f3a01298" class="bulleted-list"><li style="list-style-type:disc">separators(구분 문자)</li></ul><p id="22bb3bed-dae9-8125-b461-c021f51c9e1c" class="">실제로 입력값 정의는 코드에서 아래처럼 나타납니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8138-98b9-f300a7966fbc" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">inputs = [
+    IntInput(
+        name=&quot;chunk_size&quot;,
+        display_name=&quot;Chunk Size&quot;,
+        info=&quot;The maximum length of each chunk.&quot;,
+        value=1000,
+    ),
+    IntInput(
+        name=&quot;chunk_overlap&quot;,
+        display_name=&quot;Chunk Overlap&quot;,
+        info=&quot;The amount of overlap between chunks.&quot;,
+        value=200,
+    ),
+    # 이하 생략
+]
+</code></pre><p id="22bb3bed-dae9-81a9-a737-cf33cabeae65" class="">
+</p><p id="22bb3bed-dae9-8194-9db2-c369ef85a124" class="">데이터 처리 로직은 코드에서 아래와 같이 정의됩니다:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-81c1-aaa7-dc860236465b" class="code"><code class="language-JavaScript">    def get_data_input(self) -&gt; Any:
+        return self.data_input
+
+    def build_text_splitter(self) -&gt; TextSplitter:
+        if not self.separators:
+            separators: list[str] | None = None
+        else:
+            # check if the separators list has escaped characters
+            # if there are escaped characters, unescape them
+            separators = [unescape_string(x) for x in self.separators]
+
+        return RecursiveCharacterTextSplitter(
+            separators=separators,
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+        )</code></pre><p id="22bb3bed-dae9-815d-b111-c5e3fc470f8e" class="">
+</p><hr id="22bb3bed-dae9-813b-8433-cf74de9c75c9"/><p id="22bb3bed-dae9-81b5-99e8-fcdf73da3bff" class="">
+</p><h2 id="22bb3bed-dae9-8159-9114-f42735956eec" class="">10. 컴포넌트 버전 관리와 업데이트</h2><p id="22bb3bed-dae9-81f2-a0f5-ee4115e6dbf6" class="">
+</p><p id="22bb3bed-dae9-819b-8ba9-e49771cf7da0" class="">각 컴포넌트의 버전 및 상태 정보는 Langflow 내부 데이터베이스에 저장됩니다.</p><p id="22bb3bed-dae9-81a7-8d9c-ec2ddf018e9c" class="">컴포넌트를 플로우에 추가하는 순간, 그 시점의 버전이 고정되며, 이후 Langflow 프로그램을 업그레이드해도 자동으로 바뀌지 않습니다.</p><p id="22bb3bed-dae9-819c-9a86-d67c45e9ae9c" class="">즉, 특정 컴포넌트를 플로우에 추가할 당시 버전이 1.0이었다면, 명시적으로 업데이트하지 않는 이상 해당 플로우 내에서는 계속 1.0으로 유지됩니다.</p><p id="22bb3bed-dae9-81b9-9113-dd60049d6b38" class=""><strong>업데이트 알림 유형</strong>:</p><ul id="22bb3bed-dae9-8146-9233-d73b2298a5b8" class="bulleted-list"><li style="list-style-type:disc"><strong>Update ready</strong>: 안전한 업데이트, 기존 흐름에 영향 없음</li></ul><ul id="22bb3bed-dae9-8146-9321-f3ca7f41f968" class="bulleted-list"><li style="list-style-type:disc"><strong>Update available</strong>: 입력/출력 포트 변경 등 호환성 문제 발생 가능</li></ul><p id="22bb3bed-dae9-8122-bf37-e2619ec26df5" class=""><strong>업데이트 방법</strong>:</p><ul id="22bb3bed-dae9-8115-8dd1-dbe39a30d323" class="bulleted-list"><li style="list-style-type:disc"><strong>Update</strong> 버튼으로 개별 컴포넌트를 바로 업데이트</li></ul><ul id="22bb3bed-dae9-815d-83fa-cf80ec4c36c1" class="bulleted-list"><li style="list-style-type:disc"><strong>Review</strong> 버튼을 눌러 전체 변경 사항 확인 후 업데이트(스냅샷 생성 권장)</li></ul><p id="22bb3bed-dae9-81f6-bf9d-d7a19c25b3c4" class="">업데이트 전에는 프로젝트를 백업하는 것이 좋습니다. 업데이트 전 플로우를 백업하려면 &quot;Create backup flow before updating&quot; 옵션을 활성화하세요. 백업은 동일한 프로젝트 폴더에 (backup)이라는 이름으로 저장됩니다.</p><p id="22bb3bed-dae9-8139-9111-cd705df0822d" class="">
+</p><p id="22bb3bed-dae9-8199-985e-c60ce957857a" class="">
+</p><hr id="22bb3bed-dae9-8167-83af-ed2b6fd58d3c"/><p id="22bb3bed-dae9-81f7-a51a-e4476d887b1c" class="">
+</p><h2 id="22bb3bed-dae9-81d8-beee-ce859635c78d" class="">11. 컴포넌트 그룹화 및 재사용</h2><p id="22bb3bed-dae9-81ab-a510-c35f1f38b9c9" class="">
+</p><p id="22bb3bed-dae9-81ad-95d6-f74bc5b5210c" class="">여러 컴포넌트를 묶어서 <strong>하나의 그룹 컴포넌트</strong>로 만들 수도 있습니다.</p><p id="22bb3bed-dae9-815d-9a5c-e007c8a6fd0c" class="">이렇게 하면 복잡한 작업 흐름을 보기 쉽게 정리하고, 재사용할 수도 있습니다.</p><ul id="22bb3bed-dae9-8135-9207-e883e0a4e7ab" class="bulleted-list"><li style="list-style-type:disc">Shift 혹은 Ctrl 키를 누른 채 마우스로 여러 컴포넌트를 선택한 뒤,</li></ul><ul id="22bb3bed-dae9-81e9-9eaf-ffd93afd5517" class="bulleted-list"><li style="list-style-type:disc">Group 버튼을 클릭하면 하나로 묶입니다.</li></ul><p id="22bb3bed-dae9-81f7-a926-c4b0942166ad" class="">이후에는 그룹 전체를 하나의 컴포넌트처럼 관리할 수 있습니다.</p><p id="22bb3bed-dae9-81fb-85d6-cefb46516255" class="">그룹 해제가 필요할 때는 Show More → Ungroup 메뉴를 사용하세요.</p><p id="22bb3bed-dae9-81b4-8911-fcf4ddf0a760" class="">자주 쓰는 그룹은 컴포넌트 메뉴에 따로 저장해 둘 수도 있습니다.</p><p id="22bb3bed-dae9-8145-84e1-d66ba8e4284b" class="">
+</p><hr id="22bb3bed-dae9-81ac-a216-de1d3270e992"/><h3 id="22bb3bed-dae9-810d-aac8-cfaf0b6cf8e2" class="">참고: 단축키 및 기타 팁</h3><p id="22bb3bed-dae9-81bf-ad59-fa365db15d7a" class="">Langflow 작업 공간에서는 다양한 단축키도 지원합니다.</p><p id="22bb3bed-dae9-81bb-ac0f-cee4355b9073" class="">상단의 프로필 아이콘 → 설정(Settings) → 단축키(Shortcuts)에서 확인할 수 있습니다.</p><p id="22bb3bed-dae9-817d-96f2-c512b4601660" class="">
+</p><hr id="22bb3bed-dae9-81da-a583-ebc66649802d"/><p id="22bb3bed-dae9-81d8-92e4-e16fab926d59" class="">
+</p><p id="22bb3bed-dae9-81d9-a7bb-fc575ffc0e46" class="">*이 문서는 <a href="https://docs.langflow.org/concepts-components">https://docs.langflow.org/concepts-components</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p><p id="22bb3bed-dae9-81d6-b65e-fb18e9e84c1e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

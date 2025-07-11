@@ -1,0 +1,829 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Create custom Python components</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22bb3bed-dae9-80db-98bb-ed4168d960ba" class="page sans"><header><h1 class="page-title">Create custom Python components</h1><p class="page-description"></p></header><div class="page-body"><h1 id="22bb3bed-dae9-808c-bb53-cc36a80a0a26" class="">커스텀 Python 컴포넌트 제작</h1><h3 id="22bb3bed-dae9-8028-b926-e371af009ad7" class="">   : Components &gt; Create custom Python components</h3><p id="22bb3bed-dae9-80ad-8c33-dff7797fdc18" class="">
+</p><h2 id="22bb3bed-dae9-809b-8064-cfc87135d59e" class="">1. 커스텀 컴포넌트란?</h2><p id="22bb3bed-dae9-801d-86bf-c1d86b184ef0" class="">커스텀 컴포넌트(custom component)는 Langflow의 기능을 확장하기 위한 파이썬 클래스입니다.</p><p id="22bb3bed-dae9-8072-86b8-d07282acafcb" class="">모든 커스텀 컴포넌트는 <code>Component</code> 클래스를 상속해서 작성하며,</p><p id="22bb3bed-dae9-8093-b289-d2245e6f5e59" class="">이를 통해 새로운 기능 추가, 데이터 처리, 외부 서비스 연동, 특수 도구 구현 등이 가능합니다.</p><p id="22bb3bed-dae9-80cd-a3e5-f6ae8fae4101" class="">Langflow의 노드 기반 환경에서는 각 노드가 <strong>컴포넌트</strong>로서 독립적인 기능을 수행합니다.</p><p id="22bb3bed-dae9-80da-a3c7-ee15204b955b" class="">
+</p><p id="22bb3bed-dae9-8055-8294-d3efd90dd4a2" class="">커스텀 컴포넌트는 아래와 같은 세 가지 구성 요소를 정의하는 파이썬 클래스입니다.</p><ul id="22bb3bed-dae9-80ef-bbdd-dae7b0fefe48" class="bulleted-list"><li style="list-style-type:disc"><strong>입력(Inputs)</strong>: 컴포넌트가 동작하기 위해 필요한 데이터 또는 매개변수</li></ul><ul id="22bb3bed-dae9-8035-a840-e20a2017cfcb" class="bulleted-list"><li style="list-style-type:disc"><strong>출력(Outputs)</strong>: 컴포넌트가 처리 후 다음 노드에 제공하는 데이터</li></ul><ul id="22bb3bed-dae9-80a3-9e1a-d0bb9dcaac1c" class="bulleted-list"><li style="list-style-type:disc"><strong>로직(Logic)</strong>: 입력을 받아 출력을 생성하는 내부 처리 방식</li></ul><p id="22bb3bed-dae9-809d-8037-dae8286a3ec6" class="">
+</p><p id="22bb3bed-dae9-8031-8865-f1010b8318ad" class="">커스텀 컴포넌트를 만들면 다음과 같은 장점이 있습니다.</p><ul id="22bb3bed-dae9-8027-b510-dff323104e29" class="bulleted-list"><li style="list-style-type:disc">기능 무한 확장</li></ul><ul id="22bb3bed-dae9-80df-b355-ec2f94652a13" class="bulleted-list"><li style="list-style-type:disc">재사용성</li></ul><ul id="22bb3bed-dae9-80ec-91ea-d5a3491a3ffc" class="bulleted-list"><li style="list-style-type:disc">입력 값에 따른 자동 UI 필드 생성</li></ul><ul id="22bb3bed-dae9-80b6-8b50-dd0783ec63d1" class="bulleted-list"><li style="list-style-type:disc">노드 간 타입 안전 연결</li></ul><p id="22bb3bed-dae9-8015-b9b5-ef563eb5e10f" class="">커스텀 컴포넌트는 특화된 작업, 외부 API 호출, 고급 로직 추가 등에 사용됩니다.</p><p id="22bb3bed-dae9-8003-8907-d3cb96bb149b" class="">
+</p><hr id="22bb3bed-dae9-800e-bc1b-e7d1bda710ae"/><p id="22bb3bed-dae9-8056-9228-c30b7d955306" class="">
+</p><h2 id="22bb3bed-dae9-80b5-90b9-f5a57989c457" class="">1. 커스텀 컴포넌트의 기본 구조</h2><p id="22bb3bed-dae9-8088-bea0-e6f624892eb5" class="">
+</p><p id="22bb3bed-dae9-809d-aad3-fbff6136cc1e" class="">Langflow에서 커스텀 컴포넌트는 다음 네 가지를 기반으로 작성됩니다.</p><ol type="1" id="22bb3bed-dae9-80fe-89be-f4f5ea7c1763" class="numbered-list" start="1"><li><code>Component</code> 클래스를 상속하는 파이썬 클래스</li></ol><ol type="1" id="22bb3bed-dae9-8070-9017-f2168118ae93" class="numbered-list" start="2"><li>컴포넌트를 식별·설명하는 클래스 단위 속성</li></ol><ol type="1" id="22bb3bed-dae9-8061-bd40-c86e36d1bb28" class="numbered-list" start="3"><li>데이터 흐름을 정하는 입력/출력 목록</li></ol><ol type="1" id="22bb3bed-dae9-807d-92fd-c3ae7cca7660" class="numbered-list" start="4"><li>로깅 및 고급 로직을 위한 내부 변수</li></ol><hr id="22bb3bed-dae9-804a-9b8f-db38af7dbdd3"/><h3 id="22bb3bed-dae9-8007-986c-f4ff519ac302" class="">클래스 단위 속성(Class-level attributes)</h3><p id="22bb3bed-dae9-8049-8c06-c8409d62474b" class="">아래와 같이 클래스 단위 속성을 정의해서 컴포넌트의 UI 표시 및 동작을 제어합니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80bd-bb3b-f9ead144266a" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">class MyCsvReader(Component):
+    display_name = &quot;CSV Reader&quot;      # 노드 헤더에 표시될 이름
+    description = &quot;Reads CSV files&quot;  # 툴팁 설명
+    icon = &quot;file-text&quot;               # 아이콘 (시각적 식별자)
+    name = &quot;CSVReader&quot;               # 내부 고유 ID
+    documentation = &quot;http://docs.example.com/csv_reader&quot;  # (선택) 외부 문서 링크
+</code></pre><ul id="22bb3bed-dae9-8049-869d-cad5a38bf4a5" class="bulleted-list"><li style="list-style-type:disc"><strong>display_name</strong>: 노드 헤더에 표시될 사용자 친화적 이름</li></ul><ul id="22bb3bed-dae9-80e7-b030-dde6a1a63e42" class="bulleted-list"><li style="list-style-type:disc"><strong>description</strong>: 툴팁으로 표시되는 짧은 설명</li></ul><ul id="22bb3bed-dae9-80a5-8ada-c382d69c4eff" class="bulleted-list"><li style="list-style-type:disc"><strong>icon</strong>: Langflow 아이콘 라이브러리에서 선택하는 시각적 식별자</li></ul><ul id="22bb3bed-dae9-80ac-be2d-d7013c046c18" class="bulleted-list"><li style="list-style-type:disc"><strong>name</strong>: 내부적으로 고유하게 식별하는 값</li></ul><ul id="22bb3bed-dae9-805c-a378-ff76d2f49eda" class="bulleted-list"><li style="list-style-type:disc"><strong>documentation</strong>: (선택) 외부 문서 링크</li></ul><h3 id="22bb3bed-dae9-803f-a113-c8fb83ecb6d8" class="">아이콘 사용법</h3><p id="22bb3bed-dae9-8085-b8e3-f4eedd9a4a2d" class="">Langflow는 Lucide 아이콘 라이브러리를 사용합니다.</p><p id="22bb3bed-dae9-80e0-b610-deeb81e45be2" class="">예를 들어, <code>icon = &quot;file-text&quot;</code>와 같이 문자열로 지정하면</p><p id="22bb3bed-dae9-80c6-83c4-c7875bc4d12a" class="">자동으로 Lucide의 해당 아이콘이 렌더링됩니다.</p><p id="22bb3bed-dae9-80c1-a05f-d76930302b11" class="">
+</p><hr id="22bb3bed-dae9-8043-a098-f4c1eaa82231"/><p id="22bb3bed-dae9-8014-a158-fea02438ba0e" class="">
+</p><h2 id="22bb3bed-dae9-805d-9bb6-fcac6e5b5af0" class="">2. 커스텀 컴포넌트의 구조</h2><p id="22bb3bed-dae9-8058-9d1d-d5f9feefea70" class="">
+</p><p id="22bb3bed-dae9-809b-ac80-cfe5053dca80" class="">커스텀 컴포넌트는 단순히 입력/출력만 있는 클래스가 아닙니다.</p><p id="22bb3bed-dae9-8049-8fcd-fabe5a009e29" class="">내부적으로 라이프사이클, 출력 생성, 프론트엔드 상호작용, 로직 조직화 등의 구조를 가집니다.</p><h3 id="22bb3bed-dae9-804d-9ad6-f733b8c129c4" class="">기본 예시</h3><ul id="22bb3bed-dae9-8017-b3d5-eb152f154ffc" class="bulleted-list"><li style="list-style-type:disc"><code>langflow.custom.Component</code> 상속</li></ul><ul id="22bb3bed-dae9-8083-8987-cd8774ea78f4" class="bulleted-list"><li style="list-style-type:disc"><code>display_name</code>, <code>description</code>, <code>icon</code> 등 메타데이터 선언</li></ul><ul id="22bb3bed-dae9-8068-8288-cb165ebaa8d9" class="bulleted-list"><li style="list-style-type:disc">입력/출력 목록 정의</li></ul><ul id="22bb3bed-dae9-8058-b64e-dccc82bdc64f" class="bulleted-list"><li style="list-style-type:disc">출력과 매칭되는 메소드 구현</li></ul><h3 id="22bb3bed-dae9-805c-ba8b-c86dfc639533" class="">최소 예시 코드</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80b3-a484-dbdf8f8077b1" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">from langflow.custom import Component
+from langflow.template import Output
+
+class MyComponent(Component):
+    display_name = &quot;My Component&quot;
+    description = &quot;A short summary.&quot;
+    icon = &quot;sparkles&quot;
+    name = &quot;MyComponent&quot;
+
+    inputs = []
+    outputs = []
+
+    def some_output_method(self):
+        return ...
+</code></pre><hr id="22bb3bed-dae9-8029-811a-fe997240c534"/><h3 id="22bb3bed-dae9-8084-b2db-f63f228e500b" class="">내부 라이프사이클 및 실행 흐름</h3><p id="22bb3bed-dae9-80cd-ac9a-e829e446a7f5" class="">Langflow 엔진이 컴포넌트의 다음과 같은 라이프사이클을 관리합니다.</p><ol type="1" id="22bb3bed-dae9-809e-ae4e-c18f340f40cd" class="numbered-list" start="1"><li><strong>생성(Instantiation)</strong>: 컴포넌트 객체 생성 및 내부 구조 초기화</li></ol><ol type="1" id="22bb3bed-dae9-8091-8de9-d55fcb465036" class="numbered-list" start="2"><li><strong>입력 할당(Assigning Inputs)</strong>: UI나 연결을 통해 입력값 할당</li></ol><ol type="1" id="22bb3bed-dae9-8070-b969-e9898ed37922" class="numbered-list" start="3"><li><strong>유효성 검사 및 설정(Validation and Setup)</strong>: 필요 시 <code>_pre_run_setup</code> 등 실행 전 준비 로직 수행</li></ol><ol type="1" id="22bb3bed-dae9-8007-a120-c8a1ebebd2db" class="numbered-list" start="4"><li><strong>출력 생성(Outputs Generation)</strong>: <code>run()</code> 또는 <code>build_results()</code>가 출력 메소드 실행</li></ol><h3 id="22bb3bed-dae9-80a3-9d8a-e36803d2847a" class="">선택적 훅(Hook)</h3><ul id="22bb3bed-dae9-80e3-9bc9-d8ef4e73908e" class="bulleted-list"><li style="list-style-type:disc"><code>initialize_data</code> 또는 <code>_pre_run_setup</code>으로 실행 전 초기화 로직 구현 가능</li></ul><ul id="22bb3bed-dae9-80b9-a6f0-fe12ef62aa42" class="bulleted-list"><li style="list-style-type:disc"><code>__call__</code>, <code>run()</code>, <code>_run()</code>을 오버라이드하면 호출/실행 방식 직접 지정 가능</li></ul><p id="22bb3bed-dae9-807a-90ee-d770462be151" class="">
+</p><hr id="22bb3bed-dae9-807b-92b2-ff752b07938c"/><p id="22bb3bed-dae9-80dc-bf71-c7b8387b24fe" class="">
+</p><h2 id="22bb3bed-dae9-8066-b8d1-cafeea934807" class="">3. 입력과 출력 정의</h2><p id="22bb3bed-dae9-8052-b153-cb6fcb5f54e9" class="">
+</p><p id="22bb3bed-dae9-8092-93c5-c6ec0ec18747" class="">커스텀 컴포넌트의 입력(Inputs), 출력(Outputs)은 각각 아래 속성으로 정의합니다.</p><h3 id="22bb3bed-dae9-80ed-b8ce-cc82bd6ccd4d" class="">입력(Inputs)</h3><p id="22bb3bed-dae9-8046-a2cd-f0c956ef765a" class="">입력 목록(<code>inputs</code>)은 클래스 단위에서 선언하며,</p><p id="22bb3bed-dae9-80f2-b02a-e7e2433b4ceb" class="">Langflow가 컴포넌트를 불러올 때 이 목록을 참고해 UI 필드와 포트를 렌더링합니다.</p><p id="22bb3bed-dae9-802a-80b4-e7ffeafce622" class="">입력은 보통 <code>langflow.io</code>의 클래스 인스턴스(예: <code>StrInput</code>, <code>DataInput</code>, <code>MessageTextInput</code>)로 정의합니다.</p><h3 id="22bb3bed-dae9-80c3-8faa-d0bca9f9ef06" class="">주요 파라미터</h3><ul id="22bb3bed-dae9-8040-8064-faf8ed6638f3" class="bulleted-list"><li style="list-style-type:disc"><strong>name</strong>: 내부 변수명(<code>self.&lt;name&gt;</code>으로 접근)</li></ul><ul id="22bb3bed-dae9-8040-8d6e-de7d2e2c2a95" class="bulleted-list"><li style="list-style-type:disc"><strong>display_name</strong>: UI에 표시되는 이름</li></ul><ul id="22bb3bed-dae9-8042-b1ae-db059216c00e" class="bulleted-list"><li style="list-style-type:disc"><strong>info</strong> (선택): 툴팁 또는 설명</li></ul><ul id="22bb3bed-dae9-8018-b8ee-c42af1855528" class="bulleted-list"><li style="list-style-type:disc"><strong>value</strong> (선택): 기본값</li></ul><ul id="22bb3bed-dae9-803d-82b0-e1df3a13c790" class="bulleted-list"><li style="list-style-type:disc"><strong>advanced</strong> (선택): 고급 설정 영역으로 분리</li></ul><ul id="22bb3bed-dae9-80a2-8db7-cff9e8cc7907" class="bulleted-list"><li style="list-style-type:disc"><strong>required</strong> (선택): 필수값 여부</li></ul><ul id="22bb3bed-dae9-801a-9737-fe9800877632" class="bulleted-list"><li style="list-style-type:disc"><strong>is_list</strong> (선택): 여러 값 허용</li></ul><ul id="22bb3bed-dae9-80d4-bf89-e0b2128657fd" class="bulleted-list"><li style="list-style-type:disc"><strong>input_types</strong> (선택): 연결 가능 타입 제한(예: <code>[&quot;Data&quot;]</code>)</li></ul><h3 id="22bb3bed-dae9-805a-9f42-dcd1426cbad2" class="">주요 입력 클래스 예시</h3><ul id="22bb3bed-dae9-80d9-ba52-dd0e8bf372a5" class="bulleted-list"><li style="list-style-type:disc"><strong>텍스트 입력</strong><ul id="22bb3bed-dae9-80bf-aa6c-e172d42fd639" class="bulleted-list"><li style="list-style-type:circle"><code>StrInput</code>: 한 줄 텍스트</li></ul><ul id="22bb3bed-dae9-8094-ba68-f46f3d3a9920" class="bulleted-list"><li style="list-style-type:circle"><code>MultilineInput</code>: 여러 줄 텍스트</li></ul></li></ul><ul id="22bb3bed-dae9-8031-aa13-de39b753b494" class="bulleted-list"><li style="list-style-type:disc"><strong>숫자/불리언 입력</strong><ul id="22bb3bed-dae9-80f1-a3fa-e9d15cc9ad04" class="bulleted-list"><li style="list-style-type:circle"><code>BoolInput</code>, <code>IntInput</code>, <code>FloatInput</code></li></ul></li></ul><ul id="22bb3bed-dae9-80a9-98d5-d83f5120b18d" class="bulleted-list"><li style="list-style-type:disc"><strong>드롭다운 선택</strong><ul id="22bb3bed-dae9-800e-b01f-e364cf3ce289" class="bulleted-list"><li style="list-style-type:circle"><code>DropdownInput</code></li></ul></li></ul><ul id="22bb3bed-dae9-80ab-b7d3-cc385c67b5cd" class="bulleted-list"><li style="list-style-type:disc"><strong>시크릿 입력</strong><ul id="22bb3bed-dae9-804e-8e34-ffa34b000518" class="bulleted-list"><li style="list-style-type:circle"><code>SecretStrInput</code> (API 키 등)</li></ul></li></ul><ul id="22bb3bed-dae9-807d-9afc-ff3839cf278e" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터/메시지 입력</strong><ul id="22bb3bed-dae9-8015-b45e-c799a6ae4156" class="bulleted-list"><li style="list-style-type:circle"><code>DataInput</code>, <code>MessageInput</code>, <code>MessageTextInput</code></li></ul></li></ul><ul id="22bb3bed-dae9-8047-850b-d673aab10c35" class="bulleted-list"><li style="list-style-type:disc"><strong>핸들 입력</strong><ul id="22bb3bed-dae9-80c3-aa78-fd44a9ed5ec5" class="bulleted-list"><li style="list-style-type:circle"><code>HandleInput</code></li></ul></li></ul><ul id="22bb3bed-dae9-80c7-9799-e9504f604a20" class="bulleted-list"><li style="list-style-type:disc"><strong>파일 업로드</strong><ul id="22bb3bed-dae9-806d-ae52-e35c2de0f27c" class="bulleted-list"><li style="list-style-type:circle"><code>FileInput</code></li></ul></li></ul><ul id="22bb3bed-dae9-8039-99a4-d7659465962b" class="bulleted-list"><li style="list-style-type:disc"><strong>리스트 입력</strong><ul id="22bb3bed-dae9-801f-b998-e297acd235c8" class="bulleted-list"><li style="list-style-type:circle"><code>is_list=True</code> 옵션 사용</li></ul></li></ul><h3 id="22bb3bed-dae9-8015-9c68-e021f54a3120" class="">입력 정의 예시</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-809a-9fab-dfd1132ce6de" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">from langflow.io import StrInput, BoolInput, DropdownInput
+
+inputs = [
+    StrInput(name=&quot;title&quot;, display_name=&quot;Title&quot;),
+    BoolInput(name=&quot;enabled&quot;, display_name=&quot;Enabled&quot;, value=True),
+    DropdownInput(name=&quot;mode&quot;, display_name=&quot;Mode&quot;, options=[&quot;Fast&quot;, &quot;Safe&quot;, &quot;Experimental&quot;], value=&quot;Safe&quot;)
+]
+</code></pre><hr id="22bb3bed-dae9-8069-9d4a-cff3e8e196bb"/><h3 id="22bb3bed-dae9-807c-9df7-e1f064b24027" class="">출력(Outputs)</h3><p id="22bb3bed-dae9-805d-ad71-cc9a1a21d83b" class="">출력 목록(<code>outputs</code>)은 클래스 단위에서 선언하며,</p><p id="22bb3bed-dae9-8082-876b-cc216b5bd28e" class="">각 출력은 UI의 연결 포인트로 나타납니다.</p><p id="22bb3bed-dae9-80be-a761-d61f17fa8318" class="">출력에 연결이 이루어지면 Langflow는 자동으로 해당 메소드를 실행하고 반환값을 다음 컴포넌트로 전달합니다.</p><p id="22bb3bed-dae9-80ba-8b6f-d56417b4f4f4" class="">출력은 일반적으로 <code>langflow.io</code>의 <code>Output</code> 인스턴스로 정의합니다.</p><h3 id="22bb3bed-dae9-80e3-a104-cac5b95fd270" class="">주요 파라미터</h3><ul id="22bb3bed-dae9-801b-88dd-d37725572be9" class="bulleted-list"><li style="list-style-type:disc"><strong>name</strong>: 내부 변수명</li></ul><ul id="22bb3bed-dae9-801b-a1dd-e29b057a6c87" class="bulleted-list"><li style="list-style-type:disc"><strong>display_name</strong>: UI 표시 이름</li></ul><ul id="22bb3bed-dae9-8029-9c02-c2f63412f56e" class="bulleted-list"><li style="list-style-type:disc"><strong>method</strong>: 출력 생성에 사용될 메소드 이름</li></ul><ul id="22bb3bed-dae9-8033-8a73-e645ebc08167" class="bulleted-list"><li style="list-style-type:disc"><strong>info</strong> (선택): 도움말 텍스트</li></ul><p id="22bb3bed-dae9-80ec-a4f6-eac75b894e31" class="">출력 메소드는 클래스에 반드시 존재해야 하며, 반환 타입을 명시하는 것이 권장됩니다.</p><p id="22bb3bed-dae9-80ea-96cc-f15095e39d7e" class="">진행 상황이나 로그는 메소드 내에서 <code>self.status</code> 메시지로 출력할 수 있습니다.</p><h3 id="22bb3bed-dae9-8015-b9bb-fde26a78ef7c" class="">주요 반환 타입</h3><ul id="22bb3bed-dae9-8090-82aa-e8b781d712ca" class="bulleted-list"><li style="list-style-type:disc"><strong>Message</strong>: 구조화된 채팅 메시지</li></ul><ul id="22bb3bed-dae9-804e-98d6-ea72b9141613" class="bulleted-list"><li style="list-style-type:disc"><strong>Data</strong>: 유연한 데이터 객체(.data, .text 속성)</li></ul><ul id="22bb3bed-dae9-801a-8e98-ef2c67fc3bcd" class="bulleted-list"><li style="list-style-type:disc"><strong>DataFrame</strong>: 판다스 기반 테이블</li></ul><ul id="22bb3bed-dae9-807e-b97e-e646ce831c68" class="bulleted-list"><li style="list-style-type:disc"><strong>기본 타입</strong>(str, int, bool 등): 타입/색상 일관성이 필요하면 권장하지 않음</li></ul><h3 id="22bb3bed-dae9-80be-acbe-f580799eed8b" class="">출력 정의 예시</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8089-bd5f-c965e7f57ecc" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">from langflow.custom import Component
+from langflow.io import DataInput, Output
+from langflow.schema import Data, DataFrame
+
+class DataToDataFrame(Component):
+    display_name = &quot;Data to DataFrame&quot;
+    description = &quot;Convert multiple Data objects into a DataFrame&quot;
+    icon = &quot;table&quot;
+    name = &quot;DataToDataFrame&quot;
+
+    inputs = [
+        DataInput(
+            name=&quot;items&quot;,
+            display_name=&quot;Data Items&quot;,
+            info=&quot;List of Data objects to convert&quot;,
+            is_list=True
+        )
+    ]
+
+    outputs = [
+        Output(
+            name=&quot;df_out&quot;,
+            display_name=&quot;DataFrame Output&quot;,
+            method=&quot;build_df&quot;
+        )
+    ]
+
+    def build_df(self) -&gt; DataFrame:
+        rows = []
+        for item in self.items:
+            row_dict = item.data.copy() if item.data else {}
+            row_dict[&quot;text&quot;] = item.get_text() or &quot;&quot;
+            rows.append(row_dict)
+
+        df = DataFrame(rows)
+        self.status = f&quot;Built DataFrame with {len(rows)} rows.&quot;
+        return df
+</code></pre><hr id="22bb3bed-dae9-8030-aa0a-f589d0e81218"/><p id="22bb3bed-dae9-80f9-b585-cbba3da1ed16" class="">
+</p><h2 id="22bb3bed-dae9-800c-963d-c93a8671300f" class="">4. 타입 어노테이션(Typed annotations)</h2><p id="22bb3bed-dae9-8040-899f-d893929130a7" class="">
+</p><p id="22bb3bed-dae9-8055-b986-c32b15259130" class="">Langflow에서는 <strong>타입 어노테이션</strong>을 활용하여</p><p id="22bb3bed-dae9-80f2-b22e-cc19211c83dd" class="">사용자에게 시각적 안내를 제공하고, 플로우(연결 흐름)의 일관성을 유지할 수 있습니다.</p><p id="22bb3bed-dae9-80e4-9384-e65f60316cc4" class="">타입 어노테이션의 장점은 다음과 같습니다.</p><ul id="22bb3bed-dae9-8093-806f-c58e317f951a" class="bulleted-list"><li style="list-style-type:disc"><strong>색상 구분</strong>: <code>&gt; Data</code>, <code>&gt; Message</code>와 같이 반환 타입에 따라 출력 포트의 색상이 다름</li></ul><ul id="22bb3bed-dae9-807a-9554-f5908645d158" class="bulleted-list"><li style="list-style-type:disc"><strong>유효성 검사</strong>: 호환되지 않는 연결은 Langflow가 자동으로 차단</li></ul><ul id="22bb3bed-dae9-806d-a92b-e6ef99f4c2a6" class="bulleted-list"><li style="list-style-type:disc"><strong>가독성 향상</strong>: 개발자가 데이터 흐름을 빠르게 이해 가능</li></ul><ul id="22bb3bed-dae9-80b4-a0aa-c24a66af729e" class="bulleted-list"><li style="list-style-type:disc"><strong>개발 도구 지원</strong>: 에디터에서 코드 자동완성, 오류 체크 기능 향상</li></ul><h3 id="22bb3bed-dae9-80c0-aaca-e3844181ce52" class="">자주 사용하는 반환 타입</h3><h3 id="22bb3bed-dae9-807c-8e06-d543161d463f" class="">Message</h3><p id="22bb3bed-dae9-807e-96c8-f6bbfadf8642" class="">채팅형 출력에 적합</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8079-82af-e9e0a159424a" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def produce_message(self) -&gt; Message:
+    return Message(text=&quot;Hello! from typed method!&quot;, sender=&quot;System&quot;)
+</code></pre><p id="22bb3bed-dae9-806c-a46e-f02bbf576cc5" class="">UI 상에서는 Message 타입 입력과만 연결 가능</p><hr id="22bb3bed-dae9-8073-86bb-f9c3a6038e02"/><h3 id="22bb3bed-dae9-8046-856f-ccf65616812c" class="">Data</h3><p id="22bb3bed-dae9-80ef-a56a-e64f4c4fa455" class="">딕셔너리, 텍스트 등 구조화된 데이터에 적합</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80ea-84d0-d23c87417138" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def get_processed_data(self) -&gt; Data:
+    processed = {&quot;key1&quot;: &quot;value1&quot;, &quot;key2&quot;: 123}
+    return Data(data=processed)
+</code></pre><p id="22bb3bed-dae9-800c-b9b1-f2d40d826676" class="">UI 상에서는 DataInput과만 연결 가능</p><hr id="22bb3bed-dae9-80ad-a573-fdcd35a412c3"/><h3 id="22bb3bed-dae9-80e6-b77d-e82f1e686256" class="">DataFrame</h3><p id="22bb3bed-dae9-80ac-99c4-ffb249914d33" class="">표(tabular) 형태 데이터에 적합</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80db-9695-faafeab0289d" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def build_df(self) -&gt; DataFrame:
+    pdf = pd.DataFrame({&quot;A&quot;: [1, 2], &quot;B&quot;: [3, 4]})
+    return DataFrame(pdf)
+</code></pre><p id="22bb3bed-dae9-809c-959b-d01d2eae6677" class="">UI 상에서는 DataFrameInput과만 연결 가능</p><hr id="22bb3bed-dae9-809b-9be2-fb94681e1447"/><h3 id="22bb3bed-dae9-80be-be25-dc3e1335f226" class="">기본 타입 (str, int, bool 등)</h3><p id="22bb3bed-dae9-807b-a931-e97e171c71e2" class="">기본형 반환도 가능하나,</p><p id="22bb3bed-dae9-809c-b5ca-c6bab006154b" class="">UI 일관성을 위해 Data, Message 등으로 감싸서 반환하는 것이 권장됩니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-804b-bdb9-d2e505e19318" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def compute_sum(self) -&gt; int:
+    return sum(self.numbers)
+</code></pre><hr id="22bb3bed-dae9-80b7-8421-c0784ea97082"/><h3 id="22bb3bed-dae9-80ca-b28c-f2a1793e6139" class="">타입 어노테이션 사용 시 팁</h3><ul id="22bb3bed-dae9-806b-a08b-fdf927b38480" class="bulleted-list"><li style="list-style-type:disc"><strong>항상 반환 타입 명시</strong>: <code>&gt; Data</code>, <code>&gt; Message</code>, <code>&gt; DataFrame</code> 등 명시하면 UI 색상 구분 및 유효성 검증이 제대로 동작</li></ul><ul id="22bb3bed-dae9-8098-8f15-d9a1f0702b3f" class="bulleted-list"><li style="list-style-type:disc"><strong>Raw 데이터 감싸기</strong>: 딕셔너리 등은 Data, Message, DataFrame 등으로 감싸서 반환</li></ul><ul id="22bb3bed-dae9-807e-9312-f3f258f26fde" class="bulleted-list"><li style="list-style-type:disc"><strong>기본형 사용 신중히</strong>: 단순 플로우에서는 str/int 반환도 허용되나, 감싸서 반환하는 것이 확장성에 유리</li></ul><ul id="22bb3bed-dae9-80b5-b50e-c3c95dbbc238" class="bulleted-list"><li style="list-style-type:disc"><strong>헬퍼 함수에도 타입 명시</strong>: 내부 함수라도 typing을 명확히 하면 유지보수 용이</li></ul><ul id="22bb3bed-dae9-801e-b1a6-eb3ea04f1f21" class="bulleted-list"><li style="list-style-type:disc"><strong>에러 상황 구조화</strong>: 예외적 상황 발생 시 error 필드가 포함된 Data 객체 반환 권장</li></ul><ul id="22bb3bed-dae9-8055-aa63-dbf1e6d69bfb" class="bulleted-list"><li style="list-style-type:disc"><strong>타입 일관성 유지</strong>: 컴포넌트 전반에서 동일한 타입 사용 권장</li></ul><p id="22bb3bed-dae9-80d9-be5f-e991e408f262" class="">
+</p><hr id="22bb3bed-dae9-8042-9636-f529f3d05f78"/><p id="22bb3bed-dae9-80cf-949e-e67e604654d5" class="">
+</p><h2 id="22bb3bed-dae9-8013-9775-f30d9c6cd996" class="">5. 동적 필드(Dynamic fields) 활성화</h2><p id="22bb3bed-dae9-8024-a100-cd81e751869b" class="">
+</p><p id="22bb3bed-dae9-80f9-bee7-eb7fdde80849" class="">동적 필드는 사용자의 선택에 따라 입력 항목이 변하거나, 새롭게 나타나거나 사라질 수 있도록 합니다.</p><p id="22bb3bed-dae9-8093-a1de-c8df92d2c01c" class=""><code>dynamic=True</code>로 입력을 선언하면 동적 필드가 활성화됩니다.</p><p id="22bb3bed-dae9-80aa-91cd-f0ae5cd8ff82" class=""><code>real_time_refresh=True</code>를 함께 설정하면, 입력값이 바뀔 때마다 <code>update_build_config</code> 메서드가 호출되어</p><p id="22bb3bed-dae9-80e8-a623-ca9284e70cf2" class="">실시간으로 UI에 필드 표시 여부나 속성을 반영할 수 있습니다.</p><p id="22bb3bed-dae9-80de-9917-de3bf8f8b6a4" class="">아래 예시는 operator 입력 필드가 바뀌면(특히 &quot;regex&quot; 선택 시)</p><p id="22bb3bed-dae9-80ce-bc1c-f5ce8828c3aa" class="">regex_pattern 필드의 표시 여부를 제어하는 방식입니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80f7-b1fc-c2fb04fc6db7" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">from langflow.io import DropdownInput, StrInput
+
+class RegexRouter(Component):
+    display_name = &quot;Regex Router&quot;
+    description = &quot;Demonstrates dynamic fields for regex input.&quot;
+
+    inputs = [
+        DropdownInput(
+            name=&quot;operator&quot;,
+            display_name=&quot;Operator&quot;,
+            options=[&quot;equals&quot;, &quot;contains&quot;, &quot;regex&quot;],
+            value=&quot;equals&quot;,
+            real_time_refresh=True,
+        ),
+        StrInput(
+            name=&quot;regex_pattern&quot;,
+            display_name=&quot;Regex Pattern&quot;,
+            info=&quot;Used if operator=&#x27;regex&#x27;&quot;,
+            dynamic=True,
+            show=False,
+        ),
+    ]
+</code></pre><h3 id="22bb3bed-dae9-804e-b032-e0739beebcd0" class="">update_build_config 구현</h3><p id="22bb3bed-dae9-8064-ae5c-f45320d8928b" class=""><code>real_time_refresh=True</code>가 적용된 필드의 값이 바뀌면</p><p id="22bb3bed-dae9-8056-b7a6-cc55c16ee17d" class="">Langflow가 <code>update_build_config</code> 메서드를 호출하여</p><p id="22bb3bed-dae9-80ec-8ea0-e5439548137e" class="">다른 입력 필드의 표시 여부·속성 등을 동적으로 조정할 수 있습니다.</p><p id="22bb3bed-dae9-806b-8ad8-fa5707b60cca" class="">아래는 사용자가 operator 필드를 &quot;regex&quot;로 변경하면 regex_pattern 필드를 표시하고,</p><p id="22bb3bed-dae9-800a-80a0-cf01adda049a" class="">그 외에는 숨기는 예시입니다.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-806a-abe1-c678da41a57d" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def update_build_config(self, build_config: dict, field_value: str, field_name: str | None = None) -&gt; dict:
+    if field_name == &quot;operator&quot;:
+        if field_value == &quot;regex&quot;:
+            build_config[&quot;regex_pattern&quot;][&quot;show&quot;] = True
+        else:
+            build_config[&quot;regex_pattern&quot;][&quot;show&quot;] = False
+    return build_config
+</code></pre><h3 id="22bb3bed-dae9-8006-ba8b-e436e525a0c1" class="">동적 필드 속성 추가 제어</h3><ul id="22bb3bed-dae9-80e4-8fc5-cdef59cb1be8" class="bulleted-list"><li style="list-style-type:disc"><strong>required</strong>: 필수 입력 여부 (<code>build_config[&quot;some_field&quot;][&quot;required&quot;] = True/False</code>)</li></ul><ul id="22bb3bed-dae9-8048-8ace-c87cfe9fd409" class="bulleted-list"><li style="list-style-type:disc"><strong>advanced</strong>: 고급 입력 여부 (<code>build_config[&quot;some_field&quot;][&quot;advanced&quot;] = True</code>)</li></ul><ul id="22bb3bed-dae9-8022-8f7b-f6cc0603ad84" class="bulleted-list"><li style="list-style-type:disc"><strong>options</strong>: 드롭다운 옵션 동적 변경 등</li></ul><h3 id="22bb3bed-dae9-8014-be36-f4892fb39f97" class="">동적 필드 관리 팁</h3><ul id="22bb3bed-dae9-80e7-9dea-dec527f4ec14" class="bulleted-list"><li style="list-style-type:disc">불필요한 필드는 최소한만 숨기기(과도한 변화는 사용자 혼란 유발)</li></ul><ul id="22bb3bed-dae9-80ab-9338-c634392094ed" class="bulleted-list"><li style="list-style-type:disc">필드 추가/삭제 시 기존 입력값이 소실되지 않는지 반드시 테스트</li></ul><ul id="22bb3bed-dae9-8061-bc75-fccee65d2029" class="bulleted-list"><li style="list-style-type:disc">값 유지를 위해 <code>show=False</code>로만 숨기기(필드 삭제 X)</li></ul><ul id="22bb3bed-dae9-8010-885f-e962fbf8f147" class="bulleted-list"><li style="list-style-type:disc">필드가 나타나는 조건을 info에 설명문으로 명확히 추가</li></ul><ul id="22bb3bed-dae9-80cd-aaa7-ea231555d77d" class="bulleted-list"><li style="list-style-type:disc">동적 로직이 복잡해질 경우, 가능하다면 컴포넌트를 분리해서 관리</li></ul><p id="22bb3bed-dae9-80a3-a588-e0d0c733c61a" class="">
+</p><hr id="22bb3bed-dae9-80e1-9d10-e4ccad3bcac4"/><p id="22bb3bed-dae9-808d-b8d6-ca15aab757dd" class="">
+</p><h2 id="22bb3bed-dae9-8059-9b54-c85439ae2ce3" class="">6. 에러 처리 및 로깅(Error handling and logging)</h2><p id="22bb3bed-dae9-8066-9f18-cdcef0b5956a" class="">
+</p><p id="22bb3bed-dae9-8068-90ab-d8b2e020d095" class="">Langflow에서는 신뢰성 있는 컴포넌트 작동을 위해</p><p id="22bb3bed-dae9-80a1-9431-dc23dec22930" class="">다음과 같은 에러 처리 방식을 권장합니다.</p><h3 id="22bb3bed-dae9-802f-995d-fd7111f36d9f" class="">에러 처리 방법</h3><ol type="1" id="22bb3bed-dae9-80da-80c2-fd0d72c3a6ce" class="numbered-list" start="1"><li><strong>예외 발생(Python Exception 사용)</strong><ul id="22bb3bed-dae9-80c4-a456-f158ddbbf6de" class="bulleted-list"><li style="list-style-type:disc">치명적 오류 발생 시, ValueError 등 표준 예외 또는 ToolException 등을 사용해 에러 발생</li></ul><ul id="22bb3bed-dae9-80ae-ac56-dd9f6c17a275" class="bulleted-list"><li style="list-style-type:disc">Langflow가 예외를 자동으로 감지하여 UI에 에러 메시지 표시</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-809a-8b40-d9b047a64faa" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def compute_result(self) -&gt; str:
+    if not self.user_input:
+        raise ValueError(&quot;No input provided.&quot;)
+</code></pre></li></ol><ol type="1" id="22bb3bed-dae9-807a-8afb-c7b90503d9c4" class="numbered-list" start="2"><li><strong>구조화된 에러 데이터 반환</strong><ul id="22bb3bed-dae9-80b3-92f8-e532990df9f3" class="bulleted-list"><li style="list-style-type:disc">플로우 전체를 중단하지 않고, &quot;error&quot; 필드가 포함된 Data 객체 반환</li></ul><ul id="22bb3bed-dae9-8033-8e92-d87700c1ab84" class="bulleted-list"><li style="list-style-type:disc">이후 단계 컴포넌트에서 에러 감지 및 처리 가능</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8036-8a17-e0e683ad3ebc" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def run_model(self) -&gt; Data:
+  try:
+      # ...
+  except Exception as e:
+      return Data(data={&quot;error&quot;: str(e)})
+</code></pre></li></ol><hr id="22bb3bed-dae9-80f5-b47e-e42381ca372a"/><h3 id="22bb3bed-dae9-801f-a332-e2e2189416b4" class="">디버깅 및 플로우 관리 개선</h3><ul id="22bb3bed-dae9-805a-95a7-ddae37dd1e47" class="bulleted-list"><li style="list-style-type:disc"><strong>self.status 활용</strong>: 실행 결과, 성공/진행/에러 요약 등 간단한 메시지 저장<p id="22bb3bed-dae9-80db-995d-cc661d511cdc" class="">UI에서 바로 확인 가능</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-8063-8e4d-eea99f2797f7" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def parse_data(self) -&gt; Data:
+    # ...
+    self.status = f&quot;Parsed {len(rows)} rows successfully.&quot;
+    return Data(data={&quot;rows&quot;: rows})
+</code></pre></li></ul><ul id="22bb3bed-dae9-803e-9782-dd0896c2afa5" class="bulleted-list"><li style="list-style-type:disc"><strong>특정 출력 중단(self.stop)</strong>:<p id="22bb3bed-dae9-801d-8bc7-f898e8229182" class="">여러 출력 포트가 있는 컴포넌트에서 특정 조건 미충족 시</p><p id="22bb3bed-dae9-8093-8570-ffbc711ee9c1" class="">해당 출력만 중단(전체 컴포넌트 중단 X)</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80be-9a1c-cf4fc776860e" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def some_output(self) -&gt; Data:
+    if &lt;some condition&gt;:
+        self.stop(&quot;some_output&quot;)  # 해당 포트만 중단
+        return Data(data={&quot;error&quot;: &quot;Condition not met&quot;})
+</code></pre></li></ul><ul id="22bb3bed-dae9-80c7-85fc-fc5ffd37a66f" class="bulleted-list"><li style="list-style-type:disc"><strong>로깅(self.log)</strong>:<p id="22bb3bed-dae9-8002-ba8f-d193b2b5aafd" class="">실행 중 주요 이벤트를 기록</p><p id="22bb3bed-dae9-80f6-a020-e73d32407a52" class="">로그는 컴포넌트 상세 화면의 &quot;Logs&quot; 또는 &quot;Events&quot; 섹션에서 확인 가능</p><p id="22bb3bed-dae9-802c-913d-cc5dd6a8719e" class="">디버그 패널, 내보내기 기능 등으로 활용 가능</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="22bb3bed-dae9-80b9-a4b9-d6fbf4e932d1" class="code"><code class="language-Python" style="white-space:pre-wrap;word-break:break-all">def process_file(self, file_path: str):
+    self.log(f&quot;Processing file {file_path}&quot;)
+    # ...
+</code></pre></li></ul><hr id="22bb3bed-dae9-80ac-8ca7-c34249e03608"/><h3 id="22bb3bed-dae9-80ba-bb88-f985c27239ac" class="">에러 처리 및 로깅 팁</h3><ul id="22bb3bed-dae9-80b5-a45f-e6296b870c4d" class="bulleted-list"><li style="list-style-type:disc">입력값 미리 검증(초기 오류 사전 차단)</li></ul><ul id="22bb3bed-dae9-80a2-b526-faadac09a920" class="bulleted-list"><li style="list-style-type:disc">self.status로 간결한 결과 요약 제공</li></ul><ul id="22bb3bed-dae9-803b-9def-e47e4e382fd5" class="bulleted-list"><li style="list-style-type:disc">로그는 핵심 정보 위주로 관리(UI 혼잡 방지)</li></ul><ul id="22bb3bed-dae9-8062-9d12-df0825f5ef5c" class="bulleted-list"><li style="list-style-type:disc">구조화된 에러 반환 권장(Data(data={&quot;error&quot;: ...}))</li></ul><ul id="22bb3bed-dae9-80ce-ad42-f005cfbcb764" class="bulleted-list"><li style="list-style-type:disc">필요한 경우에만 특정 출력 중단(self.stop), 전체 중단 최소화</li></ul><p id="22bb3bed-dae9-80f5-abfe-c86f10e9f3b1" class="">
+</p><hr id="22bb3bed-dae9-80da-82ca-d497c2982a86"/><p id="22bb3bed-dae9-808f-bc3f-c08f01c081f4" class="">
+</p><h2 id="22bb3bed-dae9-804d-a00a-cf0094c5dbf7" class="">7. 커스텀 컴포넌트 기여하기</h2><p id="22bb3bed-dae9-8073-8c60-d5f04c30e89f" class="">
+</p><p id="22bb3bed-dae9-809b-968d-d0e2f870f563" class="">직접 만든 커스텀 컴포넌트를 Langflow에 기여(공유)하고 싶다면</p><p id="22bb3bed-dae9-8068-9a4d-e57453f8b0e8" class="">공식 문서의 <a href="https://docs.langflow.org/contributing-components">How to Contribute</a> 항목을 참고하세요.</p><p id="22bb3bed-dae9-8072-8c55-e60f73359488" class="">
+</p><p id="22bb3bed-dae9-80b3-9e3c-d7b883e4ddea" class="">
+</p><p id="22bb3bed-dae9-8080-9766-eba1ab017a06" class="">
+</p><hr id="22bb3bed-dae9-80f0-a7d8-f27dd414b12e"/><p id="22bb3bed-dae9-803d-a211-e2984c5954a2" class="">
+</p><p id="22bb3bed-dae9-803a-b603-de04187bfcae" class="">*이 문서는 <a href="https://docs.langflow.org/components-custom-components">https://docs.langflow.org/components-agents</a> 문서를 번역/편집한 것으로 생략되거나 추가된 내용이 있습니다. 자세한 사항은 원문을 참고하시기 바랍니다.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
